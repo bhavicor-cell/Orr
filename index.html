@@ -72,9 +72,9 @@
   @font-face{font-family:"Cotoris"; src:url("./fonts/cotoris.otf") format("opentype"); font-weight:400; font-style:normal; font-display:swap}
   @font-face{font-family:"Cotorisi"; src:url("./fonts/cotorisita.otf") format("opentype"); font-weight:400; font-style:normal; font-display:swap}
   @font-face{font-family:"Safira March"; src:url("./fonts/Safira\ March\ Personal\ Use\ Only.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap}
-  @font-face{font-family:"Roxborough CF"; src:url("./fonts/roxboroughcf-regular.otf") format("woff2"), url("./fonts/RoxboroughCF-Regular.woff") format("woff"); font-weight:400; font-style:normal; font-display:swap}
-  @font-face{font-family:"The Seasons"; src:url("./fonts/theseasons-reg.otf") format("woff2"), url("./fonts/TheSeasons-Regular.woff") format("woff"); font-weight:400; font-style:normal; font-display:swap}
-  @font-face{font-family:"Simple"; src:url("./fonts/Simple-Serenity-Serif.ttf") format("truetype"), font-weight:400; font-style:normal; font-display:swap}
+  @font-face{font-family:"Roxborough CF"; src:url("./fonts/roxboroughcf-regular.otf") format("opentype"), url("./fonts/RoxboroughCF-Regular.woff") format("woff"); font-weight:400; font-style:normal; font-display:swap}
+  @font-face{font-family:"The Seasons"; src:url("./fonts/theseasons-reg.otf") format("opentype"), url("./fonts/TheSeasons-Regular.woff") format("woff"); font-weight:400; font-style:normal; font-display:swap}
+  @font-face{font-family:"Simple"; src:url("./fonts/Simple-Serenity-Serif.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap}
   
   /* ============================== BOOT FADE ============================== */
   #boot-cover{
@@ -288,7 +288,7 @@
     /* Larger, more substantive second line + longer copy */
     #hero.hero-orr .sub{
       max-width: 78ch;
-      font: 400 clamp(17px,1.35vw,21px)/1.48 cotorisi; /* ↑ size */
+      font: 400 clamp(17px,1.35vw,21px)/1.48 Cotorisi; /* ↑ size */
       color: var(--ink-soft);
       letter-spacing: .0025em;
       margin-top: clamp(6px, .55vw, 10px);  /* title → sub (tight) */
@@ -1530,6 +1530,11 @@ Paste as a standalone file; it uses your global tokens and .story behavior. -->
       #section-7 .btn:hover{ transform:none }
       #section-7 .control:focus{ transform:none }
     }
+/* Hide the honeypot but keep it in the DOM for bots */
+#section-7 .hp{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden }
+#section-7 .hp input{ height:1px }
+
+    
   </style>
 
   <div class="inner">
@@ -1538,24 +1543,49 @@ Paste as a standalone file; it uses your global tokens and .story behavior. -->
       <p class="eyebrow">Make It Move</p>
       <h2 id="s7-heading" class="title">A quiet entry. No friction.</h2>
 
-      <form class="short-form" action="#" method="post" novalidate>
-        <div class="field">
-          <input class="control" id="s7-name" name="name" type="text" placeholder=" " autocomplete="name" required>
-          <label class="label" for="s7-name">Your Name</label>
-        </div>
-        <div class="field">
-          <input class="control" id="s7-email" name="email" type="email" placeholder=" " autocomplete="email" required>
-          <label class="label" for="s7-email">Email</label>
-        </div>
-        <div class="field">
-          <textarea class="control" id="s7-note" name="note" rows="3" placeholder=" " required></textarea>
-          <label class="label" for="s7-note">Describe the friction</label>
-        </div>
-        <div class="actions">
-          <button class="btn btn--cta" type="submit">Begin</button>
-          <span class="micro">No noise. No spam. Human reply in 24h.</span>
-        </div>
-      </form>
+     <form id="s7-form" class="short-form" action="https://formspree.io/f/xzzjvbvj" method="POST" novalidate>
+  <!-- Honeypot (hidden from humans; bots will fill it) -->
+  <div class="hp" aria-hidden="true">
+    <label>Leave this empty
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+    </label>
+  </div>
+
+  <!-- Speed-trap timestamp (set in JS on page load) -->
+  <input type="hidden" name="_ts" id="s7-ts">
+
+  <!-- Optional: nicer subject in your inbox -->
+  <input type="hidden" name="_subject" value="ORR — New inquiry from website">
+
+  <!-- Your existing fields (keep names + ids) -->
+  <div class="field">
+    <input class="control" id="s7-name" name="name" type="text" placeholder=" " autocomplete="name" required>
+    <label class="label" for="s7-name">Your Name</label>
+  </div>
+  <div class="field">
+    <input class="control" id="s7-email" name="email" type="email" placeholder=" " autocomplete="email" required>
+    <label class="label" for="s7-email">Email</label>
+  </div>
+  <div class="field">
+    <textarea class="control" id="s7-note" name="note" rows="3" placeholder=" " required></textarea>
+    <label class="label" for="s7-note">Describe the friction</label>
+  </div>
+
+  <div class="actions">
+    <!-- Invisible reCAPTCHA button -->
+    <button
+      class="btn btn--cta g-recaptcha"
+      id="s7-send"
+      type="submit"
+      data-sitekey="6LcVQd4rAAAAAOigp1_bgpY2Jr0AIqLqlnJpt0gT"
+      data-callback="onS7Captcha"
+      data-size="invisible">
+      Begin
+    </button>
+    <span class="micro" id="s7-status">No noise. No spam. Human reply in 24h.</span>
+  </div>
+</form>
+
     </div>
 
     <!-- RIGHT: Single ultra-high-end quote -->
@@ -1649,9 +1679,84 @@ Paste as a standalone file; it uses your global tokens and .story behavior. -->
   /* ===== Footer year ===== */
   document.getElementById('yr').textContent = new Date().getFullYear();
 </script>
+<script>
+(function(){
+  const form   = document.getElementById('s7-form');
+  if(!form) return;
+
+  const btn    = document.getElementById('s7-send');
+  const tsEl   = document.getElementById('s7-ts');
+  const status = document.getElementById('s7-status');
+  const hp     = form.querySelector('input[name="_gotcha"]');
+  const nameEl = document.getElementById('s7-name');
+  const mailEl = document.getElementById('s7-email');
+  const noteEl = document.getElementById('s7-note');
+
+  // 1) Start the timer (speed-trap)
+  tsEl.value = String(Date.now());
+
+  // 2) helpers
+  const isEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v||'');
+  const bad = el => el && el.setAttribute('aria-invalid','true');
+  const ok  = el => el && el.setAttribute('aria-invalid','false');
+
+  // 3) Google will call this when Invisible reCAPTCHA passes
+  window.onS7Captcha = async function(token){
+    // bot traps
+    if (hp.value) { return; } // honeypot filled → ignore silently
+    if ((Date.now() - Number(tsEl.value||0)) < 1200) {
+      status.textContent = 'That was too fast — try again.'; 
+      grecaptcha.reset(); 
+      return;
+    }
+
+    // human field checks
+    let pass = true;
+    if (!nameEl.value.trim())    { bad(nameEl);  pass=false; } else ok(nameEl);
+    if (!isEmail(mailEl.value))  { bad(mailEl);  pass=false; } else ok(mailEl);
+    if (!noteEl.value.trim())    { bad(noteEl);  pass=false; } else ok(noteEl);
+    if (!pass){ status.textContent='Please fill all fields correctly.'; return; }
+
+    // send to Formspree
+    btn.disabled = true; btn.textContent = 'Sending…'; status.textContent = 'Working…';
+    const data = new FormData(form);
+    data.set('g-recaptcha-response', token); // include token (Formspree won’t verify it, but safe)
+
+    try{
+      const res = await fetch(form.action, { method:'POST', body:data, headers:{ 'Accept':'application/json' } });
+      if (res.ok){
+        form.reset();
+        status.textContent = 'Thank you — we’ll reply within 24h.';
+        btn.textContent = 'Sent';
+      } else {
+        const j = await res.json().catch(()=> ({}));
+        status.textContent = (j && j.errors && j.errors[0]?.message) || 'Something went wrong. Try again.';
+        btn.disabled = false; btn.textContent = 'Begin'; grecaptcha.reset();
+      }
+    }catch(_){
+      status.textContent = 'Network issue. Try again.';
+      btn.disabled = false; btn.textContent = 'Begin'; grecaptcha.reset();
+    }
+  };
+
+  // 4) Intercept normal submit → run Invisible reCAPTCHA
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (window.grecaptcha && grecaptcha.execute){
+      grecaptcha.execute(); // will call onS7Captcha()
+    } else {
+      // if captcha script didn’t load, just post normally
+      form.submit();
+    }
+  });
+})();
+</script>
 
 <noscript><style>html{background:#000}</style></noscript>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </body>
 
 </html>
+
 
