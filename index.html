@@ -1469,6 +1469,7 @@ Paste as a standalone file; it uses your global tokens and .story behavior. -->
     #section-7 .control:focus+.label{ transform:translateY(-12px) scale(.9); opacity:.95 }
 
     #section-7 .actions{ display:flex; align-items:center; gap:14px; margin-top:6px }
+    
     #section-7 .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
       min-height:50px; padding:0 22px; border:1px solid var(--line); border-radius:999px;
@@ -1534,7 +1535,41 @@ Paste as a standalone file; it uses your global tokens and .story behavior. -->
 #section-7 .hp{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden }
 #section-7 .hp input{ height:1px }
 
-    
+    /* Hide Google’s floating badge (we added the required disclosure above) */
+.grecaptcha-badge{ visibility: none !important; }
+
+/* Stack button → disclosure → status on separate lines */
+#section-7 .actions{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;        /* little breathing room */
+}
+
+/* Button + status inline */
+#section-7 .actions-row{
+  display: flex;
+  align-items: center;    /* vertical alignment */
+  gap: 12px;              /* space between button and status line */
+  flex-wrap: wrap;        /* wrap on tiny screens */
+}
+
+/* Make the disclosure look neat */
+#section-7 .recaptcha-note{
+  margin-top: 6px;
+  max-width: 520px;
+  line-height: 1.5;
+  opacity: .8;
+}
+#section-7 .recaptcha-note a{
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+/* Optional: on very small screens, stack the row cleanly */
+@media (max-width: 420px){
+  #section-7 .actions-row{ gap: 10px; }
+}
+
   </style>
 
   <div class="inner">
@@ -1572,6 +1607,7 @@ Paste as a standalone file; it uses your global tokens and .story behavior. -->
   </div>
 
   <div class="actions">
+    <div class="actions-row">
     <!-- Invisible reCAPTCHA button -->
     <button
       class="btn btn--cta g-recaptcha"
@@ -1580,11 +1616,21 @@ Paste as a standalone file; it uses your global tokens and .story behavior. -->
       data-sitekey="6LcVQd4rAAAAAOigp1_bgpY2Jr0AIqLqlnJpt0gT"
       data-callback="onS7Captcha"
       data-size="invisible"
-      data-badge="inline">
+      >
       Begin
     </button>
     <span class="micro" id="s7-status">No noise. No spam. Human reply in 24h.</span>
   </div>
+
+  <!-- lives below the row -->
+  <p class="micro recaptcha-note">
+    This site is protected by reCAPTCHA and the Google
+    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>
+    and
+    <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a>
+    apply.
+  </p>
+</div>
 </form>
 
     </div>
@@ -1759,6 +1805,3 @@ Paste as a standalone file; it uses your global tokens and .story behavior. -->
 </body>
 
 </html>
-
-
-
