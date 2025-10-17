@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ORR — Codex · Article</title>
+  <meta name="description" content="An ultra-luxe, longform Codex article template with immaculate alignment and readability." />
+  <link rel="preload" as="video" href="../../assets/video.webm" type="video/webm" />
+
+  <style>
+    /* ============================== QUIET LUXE BASE ============================== */
+    :root{
+      --page-bg:#121110;
+      --ink:#F5F3EF;
+      --ink-soft:#EAE6DE;
+      --line:#90827D;
+      --cta:#CBB89D;
+
+      --video-opacity:0.033;
+      --video-speed:0.28;
+      --tint-opacity:0.02;
+
+      --font-heading:"Safira March", serif;
+      --font-subhead:"Roxborough CF","RoxboroughCF",serif;
+      --font-body:"Cotoris", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+
+      --topnav-h: clamp(56px, 7.5vh, 68px);
+
+      /* Reading width + layout */
+      --measure: 80ch;
+      --aside-w: 340px;
+      --gap: clamp(32px, 5vw, 64px);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{background:#000;color:var(--ink);scrollbar-width:thin;scrollbar-color: rgba(245,243,239,.25) transparent}
+    ::-webkit-scrollbar{ width:10px }
+    ::-webkit-scrollbar-track{ background:transparent }
+    ::-webkit-scrollbar-thumb{ background: rgba(245,243,239,.22); border:2px solid transparent; border-radius:8px; background-clip:padding-box }
+    ::-webkit-scrollbar-thumb:hover{ background: rgba(245,243,239,.35) }
+
+    body{
+      font:400 clamp(17px,1.35vw,19.2px)/1.68 var(--font-body);
+      color:var(--ink);
+      background:var(--page-bg);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+
+    @font-face{font-family:"Cotoris"; src:url("../../fonts/cotoris.otf") format("opentype"); font-weight:400; font-style:normal; font-display:swap}
+    @font-face{font-family:"Roxborough CF"; src:url("../../fonts/roxboroughcf-regular.otf") format("opentype"), url("../../fonts/RoxboroughCF-Regular.woff") format("woff"); font-weight:400; font-style:normal; font-display:swap}
+    @font-face{font-family:"Safira March"; src:url("../../fonts/Safira\\ March\\ Personal\\ Use\\ Only.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap}
+
+    /* ============================== GLOBAL BACKGROUND ============================== */
+    #site-bg{ position:fixed; inset:0; z-index:0; background:var(--page-bg); pointer-events:none; overflow:hidden }
+    #bg-video{ position:absolute; top:50%; left:50%; min-width:100%; min-height:100%; transform:translate(-50%,-50%); object-fit:cover; opacity:var(--video-opacity); transition:opacity .6s ease }
+    #bg-tint{ position:absolute; inset:0; mix-blend-mode:soft-light; background:var(--ink); opacity:var(--tint-opacity) }
+    @media (prefers-reduced-motion:reduce){ #bg-video{display:none} #bg-tint{mix-blend-mode:normal;opacity:.06} }
+
+    /* ============================== NAVBAR ============================== */
+    .top-nav{
+      position:fixed; top:0; left:0; right:0; height:var(--topnav-h);
+      display:flex; align-items:center; gap:24px; padding:0 clamp(16px,5vw,48px);
+      backdrop-filter:saturate(1.12) blur(10px);
+      z-index:6; background: rgba(12,11,10,.55); color: var(--ink);
+      border-bottom: 1px solid var(--line); box-shadow: 0 10px 28px rgba(0,0,0,.18);
+    }
+    .top-nav .brand{ display:inline-flex; align-items:center; gap:10px; text-decoration:none; color:inherit }
+    .top-nav .brand img{ display:block; height: clamp(32px, 3.8vw, 48px); width:auto }
+    .menu{ margin-left:auto; display:flex; align-items:center; gap: clamp(18px, 2.4vw, 36px) }
+    .menu a{ text-decoration:none; color:inherit; opacity:.92; font:600 12px/1.1 "Roxborough CF",serif; letter-spacing:.12em; text-transform:uppercase; transition:opacity .2s ease, transform .12s ease }
+    .menu a:hover{ opacity:1; transform:translateY(-1px) }
+    html, body, button, .btn, .menu a, input, select{ font-family: "Roxborough CF", serif !important; }
+
+    /* ============================== PROGRESS BAR ============================== */
+    #progress{
+      position:fixed; left:0; top:0; height:2px; width:0%; z-index:7; pointer-events:none;
+      background: linear-gradient(90deg, rgba(203,184,157,.05), rgba(203,184,157,.9) 40%, rgba(245,243,239,.95));
+      box-shadow: 0 0 24px rgba(203,184,157,.35);
+      transition: width .15s linear;
+    }
+
+    /* ============================== MASTER PAGE GRID ============================== */
+    main{ position:relative; z-index:1; padding-top:calc(var(--topnav-h) + 36px) }
+
+    /* [gutter] [article] [gap] [aside] [gutter] */
+    .page{
+      display:grid;
+      grid-template-columns:
+        minmax(12px,1fr)
+        minmax(0, var(--measure))
+        var(--gap)
+        minmax(240px, var(--aside-w))
+        minmax(12px,1fr);
+      row-gap: clamp(28px, 5vh, 40px);
+      width:100%;
+      margin: 0 auto clamp(90px, 14vh, 140px);
+    }
+
+    /* ============================== MASTHEAD (ALIGNS WITH CONTENT) ============================== */
+    .head{
+      grid-column: 2 / 6; /* align to the article column */
+      margin-top: clamp(96px, 14vh, 140px);
+      padding-inline: clamp(16px, 2.6vw, 26px); /* same inner padding as article */
+      background: transparent; border: none; box-shadow: none;
+    }
+    .eyebrow{ font:400 14px/1 "Roxborough CF",serif; letter-spacing:.06em; color:var(--ink-soft) }
+    h1.title{
+      font-family:var(--font-heading); font-weight:400; letter-spacing:.01em;
+      font-size: clamp(34px,4.2vw,72px);
+      line-height:1.03; margin-top:10px;
+    }
+
+    .ax-rule{ position:relative; height:2px; width:fit-content; max-width:100%; margin-top:12px }
+    .ax-rule::before{
+      content:""; display:block; height:2px; width:100%;
+      background:linear-gradient(90deg, transparent 0%, color-mix(in oklab, var(--cta) 70%, transparent) 18%, color-mix(in oklab, var(--ink) 80%, transparent) 58%, transparent 100%);
+      transform:scaleX(.18); transform-origin:left center; opacity:.9; filter: drop-shadow(0 6px 24px rgba(203,184,157,.22));
+      animation: ruleGrow 1600ms cubic-bezier(.19,1,.22,1) .15s forwards;
+    }
+    @keyframes ruleGrow{ to{ transform:scaleX(1); opacity:1 } }
+
+    .standfirst{ color:var(--ink-soft); font:400 clamp(17px,1.2vw,20px)/1.65 var(--font-body); margin-top:16px; max-width:100% }
+    .meta{ display:flex; align-items:center; gap:12px; margin-top:12px; color:var(--ink-soft); font:500 12px/1 var(--font-body); letter-spacing:.12em; text-transform:uppercase; opacity:.9 }
+    .dot{ width:3px; height:3px; border-radius:999px; background: currentColor; opacity:.6 }
+
+    .actions{ display:flex; gap:10px; margin-top:16px; }
+    .pill{ display:inline-flex; align-items:center; gap:10px; padding:.58rem 1rem; border:1px solid var(--line); border-radius:999px; background:transparent; color:var(--ink); font:600 12px/1 var(--font-body); letter-spacing:.12em; text-transform:uppercase; text-decoration:none }
+    .pill:hover{ background:rgba(255,255,255,.03); transform:translateY(-1px); transition:transform .12s ease, background .2s ease }
+    .head .actions{ margin-bottom: clamp(22px, 5vh, 60px); }
+
+    /* ============================== ARTICLE + ASIDE ============================== */
+    article.content{
+      grid-column: 2;
+      max-width:100%;
+      padding-inline: clamp(16px, 2.6vw, 26px);
+    }
+    aside.toc{
+      grid-column: 4;
+      position:sticky; top:calc(var(--topnav-h) + 24px);
+      align-self:start; height:max-content;
+    }
+
+    .toc h2{ font:600 11px/1 var(--font-body); letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:10px }
+    .toc nav{ border:1px solid var(--line); border-radius:16px; padding:12px; background: linear-gradient(180deg, rgba(245,243,239,.12), rgba(245,243,239,.08)); backdrop-filter: blur(8px) saturate(110%); box-shadow: 0 1px 0 rgba(255,255,255,.03), 0 40px 80px rgba(0,0,0,.60) }
+    .toc a{ display:block; padding:8px 10px; color:var(--ink-soft); text-decoration:none; border-radius:10px; font:500 14px/1.35 var(--font-body); letter-spacing:.01em }
+    .toc a:hover{ color:var(--ink); background: rgba(255,255,255,.05) }
+    .toc a[aria-current="true"]{ color:var(--ink); background: rgba(255,255,255,.07) }
+
+    article h2{ font-family:var(--font-subhead); font-weight:400; letter-spacing:.006em; font-size: clamp(26px,2.6vw,38px); line-height:1.12; margin: clamp(36px,6vh,56px) 0 10px }
+    article h3{ font-family:var(--font-subhead); font-weight:400; letter-spacing:.005em; font-size: clamp(20px,2vw,26px); line-height:1.18; margin: clamp(24px,4vh,36px) 0 8px }
+
+    article p{ margin: 0 0 1.05em; color:var(--ink) }
+    .muted{ color:var(--ink-soft) }
+    .lead{ font-size: 1.02em; line-height:1.68 }
+    .lead.has-dropcap::first-letter{ float:left; font-family:var(--font-heading); font-size:3.2em; line-height:.9; padding-right:.06em; padding-top:.04em; color:var(--ink) }
+
+    article a{ color:var(--ink); text-decoration:underline; text-underline-offset:3px; text-decoration-color: rgba(245,243,239,.28) }
+    article a:hover{ text-decoration-color: rgba(245,243,239,.48) }
+
+    article ul, article ol{ margin: .6em 0 1.1em 1.2em }
+
+    figure{ margin: clamp(18px,4vh,28px) 0 }
+    figure img{ width:100%; height:auto; display:block; border-radius:18px; border:1px solid color-mix(in oklab, var(--line) 78%, transparent); box-shadow: 0 24px 60px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.04) }
+    figcaption{ font: 500 13px/1.5 var(--font-body); color:var(--ink-soft); margin-top:8px }
+
+    .pull{ margin: clamp(24px, 6vh, 42px) 0; padding: clamp(14px,2vw,18px) clamp(16px,2.4vw,22px); border:1px solid var(--line); border-radius:16px; background: linear-gradient(180deg, rgba(245,243,239,.12), rgba(245,243,239,.08)); box-shadow: 0 1px 0 rgba(255,255,255,.03), 0 40px 80px rgba(0,0,0,.60) }
+    .pull blockquote{ font-family: var(--font-heading); font-size: clamp(24px,3.2vw,36px); line-height:1.12; letter-spacing:.005em }
+    .pull cite{ display:block; margin-top:8px; font:500 12px/1 var(--font-body); letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft) }
+
+    pre, code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace }
+    pre{ background: rgba(255,255,255,.03); border:1px solid var(--line); color:var(--ink); padding:16px; border-radius:14px; overflow:auto; box-shadow: inset 0 0 0 1px rgba(255,255,255,.04) }
+
+    .footnotes{ border-top:1px solid var(--line); margin-top: clamp(36px, 8vh, 64px); padding-top: 18px; color:var(--ink-soft) }
+    .footnotes ol{ margin-left:1.2em }
+    .footnotes a{ color:var(--ink-soft) }
+
+    /* ============================== PREV / NEXT (single-line titles) ============================== */
+    .article-nav{
+      grid-column: 2 / 5; /* align with the article column */
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(12px, 2.2vw, 20px);
+      margin: clamp(28px, 6vh, 48px) 0 0;
+      padding: 0 clamp(16px, 2.6vw, 26px);
+    }
+    .nav-card{
+      position:relative; display:flex; align-items:center; gap:12px;
+      padding: 14px 16px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:transparent;
+      text-decoration:none; color:var(--ink);
+      box-shadow: 0 1px 0 rgba(255,255,255,.03), 0 28px 60px rgba(0,0,0,.50);
+      transition: transform .12s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+      min-height: 64px;
+    }
+    .nav-card:hover{ background: rgba(255,255,255,.03); transform: translateY(-1px) }
+
+    .nav-eyebrow{ font:600 10px/1 var(--font-body); letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft); margin:0 0 4px 0 }
+    .nav-title{
+      font-family:var(--font-subhead);
+      font-size: clamp(15px,1.15vw,17px);
+      line-height:1.2;
+      white-space: nowrap;            /* force one line */
+      overflow: hidden;
+      text-overflow: ellipsis;        /* graceful truncation */
+      max-width: 88%;
+    }
+    .nav-card::after{
+      content:"→"; margin-left:auto; opacity:.75; transition: transform .18s ease, opacity .18s ease;
+      font: 500 16px/1 var(--font-body);
+    }
+    .nav-card:hover::after{ transform: translateX(4px); opacity:.95 }
+
+    /* Footer aligned to grid */
+    footer{ grid-column: 1 / -1; padding:24px 6vw 40px; text-align:center; font-size:13px; color:var(--ink-soft) }
+
+    .visually-hidden{ position:absolute!important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap }
+
+    /* ============================== RESPONSIVE ============================== */
+    @media (max-width: 1100px){
+      .page{
+        grid-template-columns: minmax(12px,1fr) minmax(0, 96vw) minmax(12px,1fr);
+      }
+      .head, article.content, aside.toc, .article-nav, footer{ grid-column: 2; }
+      aside.toc{ position:static; margin-top: 8px }
+      .article-nav{ grid-template-columns: 1fr; }
+      .nav-title{ max-width: 100% }
+    }
+
+    /* ============================== READING MODE ============================== */
+    body.mode-reading{
+      --page-bg:#F5F3EF;
+      --ink:#1A1816;
+      --ink-soft:#6F685F;
+      --line:#CFC7BC;
+      --video-opacity:0;
+      --tint-opacity:0;
+    }
+    body.mode-reading #site-bg{ background:var(--page-bg) }
+    body.mode-reading #bg-video{ display:none }
+    body.mode-reading #bg-tint{ opacity:0 }
+    body.mode-reading .top-nav{
+      background: linear-gradient(to bottom, rgba(18,17,16,.03), rgba(18,17,16,.06));
+      border-bottom:1px solid rgba(18,17,16,.12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 12px 36px rgba(0,0,0,.12);
+    }
+    body.mode-reading .toc nav,
+    body.mode-reading .pull,
+    body.mode-reading pre{
+      background: linear-gradient(180deg, rgba(18,17,16,.03), rgba(18,17,16,.06));
+      color:var(--ink);
+      border-color: var(--line);
+    }
+    body.mode-reading pre{ background: rgba(0,0,0,.04) }
+    body.mode-reading .nav-card:hover{ background: rgba(0,0,0,.03) }
+    body.mode-reading .pill:hover{ background: rgba(0,0,0,.05) }
+    body.mode-reading article a{ text-decoration-color: rgba(26,24,22,.28) }
+    body.mode-reading article a:hover{ text-decoration-color: rgba(26,24,22,.52) }
+    body.mode-reading .toc a:hover{ background: rgba(0,0,0,.05); color:var(--ink) }
+    body.mode-reading .toc a[aria-current="true"]{ background: rgba(0,0,0,.07); color:var(--ink) }
+    body.mode-reading ::selection{ background: color-mix(in srgb, var(--cta) 26%, #000 8%); color:#fff }
+    body.mode-reading #progress{
+      background: linear-gradient(90deg, rgba(26,24,22,.18) 0%, rgba(26,24,22,.68) 42%, rgba(203,184,157,.92) 100%);
+      box-shadow: 0 0 18px rgba(203,184,157,.28), 0 1px 0 rgba(255,255,255,.45) inset;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .pill, .nav-card, .toc a, .ax-rule::before{ transition:none; animation:none }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background layer (shared) -->
+  <div id="site-bg" aria-hidden="true">
+    <video id="bg-video" muted playsinline autoplay loop preload="metadata" poster="../../assets/video-poster.jpg">
+      <source src="../../assets/video.webm" type="video/webm">
+      <source src="../../assets/3.mp4" type="video/mp4">
+    </video>
+    <div id="bg-tint"></div>
+  </div>
+
+  <!-- Reading progress -->
+  <div id="progress" aria-hidden="true"></div>
+
+  <!-- Top nav -->
+  <header class="top-nav" aria-label="Site">
+    <a class="brand" href="../../index.html#hero" aria-label="ORR home">
+      <img src="../../assets/re2.svg" alt="ORR" loading="lazy" />
+    </a>
+    <nav class="menu" aria-label="Primary">
+      <a href="../../index.html#partners">Clients</a>
+      <a href="../../index.html#action">In Motion</a>
+      <a href="../codex.html" class="cta">Codex</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page">
+      <!-- Masthead (aligned with content) -->
+      <header class="head">
+        <div class="eyebrow" id="persona">Codex Fragment 0003 · Step 3</div>
+        <h1 class="title" id="title">Understand the Market</h1>
+        <div class="ax-rule" aria-hidden="true"></div>
+        <p class="standfirst" id="standfirst">The world is loud because everyone is selling — almost no one is seeing. Understanding the field is how you stop chasing and start positioning.</p>
+        <div class="meta">
+          <time id="date" datetime="2025-10-16">Oct 16, 2025</time>
+          <span class="dot" aria-hidden="true"></span>
+          <span id="readtime">—</span>
+        </div>
+        <div class="actions">
+          <a class="pill" href="../codex.html">← Back to Codex</a>
+          <button class="pill" id="reading" type="button" aria-pressed="false" title="Toggle reading mode">Reading Light</button>
+        </div>
+      </header>
+
+      <!-- Article -->
+      <article id="article" class="content">
+        <p class="lead has-dropcap"><strong>🧠 THE WORLD IS LOUD BECAUSE EVERYONE IS SELLING.</strong> And almost no one is seeing. By now you’ve done two things — you’ve stopped wasting money, and you’ve put a real number and timeframe on what you want. Now comes the critical part: <em>understanding the field you’re about to fight in.</em></p>
+
+        <h2 id="civilization-2025">⚙️ The Civilization We’re In — 2025</h2>
+        <p>Look around. The signals are obvious if you stop scrolling long enough to read them.</p>
+        <ul>
+          <li>Financial strain everywhere.</li>
+          <li>Companies cutting costs through automation.</li>
+          <li>Too many candidates, too few roles.</li>
+          <li>Every creator, founder, and freelancer shouting “Buy from me.”</li>
+        </ul>
+
+        <h2 id="reactions">Two reactions dominate the market</h2>
+        <ol>
+          <li><strong>Those who need money do more.</strong> They launch startups, invest, hustle, “build brands.” Activity replaces clarity.</li>
+          <li><strong>Those who understand this flow exploit it.</strong> They sell tickets to the dream — courses, blueprints, shortcuts, promises. It’s a global gacha machine: pull the lever, maybe win freedom.</li>
+        </ol>
+
+        <h2 id="problem">🧩 The Real Problem</h2>
+        <p>We’ve reached a point where everyone is producing and no one is consuming consciously. We don’t even recognize our consumption anymore: the phone upgrade, the subscription, the “tool stack,” the self‑improvement loop. Each disguised as necessity, each a slow leak.</p>
+        <p>And this imbalance leads one way: <strong>The middle collapses.</strong> You’re either leveraged — or you’re owned. That’s not doom. It’s design.</p>
+
+        <div class="pull">
+          <blockquote>You’re either leveraged — or you’re owned.</blockquote>
+          <cite>— ORR</cite>
+        </div>
+
+        <h2 id="meaning">👁️ What “Understanding the Market” Actually Means</h2>
+        <p>It means seeing beyond the feed.</p>
+        <ul>
+          <li>Reading data, not dopamine.</li>
+          <li>Observing human patterns, not press releases.</li>
+          <li>Knowing where value is really shifting.</li>
+          <li>Asking: <em>Who’s getting paid here, and why?</em></li>
+        </ul>
+        <p>When you understand the flow, you stop chasing “opportunities” and start building <strong>positions</strong>.</p>
+
+        <h2 id="operator">💡 The Operator’s Mindset</h2>
+        <p>You don’t look at chaos and despair. You look, smirk, and say: “Alright, I see the game. Let’s play it — on my terms.” Because that’s what understanding the market gives you — not bitterness, but strategic amusement.</p>
+        <p>You see the trap, you smile at it, and you move exactly where the blind are running from.</p>
+
+        <section class="footnotes" aria-label="Footnotes">
+          <h2 class="visually-hidden">Footnotes</h2>
+          <ol>
+            <li id="fn1">Codex Path: <em>How to Make Money Without Being a Slave to It</em>. Fragment 0003. <a href="#fn1" aria-label="Back to reference">↩</a></li>
+          </ol>
+        </section>
+      </article>
+
+      <!-- Outline -->
+      <aside class="toc" aria-label="On this page">
+        <h2>Outline</h2>
+        <nav id="toc"></nav>
+      </aside>
+
+      <!-- Prev / Next aligned to content, single-line titles -->
+      <nav class="article-nav" aria-label="More Codex">
+        <a class="nav-card" href="./step-2-free-of-delusion.html">
+          <div>
+            <div class="nav-eyebrow">Previous</div>
+            <div class="nav-title">Step 2 — Be Free of Delusion.</div>
+          </div>
+        </a>
+        <a class="nav-card" href="#">
+          <div>
+            <div class="nav-eyebrow">Next</div>
+            <div class="nav-title">Step 4 — (Coming Soon).</div>
+          </div>
+        </a>
+      </nav>
+
+      <footer>© <span id="yr"></span> ORR. All rights reserved.</footer>
+    </div>
+  </main>
+
+  <script>
+    // Background motion
+    (function(){
+      const v = document.getElementById('bg-video');
+      if (!v) return; v.muted = true;
+      try{ v.playbackRate = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--video-speed')) || 0.28; }catch(_){ }
+      const p = v.play && v.play(); if (p && p.catch) p.catch(function(){});
+    })();
+
+    // Year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Reading time (approx 225 wpm)
+    (function(){
+      const el = document.getElementById('article');
+      if(!el) return; const text = el.innerText || el.textContent || "";
+      const words = (text.trim().match(/\S+/g) || []).length;
+      const mins = Math.max(1, Math.round(words / 225));
+      const rt = document.getElementById('readtime');
+      if(rt) rt.textContent = mins + (mins === 1 ? ' min' : ' mins') + ' read';
+    })();
+
+    // Build ToC from h2/h3
+    (function(){
+      const toc = document.getElementById('toc');
+      const article = document.getElementById('article'); if(!toc || !article) return;
+      const hs = article.querySelectorAll('h2, h3');
+      const ul = document.createElement('ul'); ul.style.listStyle='none'; ul.style.margin='0'; ul.style.padding='0';
+      hs.forEach(h=>{
+        if(!h.id){ h.id = h.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g,'-'); }
+        const li = document.createElement('li');
+        li.style.margin = h.tagName==='H2' ? '6px 0' : '2px 0 2px 14px';
+        const a = document.createElement('a'); a.href = '#'+h.id; a.textContent = h.textContent.trim();
+        a.setAttribute('data-target', h.id);
+        li.appendChild(a); ul.appendChild(li);
+      });
+      toc.appendChild(ul);
+    })();
+
+    // Scroll spy + progress
+    (function(){
+      const links = Array.from(document.querySelectorAll('.toc a'));
+      const sections = links.map(a=> document.getElementById(a.dataset.target)).filter(Boolean);
+      const progress = document.getElementById('progress');
+
+      const spy = new IntersectionObserver((entries)=>{
+        entries.forEach(en=>{
+          if(en.isIntersecting){
+            const id = en.target.id;
+            links.forEach(l=> l.setAttribute('aria-current', l.dataset.target===id ? 'true' : 'false'));
+          }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px', threshold: [0, 1] });
+
+      sections.forEach(s=> spy.observe(s));
+
+      const onScroll = ()=>{
+        const doc = document.documentElement; const body = document.body;
+        const scrollTop = doc.scrollTop || body.scrollTop;
+        const height = (doc.scrollHeight - doc.clientHeight) || 1;
+        const percent = Math.max(0, Math.min(1, scrollTop / height));
+        if(progress) progress.style.width = (percent*100).toFixed(2) + '%';
+      };
+      document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+    })();
+
+    // Reading Mode toggle (persist)
+    (function(){
+      const key = 'codexReadingMode';
+      const btn = document.getElementById('reading');
+      if(!btn) return;
+
+      function apply(mode){
+        const on = (mode === 'light');
+        document.body.classList.toggle('mode-reading', on);
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        btn.textContent = on ? 'Reading Dark' : 'Reading Light';
+      }
+
+      let saved = localStorage.getItem(key) || 'dark';
+      apply(saved);
+
+      btn.addEventListener('click', ()=>{
+        const next = document.body.classList.contains('mode-reading') ? 'dark' : 'light';
+        localStorage.setItem(key, next);
+        apply(next);
+      });
+    })();
+  </script>
+</body>
+</html>
