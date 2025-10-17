@@ -1,1 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ORR — The Codex</title>
+  
+  <!-- Reuse your background assets -->
+  <link rel="preload" as="video" href="/assets/video.webm" type="video/webm" />
+
+  <style>
+    /* ============================== QUIET LUXE BASE (re-using your tokens) ============================== */
+    :root{
+      --page-bg:#121110;   /* near-black */
+      --ink:#F5F3EF;       /* ivory */
+      --ink-soft:#EAE6DE;  /* stone */
+      --line:#90827D;      /* warm hairline */
+      --cta:#CBB89D;       /* champagne */
+
+      --video-opacity:0.033;
+      --video-speed:0.28;
+      --tint-opacity:0.02;
+
+      --font-heading:"Safira March", serif;       
+      --font-subhead:"Roxborough CF","RoxboroughCF",serif; 
+      --font-body:"Cotoris", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; 
+      --font-special:"The Seasons","TheSeasons",serif; 
+
+      --space-sm:14px; --space-md:20px; --space-lg:clamp(24px,3vw,36px);
+      --radius-pill:999px;
+
+      --glass-dark: rgba(12,11,10,.55);
+      --glass-veil-1: rgba(245,243,239,.12);
+      --glass-veil-2: rgba(245,243,239,.08);
+
+      --shadow-soft: 0 1px 0 rgba(255,255,255,.03), 0 40px 80px rgba(0,0,0,.60);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{background:#000;color:var(--ink);scrollbar-width:thin;scrollbar-color: rgba(245,243,239,.25) transparent}
+    ::-webkit-scrollbar{ width:10px }
+    ::-webkit-scrollbar-track{ background:transparent }
+    ::-webkit-scrollbar-thumb{ background: rgba(245,243,239,.22); border:2px solid transparent; border-radius:8px; background-clip:padding-box }
+    ::-webkit-scrollbar-thumb:hover{ background: rgba(245,243,239,.35) }
+
+    body{
+      font:400 16px/1.58 var(--font-body);
+      color:var(--ink);
+      background:var(--page-bg);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+
+    /* ============ FONT FACES (same family names as your index) ============ */
+    @font-face{font-family:"Cotoris";   src:url("/fonts/cotoris.otf") format("opentype"); font-weight:400; font-style:normal; font-display:swap}
+    @font-face{font-family:"Cotorisi";  src:url("/fonts/cotorisita.otf") format("opentype"); font-weight:400; font-style:normal; font-display:swap}
+    @font-face{font-family:"Safira March"; src:url("/fonts/Safira\ March\ Personal\ Use\ Only.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap}
+    @font-face{font-family:"Roxborough CF"; src:url("/fonts/roxboroughcf-regular.otf") format("opentype"), url("/fonts/RoxboroughCF-Regular.woff") format("woff"); font-weight:400; font-style:normal; font-display:swap}
+    @font-face{font-family:"The Seasons"; src:url("/fonts/theseasons-reg.otf") format("opentype"), url("/fonts/TheSeasons-Regular.woff") format("woff"); font-weight:400; font-style:normal; font-display:swap}
+    @font-face{font-family:"Simple"; src:url("/fonts/Simple-Serenity-Serif.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap}
+
+    /* ============================== GLOBAL BACKGROUND VIDEO ============================== */
+    #site-bg{ position:fixed; inset:0; z-index:0; background:var(--page-bg); pointer-events:none; overflow:hidden }
+    #bg-video{ position:absolute; top:50%; left:50%; min-width:100%; min-height:100%; transform:translate(-50%,-50%); object-fit:cover; opacity:var(--video-opacity); transition:opacity .6s ease }
+    #bg-tint{ position:absolute; inset:0; mix-blend-mode:soft-light; background:var(--ink); opacity:var(--tint-opacity) }
+    @media (prefers-reduced-motion:reduce){ #bg-video{display:none} #bg-tint{mix-blend-mode:normal;opacity:.06} }
+
+    /* ============================== NAVBAR (always-visible on Codex) ============================== */
+    :root{ --topnav-h: clamp(56px, 7.5vh, 68px) }
+    .top-nav{
+      position:fixed; top:0; left:0; right:0; height:var(--topnav-h);
+      display:flex; align-items:center; gap:24px; padding:0 clamp(16px,5vw,48px);
+      backdrop-filter:saturate(1.12) blur(10px);
+      z-index:6; opacity:1; transform:none; pointer-events:auto;
+      background: var(--glass-dark); color: var(--ink);
+      border-bottom: 1px solid var(--line); box-shadow: 0 10px 28px rgba(0,0,0,.18);
+    }
+    .top-nav .brand{ display:inline-flex; align-items:center; gap:10px; text-decoration:none; color:inherit }
+    .top-nav .brand img{ display:block; height: clamp(32px, 3.8vw, 48px); width:auto }
+    .menu{ margin-left:auto; display:flex; align-items:center; gap: clamp(18px, 2.4vw, 36px) }
+    .menu a{ text-decoration:none; color:inherit; opacity:.92; font:600 12px/1.1 var(--font-body); letter-spacing:.12em; text-transform:uppercase; transition:opacity .2s ease, transform .12s ease }
+    .menu a:hover{ opacity:1; transform:translateY(-1px) }
+    .menu .cta{ padding:.55rem .9rem; border:1px solid currentColor; border-radius:var(--radius-pill); background:transparent }
+
+    html, body, button, .btn, .menu a, input, select{ font-family: Roxborough CF !important; }
+
+    /* ============================== CODEX PAGE ============================== */
+    main#codex{ position:relative; z-index:1; padding-top:calc(var(--topnav-h) + 28px) }
+
+    /* Header */
+    .cz-header{ max-width:1280px; margin: clamp(64px, 10vh, 110px) auto clamp(16px,4vh,28px); padding: 0 clamp(24px, 2.5vw, 40px); display:grid; grid-template-columns: 1fr minmax(320px,560px); grid-auto-rows: min-content; align-items:end; column-gap: clamp(24px,4vw,56px); row-gap: 12px }
+    .cz-h1{ font-family:var(--font-heading); font-weight:400; letter-spacing:.01em; font-size: clamp(38px,5.2vw,84px); line-height:1.02 }
+    .cz-sub{ font: 400 clamp(14px,1.25vw,18px)/1.55 var(--font-body); color:var(--ink-soft) }
+    .cz-count{ font: 500 12px/1 var(--font-body); letter-spacing:.16em; text-transform:uppercase; opacity:.85 }
+
+    /* Header prestige rule (slow-grow) */
+    .cz-rule{
+      height:1px; width:100%; max-width:260px;
+      background:linear-gradient(90deg, transparent,
+        color-mix(in oklab, var(--cta), transparent 82%) 18%,
+        color-mix(in oklab, var(--ink), transparent 78%) 56%,
+        transparent);
+      opacity:.75;
+      transform:scaleX(.18);
+      transform-origin:left center;
+      will-change:transform,opacity;
+      margin-top:6px;
+      animation: codexRule 1500ms cubic-bezier(.19,1,.22,1) .2s forwards;
+    }
+    @keyframes codexRule{ to{ transform:scaleX(1); opacity:.95 } }
+
+    /* Controls row */
+    .cz-controls{ max-width:1280px; margin: 6px auto 8px; padding: 0 clamp(24px, 2.5vw, 40px); display:flex; align-items:center; gap:12px; justify-content:flex-end; flex-wrap:wrap }
+    .cz-search{ position:relative; flex:1 1 360px; min-width:260px; max-width:520px }
+    .cz-search input{ width:100%; appearance:none; border:1px solid var(--line); border-radius:999px; background:transparent; color:var(--ink); padding:.7rem 1rem; font:600 12px/1 var(--font-body); letter-spacing:.08em; text-transform:uppercase }
+    .cz-sort{ position:relative; display:flex; align-items:center; gap:8px }
+    
+
+    /* Entries grid */
+    .cz-grid{ max-width:1280px; margin: 60px auto clamp(90px, 14vh, 140px); padding: 0 clamp(24px, 2.5vw, 40px); display:grid; grid-template-columns: repeat(2, minmax(420px, 1fr)); column-gap: clamp(36px, 4.5vw, 72px); row-gap: clamp(22px, 3.2vw, 36px) }
+    @media (max-width: 900px){ .cz-grid{ grid-template-columns: 1fr } }
+
+    .cz-item{ position:relative; /* for glint */
+      border-bottom:1px solid color-mix(in srgb, var(--line) 76%, transparent);
+      padding: 1.35rem 0 1.85rem; 
+      opacity:0; transform:translateY(8px);
+      transition: opacity .5s ease, transform .6s cubic-bezier(.22,.61,.36,1);
+    }
+    .cz-item.is-in{ opacity:1; transform:none }
+
+    .cz-link{
+      display:grid; grid-template-columns: 1fr auto; grid-template-rows:auto auto auto;
+      column-gap: 12px; row-gap: .7rem; align-items:start;
+      text-decoration:none; color:inherit; position:relative;
+    }
+
+    .cz-title{
+      grid-column:1 / -1; font-family:var(--font-subhead); font-weight:400;
+      letter-spacing:.005em; font-size: clamp(20px, 2.2vw, 28px);
+      line-height:1.15; text-decoration:none
+    }
+    .cz-frag{ grid-column:1 / -1; color:var(--ink-soft); font: 400 1rem/1.5 var(--font-body); max-width: 60ch; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+
+    .cz-meta{ grid-column:1 / 2; display:flex; align-items:center; gap:10px; font: 500 .85rem/1 var(--font-body); opacity:.9 }
+    .cz-meta .cz-dot{ width:3px; height:3px; border-radius:999px; background: currentColor; opacity:.6 }
+
+    .cz-arrow{
+      align-self:center; justify-self:end;
+      opacity:0; transform:translateX(-4px);
+      transition: opacity .35s ease, transform .6s cubic-bezier(.19,1,.22,1);
+      font: 500 1rem/1 var(--font-body)
+    }
+
+    /* Ultra-subtle growing hairline per item */
+    .cz-link::after{
+      content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px;
+      background:linear-gradient(90deg, transparent,
+        color-mix(in oklab, var(--cta), transparent 84%) 22%,
+        color-mix(in oklab, var(--ink), transparent 80%) 58%,
+        transparent);
+      transform:scaleX(.16);
+      transform-origin:left center;
+      opacity:0;
+      transition: transform 900ms cubic-bezier(.19,1,.22,1), opacity 320ms ease;
+    }
+
+    .cz-item:hover .cz-title{ text-decoration:none }
+    .cz-item:hover .cz-arrow{ opacity:1; transform:none }
+    .cz-item:hover .cz-link::after,
+    .cz-item:focus-within .cz-link::after{ transform:scaleX(1); opacity:.9 }
+
+    /* Load more */
+    .cz-more-wrap{ max-width:1280px; margin: 12px auto 90px; padding: 0 clamp(24px, 2.5vw, 40px); display:flex; justify-content:center }
+    .cz-more{ display:inline-flex; align-items:center; gap:10px; padding:.7rem 1.1rem; border:1px solid var(--line); border-radius:999px; background:transparent; color:var(--ink); font:600 12px/1 var(--font-body); letter-spacing:.12em; text-transform:uppercase; cursor:pointer; transition: transform .12s ease, background .2s ease, border-color .2s ease }
+    .cz-more:hover{ transform:translateY(-1px); background:rgba(255,255,255,.03) }
+
+    /* Empty state */
+    .cz-empty{ max-width:1280px; margin: 20px auto; padding: 0 clamp(24px, 2.5vw, 40px); color:var(--ink-soft) }
+
+    /* Footer */
+    footer{ padding:24px 6vw 40px; text-align:center; font-size:13px; color:var(--ink-soft) }
+
+    /* Motion hygiene */
+    @media (prefers-reduced-motion:reduce){
+      .cz-item .cz-title, .cz-arrow, .cz-more, .cz-link::after{ transition:none }
+    }
+
+    /* a11y util */
+    .visually-hidden{ position:absolute!important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap }
+    /* ============================== LUXE PALETTE ENHANCEMENTS ============================== */
+  :root{
+    --accent-foil: color-mix(in oklab, var(--cta) 72%, transparent); /* warm champagne */
+    --accent-ivory: color-mix(in oklab, var(--ink) 86%, transparent); /* crisp ivory */
+    --accent-haze: color-mix(in oklab, var(--cta) 18%, transparent);  /* soft glow */
+  }
+
+  /* Elevated prestige rule under the page title */
+  .cz-rule{ position:relative; height:2px; width:100%; max-width:360px; margin-top:10px;
+    background:linear-gradient(90deg, transparent 0%, var(--accent-foil) 18%, var(--accent-ivory) 58%, transparent 100%);
+    opacity:.9; transform:scaleX(.12); transform-origin:left center; will-change:transform,opacity; filter: drop-shadow(0 6px 24px rgba(203,184,157,.22));
+    animation: codexRule 1600ms cubic-bezier(.19,1,.22,1) .15s forwards; }
+  .cz-rule::after{ content:""; position:absolute; inset:-10px 0 -10px 0; pointer-events:none;
+    background: radial-gradient(220px 40px at 20% 50%, var(--accent-haze), transparent 60%),
+                radial-gradient(220px 40px at 70% 50%, color-mix(in oklab, var(--ink) 14%, transparent), transparent 60%);
+    opacity:.35; filter: blur(6px); }
+
+  @keyframes codexRule{ to{ transform:scaleX(1); opacity:1 } }
+
+  /* Search / Sort controls — champagne focus ring */
+  .cz-search input, .cz-sort select{ transition: box-shadow .25s ease, border-color .25s ease, background .25s ease; }
+  .cz-search input:focus{ background: transparent; box-shadow:0 0 0 1px var(--line), 0 8px 24px rgba(0,0,0,.35); }
+
+  /* Item hairline — pearlescent rim with subtle halo */
+  .cz-link::after{ height:1.5px; background:
+      linear-gradient(90deg, transparent, color-mix(in oklab, var(--cta) 60%, transparent) 20%, color-mix(in oklab, var(--ink) 78%, transparent) 60%, transparent);
+    box-shadow: 0 0 0 0.5px color-mix(in oklab, var(--cta) 14%, transparent); }
+  .cz-item:hover .cz-link::after, .cz-item:focus-within .cz-link::after{ opacity:1; transform:scaleX(1); }
+  .cz-item:hover .cz-link::after, .cz-item:focus-within .cz-link::after{ opacity:1; transform:scaleX(1); }
+
+  /* Champagne glint following pointer (ultra subtle) */
+  .cz-item{ --mx:50%; }
+  .cz-item::after{ content:""; position:absolute; left:0; right:0; bottom:-1px; height:10px; pointer-events:none;
+    background: radial-gradient(130px 10px at var(--mx) 50%, color-mix(in oklab, var(--cta) 28%, transparent) 0%, transparent 70%);
+    opacity:0; transition: opacity .35s ease; filter: blur(6px); }
+  .cz-item:hover::after{ opacity:.55 }
+
+  /* Curated tag pill using the brand palette */
+  .cz-tag{ display:inline-flex; align-items:center; gap:6px; padding:.28rem .55rem; border-radius:999px; margin-left:10px;
+    border:1px solid color-mix(in oklab, var(--cta) 42%, var(--line) 58%);
+    background: linear-gradient(180deg, color-mix(in oklab, var(--cta) 16%, transparent), transparent);
+    font:600 11px/1 var(--font-body); letter-spacing:.12em; text-transform:uppercase; color: color-mix(in oklab, var(--ink) 92%, transparent); }
+
+  /* Better mobile spacing under header */
+  @media (max-width: 560px){
+    .cz-header{ padding: 0 1.2rem; gap:12px }
+    .cz-rule{ max-width:70% }
+  }
+  /* Header grid placements for right-aligned search */
+  /* Muted tone for meta (date · persona) */
+  .cz-meta{ color: var(--ink-soft); opacity:1 }
+
+  .cz-header .cz-h1, .cz-header .cz-rule, .cz-header .cz-count{ grid-column:1 }
+  .cz-header .cz-ctrls-right{ grid-column:2; grid-row:1 / span 3; align-self:end; display:flex; gap:12px; justify-content:flex-end }
+  .cz-ctrls-right .cz-search{ flex:1 1 360px; min-width:260px }
+  
+  @media (max-width: 760px){
+    .cz-header{ grid-template-columns:1fr }
+    .cz-header .cz-ctrls-right{ grid-column:1; grid-row:auto; margin-top:10px }
+  }
+  /* === ULTRA-LUXE: Title-matched prestige line + premium spacing === */
+  .cz-link{ row-gap: clamp(.42rem, 1.1vw, .62rem); }
+  .cz-title{
+    display:inline-block;
+    position:relative;
+    padding-bottom:.25rem;
+    margin-bottom: clamp(6px, 1.2vw, 14px);
+  }
+  .cz-title::before{ display:none !important }
+  .cz-title::after{
+    content:""; position:absolute; left:0; bottom:-2px; height:1.5px; width:100%;
+    background: linear-gradient(90deg, transparent 0%,
+                 color-mix(in oklab, var(--cta) 60%, transparent) 18%,
+                 color-mix(in oklab, var(--ink) 78%, transparent) 58%,
+                 transparent 100%);
+    transform: scaleX(.12);
+    transform-origin:left center;
+    opacity:.9;
+    filter: drop-shadow(0 6px 18px rgba(203,184,157,.22));
+    transition: transform 900ms cubic-bezier(.19,1,.22,1), opacity .35s ease, filter .35s ease;
+  }
+  .cz-item:hover .cz-title::after,
+  .cz-item:focus-within .cz-title::after{ transform: scaleX(1); opacity:1; filter: drop-shadow(0 8px 22px rgba(203,184,157,.30)); }
+  .cz-item:hover .cz-title::before,
+  .cz-item:focus-within .cz-title::before{ opacity:.45; }
+
+  .cz-link::after{ display:none !important }
+  .cz-meta{ color: var(--ink-soft); opacity:.95 }
+
+  /* === ULTRA-LUXE custom sort control === */
+  .cz-sort-btn{
+    position:relative; appearance:none; -webkit-appearance:none;
+    border:1px solid var(--line); border-radius:999px; background:transparent; color:var(--ink);
+    padding:.62rem 2.2rem .62rem 1rem; cursor:pointer; user-select:none;
+    font:600 12px/1 var(--font-body); letter-spacing:.12em; text-transform:uppercase;
+    backdrop-filter: blur(8px) saturate(112%);
+    transition: transform .12s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+    box-shadow: 0 1px 0 rgba(255,255,255,.04), 0 16px 36px rgba(0,0,0,.28);
+  }
+  .cz-sort-btn::after{
+    content:""; position:absolute; right:.8rem; top:50%; width:14px; height:14px; transform:translateY(-50%);
+    background: currentColor; opacity:.9;
+    -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="%23fff" stroke-width="2" stroke-linecap="round"/></svg>') no-repeat center/contain;
+            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="%23fff" stroke-width="2" stroke-linecap="round"/></svg>') no-repeat center/contain;
+    transition: transform .25s ease, opacity .25s ease;
+  }
+  .cz-sort-btn:hover{ transform:translateY(-1px); background:rgba(255,255,255,.03) }
+  .cz-sort-btn:focus-visible{ outline:2px solid var(--cta); outline-offset:2px }
+  .cz-sort-btn[aria-expanded="true"]::after{ transform: translateY(-50%) rotate(180deg) }
+
+  .cz-sort-list{
+    position:absolute; right:0; top:calc(100% + 8px); z-index:20; min-width:190px;
+    padding:6px; margin:0; list-style:none; border-radius:14px;
+    border:1px solid var(--line);
+    background: linear-gradient(180deg, var(--glass-veil-1), var(--glass-veil-2));
+    box-shadow: var(--shadow-soft), 0 24px 60px rgba(0,0,0,.35);
+    backdrop-filter: blur(10px) saturate(115%);
+  }
+  .cz-sort-list [role="option"]{
+    padding:10px 34px 10px 12px; border-radius:10px; cursor:pointer; color:var(--ink);
+    font:600 12px/1 var(--font-body); letter-spacing:.12em; text-transform:uppercase;
+    white-space:nowrap; position:relative; transition: background .2s ease, color .2s ease;
+  }
+  .cz-sort-list [role="option"]:hover,
+  .cz-sort-list [role="option"]:focus{ background: rgba(255,255,255,.06); outline:none }
+  .cz-sort-list [role="option"][aria-selected="true"]::after{
+    content:""; position:absolute; right:10px; top:50%; width:14px; height:14px; transform:translateY(-50%);
+    background: currentColor; opacity:.9;
+    -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" fill="none" stroke="%23fff" stroke-width="2" stroke-linecap="round"/></svg>') no-repeat center/contain;
+            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" fill="none" stroke="%23fff" stroke-width="2" stroke-linecap="round"/></svg>') no-repeat center/contain;
+  }
+</style>
+</head>
+<body>
+  <!-- Background layer (shared aesthetic) -->
+  <div id="site-bg" aria-hidden="true">
+    <video id="bg-video" muted playsinline autoplay loop preload="metadata" poster="/assets/video-poster.jpg">
+      <source src="/assets/video.webm" type="video/webm">
+      <source src="/assets/3.mp4" type="video/mp4">
+    </video>
+    <div id="bg-tint"></div>
+  </div>
+
+  <!-- Top nav (always visible here) -->
+  <header class="top-nav" aria-label="Site">
+    <a class="brand" href="#hero" aria-label="ORR home">
+      <img src="./assets/re2.svg" alt="ORR" loading="lazy" />
+    </a>
+    <nav class="menu" aria-label="Primary">
+      <a href="#partners">Clients</a>
+      <a href="/codex">Codex</a>
+      <a class="cta" href="#section-7">Begin</a>
+    </nav>
+  </header>
+
+  <!-- CODEX -->
+  <main id="codex" role="main">
+    <header class="cz-header">
+      <h1 class="cz-h1">THE CODEX</h1>
+      <div class="cz-ctrls-right">
+        <div class="cz-search" role="search">
+          <input id="cz-q" type="search" placeholder="Search" aria-label="Search entries" />
+        </div>
+        <div class="cz-sort">
+          <button id="cz-sort-btn" class="cz-sort-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="cz-sort-list">
+            <span class="label">Newest</span>
+          </button>
+          <ul id="cz-sort-list" class="cz-sort-list" role="listbox" aria-label="View" hidden>
+            <!-- Sort -->
+            <li role="option" data-type="sort" data-value="new" aria-selected="true" tabindex="-1">Newest</li>
+            <!-- Genre filter -->
+            <li role="option" data-type="genre" data-value="all" aria-selected="false" tabindex="-1">All</li>
+            <li role="option" data-type="genre" data-value="money" aria-selected="false" tabindex="-1">Money</li>
+            <li role="option" data-type="genre" data-value="ai" aria-selected="false" tabindex="-1">AI</li>
+            <li role="option" data-type="genre" data-value="market" aria-selected="false" tabindex="-1">Market</li>
+            <li role="option" data-type="genre" data-value="ops" aria-selected="false" tabindex="-1">Ops</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Prestige rule -->
+      <div class="cz-rule" aria-hidden="true"></div>
+      <div class="cz-count" id="cz-count" aria-live="polite">0 entries</div>
+    </header>
+
+    <section class="cz-grid" id="cz-grid" aria-label="Codex entries"></section>
+
+    <div class="cz-empty" id="cz-empty" hidden>No entries found. Clear filters or try a different keyword.</div>
+
+    <div class="cz-more-wrap">
+      <button id="cz-more" class="cz-more" hidden>Load more</button>
+    </div>
+
+    <footer>© <span id="yr"></span> ORR. All rights reserved.</footer>
+  </main>
+
+  <!-- Inline data manifest -->
+  <script type="application/json" id="codex-data">{
+    "entries": [
+      {
+        "title": "AI Killed Creativity; DEPTH is next.",
+        "fragment": "Something that feels like you — but isn’t.",
+        "date": "Jul 16, 2025",
+        "slug": "/codex/articles/ai-killed-creativity.html",
+        "persona": "Codex of Oronos",
+        "curated": false,
+        "genre": "ai"
+      },
+      {
+        "title": "Prompt Engineering Is Too Outdated.",
+        "fragment": "AI isn’t dumb. Most people just aren’t clear.",
+        "date": "Jul 19, 2025",
+        "slug": "/codex/articles/prompt-engineering-outdated.html",
+        "persona": "Codex of Oronos",
+        "curated": false,
+        "genre": "ai"
+      },
+      {
+        "title": "Not Everyone Saves Time with AI.",
+        "fragment": "Thou wouldst command the sword? Then let Clarity be thy hand.",
+        "date": "Jul 22, 2025",
+        "slug": "/codex/articles/ai-time-saver.html",
+        "persona": "Elegant Fool",
+        "curated": true,
+        "genre": "ai"
+      },
+      {
+        "title": "NOT A CHANCE — Beating AI with UX?",
+        "fragment": "Better UX doesn’t matter if the wave swallows you first.",
+        "date": "Jul 25, 2025",
+        "slug": "/codex/articles/startups-vs-ai.html",
+        "persona": "Codex of Oronos",
+        "curated": false,
+        "genre": "ai"
+      },
+
+      {
+        "title": "Step 1 — Customer by Choice, Not by Manipulation",
+        "fragment": "You can’t earn cleanly while leaking predictably.",
+        "date": "Jul 04, 2025",
+        "slug": "/codex/articles/money-step-1.html",
+        "persona": "Codex of Oronos",
+        "curated": true,
+        "genre": "money"
+      },
+      {
+        "title": "Step 2 — Be Free of Delusion",
+        "fragment": "Goals without numbers are dreams. Reality has math.",
+        "date": "Jul 05, 2025",
+        "slug": "/codex/articles/money-step-2.html",
+        "persona": "Codex of Oronos",
+        "curated": true,
+        "genre": "money"
+      },
+      {
+        "title": "Step 3 — Understand the Market",
+        "fragment": "Everyone’s selling. Few are seeing. Play the real field.",
+        "date": "Jul 06, 2025",
+        "slug": "/codex/articles/money-step-3.html",
+        "persona": "Codex of Oronos",
+        "curated": true,
+        "genre": "money"
+      },
+      {
+        "title": "Step 4 — Know Your Weapons",
+        "fragment": "The market doesn’t reward noise — only sharp clarity.",
+        "date": "Jul 07, 2025",
+        "slug": "./codex/money-step-4.html",
+        "persona": "Codex of Oronos",
+        "curated": true,
+        "genre": "money"
+      },
+      {
+        "title": "Step 5 — Do What You Don’t Like — or Outsmart It",
+        "fragment": "You don’t have to do everything. But you must do something.",
+        "date": "Jul 08, 2025",
+        "slug": "/codex/articles/money-step-5.html",
+        "persona": "Codex of Oronos",
+        "curated": true,
+        "genre": "money"
+      },
+      {
+        "title": "Step 6 — Evolve With Every Second",
+        "fragment": "Staying still is erasure. Evolution is minimum qualification.",
+        "date": "Jul 09, 2025",
+        "slug": "/codex/articles/money-step-6.html",
+        "persona": "Codex of Oronos",
+        "curated": true,
+        "genre": "money"
+      },
+      {
+        "title": "Step 7 — Use the Patterns, But Play Them Differently",
+        "fragment": "You don’t need more ideas. You need cleaner observation loops.",
+        "date": "Jul 10, 2025",
+        "slug": "/codex/articles/money-step-7.html",
+        "persona": "Codex of Oronos",
+        "curated": true,
+        "genre": "money"
+      },
+      {
+        "title": "Step 8 — Make Money — Without Becoming Its Slave",
+        "fragment": "You don’t need a billion. You need breathing room — and clarity.",
+        "date": "Jul 11, 2025",
+        "slug": "/codex/articles/money-step-8.html",
+        "persona": "Codex of Oronos",
+        "curated": true,
+        "genre": "money"
+      }
+    ]
+  }</script>
+
+  <script>
+  // Background motion parity with your index
+  (function(){
+    const v = document.getElementById('bg-video');
+    if (!v) return;
+    v.muted = true;
+    try{ v.playbackRate = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--video-speed')) || 0.28; }catch(_){ }
+    const p = v.play && v.play(); if (p && p.catch) p.catch(function(){});
+  })();
+
+  // Year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Utility: format count (current filtered entries)
+  const setCount = (n)=>{
+    const el = document.getElementById('cz-count');
+    if(!el) return; el.textContent = n + (n === 1 ? ' entry' : ' entries');
+  };
+
+  // Debounce helper for search
+  const debounce = (fn, ms=180)=>{ let t; return (...args)=>{ clearTimeout(t); t = setTimeout(()=> fn(...args), ms); }; };
+
+  // Data load (inline or external fallback)
+  async function loadCodex(){
+    let data = null;
+    const inline = document.getElementById('codex-data');
+    if(inline){ try{ data = JSON.parse(inline.textContent); }catch(e){} }
+    if(!data){
+      try{
+        const res = await fetch('/assets/codex.json', {cache:'no-store'});
+        if(res.ok) data = await res.json();
+      }catch(_){ }
+    }
+    return (data && Array.isArray(data.entries)) ? data.entries : [];
+  }
+
+  (async function(){
+    const grid   = document.getElementById('cz-grid');
+    const empty  = document.getElementById('cz-empty');
+    const moreBtn= document.getElementById('cz-more');
+    const q      = document.getElementById('cz-q');
+
+    // Luxe sort/filter control
+    let sortValue = 'new';
+    const sortBtn  = document.getElementById('cz-sort-btn');
+    const sortList = document.getElementById('cz-sort-list');
+
+    // Reveal observer
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach((en)=>{ if(en.isIntersecting){ en.target.classList.add('is-in'); io.unobserve(en.target); } });
+    }, { threshold: .24 });
+
+    const PAGE = 12; // items per batch
+    let entries = await loadCodex();
+    entries = entries.map(e=>({ ...e, _time: (Date.parse(e.date||'') || 0) }));
+
+    // Genre state from URL (?genre=money)
+    const urlParams = new URLSearchParams(window.location.search);
+    let activeGenre = urlParams.get("genre") || "all";
+
+    // Filter set we render; will be derived from entries via genre + search
+    let filtered = entries.slice();
+
+    const applyGenre = ()=>{
+      if (!activeGenre || activeGenre === "all") { filtered = entries.slice(); return; }
+      filtered = entries.filter(e => Array.isArray(e.genre) ? e.genre.includes(activeGenre) : e.genre === activeGenre);
+    };
+
+    // apply initial genre and remember base set for search-clear
+    applyGenre();
+    let baseSet = filtered.slice();
+
+    // Set initial button label to match URL genre (if any)
+    const labelMap = { all:"All", money:"Money", ai:"AI", market:"Market", ops:"Ops" };
+    if (activeGenre && activeGenre !== "all") {
+      sortBtn.querySelector('.label').textContent = labelMap[activeGenre] || activeGenre;
+      // reflect selected state in list
+      sortList.querySelectorAll('[role="option"]').forEach(o=>{
+        const isSel = (o.dataset.type === 'genre' && o.dataset.value === activeGenre);
+        o.setAttribute('aria-selected', isSel ? 'true' : 'false');
+      });
+    } else {
+      sortBtn.querySelector('.label').textContent = "Newest";
+      sortList.querySelectorAll('[role="option"]').forEach(o=>{
+        const isSel = (o.dataset.type === 'sort' && o.dataset.value === 'new');
+        o.setAttribute('aria-selected', isSel ? 'true' : 'false');
+      });
+    }
+
+    let shown = 0;
+
+    const trackGlint = (card)=>{
+      let raf = null;
+      card.addEventListener('pointermove', (ev)=>{
+        const r = card.getBoundingClientRect();
+        const x = ((ev.clientX - r.left) / Math.max(r.width,1)) * 100;
+        if(raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(()=> card.style.setProperty('--mx', x + '%'));
+      });
+      card.addEventListener('pointerleave', ()=> card.style.setProperty('--mx','50%'));
+    };
+
+    const renderItem = (e)=>{
+      const a = document.createElement('a');
+      a.href = e.slug || '#';
+      a.className = 'cz-link';
+      a.setAttribute('aria-label', e.title);
+      const tag = e.curated ? '<span class="cz-tag" aria-label="Curated">Curated</span>' : '';
+      a.innerHTML = `
+        <div class="cz-title">${e.title}</div>
+        <div class="cz-frag">${e.fragment || ''}</div>
+        <div class="cz-meta">
+          <span>${e.date || ''}</span>
+          ${e.persona ? '<span class="cz-dot"></span><span>'+e.persona+'</span>' : ''}
+          ${tag}
+        </div>
+        <div class="cz-arrow" aria-hidden="true">→</div>
+      `;
+      const wrap = document.createElement('article');
+      wrap.className = 'cz-item';
+      wrap.appendChild(a);
+      return wrap;
+    };
+
+    const applySort = ()=>{
+      // currently only "new" is used; keep stable API
+      const mode = sortValue;
+      if(mode === 'old'){
+        filtered.sort((a,b)=> (a._time - b._time));
+      } else if(mode === 'curated'){
+        filtered.sort((a,b)=> (b.curated===true) - (a.curated===true) || (b._time - a._time));
+      } else {
+        filtered.sort((a,b)=> (b._time - a._time));
+      }
+    };
+
+    const applySearch = ()=>{
+      const term = (q.value||'').trim().toLowerCase();
+      if(!term){ filtered = baseSet.slice(); return; } // back to current genre view
+      // Global search across all entries
+      filtered = entries.filter(e=> (
+        (e.title||'').toLowerCase().includes(term) ||
+        (e.fragment||'').toLowerCase().includes(term) ||
+        (e.persona||'').toLowerCase().includes(term)
+      ));
+    };
+
+    const clearGrid = ()=>{ grid.innerHTML=''; shown = 0; };
+
+    const renderBatch = ()=>{
+      const next = filtered.slice(shown, shown + PAGE);
+      next.forEach(e=>{
+        const node = renderItem(e);
+        grid.appendChild(node);
+        io.observe(node);
+        trackGlint(node);
+      });
+      shown += next.length;
+      moreBtn.hidden = shown >= filtered.length;
+      empty.hidden = filtered.length !== 0;
+      setCount(filtered.length);
+    };
+
+    const refresh = ()=>{ clearGrid(); applySort(); renderBatch(); };
+
+    // Initial paint
+    refresh();
+
+    // Events
+    moreBtn.addEventListener('click', renderBatch);
+    q.addEventListener('input', debounce(()=>{ applySearch(); refresh(); }, 160));
+
+    // Unified menu handler (sort + genre)
+    function setMenu(val, label, type){
+      // Update selection UI
+      sortList.querySelectorAll('[role="option"]').forEach(o=>{
+        const match = (o.dataset.value === val && o.dataset.type === type);
+        o.setAttribute('aria-selected', match ? 'true' : 'false');
+      });
+      sortBtn.querySelector('.label').textContent = label;
+
+      if(type === 'sort'){
+        sortValue = val; // "new"
+      } else if (type === 'genre'){
+        activeGenre = val;
+        applyGenre();
+        baseSet = filtered.slice();
+        q.value = ''; // clear search when changing genre
+      }
+
+      applySort();
+      refresh();
+    }
+
+    function openSort(){
+      sortBtn.setAttribute('aria-expanded','true');
+      sortList.hidden = false;
+      const current = sortList.querySelector('[aria-selected="true"]');
+      (current || sortList.firstElementChild).focus();
+    }
+    function closeSort(){
+      sortBtn.setAttribute('aria-expanded','false');
+      sortList.hidden = true;
+    }
+
+    sortBtn.addEventListener('click', ()=>{
+      const open = sortBtn.getAttribute('aria-expanded') === 'true';
+      open ? closeSort() : openSort();
+    });
+
+    sortList.addEventListener('click', (e)=>{
+      const li = e.target.closest('[role="option"]'); if(!li) return;
+      setMenu(li.dataset.value, li.textContent.trim(), li.dataset.type);
+      closeSort();
+    });
+
+    sortBtn.addEventListener('keydown', (e)=>{
+      if(e.key==='ArrowDown' || e.key==='Enter' || e.key===' '){ e.preventDefault(); openSort(); }
+    });
+
+    const move = (dir)=>{
+      const opts = Array.from(sortList.querySelectorAll('[role="option"]'));
+      const idx = Math.max(0, opts.indexOf(document.activeElement));
+      const n = (idx + dir + opts.length) % opts.length; opts[n].focus();
+    };
+
+    sortList.querySelectorAll('[role="option"]').forEach(li=>{
+      li.addEventListener('keydown', (e)=>{
+        if(e.key==='ArrowDown'){ e.preventDefault(); move(1); }
+        else if(e.key==='ArrowUp'){ e.preventDefault(); move(-1); }
+        else if(e.key==='Enter'){ e.preventDefault(); setMenu(li.dataset.value, li.textContent.trim(), li.dataset.type); closeSort(); }
+        else if(e.key==='Escape'){ e.preventDefault(); closeSort(); sortBtn.focus(); }
+      });
+    });
+
+    document.addEventListener('click', (e)=>{
+      if(sortBtn.getAttribute('aria-expanded')==='true' && !e.target.closest('.cz-sort')) closeSort();
+    });
+  })();
+  </script>
+</body>
+</html>
 
