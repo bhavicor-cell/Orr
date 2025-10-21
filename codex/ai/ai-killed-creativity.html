@@ -79,7 +79,27 @@
   border-radius: var(--radius-pill);
   background: transparent;
 }
-    html, body, button, .btn, .menu a, input, select{ font-family: "Roxborough CF", serif !important; }
+    /* ---- Scoped typography map ---- */
+body{ font-family: var(--font-body); }               /* Cotoris by default */
+
+article.content,
+article.content p,
+article.content li,
+.standfirst,
+.meta,
+.pull cite,
+figcaption{ font-family: var(--font-body); }        /* Reading surfaces → Cotoris */
+
+/* Important/ornamental surfaces → Roxborough */
+article h2, 
+article h3,
+.eyebrow,
+.nav-title,
+.nav-eyebrow,
+.toc h2,
+.menu a,
+.pill{ font-family: var(--font-subhead); }          /* Roxborough */
+btn, .menu a, input, select{ font-family: "Roxborough CF", serif !important; }
 
     /* ============================== PROGRESS BAR ============================== */
     #progress{
@@ -376,7 +396,7 @@ aside.toc{
         </ul>
         <p>I built multiple products across angles and strategies. Not for relevance theater — for <em>money</em>. Choose what fits. Take what you need. Keep moving.</p>
 
-        <h2 id="final">🧱 Final Thought</h2>
+        <h2 id="final">✦ Final Thought</h2>
         <p>I want to say “SCREW YOU, AI.” But that won’t feed our families. So we play the real game: use the machine without becoming it. <strong>Life is beautiful; survival is hard.</strong> Smile a few times while you build.</p>
 
         <section class="footnotes" aria-label="Footnotes">
