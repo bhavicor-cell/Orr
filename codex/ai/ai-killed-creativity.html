@@ -177,13 +177,17 @@ aside.toc{ grid-column: 2; }
 
     /* ============================== PREV / NEXT (single-line titles) ============================== */
     .article-nav{
-      grid-column: 1 / -1; /* align with the article column */
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(12px, 2.2vw, 20px);
-      margin: clamp(28px, 6vh, 48px) 0 0;
-      padding: 0 clamp(16px, 2.6vw, 26px);
-    }
+  grid-column: 1;                  /* same width as the content column */
+  display:grid;
+  grid-template-columns: 1fr 1fr;  /* two equal cards within that width */
+  gap: clamp(12px, 2.2vw, 20px);
+  margin: clamp(28px, 6vh, 48px) 0 0;
+  padding: 0;                      /* align to the text edges */
+}
+@media (max-width: 700px){
+  .article-nav{ grid-template-columns: 1fr; } /* stack on narrow screens */
+}
+
     .nav-card{
       position:relative; display:flex; align-items:center; gap:12px;
       padding: 14px 16px;
