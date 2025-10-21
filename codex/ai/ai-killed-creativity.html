@@ -286,16 +286,15 @@
 
   <!-- Top nav -->
   <header class="top-nav" aria-label="Site">
-    <a class="brand" href="../../../../index.html#hero" aria-label="ORR home">
+    <a class="brand" data-nav="home" href="../../../../index.html#hero" aria-label="ORR home">
       <img src="../../../../assets/re2.svg" alt="ORR" loading="lazy" />
     </a>
     <nav class="menu" aria-label="Primary">
-      <a href="../../../../index.html#partners">Clients</a>
-      <a href="../../../../index.html#action">In Motion</a>
-      <a href="../../../../codex.html" class="cta">Codex</a>
+      <a data-nav="clients" href="../../../../index.html#partners">Clients</a>
+      <a data-nav="codex" href="../../../../codex.html">Codex</a>
+      <a data-nav="begin" href="../../../../index.html#section-7" class="cta">Begin</a>
     </nav>
   </header>
-
   <main>
     <div class="page">
       <!-- Masthead (aligned with content) -->
@@ -486,6 +485,38 @@
       });
     })();
   </script>
+
+  <script>
+/* Normalize nav links from any depth (/, /codex/, /codex/ai/..., etc.) */
+(function () {
+  const segs  = location.pathname.split('/').filter(Boolean);
+  const last  = segs[segs.length - 1] || '';
+  const isDir = !last.includes('.');                 // e.g. /codex/
+  const up    = isDir ? segs.length : segs.length - 1;
+  const P     = up ? '../'.repeat(up) : './';        // prefix back to site root
+  const onIdx = /(^|\/)index\.html$/.test(location.pathname) || segs.length === 0;
+
+  const set = (sel, href) => {
+    const el = document.querySelector(sel);
+    if (el) el.setAttribute('href', href);
+  };
+
+  // Brand → index hero
+  set('.top-nav .brand', onIdx ? '#hero' : P + 'index.html#hero');
+
+  // Clients → index section 2
+  set('.top-nav .menu a[href="#partners"]',
+      onIdx ? '#partners' : P + 'index.html#partners');
+
+  // Begin → index CTA
+  set('.top-nav .menu a[href="#section-7"]',
+      onIdx ? '#section-7' : P + 'index.html#section-7');
+
+  // Codex hub (your codex “paths” page)
+  const codex = document.querySelector('.top-nav .menu a[href*="codex"]');
+  if (codex) codex.setAttribute('href', P + 'codex/codex.html');
+})();
+</script>
 </body>
 </html>
 
