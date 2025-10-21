@@ -16,8 +16,10 @@
       --line:#90827D;
       --cta:#CBB89D;
       --radius-pill: 999px;
+      --right-spill: clamp(0px, 8vw, 160px); 
       --container-max: 1280px;                 /* same cap as list page */
   --container-pad: clamp(24px, 2.5vw, 40px);  
+      
       
       --video-opacity:0.033;
       --video-speed:0.28;
@@ -115,7 +117,7 @@ btn, .menu a, input, select{ font-family: "Roxborough CF", serif !important; }
 
     /* [gutter] [article] [gap] [aside] [gutter] */
     .page{
-  max-width: var(--container-max);
+  max-width: calc(var(--container-max) + var(--right-spill));
   width: 100%;
   margin: 0 auto clamp(90px, 14vh, 140px);
   padding-inline: var(--container-pad);
@@ -173,6 +175,10 @@ aside.toc{
 
 /* Mobile: let it flow naturally */
 @media (max-width: 1100px){
+  .page{
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
   aside.toc{ position: static; max-height: none; overflow: visible; }
 }
 
