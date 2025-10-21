@@ -15,6 +15,9 @@
       --ink-soft:#EAE6DE;
       --line:#90827D;
       --cta:#CBB89D;
+      --radius-pill: 999px;
+      --container-max: 1280px;                 /* same cap as list page */
+  --container-pad: clamp(24px, 2.5vw, 40px);  
 
       --video-opacity:0.033;
       --video-speed:0.28;
@@ -27,8 +30,8 @@
       --topnav-h: clamp(56px, 7.5vh, 68px);
 
       /* Reading width + layout */
-      --measure: 80ch;
-      --aside-w: 340px;
+      --measure: 70ch;
+      --aside-w: 320px;
       --gap: clamp(32px, 5vw, 64px);
     }
 
@@ -49,8 +52,7 @@
 
     @font-face{font-family:"Cotoris"; src:url("../../fonts/cotoris.otf") format("opentype"); font-weight:400; font-style:normal; font-display:swap}
     @font-face{font-family:"Roxborough CF"; src:url("../../fonts/roxboroughcf-regular.otf") format("opentype"), url("../../fonts/RoxboroughCF-Regular.woff") format("woff"); font-weight:400; font-style:normal; font-display:swap}
-    @font-face{font-family:"Safira March"; src:url("../../fonts/Safira\\ March\\ Personal\\ Use\\ Only.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap}
-
+    @font-face{font-family:"Safira March"; src:url("../../../../fonts/Safira\ March\ Personal\ Use\ Only.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap}
     /* ============================== GLOBAL BACKGROUND ============================== */
     #site-bg{ position:fixed; inset:0; z-index:0; background:var(--page-bg); pointer-events:none; overflow:hidden }
     #bg-video{ position:absolute; top:50%; left:50%; min-width:100%; min-height:100%; transform:translate(-50%,-50%); object-fit:cover; opacity:var(--video-opacity); transition:opacity .6s ease }
@@ -62,7 +64,7 @@
       position:fixed; top:0; left:0; right:0; height:var(--topnav-h);
       display:flex; align-items:center; gap:24px; padding:0 clamp(16px,5vw,48px);
       backdrop-filter:saturate(1.12) blur(10px);
-      z-index:6; background: rgba(12,11,10,.55); color: var(--ink);
+      z-index:5; background: rgba(12,11,10,.55); color: var(--ink);
       border-bottom: 1px solid var(--line); box-shadow: 0 10px 28px rgba(0,0,0,.18);
     }
     .top-nav .brand{ display:inline-flex; align-items:center; gap:10px; text-decoration:none; color:inherit }
@@ -70,8 +72,34 @@
     .menu{ margin-left:auto; display:flex; align-items:center; gap: clamp(18px, 2.4vw, 36px) }
     .menu a{ text-decoration:none; color:inherit; opacity:.92; font:600 12px/1.1 "Roxborough CF",serif; letter-spacing:.12em; text-transform:uppercase; transition:opacity .2s ease, transform .12s ease }
     .menu a:hover{ opacity:1; transform:translateY(-1px) }
-    html, body, button, .btn, .menu a, input, select{ font-family: "Roxborough CF", serif !important; }
+    .top-nav .menu .cta{
+  padding: .55rem .9rem;
+  border: 1px solid currentColor;
+  border-radius: var(--radius-pill);
+  background: transparent;
+}
+    /* ---- Scoped typography map ---- */
+body{ font-family: var(--font-body); }               /* Cotoris by default */
 
+article.content,
+article.content p,
+article.content li,
+.standfirst,
+.meta,
+.pull cite,
+figcaption{ font-family: var(--font-body); }        /* Reading surfaces → Cotoris */
+
+/* Important/ornamental surfaces → Roxborough */
+article h2, 
+article h3,
+.eyebrow,
+.nav-title,
+.nav-eyebrow,
+.toc h2,
+.menu a,
+.pill{ font-family: var(--font-subhead); }          /* Roxborough */
+btn, .menu a, input, select{ font-family: "Roxborough CF", serif !important; }
+    
     /* ============================== PROGRESS BAR ============================== */
     #progress{
       position:fixed; left:0; top:0; height:2px; width:0%; z-index:7; pointer-events:none;
@@ -85,23 +113,23 @@
 
     /* [gutter] [article] [gap] [aside] [gutter] */
     .page{
-      display:grid;
-      grid-template-columns:
-        minmax(12px,1fr)
-        minmax(0, var(--measure))
-        var(--gap)
-        minmax(240px, var(--aside-w))
-        minmax(12px,1fr);
-      row-gap: clamp(28px, 5vh, 40px);
-      width:100%;
-      margin: 0 auto clamp(90px, 14vh, 140px);
-    }
+  max-width: var(--container-max);
+  width: 100%;
+  margin: 0 auto clamp(90px, 14vh, 140px);
+  padding-inline: var(--container-pad);
+
+  display: grid;
+  grid-template-columns: minmax(0, var(--measure)) minmax(240px, var(--aside-w));
+  column-gap: clamp(36px, 4.5vw, 72px);
+  row-gap: clamp(28px, 5vh, 40px);
+}
+
 
     /* ============================== MASTHEAD (ALIGNS WITH CONTENT) */
     .head{
-      grid-column: 2 / 6; /* align to the article column */
+      grid-column: 1 / -1; /* align to the article column */
       margin-top: clamp(96px, 14vh, 140px);
-      padding-inline: clamp(16px, 2.6vw, 26px); /* same inner padding as article */
+      padding-inline: 0; /* same inner padding as article */
       background: transparent; border: none; box-shadow: none;
     }
     .eyebrow{ font:400 14px/1 "Roxborough CF",serif; letter-spacing:.06em; color:var(--ink-soft) }
@@ -130,16 +158,21 @@
     .head .actions{ margin-bottom: clamp(22px, 5vh, 60px); }
 
     /* ============================== ARTICLE + ASIDE ============================== */
-    article.content{
-      grid-column: 2;
-      max-width:100%;
-      padding-inline: clamp(16px, 2.6vw, 26px);
-    }
-    aside.toc{
-      grid-column: 4;
-      position:sticky; top:calc(var(--topnav-h) + 24px);
-      align-self:start; height:max-content;
-    }
+    article.content{ grid-column: 1; padding-inline: 0; }
+aside.toc{
+  grid-column: 2;
+  position: sticky;
+  top: calc(var(--topnav-h) + 16px);
+  align-self: start;
+  height: max-content;
+  max-height: calc(100svh - var(--topnav-h) - 24px);
+  overflow: auto;                       /* scroll inside if ToC is tall */
+}
+
+/* Mobile: let it flow naturally */
+@media (max-width: 1100px){
+  aside.toc{ position: static; max-height: none; overflow: visible; }
+}
 
     .toc h2{ font:600 11px/1 var(--font-body); letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:10px }
     .toc nav{ border:1px solid var(--line); border-radius:16px; padding:12px; background: linear-gradient(180deg, rgba(245,243,239,.12), rgba(245,243,239,.08)); backdrop-filter: blur(8px) saturate(110%); box-shadow: 0 1px 0 rgba(255,255,255,.03), 0 40px 80px rgba(0,0,0,.60) }
@@ -177,13 +210,16 @@
 
     /* ============================== PREV / NEXT (single-line titles) ============================== */
     .article-nav{
-      grid-column: 2 / 5; /* align with the article column */
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(12px, 2.2vw, 20px);
-      margin: clamp(28px, 6vh, 48px) 0 0;
-      padding: 0 clamp(16px, 2.6vw, 26px);
-    }
+  grid-column: 1;                  /* same width as the content column */
+  display:grid;
+  grid-template-columns: 1fr 1fr;  /* two equal cards within that width */
+  gap: clamp(12px, 2.2vw, 20px);
+  margin: clamp(28px, 6vh, 48px) 0 0;
+  padding: 0;                      /* align to the text edges */
+}
+@media (max-width: 700px){
+  .article-nav{ grid-template-columns: 1fr; } /* stack on narrow screens */
+}
     .nav-card{
       position:relative; display:flex; align-items:center; gap:12px;
       padding: 14px 16px;
@@ -220,14 +256,14 @@
 
     /* ============================== RESPONSIVE ============================== */
     @media (max-width: 1100px){
-      .page{
-        grid-template-columns: minmax(12px,1fr) minmax(0, 96vw) minmax(12px,1fr);
-      }
-      .head, article.content, aside.toc, .article-nav, footer{ grid-column: 2; }
-      aside.toc{ position:static; margin-top: 8px }
-      .article-nav{ grid-template-columns: 1fr; }
-      .nav-title{ max-width: 100% }
-    }
+  .page{
+    max-width: 860px;      /* mirrors your list-page mid cap */
+    grid-template-columns: 1fr;  /* stack */
+    padding-inline: var(--container-pad);
+  }
+  .head, article.content, aside.toc, .article-nav, footer{ grid-column: 1; }
+  aside.toc{ position: static; margin-top: 6px; }
+}
 
     /* ============================== READING MODE ============================== */
     body.mode-reading{
@@ -275,8 +311,8 @@
   <!-- Background layer (shared) -->
   <div id="site-bg" aria-hidden="true">
     <video id="bg-video" muted playsinline autoplay loop preload="metadata" poster="../../assets/video-poster.jpg">
-      <source src="../../assets/video.webm" type="video/webm">
-      <source src="../../assets/3.mp4" type="video/mp4">
+      <source src="../../../../assets/video.webm" type="video/webm">
+      <source src="../../../../assets/3.mp4" type="video/mp4">
     </video>
     <div id="bg-tint"></div>
   </div>
@@ -286,13 +322,13 @@
 
   <!-- Top nav -->
   <header class="top-nav" aria-label="Site">
-    <a class="brand" href="../../index.html#hero" aria-label="ORR home">
-      <img src="../../assets/re2.svg" alt="ORR" loading="lazy" />
+    <a class="brand" data-nav="home" href="../../../../index.html#hero" aria-label="ORR home">
+      <img src="../../../../assets/re2.svg" alt="ORR" loading="lazy" />
     </a>
     <nav class="menu" aria-label="Primary">
-      <a href="../index.html#partners">Clients</a>
-      <a href="../index.html#action">In Motion</a>
-      <a href="../list.html?genre=money" class="cta">Codex</a>
+      <a data-nav="clients" href="../../../../index.html#partners">Clients</a>
+      <a data-nav="codex" href="../../../../codex.html">Codex</a>
+      <a data-nav="begin" href="../../../../index.html#section-7" class="cta">Begin</a>
     </nav>
   </header>
 
@@ -310,7 +346,7 @@
           <span id="readtime">—</span>
         </div>
         <div class="actions">
-          <a class="pill" href="../list.html?genre=money">← Back to Codex</a>
+          <a class="pill" href="../../../../codex/list.html">← Back to Codex List</a>
           <button class="pill" id="reading" type="button" aria-pressed="false" title="Toggle reading mode">Reading Light</button>
         </div>
       </header>
@@ -376,13 +412,13 @@
 
       <!-- Prev / Next aligned to content, single-line titles -->
       <nav class="article-nav" aria-label="More Codex">
-        <a class="nav-card" href="./step-1-stop-losing.html">
+        <a class="nav-card" href="../../../../codex/money/step-1.html">
           <div>
             <div class="nav-eyebrow">Previous</div>
             <div class="nav-title">Step 1 — Stop Losing What You Already Have.</div>
           </div>
         </a>
-        <a class="nav-card" href="./step-3-understand-the-market.html">
+        <a class="nav-card" href="../../../../codex/money/step-3.html">
           <div>
             <div class="nav-eyebrow">Next</div>
             <div class="nav-title">Step 3 — Understand the Market.</div>
@@ -483,5 +519,37 @@
       });
     })();
   </script>
+<script>
+/* Normalize nav links from any depth (/, /codex/, /codex/ai/..., etc.) */
+(function () {
+  const segs  = location.pathname.split('/').filter(Boolean);
+  const last  = segs[segs.length - 1] || '';
+  const isDir = !last.includes('.');                 // e.g. /codex/
+  const up    = isDir ? segs.length : segs.length - 1;
+  const P     = up ? '../'.repeat(up) : './';        // prefix back to site root
+  const onIdx = /(^|\/)index\.html$/.test(location.pathname) || segs.length === 0;
+
+  const set = (sel, href) => {
+    const el = document.querySelector(sel);
+    if (el) el.setAttribute('href', href);
+  };
+
+  // Brand → index hero
+  set('.top-nav .brand', onIdx ? '#hero' : P + 'index.html#hero');
+
+  // Clients → index section 2
+  set('.top-nav .menu a[href="#partners"]',
+      onIdx ? '#partners' : P + 'index.html#partners');
+
+  // Begin → index CTA
+  set('.top-nav .menu a[href="#section-7"]',
+      onIdx ? '#section-7' : P + 'index.html#section-7');
+
+  // Codex hub (your codex “paths” page)
+  const codex = document.querySelector('.top-nav .menu a[href*="codex"]');
+  if (codex) codex.setAttribute('href', P + 'codex/codex.html');
+})();
+</script>
 </body>
 </html>
+
