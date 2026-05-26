@@ -541,9 +541,21 @@
     }
 
     @media (max-width: 640px) {
-      #problem .problem-grid { gap: 14px 24px; }
-      #problem .problem-item-text { display: none; }
-    }
+  #hero .hero-descriptor { margin-bottom: 40px; }  /* already there */
+  #hero .hero-scroll-wrap { bottom: 20px; }         /* already there */
+
+  /* ADD THESE: */
+  #hero.hero-orr {
+    padding-top: 18vh;
+    align-items: flex-start;
+  }
+  #hero .hero-inner {
+    padding-top: 0;
+  }
+  #hero .hero-logo {
+    margin-top: 0;
+  }
+}
   </style>
 
   <div class="problem-inner">
