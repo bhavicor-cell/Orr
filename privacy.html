@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Privacy Policy — ORR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant+SC:wght@500&family=DM+Sans:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --page-bg: #121110; --ink: #F5F3EF; --ink-soft: #EAE6DE;
+    --line: #90827D; --cta: #CBB89D;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-label: 'Cormorant SC', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--page-bg); color: var(--ink); scrollbar-width: thin; scrollbar-color: rgba(245,243,239,.25) transparent; }
+  body { font: 400 16px/1.6 var(--font-body); background: var(--page-bg); -webkit-font-smoothing: antialiased; }
+  .legal-nav { position: fixed; top: 0; left: 0; right: 0; height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(20px, 6vw, 80px); background: rgba(18,17,16,0.85); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(144,130,125,0.15); z-index: 100; }
+  .legal-nav a { text-decoration: none; color: var(--ink); }
+  .legal-nav .brand { font-family: var(--font-label); font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.9; }
+  .legal-nav .back { font-family: var(--font-label); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); opacity: 0.5; display: flex; align-items: center; gap: 8px; transition: opacity 0.2s ease; }
+  .legal-nav .back:hover { opacity: 0.9; }
+  .legal-wrap { max-width: 760px; margin: 0 auto; padding: 120px clamp(20px, 6vw, 48px) 100px; }
+  .legal-eyebrow { font-family: var(--font-label); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--cta); opacity: 0.65; display: block; margin-bottom: 20px; }
+  .legal-title { font-family: var(--font-display); font-weight: 300; font-size: clamp(36px, 5vw, 58px); line-height: 1.06; color: var(--ink); margin-bottom: 12px; }
+  .legal-date { font-family: var(--font-body); font-size: 12px; color: var(--ink-soft); opacity: 0.45; letter-spacing: 0.04em; display: block; margin-bottom: 56px; }
+  .legal-rule { width: 100%; height: 1px; background: linear-gradient(90deg, rgba(144,130,125,0.4), transparent); margin-bottom: 56px; }
+  .legal-section { margin-bottom: 52px; }
+  .legal-section-title { font-family: var(--font-label); font-size: 11px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: var(--cta); opacity: 0.7; display: block; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(144,130,125,0.12); }
+  .legal-section p { font-family: var(--font-body); font-size: 14px; line-height: 1.82; color: var(--ink-soft); opacity: 0.75; margin-bottom: 14px; max-width: 100%; }
+  .legal-section p:last-child { margin-bottom: 0; }
+  .legal-section ul { list-style: none; margin: 12px 0 14px; }
+  .legal-section ul li { font-family: var(--font-body); font-size: 14px; line-height: 1.82; color: var(--ink-soft); opacity: 0.75; padding-left: 18px; position: relative; margin-bottom: 6px; }
+  .legal-section ul li::before { content: '—'; position: absolute; left: 0; font-size: 10px; color: var(--cta); opacity: 0.5; top: 4px; }
+  .legal-highlight { border-left: 1px solid rgba(203,184,157,0.4); padding: 20px 24px; margin: 28px 0; background: rgba(203,184,157,0.04); }
+  .legal-highlight p { font-family: var(--font-display); font-style: italic; font-size: 15px; line-height: 1.65; color: var(--ink-soft); opacity: 0.85 !important; margin: 0; }
+  .legal-footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid rgba(144,130,125,0.15); display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .legal-footer span { font-family: var(--font-label); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); opacity: 0.35; }
+  .legal-footer a { font-family: var(--font-label); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); opacity: 0.45; text-decoration: none; transition: opacity 0.2s ease; }
+  .legal-footer a:hover { opacity: 0.9; }
+  .legal-footer-links { display: flex; gap: 24px; }
+</style>
+</head>
+<body>
+
+<nav class="legal-nav">
+  <a class="brand" href="index.html">
+  <img src="../assets/re2.svg" alt="ORR" style="height: 32px; width: auto; display: block; opacity: 0.9;">
+</a>
+  <a class="back" href="index.html">← Back to site</a>
+</nav>
+
+<div class="legal-wrap">
+
+  <span class="legal-eyebrow">Legal</span>
+  <h1 class="legal-title">Privacy Policy</h1>
+  <span class="legal-date">Last updated: <span id="priv-date"></span></span>
+
+  <div class="legal-rule"></div>
+
+  <div class="legal-highlight">
+    <p>ORR is committed to protecting the privacy of everyone who interacts with this website. This policy explains what information we collect, why we collect it, and how it is handled.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">01 — Who This Policy Applies To</span>
+    <p>This Privacy Policy applies to all individuals who visit orrhq.com, submit an inquiry, or engage in any communication with ORR through this website. It covers data collected through the website only — not data collected under separate engagement agreements, which are governed by the confidentiality terms within those agreements.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">02 — What We Collect</span>
+    <p>We collect only what is necessary. When you submit an inquiry through our contact form, we collect:</p>
+    <ul>
+      <li>Your name</li>
+      <li>Your email address</li>
+      <li>The content of your message</li>
+      <li>The timestamp of your submission</li>
+    </ul>
+    <p>We do not collect payment information through this website. We do not use tracking pixels, third-party advertising scripts, or behavioural analytics tools. We do not use cookies beyond what is strictly necessary for the website to function.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">03 — How We Use Your Information</span>
+    <p>Information submitted through the contact form is used solely to:</p>
+    <ul>
+      <li>Respond to your inquiry</li>
+      <li>Assess whether an engagement may be appropriate</li>
+      <li>Communicate with you in relation to a potential or active engagement</li>
+    </ul>
+    <p>We do not use your information for marketing, advertising, or any automated decision-making. We do not add you to mailing lists without your explicit consent.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">04 — How We Store Your Information</span>
+    <p>Inquiry submissions are processed through Formspree, a third-party form handling service. By submitting an inquiry, your data is transmitted to and stored by Formspree in accordance with their privacy policy, available at formspree.io/legal/privacy-policy.</p>
+    <p>ORR does not operate its own database of website inquiries. Any follow-up correspondence is handled through standard email. We retain correspondence only for as long as is necessary for the purpose it was collected, or as required by applicable law.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">05 — Third Parties</span>
+    <p>We do not sell, rent, trade, or otherwise transfer your personal information to third parties except:</p>
+    <ul>
+      <li>Formspree, for processing contact form submissions as described above</li>
+      <li>Where required by law, court order, or governmental authority</li>
+      <li>Where necessary to protect the rights, property, or safety of ORR or others</li>
+    </ul>
+    <p>This website loads fonts from Google Fonts. Google may collect limited technical data as part of that request in accordance with their privacy policy.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">06 — Your Rights</span>
+    <p>Depending on your location, you may have rights regarding your personal data including:</p>
+    <ul>
+      <li>The right to access the personal data we hold about you</li>
+      <li>The right to request correction of inaccurate data</li>
+      <li>The right to request deletion of your data</li>
+      <li>The right to object to or restrict processing of your data</li>
+      <li>The right to data portability where applicable</li>
+    </ul>
+    <p>To exercise any of these rights, please contact us through the inquiry form on this website. We will respond within 30 days.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">07 — GDPR</span>
+    <p>If you are located in the European Economic Area, you have rights under the General Data Protection Regulation (GDPR). Our legal basis for processing your data when you submit an inquiry is legitimate interest — specifically, the legitimate interest of responding to a direct business inquiry.</p>
+    <p>You have the right to lodge a complaint with your local data protection authority if you believe your data has been handled unlawfully.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">08 — CCPA</span>
+    <p>If you are a California resident, you have rights under the California Consumer Privacy Act (CCPA). We do not sell personal information. You have the right to know what personal information we collect, to request deletion, and to non-discrimination for exercising your rights. To submit a request, use the contact form on this website.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">09 — Security</span>
+    <p>We take reasonable technical and organisational measures to protect the personal information we handle. However, no method of transmission over the internet is completely secure, and we cannot guarantee absolute security.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">10 — Children</span>
+    <p>This website is not directed at individuals under the age of 18. We do not knowingly collect personal information from minors. If you believe we have inadvertently collected such information, please contact us and we will delete it promptly.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">11 — Changes to This Policy</span>
+    <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with a revised date. We encourage you to review this page periodically. Continued use of the website following any update constitutes acceptance of the revised policy.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">12 — Contact</span>
+    <p>For any privacy-related questions or to exercise your data rights, please contact us through the inquiry form at <a href="index.html#begin" style="color: var(--cta); opacity: 0.8; text-decoration: none;">orrhq.com</a>. We aim to respond within 30 days.</p>
+  </div>
+
+  <div class="legal-footer">
+    <span>© <span class="yr"></span> ORR — All rights reserved</span>
+    <div class="legal-footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="disclaimer.html">Disclaimer</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const d = new Date();
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('priv-date').textContent = d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+  document.querySelectorAll('.yr').forEach(el => el.textContent = d.getFullYear());
+</script>
+</body>
+</html>

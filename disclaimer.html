@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Disclaimer — ORR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant+SC:wght@500&family=DM+Sans:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --page-bg: #121110;
+    --ink: #F5F3EF;
+    --ink-soft: #EAE6DE;
+    --line: #90827D;
+    --cta: #CBB89D;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-label: 'Cormorant SC', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--page-bg); color: var(--ink); scrollbar-width: thin; scrollbar-color: rgba(245,243,239,.25) transparent; }
+  body { font: 400 16px/1.6 var(--font-body); background: var(--page-bg); -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  .legal-nav {
+    position: fixed; top: 0; left: 0; right: 0; height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(20px, 6vw, 80px);
+    background: rgba(18,17,16,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(144,130,125,0.15);
+    z-index: 100;
+  }
+  .legal-nav a { text-decoration: none; color: var(--ink); }
+  .legal-nav .brand {
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.9;
+  }
+  .legal-nav .back {
+    font-family: var(--font-label);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.2s ease;
+  }
+  .legal-nav .back:hover { opacity: 0.9; }
+
+  /* LAYOUT */
+  .legal-wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 120px clamp(20px, 6vw, 48px) 100px;
+  }
+
+  /* HEADER */
+  .legal-eyebrow {
+    font-family: var(--font-label);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cta);
+    opacity: 0.65;
+    display: block;
+    margin-bottom: 20px;
+  }
+  .legal-title {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1.06;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .legal-date {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--ink-soft);
+    opacity: 0.45;
+    letter-spacing: 0.04em;
+    display: block;
+    margin-bottom: 56px;
+  }
+
+  /* HAIRLINE */
+  .legal-rule {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(144,130,125,0.4), transparent);
+    margin-bottom: 56px;
+  }
+
+  /* SECTIONS */
+  .legal-section {
+    margin-bottom: 52px;
+  }
+  .legal-section-title {
+    font-family: var(--font-label);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--cta);
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(144,130,125,0.12);
+  }
+  .legal-section h3 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(18px, 2vw, 24px);
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .legal-section p {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.82;
+    color: var(--ink-soft);
+    opacity: 0.75;
+    margin-bottom: 14px;
+    max-width: 100%;
+  }
+  .legal-section p:last-child { margin-bottom: 0; }
+  .legal-section ul {
+    list-style: none;
+    margin: 12px 0 14px;
+  }
+  .legal-section ul li {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.82;
+    color: var(--ink-soft);
+    opacity: 0.75;
+    padding-left: 18px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+  .legal-section ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    font-size: 10px;
+    color: var(--cta);
+    opacity: 0.5;
+    top: 4px;
+  }
+
+  /* HIGHLIGHT BOX */
+  .legal-highlight {
+    border-left: 1px solid rgba(203,184,157,0.4);
+    padding: 20px 24px;
+    margin: 28px 0;
+    background: rgba(203,184,157,0.04);
+  }
+  .legal-highlight p {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    opacity: 0.85 !important;
+    margin: 0;
+  }
+
+  /* FOOTER */
+  .legal-footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(144,130,125,0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .legal-footer span {
+    font-family: var(--font-label);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    opacity: 0.35;
+  }
+  .legal-footer a {
+    font-family: var(--font-label);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    opacity: 0.45;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .legal-footer a:hover { opacity: 0.9; }
+  .legal-footer-links { display: flex; gap: 24px; }
+</style>
+</head>
+<body>
+
+<nav class="legal-nav">
+  <a class="brand" href="index.html">
+  <img src="../assets/re2.svg" alt="ORR" style="height: 32px; width: auto; display: block; opacity: 0.9;">
+</a>
+  <a class="back" href="index.html">← Back to site</a>
+</nav>
+
+<div class="legal-wrap">
+
+  <span class="legal-eyebrow">Legal</span>
+  <h1 class="legal-title">Disclaimer</h1>
+  <span class="legal-date">Last updated: <span id="disc-date"></span></span>
+
+  <div class="legal-rule"></div>
+
+  <div class="legal-highlight">
+    <p>Please read this disclaimer carefully before engaging with ORR or relying on any information presented on this website. By accessing this site or engaging our services, you acknowledge and accept the terms set out below.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">01 — General</span>
+    <p>The information contained on this website (orrhq.com) is provided by ORR for general informational purposes only. Nothing on this site constitutes professional advice of any kind — legal, financial, accounting, or otherwise.</p>
+    <p>ORR is an operational consulting and execution infrastructure business. All content, case references, and materials on this site are intended solely to describe the nature of our work and approach.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">02 — Results & Case References</span>
+    <p>Any results, metrics, or outcomes referenced on this website — including but not limited to delivery rate improvements, capital efficiency gains, decision velocity, and ramp time reductions — reflect specific, individual client engagements conducted under particular circumstances.</p>
+    <ul>
+      <li>Past results do not guarantee, predict, or imply future outcomes for any individual or business.</li>
+      <li>Results vary significantly based on business size, industry, team composition, existing infrastructure, market conditions, and the degree of client engagement and implementation.</li>
+      <li>No representation is made that any client will achieve similar or equivalent results.</li>
+      <li>All case references have been anonymised or generalised. Any resemblance to specific named businesses is coincidental.</li>
+    </ul>
+    <p>ORR makes no warranty, express or implied, that the strategies, systems, or frameworks installed during any engagement will produce specific measurable outcomes.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">03 — No Client Relationship</span>
+    <p>Access to or use of this website does not constitute, create, or imply a client relationship between you and ORR. A formal client relationship is established only upon execution of a signed engagement agreement.</p>
+    <p>Any communication through this website — including form submissions — does not constitute legal, financial, or operational advice, and does not create any obligation on the part of ORR to provide services.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">04 — Limitation of Liability</span>
+    <p>To the fullest extent permitted by applicable law, ORR, its principals, advisors, contractors, and affiliates shall not be liable for any direct, indirect, incidental, consequential, or punitive damages arising from:</p>
+    <ul>
+      <li>Your use of or reliance on information presented on this website</li>
+      <li>Any errors, omissions, or inaccuracies in website content</li>
+      <li>Any decision made based on information found on this site</li>
+      <li>Any interruption, suspension, or termination of this website</li>
+      <li>Any outcomes — positive or negative — resulting from an engagement with ORR</li>
+    </ul>
+    <p>Your use of this website and engagement with ORR is entirely at your own risk.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">05 — External Links</span>
+    <p>This website may contain links to third-party websites or resources. ORR has no control over the content, privacy practices, or availability of those sites and accepts no responsibility or liability for them.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">06 — Intellectual Property</span>
+    <p>All content on this website — including text, design, structure, frameworks described, and visual assets — is the intellectual property of ORR unless otherwise stated. No content may be reproduced, distributed, or used without prior written permission.</p>
+    <p>Operational systems, frameworks, and methodologies developed and installed by ORR during client engagements remain the intellectual property of ORR unless explicitly assigned in writing within a signed engagement agreement.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">07 — Confidentiality</span>
+    <p>ORR treats all information shared by prospective and active clients as strictly confidential. We do not disclose, share, or reference client-specific information without explicit written consent. Any case references on this site have been anonymised.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">08 — Changes to This Disclaimer</span>
+    <p>ORR reserves the right to update or modify this disclaimer at any time without prior notice. Continued use of this website following any changes constitutes your acceptance of the revised disclaimer.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">09 — Governing Law</span>
+    <p>This disclaimer shall be governed by and construed in accordance with applicable law. Any disputes arising in connection with this disclaimer shall be subject to the exclusive jurisdiction of the courts of the relevant territory in which ORR operates.</p>
+  </div>
+
+  <div class="legal-section">
+    <span class="legal-section-title">10 — Contact</span>
+    <p>If you have questions regarding this disclaimer, please contact us through the inquiry form at <a href="index.html#begin" style="color: var(--cta); opacity: 0.8; text-decoration: none;">orrhq.com</a>.</p>
+  </div>
+
+  <div class="legal-footer">
+    <span>© <span class="yr"></span> ORR — All rights reserved</span>
+    <div class="legal-footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="disclaimer.html">Disclaimer</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const d = new Date();
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const str = d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+  document.getElementById('disc-date').textContent = str;
+  document.querySelectorAll('.yr').forEach(el => el.textContent = d.getFullYear());
+</script>
+</body>
+</html>
