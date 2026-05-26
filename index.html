@@ -1693,6 +1693,11 @@ section#s5 {
 
 /* RESPONSIVE */
 /* ── Tablet (641–860px) ── */
+  @media (min-width: 641px) and (max-width: 860px) {
+  .s5-pillar-name { font-size: clamp(28px, 4vw, 40px); }
+  .s5-subtext { display: none; }
+  .s5-get-item { color: var(--ink-soft); }
+}
 @media (max-width: 860px) {
   .s5-inner {
     grid-template-columns: 1fr;
@@ -2147,7 +2152,7 @@ section#s5 {
     display: grid;
     place-items: center;
     min-height: var(--vh);
-    padding: clamp(80px, 12vh, 140px) clamp(24px, 7vw, 100px);
+    padding: clamp(50px, 9vh, 100px) clamp(24px, 7vw, 100px);
     position: relative;
   }
 
@@ -2273,11 +2278,12 @@ section#s5 {
     display: flex;
     flex-direction: column;
     gap: 6px;
+    font-size:12px;
   }
 
   #we-get-it .wgi-link-name {
     font-family: var(--font-label);
-    font-size: 11px;
+    font-size: 12.5px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -2289,7 +2295,7 @@ section#s5 {
     gap: 7px;
     position: relative;
     padding-bottom: 5px;
-    transition: opacity 0.22s ease, gap 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transition: opacity 0.42s ease, gap 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
 
   #we-get-it .wgi-link-name::after {
@@ -2300,13 +2306,13 @@ section#s5 {
     width: 100%;
     height: 1px;
     background: var(--cta);
-    opacity: 0.28;
+    opacity: 0.48;
     transition: opacity 0.25s ease;
   }
 
   #we-get-it .wgi-link-name:hover {
     opacity: 1;
-    gap: 11px;
+    gap: 15px;
   }
 
   #we-get-it .wgi-link-item:hover .wgi-link-desc {
@@ -2740,7 +2746,7 @@ section#s5 {
     font-style: italic;
     font-weight: 300;
     font-size: clamp(11px, 0.9vw, 13px);
-    color: rgba(144,130,125,0.5);
+    color: rgba(144,130,125,0.85);
     white-space: nowrap;
     letter-spacing: 0.01em;
   }
@@ -3824,6 +3830,8 @@ section#s5 {
     display: flex;
     flex-direction: column;
     gap: 14px;
+    align-items: center;
+text-align: center;
   }
 
   #site-footer .footer-logo {
