@@ -1386,12 +1386,15 @@ section#s5 {
   width: 100%;
   max-width: 1050px;
   display: grid;
-  grid-template-columns: 1fr 1px 0.42fr;
+  grid-template-columns: 1fr clamp(40px, 6vw, 80px) 0.42fr;
   min-height: min(140vh, 720px);
   align-items: flex-start;
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 0.65s cubic-bezier(0.22,0.61,0.36,1), transform 0.65s cubic-bezier(0.22,0.61,0.36,1);
+  /* ADD THIS — pushes left col to edge, right col stays in place */
+  margin-left: clamp(-40px, -4vw, -20px);
+  max-width: 1200px;  /* widen the container slightly */
 }
 
 .s5-inner.s5-loaded {
@@ -1516,16 +1519,17 @@ section#s5 {
   font-weight: 300;
   font-size: clamp(11px, 1vw, 13px);
   line-height: 1.6;
-  color: var(--line);
+  color: var(--ink-soft);
+  opacity: 0.75;
   display: flex;
   align-items: flex-start;
   gap: 9px;
 }
 
 .s5-get-item::before {
-  content: '—';
+  content: '✦';
   font-size: 9px;
-  color: rgba(203, 184, 157, 0.3);
+  color: rgba(203, 184, 157, 0.5);
   flex-shrink: 0;
   margin-top: 2px;
   letter-spacing: -0.04em;
@@ -1569,18 +1573,9 @@ section#s5 {
   padding-bottom: clamp(28px, 4vh, 44px);
 }
 
-.s5-pre {
-  display: block;
-  font-family: var(--font-label);
-  font-size: 14px;
-  letter-spacing: 0.36em;
-  color: rgba(144,130,125,0.36);
-  margin-bottom: 14px;
-}
-
 .s5-headline {
   font-family: var(--font-display);
-  font-size: clamp(22px, 2.4vw, 48px);
+  font-size: clamp(22px, 2vw, 52px);
   font-weight: 300;
   font-style: italic;
   line-height: 1.22;
@@ -1589,19 +1584,20 @@ section#s5 {
   text-align: right;
   align-self: flex-end;
   align-items: flex-end;
+  
 }
 
 .s5-headline em {
   color: var(--cta);
   font-style: italic;
-  font-size: clamp(26px, 3vw, 42px);
+  font-size: clamp(26px, 2.8vw, 64px);
 }
 
 .s5-subtext {
   font-family: var(--font-display);
   font-weight: 300;
   font-style: italic;
-  font-size: clamp(11px, 0.95vw, 13px);
+  font-size: clamp(12px, 0.88vw, 15px);
   color: var(--ink-soft);
   text-align: right;
   align-self: flex-end;
@@ -1756,8 +1752,6 @@ section#s5 {
   }
 
   .s5-right::before { display: none; }
-
-  .s5-pre { font-size: 10px; }
 
   .s5-headline {
     font-size: 22px;
@@ -1942,8 +1936,7 @@ section#s5 {
   <div class="s5-right">
 
     <div class="s5-title-block">
-      <span class="s5-pre">ORR Solutions</span>
-      <h3 class="s5-headline">— 3 ways a business<br><em>quietly breaks its founder.</em></h3>
+      <h3 class="s5-headline">— 3 ways a business quietly<br><em>breaks its founder.</em></h3>
       <p class="s5-subtext">These aren't strategic failures. They're operational ones. And they're fixable.</p>
     </div>
 
