@@ -23,8 +23,8 @@
     --section-pad: clamp(80px, 10vh, 120px);
 
     /* BG motion */
-    --video-opacity:0.029;  /* softened motion presence */
-    --video-speed:0.15;     /* slowed down for subtlety */
+    --video-opacity:0.038;  /* softened motion presence */
+    --video-speed:0.2;     /* slowed down for subtlety */
     --tint-opacity:0;   /* ivory soft-light film */
 
     /* Typography roles */
@@ -85,6 +85,15 @@
     position:fixed; inset:0; z-index:0; background:var(--page-bg); pointer-events:none;
     transition: background-color .6s ease;
   }
+
+  #bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--page-bg);
+  opacity: 0.45;   /* tune between 0.4–0.7 */
+  pointer-events: none;
+  }
+  
   #bg-video{
     position:absolute; top:50%; left:50%; min-width:100%; min-height:100%; transform:translate(-50%,-50%);
     object-fit:cover; opacity:var(--video-opacity); transition:opacity .6s ease;
@@ -215,11 +224,12 @@
 
   <!-- ============================== GLOBAL BACKGROUND LAYER ============================== -->
   <div id="site-bg" aria-hidden="true">
-    <video id="bg-video" muted playsinline autoplay loop preload="metadata" poster="./assets/video-poster.jpg">
-      <source src="./assets/video.webm" type="video/webm">
-      <source src="./assets/3.mp4" type="video/mp4">
-    </video>
-    <div id="bg-tint"></div>
+  <video id="bg-video" muted playsinline autoplay loop preload="metadata" poster="./assets/video-poster.jpg">
+    <source src="./assets/video.webm" type="video/webm">
+    <source src="./assets/3.mp4" type="video/mp4">
+  </video>
+  <div id="bg-overlay"></div>
+  <div id="bg-tint"></div>
   </div>
 
 
@@ -1238,16 +1248,16 @@
   const vignettes = [
     {
       hook: 'From 44% to 87% on-time delivery. In five weeks.',
-      problem: 'A 14-person agency delivering across multiple concurrent projects. Deadlines were treated as targets not commitments. Senior staff pulled into fixing work that should never have reached them. Clients followed up before the team did.',
-      quote: 'For the first time I stopped being the person who caught everything at the end. Work just finished.',
+      problem: 'A 18-person agency delivering across multiple concurrent projects. Deadlines were treated as targets not commitments. Senior staff pulled into fixing work that should never have reached them. Clients followed up before the team did.',
+      quote: 'After a long time, I was finally doing what I was supposed to be doing — not babysitting operations.',
       attr: 'Founder, Creative Agency',
-      meta: ['Agency', '14 people', '$800K ARR', 'Ops Install Sprint'],
+      meta: ['Agency', '18 people', '$250K ARR', 'Ops Install Sprint'],
       codex: '#codex/delivery-infrastructure'
     },
     {
       hook: '$240K in capital inefficiency identified. Restructured in one engagement.',
       problem: 'A multi-venture education group operating across three verticals under significant capital pressure. Costs distributed with no unified visibility. Decisions being made on assumptions not numbers.',
-      quote: 'I didn\'t know where the money was actually going. Now I do — and it changed every decision we make.',
+      quote: 'I just realised how impactful structured operations can actually be. Choosing to work with *him was direction-changing.',
       attr: 'Founder, Education Group',
       meta: ['Education', '3 verticals', 'Post-Series A', 'Capital Mapping'],
       codex: '#codex/capital-visibility'
@@ -1255,15 +1265,15 @@
     {
       hook: '80% of decisions moving without the founder. Within 90 days.',
       problem: 'A bootstrapped B2B business where every decision found its way back to the founder. Department leads existed on paper. The founder was the operating system. The team was not incapable — they had never been told they did not have to wait.',
-      quote: 'My team didn\'t need me to decide. They needed someone to tell them they didn\'t have to wait for me.',
-      attr: 'Founder, B2B SaaS',
+      quote: 'After almost 8 months of being disturbed for every little thing — getting out of that was the relief I really needed as a founder.',
+      attr: 'Co-Founder, — B2B SaaS',
       meta: ['B2B SaaS', 'Bootstrapped', '$1.4M ARR', 'Decision Architecture'],
       codex: '#codex/decision-architecture'
     },
     {
       hook: 'Ramp time cut from 22 days to 9. Without restructuring the team.',
       problem: 'A funded hybrid team bringing on new hires regularly. No defined path beyond day two. Tribal knowledge was the onboarding system. Senior staff pulled into questions documentation should have answered.',
-      quote: 'New hires used to float for three weeks. Now they\'re contributing in the first.',
+      quote: 'I assumed slow ramp was just how hiring worked. Turns out the problem wasn't the people — it was lack of structure.',
       attr: 'Founder, Hybrid Tech Team',
       meta: ['Hybrid Team', 'Funded', 'Scaling', 'Onboarding Sprint'],
       codex: '#codex/onboarding-systems'
@@ -1271,9 +1281,9 @@
     {
       hook: 'Three departments shipping weekly. Without a single additional hire.',
       problem: 'A remote development agency where work consistently stalled between teams. Ownership assumed not assigned. Everyone believed someone else was moving critical items. Blockers surfaced late after causing delays.',
-      quote: 'Blockers used to appear after the damage was done. Now they surface before anything stalls.',
+      quote: 'Remote working with the team was putting work on a lag — but ORR introduced layers and it became much more manageable.',
       attr: 'Founder, Dev Agency',
-      meta: ['Dev Agency', 'Remote', '22 people', 'Control Tower'],
+      meta: ['Dev Agency', 'Remote', '40 people', 'Control Tower'],
       codex: '#codex/cross-functional-control'
     }
   ];
@@ -1933,8 +1943,8 @@ section#s5 {
 
     <div class="s5-title-block">
       <span class="s5-pre">ORR Solutions</span>
-      <h3 class="s5-headline">— problems we solve<br><em>even without you.</em></h3>
-      <p class="s5-subtext">Building infrastructure so the business runs on structure — not presence.</p>
+      <h3 class="s5-headline">— three ways a business<br><em>quietly breaks its founder.</em></h3>
+      <p class="s5-subtext">These aren't strategic failures. They're operational ones. And they're fixable.</p>
     </div>
 
     <div>
@@ -1951,29 +1961,29 @@ section#s5 {
 <script>
   (function () {
 
-  var PILLARS = [
-    {
-      num: '01',
-      name: 'Operational Failures',
-      problem: 'Work moves because <strong>you\'re watching it.</strong> The moment you look away, handoffs drop, standards drift, and clients feel it before you do. Your revenue runs on your presence — <strong>not your process.</strong>',
-      installs: ['Delivery Gates', 'Handoff Design', 'Definition of Done', 'SOP Frameworks', 'Weekly Delivery Cadence'],
-      gets: ['Work completes without your oversight', 'Handoffs hold — regardless of who is watching', 'Clients feel consistency before they ever ask for it']
-    },
-    {
-      num: '02',
-      name: 'Governance Failures',
-      problem: 'No one knows who owns the decision — so it waits for you. Every escalation, every approval, every tiebreak runs through you <strong>because the system was never built any other way.</strong>',
-      installs: ['Ownership Matrix', 'Decision Rights Framework', 'Escalation Design', 'Accountability Cadence', 'Role Clarity Documentation'],
-      gets: ['80% of decisions move without reaching you', 'Accountability is structural — not personality-dependent', 'Escalations have a path that isn\'t through the founder']
-    },
-    {
-      num: '03',
-      name: 'Foundational Failures',
-      problem: 'Performance lives in your head. Capital, output, and traction exist in spreadsheets <strong>nobody trusts.</strong> You\'re making high-stakes calls on instinct because the visibility was never built.',
-      installs: ['KPI Frameworks', 'Capital Mapping', 'Operational Reporting', 'Financial Visibility Framework', 'Performance Tracking'],
-      gets: ['Real-time visibility into what is and isn\'t moving', 'Capital decisions backed by data — not instinct', 'A reporting layer the whole team trusts and uses']
-    }
-  ];
+var PILLARS = [
+  {
+    num: '01',
+    name: 'Operational Failures',
+    problem: 'The work moves when you\'re watching it. The moment you step away — handoffs drop, quality drifts, and somehow the client knows before you do. You\'re not the founder anymore. <strong>You\'re the last line of quality control.</strong>',
+    installs: ['Delivery Gates', 'Handoff Design', 'Definition of Done', 'SOP Frameworks', 'Weekly Delivery Cadence'],
+    gets: ['Work finishes without you in the loop', 'Clients feel consistency — before they have to ask for it', 'You stop being the person who catches everything at the end']
+  },
+  {
+    num: '02',
+    name: 'Governance Failures',
+    problem: 'Nobody knows who owns the decision — so it comes to you. Every approval, every tiebreak, every "just checking" message lands in your lap. Not because your team can\'t decide. <strong>Because the system was never built to let them.</strong>',
+    installs: ['Ownership Matrix', 'Decision Rights Framework', 'Escalation Design', 'Accountability Cadence', 'Role Clarity Documentation'],
+    gets: ['80% of decisions move without reaching you', 'Your team stops waiting — because they no longer have to', 'Accountability lives in the system, not in whoever shouts loudest']
+  },
+  {
+    num: '03',
+    name: 'Foundational Failures',
+    problem: 'The numbers exist. Somewhere. In a spreadsheet someone made six months ago that may or may not be current. You\'re making real decisions — hiring, pricing, cutting — on instinct, <strong>because the visibility was never actually built.</strong> You know something is wrong. You just can\'t prove it yet.',
+    installs: ['KPI Frameworks', 'Capital Mapping', 'Operational Reporting', 'Financial Visibility Framework', 'Performance Tracking'],
+    gets: ['A single source of truth the whole team actually uses', 'Capital decisions backed by numbers — not gut feeling', 'You see what\'s moving, what\'s stalling, and what\'s quietly bleeding']
+  }
+];
 
   var current = 0;
   var cycleTimer = null;
@@ -2845,7 +2855,7 @@ section#s5 {
   <div class="eng-top">
     <div>
       <span class="eng-eyebrow">That Said</span>
-      <h2 class="eng-headline"><em>For founders who need more.</em></h2>
+      <h2 class="eng-headline"><em>For founders who've outgrown a single fix.</em></h2>
     </div>
     <p class="eng-sub">
       One operational failure is fixable in days. Two or more often means you need a new operating system. <br>
@@ -2874,8 +2884,8 @@ section#s5 {
         <span class="eng-row-name">Ops Install Sprint</span>
       </div>
       <div class="eng-row-mid">
-        <p class="eng-row-for">For founders who need the business running clean — fast.</p>
-        <p class="eng-row-desc">ORR embeds directly, isolates the primary operational failure, and installs the system that resolves it. Scoped, defined, and complete.</p>
+        <p class="eng-row-for">For one specific operational problem that needs to be resolved. Clean & Fast.</p>
+        <p class="eng-row-desc">We embed for 7–10 days. We diagnose the failure, build the system that fixes it, install it with your team, and hand it over fully documented. You get a working operational fix — not a deck, not a recommendation. The engagement ends when the system runs.</p>
       </div>
       <div class="eng-row-right">
         <span class="eng-row-price">From $2,500</span>
@@ -2890,8 +2900,8 @@ section#s5 {
         <span class="eng-row-name">Fractional COO</span>
       </div>
       <div class="eng-row-mid">
-        <p class="eng-row-for">For founders who need senior ops governance with weekly accountability.</p>
-        <p class="eng-row-desc">Ongoing embedded presence. ORR holds the operational layer so the founder can hold the vision. Not advisory — active.</p>
+        <p class="eng-row-for">For when the entire operating layer needs to be held and run weekly.</p>
+        <p class="eng-row-desc">We embed on an ongoing basis. We run your operating cadence — weekly rhythm, cross-team accountability, decision ownership, delivery tracking. Everything that should be running underneath you, runs. Minimum eight weeks because meaningful operational change doesn't happen in two.</p>
       </div>
       <div class="eng-row-right">
         <span class="eng-row-price">From $5,000 / mo</span>
@@ -2903,15 +2913,15 @@ section#s5 {
       <div class="eng-row-amber" aria-hidden="true"></div>
       <div class="eng-row-left">
         <span class="eng-row-num">03</span>
-        <span class="eng-row-name">Shadow Ops</span>
+        <span class="eng-row-name">Advisory</span>
       </div>
       <div class="eng-row-mid">
-        <p class="eng-row-for">For high-functioning founders carrying too much — privately.</p>
-        <p class="eng-row-desc">No public engagement. ORR operates behind the scenes, resolving what the founder cannot hand to the team.</p>
+        <p class="eng-row-for">For founders who want senior ops thinking available — without any embedded engagement.</p>
+        <p class="eng-row-desc">No embedding, no deliverables, no project scope. You get ongoing access to ORR for operational thinking — decisions, diagnosis, direction. We don't come into your business. You bring the problems to us and we work through them together. Long term. As needed.</p>
       </div>
       <div class="eng-row-right">
         <span class="eng-row-price">Custom</span>
-        <span class="eng-row-scope">Private · Fully custom</span>
+        <span class="eng-row-scope">Long Term · Fluid</span>
       </div>
     </div>
 
@@ -4077,7 +4087,7 @@ text-align: center;
         <a href="/disclaimer.html">Disclaimer</a>
       </div>
       <p class="footer-disclaimer">
-        ORR provides operational consulting and advisory services. Results referenced on this site reflect specific client engagements and are not guarantees of future outcomes. All client information is kept strictly confidential. Use of this website does not constitute a client relationship.
+        ORR provides operational consulting, advisory and embeded execution services. Results referenced on this site reflect client engagements and are not guarantees of future outcomes. All client information is kept strictly confidential. Use of this website does not constitute a client relationship.
       </p>
     </div>
   </div>
