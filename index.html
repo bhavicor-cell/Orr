@@ -1386,14 +1386,14 @@ section#s5 {
   width: 100%;
   max-width: 1050px;
   display: grid;
-  grid-template-columns: 1fr clamp(40px, 6vw, 80px) 0.42fr;
+  grid-template-columns: 1fr clamp(40px, 6vw, 80px) 0.45fr;
   min-height: min(140vh, 720px);
   align-items: flex-start;
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 0.65s cubic-bezier(0.22,0.61,0.36,1), transform 0.65s cubic-bezier(0.22,0.61,0.36,1);
   /* ADD THIS — pushes left col to edge, right col stays in place */
-  margin-left: clamp(-40px, -4vw, -20px);
+  margin-left: clamp(-20px, -2vw, -10px);
   max-width: 1200px;  /* widen the container slightly */
 }
 
@@ -1519,7 +1519,7 @@ section#s5 {
   font-weight: 300;
   font-size: clamp(11px, 1vw, 13px);
   line-height: 1.6;
-  color: var(--ink-soft);
+  color: rgba(234,230,222,0.78);
   opacity: 0.75;
   display: flex;
   align-items: flex-start;
@@ -1528,8 +1528,8 @@ section#s5 {
 
 .s5-get-item::before {
   content: '✦';
-  font-size: 9px;
-  color: rgba(203, 184, 157, 0.5);
+  font-size: 11px;
+  color: rgba(234,230,222,0.78);
   flex-shrink: 0;
   margin-top: 2px;
   letter-spacing: -0.04em;
@@ -2878,7 +2878,7 @@ var PILLARS = [
       </div>
       <div class="eng-row-mid">
         <p class="eng-row-for">For one specific operational problem that needs to be resolved. Clean & Fast.</p>
-        <p class="eng-row-desc">We embed for 7–10 days. We diagnose the failure, build the system that fixes it, install it with your team, and hand it over fully documented. You get a working operational fix — not a deck, not a recommendation. The engagement ends when the system runs.</p>
+        <p class="eng-row-desc">We diagnose the failure, build the system that fixes it, install it with your team, and hand it over fully documented. You get a working operational fix — the engagement ends when the system runs.</p>
       </div>
       <div class="eng-row-right">
         <span class="eng-row-price">From $2,500</span>
@@ -2894,7 +2894,7 @@ var PILLARS = [
       </div>
       <div class="eng-row-mid">
         <p class="eng-row-for">For when the entire operating layer needs to be held and run weekly.</p>
-        <p class="eng-row-desc">We embed on an ongoing basis. We run your operating cadence — weekly rhythm, cross-team accountability, decision ownership, delivery tracking. Everything that should be running underneath you, runs. Minimum eight weeks because meaningful operational change doesn't happen in two.</p>
+        <p class="eng-row-desc">We embed on an ongoing basis. We run your operating cadence — weekly rhythm, cross-team accountability, decision ownership, delivery tracking. Everything that should be running underneath you, runs.</p>
       </div>
       <div class="eng-row-right">
         <span class="eng-row-price">From $5,000 / mo</span>
