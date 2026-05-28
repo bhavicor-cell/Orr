@@ -11,8 +11,8 @@
     :root {
       --page-bg:    #121110;
       --ink:        #F5F3EF;
-      --ink-soft:   #C8C2B8;
-      --ink-muted:  #7A746E;
+      --ink-soft:   #EAE6DE;
+      --ink-muted:  #EAE6DE;
       --line:       #90827D;
       --line-faint: rgba(144,130,125,0.14);
       --cta:        #CBB89D;
@@ -61,17 +61,17 @@
       position: fixed; top: 0; left: 0; right: 0; height: var(--topnav-h);
       display: flex; align-items: center; gap: 24px;
       padding: 0 clamp(20px, 5vw, 52px);
-      background: var(--glass); border-bottom: 1px solid var(--line-faint);
-      backdrop-filter: blur(12px) saturate(1.1);
-      -webkit-backdrop-filter: blur(12px) saturate(1.1);
-      z-index: 200; box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      background: rgba(12,11,10,0.55); border-bottom: 1px solid var(--line);
+      backdrop-filter: saturate(1.12) blur(10px);
+      -webkit-backdrop-filter: saturate(1.12) blur(10px);
+      z-index: 200; box-shadow: 0 10px 28px rgba(0,0,0,0.18);
     }
     .nav-brand { display: inline-flex; align-items: center; }
-    .nav-brand img { height: clamp(28px, 3.4vw, 42px); width: auto; display: block; }
+    .nav-brand img { height: clamp(32px, 3.8vw, 48px); width: auto; display: block; }
     .nav-menu { margin-left: auto; display: flex; align-items: center; gap: clamp(20px, 2.8vw, 40px); }
     .nav-menu a {
-      font: 500 11px/1 var(--font-label); letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--ink); opacity: 0.82; transition: opacity 0.2s ease, transform 0.15s ease;
+      font: 600 12px/1.1 var(--font-label); letter-spacing: 0.20em; text-transform: uppercase;
+      color: var(--ink); opacity: 0.92; transition: opacity 0.2s ease, transform 0.15s ease;
     }
     .nav-menu a:hover { opacity: 1; transform: translateY(-1px); }
     .nav-menu a.is-active { opacity: 1; position: relative; }
@@ -81,7 +81,7 @@
     }
     .nav-cta { padding: 0.5rem 0.9rem; border: 1px solid rgba(203,184,157,0.4); border-radius: var(--radius-pill); }
 
-    .page-wrap { padding-top: var(--topnav-h); min-height: 100vh; }
+    .page-wrap { padding-top: var(--topnav-h); min-height: 100vh;position: relative; z-index: 1; }
 
     .breadcrumb {
       display: flex; align-items: center; gap: 10px;
@@ -90,11 +90,11 @@
     }
     .breadcrumb a, .breadcrumb span {
       font: 400 10px/1 var(--font-label); letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--ink-muted); transition: color 0.2s ease;
+      color: var(--ink-soft); opacity: 0.6; transition: color 0.2s ease;
     }
     .breadcrumb a:hover { color: var(--ink-soft); }
     .breadcrumb .sep { width: 12px; height: 1px; background: var(--line); opacity: 0.35; flex-shrink: 0; }
-    .breadcrumb .current { color: var(--ink-soft); }
+    .breadcrumb .current { color: var(--ink-soft); opacity: 1; }
 
     .entry-hero {
       padding: clamp(52px, 8vh, 100px) clamp(20px, 6vw, 80px) clamp(36px, 5vh, 60px);
@@ -109,8 +109,7 @@
 
     .entry-type-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      font: 500 9px/1 var(--font-label); letter-spacing: 0.28em; text-transform: uppercase;
-      color: var(--cta); opacity: 0.8; margin-bottom: clamp(16px, 2.2vh, 24px);
+      font: 500 10px/1 var(--font-label); letter-spacing: 0.28em; text-transform: uppercase; color: var(--cta); opacity: 1; margin-bottom: clamp(16px, 2.2vh, 24px);
     }
     .entry-type-badge::before {
       content: ''; width: 20px; height: 1px; background: var(--cta); opacity: 0.5; flex-shrink: 0;
@@ -165,7 +164,7 @@
     }
 
     .narrative-text {
-      font: 400 clamp(15px, 1.3vw, 17px)/1.78 var(--font-body);
+      font: 400 clamp(16px, 1.4vw, 18px)/1.82 var(--font-body);
       color: var(--ink-soft); letter-spacing: 0.012em;
       max-width: var(--body-measure);
     }
@@ -213,7 +212,7 @@
     }
     .outcome-item:first-child { border-top: 1px solid var(--line-faint); }
     .outcome-stat {
-      font: 300 clamp(20px, 2vw, 28px)/1.1 var(--font-display);
+      font: 300 clamp(24px, 2.4vw, 36px)/1.1 var(--font-display);       letter-spacing: -0.02em;
       color: var(--cta); letter-spacing: -0.01em; display: block; margin-bottom: 4px;
     }
     .outcome-desc {
@@ -309,12 +308,20 @@
 
 <div id="boot-cover" aria-hidden="false"></div>
 
+<div id="site-bg" aria-hidden="true" style="position:fixed;inset:0;z-index:0;background:#121110;pointer-events:none;">
+  <video id="bg-video" muted playsinline autoplay loop preload="metadata" style="position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;transform:translate(-50%,-50%);object-fit:cover;opacity:0.038;">
+    <source src="../../assets/video.webm" type="video/webm">
+    <source src="../../assets/3.mp4" type="video/mp4">
+  </video>
+  <div style="position:absolute;inset:0;background:#121110;opacity:0.45;pointer-events:none;"></div>
+</div>
+  
 <header class="top-nav">
   <a class="nav-brand" href="../../index.html" aria-label="ORR home">
     <img src="../../assets/re2.svg" alt="ORR" />
   </a>
   <nav class="nav-menu" aria-label="Primary">
-    <a href="../../systems.html">Systems</a>
+    <a href="../systems.html">Systems</a>
     <a href="../codex.html" class="is-active">Codex</a>
     <a href="../../index.html#begin" class="nav-cta">Begin</a>
   </nav>
