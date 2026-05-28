@@ -1716,14 +1716,16 @@ section#s5 {
   .s5-title-block { flex: none; }
 
   .s5-headline {
-    text-align: left;
-    align-self: flex-start;
-  }
+  text-align: right;
+  align-self: flex-end;
+    font-size: clamp(30px, 4.5vw, 40px); /* add this */
+}
 
-  .s5-subtext {
-    text-align: left;
-    align-self: flex-start;
-  }
+.s5-subtext {
+  text-align: right;
+  align-self: flex-end;
+  font-size: clamp(24px, 3vw, 32px); /* add this */
+}
 
   .s5-left { padding: clamp(28px, 4vh, 44px) 0; }
   .s5-bottom-grid { grid-template-columns: 1fr; }
@@ -1754,20 +1756,21 @@ section#s5 {
   .s5-right::before { display: none; }
 
   .s5-headline {
-    font-size: 22px;
-    text-align: left;
-    align-self: flex-start;
-    line-height: 1.3;
-  }
+  font-size: clamp(30px, 4.5vw, 40px); /* add this */
+  text-align: right;
+  align-self: flex-end;
+  line-height: 1.3;
+}
 
-  .s5-headline em { font-size: 26px; }
+  .s5-headline em { font-size: 42px; }
 
-  .s5-subtext {
-    font-size: 12px;
-    text-align: left;
-    align-self: flex-start;
-    max-width: 100%;
-  }
+ .s5-subtext {
+  font-size: clamp(24px, 3vw, 32px); /* add this */
+
+  text-align: right;
+  align-self: flex-end;
+  max-width: 100%;
+}
 
   /* Progress bar stays, looks intentional */
   .s5-progress {
