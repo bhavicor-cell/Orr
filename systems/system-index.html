@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Systems — ORR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant+SC:wght@400;500&family=DM+Sans:wght@300;400&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ═══════════════════════════════════════
+       TOKENS
+    ═══════════════════════════════════════ */
+    :root {
+      --page-bg:    #121110;
+      --ink:        #F5F3EF;
+      --ink-soft:   #C8C2B8;
+      --ink-muted:  #7A746E;
+      --line:       #90827D;
+      --line-faint: rgba(144,130,125,0.14);
+      --cta:        #CBB89D;
+      --cta-dim:    rgba(203,184,157,0.08);
+      --cta-hair:   rgba(203,184,157,0.35);
+      --glass:      rgba(18,17,16,0.72);
+
+      --font-display: 'Cormorant Garamond', serif;
+      --font-label:   'Cormorant SC', serif;
+      --font-body:    'DM Sans', sans-serif;
+
+      --topnav-h:    clamp(56px, 7.5vh, 68px);
+      --radius-pill: 999px;
+      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      background: var(--page-bg);
+      color: var(--ink);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(245,243,239,.18) transparent;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(245,243,239,.16);
+      border: 2px solid transparent;
+      border-radius: 8px;
+      background-clip: padding-box;
+    }
+
+    body {
+      font: 400 16px/1.6 var(--font-body);
+      color: var(--ink);
+      background: var(--page-bg);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+    }
+
+    ::selection {
+      background: color-mix(in srgb, var(--cta) 24%, #000 76%);
+      color: #fff;
+    }
+
+    :focus-visible {
+      outline: 1.5px solid var(--cta);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ═══════════════════════════════════════
+       BOOT COVER
+    ═══════════════════════════════════════ */
+    #boot-cover {
+      position: fixed;
+      inset: 0;
+      background: var(--page-bg);
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+    #boot-cover.gone { opacity: 0; }
+    #boot-cover[aria-hidden="true"] { display: none; }
+
+    /* ═══════════════════════════════════════
+       TOP NAV
+    ═══════════════════════════════════════ */
+    .top-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--topnav-h);
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 0 clamp(20px, 5vw, 52px);
+      background: var(--glass);
+      border-bottom: 1px solid var(--line-faint);
+      backdrop-filter: blur(12px) saturate(1.1);
+      -webkit-backdrop-filter: blur(12px) saturate(1.1);
+      z-index: 100;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+
+    .nav-brand {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .nav-brand img {
+      height: clamp(28px, 3.4vw, 42px);
+      width: auto;
+      display: block;
+    }
+
+    .nav-menu {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: clamp(20px, 2.8vw, 40px);
+    }
+
+    .nav-menu a {
+      font: 500 11px/1 var(--font-label);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      opacity: 0.82;
+      text-decoration: none;
+      transition: opacity 0.2s ease, transform 0.15s ease;
+    }
+
+    .nav-menu a:hover { opacity: 1; transform: translateY(-1px); }
+
+    .nav-menu a.is-active {
+      opacity: 1;
+      position: relative;
+    }
+
+    .nav-menu a.is-active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0; right: 0;
+      height: 1px;
+      background: var(--cta);
+      opacity: 0.7;
+    }
+
+    .nav-cta {
+      padding: 0.5rem 0.9rem;
+      border: 1px solid rgba(203,184,157,0.4);
+      border-radius: var(--radius-pill);
+    }
+
+    /* ═══════════════════════════════════════
+       PAGE WRAP
+    ═══════════════════════════════════════ */
+    .page-wrap {
+      padding-top: var(--topnav-h);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ═══════════════════════════════════════
+       PAGE HEADER
+    ═══════════════════════════════════════ */
+    .page-header {
+      padding: clamp(64px, 10vh, 120px) clamp(20px, 6vw, 80px) clamp(48px, 7vh, 88px);
+      border-bottom: 1px solid var(--line-faint);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: clamp(32px, 5vw, 80px);
+      position: relative;
+    }
+
+    /* top champagne rule */
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: clamp(20px, 6vw, 80px);
+      width: clamp(48px, 6vw, 72px);
+      height: 1px;
+      background: var(--cta);
+      opacity: 0.45;
+    }
+
+    .header-left { display: flex; flex-direction: column; gap: 0; }
+
+    .page-eyebrow {
+      font: 500 10px/1 var(--font-label);
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--cta);
+      opacity: 0.7;
+      display: block;
+      margin-bottom: clamp(18px, 2.4vh, 28px);
+    }
+
+    .page-title {
+      font: 300 clamp(48px, 7vw, 104px)/0.94 var(--font-display);
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: clamp(20px, 2.8vh, 32px);
+    }
+
+    .page-descriptor {
+      font: 300 clamp(16px, 1.5vw, 21px)/1.6 var(--font-display);
+      color: var(--ink-soft);
+      max-width: 58ch;
+      letter-spacing: 0.008em;
+    }
+
+    .header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+      padding-bottom: 6px;
+      flex-shrink: 0;
+    }
+
+    .header-stat {
+      text-align: right;
+    }
+
+    .stat-number {
+      font: 300 clamp(36px, 4.5vw, 64px)/1 var(--font-display);
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      display: block;
+    }
+
+    .stat-label {
+      font: 400 10px/1 var(--font-label);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      display: block;
+      margin-top: 6px;
+    }
+
+    /* ═══════════════════════════════════════
+       FILTER BAR
+    ═══════════════════════════════════════ */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 0 clamp(20px, 6vw, 80px);
+      border-bottom: 1px solid var(--line-faint);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .filter-bar::-webkit-scrollbar { display: none; }
+
+    .filter-btn {
+      appearance: none;
+      border: none;
+      background: transparent;
+      padding: clamp(14px, 1.8vh, 20px) clamp(16px, 1.8vw, 24px);
+      font: 500 10px/1 var(--font-label);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      position: relative;
+      transition: color 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .filter-btn:hover { color: var(--ink-soft); }
+
+    .filter-btn.active {
+      color: var(--ink);
+    }
+
+    .filter-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: clamp(16px, 1.8vw, 24px);
+      right: clamp(16px, 1.8vw, 24px);
+      height: 1px;
+      background: var(--cta);
+      opacity: 0.7;
+    }
+
+    /* ═══════════════════════════════════════
+       SYSTEMS LIST
+    ═══════════════════════════════════════ */
+    .systems-list {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .system-row {
+      display: grid;
+      grid-template-columns:
+        clamp(48px, 5vw, 72px)   /* number */
+        1fr                        /* name + desc */
+        auto                       /* tags */
+        clamp(40px, 4vw, 56px);   /* arrow */
+      align-items: center;
+      gap: 0 clamp(20px, 3vw, 48px);
+      padding: clamp(20px, 2.8vh, 32px) clamp(20px, 6vw, 80px);
+      border-bottom: 1px solid var(--line-faint);
+      text-decoration: none;
+      color: var(--ink);
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s ease;
+
+      /* reveal */
+      opacity: 0;
+      transform: translateY(8px);
+      transition:
+        opacity 0.55s var(--ease-out),
+        transform 0.55s var(--ease-out),
+        background 0.25s ease;
+    }
+
+    .system-row:first-child { border-top: 1px solid var(--line-faint); }
+
+    .system-row.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .system-row:hover {
+      background: rgba(203,184,157,0.04);
+    }
+
+    /* Champagne left accent on hover */
+    .system-row::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--cta);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .system-row:hover::before { opacity: 0.6; }
+
+    /* Number */
+    .row-num {
+      font: 300 clamp(12px, 1.1vw, 15px)/1 var(--font-display);
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+
+    /* Name + desc */
+    .row-content {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .row-name {
+      font: 300 clamp(18px, 1.8vw, 26px)/1.1 var(--font-display);
+      color: var(--ink);
+      letter-spacing: 0.005em;
+      transition: color 0.25s ease;
+    }
+
+    .system-row:hover .row-name { color: var(--cta); }
+
+    .row-desc {
+      font: 400 clamp(12px, 1vw, 14px)/1.5 var(--font-body);
+      color: var(--ink-muted);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Tags */
+    .row-tags {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      flex-shrink: 0;
+    }
+
+    .row-tag {
+      font: 400 9px/1 var(--font-label);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      border: 1px solid var(--line-faint);
+      padding: 5px 10px;
+      border-radius: 2px;
+      white-space: nowrap;
+      transition: border-color 0.25s ease, color 0.25s ease;
+    }
+
+    .system-row:hover .row-tag {
+      border-color: var(--cta-hair);
+      color: var(--ink-soft);
+    }
+
+    /* Arrow */
+    .row-arrow {
+      display: grid;
+      place-items: center;
+      width: clamp(32px, 3.2vw, 44px);
+      height: clamp(32px, 3.2vw, 44px);
+      border-radius: 999px;
+      border: 1px solid var(--line-faint);
+      color: var(--ink-muted);
+      flex-shrink: 0;
+      transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+    }
+
+    .system-row:hover .row-arrow {
+      border-color: var(--cta-hair);
+      color: var(--cta);
+      transform: translateX(3px);
+      background: rgba(203,184,157,0.06);
+    }
+
+    .row-arrow svg { width: 13px; height: 13px; }
+
+    /* Hidden rows (filtered out) */
+    .system-row.filtered-out {
+      display: none;
+    }
+
+    /* ═══════════════════════════════════════
+       BOTTOM CTA STRIP
+    ═══════════════════════════════════════ */
+    .cta-strip {
+      padding: clamp(48px, 7vh, 80px) clamp(20px, 6vw, 80px);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: clamp(24px, 4vw, 60px);
+      border-top: 1px solid var(--line-faint);
+    }
+
+    .cta-left { display: flex; flex-direction: column; gap: 12px; }
+
+    .cta-headline {
+      font: 300 clamp(24px, 2.8vw, 40px)/1.12 var(--font-display);
+      color: var(--ink);
+      letter-spacing: 0.005em;
+    }
+
+    .cta-headline em {
+      font-style: italic;
+      color: var(--cta);
+    }
+
+    .cta-sub {
+      font: 400 clamp(13px, 1.1vw, 15px)/1.6 var(--font-body);
+      color: var(--ink-muted);
+      max-width: 54ch;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: clamp(14px, 1.6vh, 18px) clamp(24px, 2.4vw, 36px);
+      background: var(--cta);
+      color: #1a1816;
+      border-radius: var(--radius-pill);
+      font: 500 11px/1 var(--font-label);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 12px 36px rgba(203,184,157,0.22);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 52px rgba(203,184,157,0.32);
+    }
+
+    .cta-btn svg { width: 11px; height: 11px; }
+
+    /* ═══════════════════════════════════════
+       FOOTER STRIP
+    ═══════════════════════════════════════ */
+    .page-footer {
+      padding: clamp(18px, 2.5vh, 28px) clamp(20px, 6vw, 80px);
+      border-top: 1px solid var(--line-faint);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-copy {
+      font: 400 10px/1 var(--font-label);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      opacity: 0.55;
+    }
+
+    .footer-link {
+      font: 400 10px/1 var(--font-label);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      opacity: 0.55;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-link:hover { opacity: 0.9; }
+
+    /* ═══════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════ */
+    @media (max-width: 860px) {
+      .page-header {
+        grid-template-columns: 1fr;
+      }
+
+      .header-right {
+        align-items: flex-start;
+        flex-direction: row;
+        gap: 32px;
+      }
+
+      .header-stat { text-align: left; }
+
+      .row-tags { display: none; }
+
+      .system-row {
+        grid-template-columns: clamp(40px, 5vw, 56px) 1fr clamp(32px, 4vw, 44px);
+      }
+
+      .cta-strip {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .row-desc { display: none; }
+    }
+
+    /* ═══════════════════════════════════════
+       REVEAL
+    ═══════════════════════════════════════ */
+    .page-reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+
+    .page-reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .page-reveal, .system-row { transition: none; opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="boot-cover" aria-hidden="false"></div>
+
+  <!-- NAV -->
+  <header class="top-nav">
+    <a class="nav-brand" href="index.html" aria-label="ORR home">
+      <img src="assets/re2.svg" alt="ORR" />
+    </a>
+    <nav class="nav-menu" aria-label="Primary">
+      <a href="systems.html" class="is-active">Systems</a>
+      <a href="codex/codex.html">Codex</a>
+      <a href="index.html#begin" class="nav-cta">Begin</a>
+    </nav>
+  </header>
+
+  <div class="page-wrap">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header page-reveal">
+      <div class="header-left">
+        <span class="page-eyebrow">ORR · Infrastructure</span>
+        <h1 class="page-title">Systems</h1>
+        <p class="page-descriptor">
+          What ORR actually builds. Twelve operational systems — each one targeting a specific failure. Find yours, understand what it does, and see what changes when it runs.
+        </p>
+      </div>
+      <div class="header-right">
+        <div class="header-stat">
+          <span class="stat-number">12</span>
+          <span class="stat-label">Systems</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar page-reveal" role="group" aria-label="Filter systems by category">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="cadence">Cadence</button>
+      <button class="filter-btn" data-filter="decisions">Decisions</button>
+      <button class="filter-btn" data-filter="people">People</button>
+      <button class="filter-btn" data-filter="revenue">Revenue</button>
+      <button class="filter-btn" data-filter="visibility">Visibility</button>
+    </div>
+
+    <!-- SYSTEMS LIST -->
+    <main class="systems-list" id="systems-list" aria-label="All systems">
+
+      <a class="system-row" href="systems/system-control-tower.html" data-categories="cadence" aria-label="Control Tower — System 01">
+        <span class="row-num">01</span>
+        <div class="row-content">
+          <span class="row-name">Control Tower</span>
+          <span class="row-desc">Weekly operating system — scoreboard, owners, blockers, cadence</span>
+        </div>
+        <div class="row-tags">
+          <span class="row-tag">Cadence</span>
+          <span class="row-tag">Visibility</span>
+        </div>
+        <span class="row-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="system-row" href="systems/system-intake-raci.html" data-categories="decisions cadence" aria-label="Intake RACI Closeout — System 02">
+        <span class="row-num">02</span>
+        <div class="row-content">
+          <span class="row-name">Intake → RACI → Closeout</span>
+          <span class="row-desc">How work enters, gets owned, and closes with a record</span>
+        </div>
+        <div class="row-tags">
+          <span class="row-tag">Decisions</span>
+          <span class="row-tag">Cadence</span>
+        </div>
+        <span class="row-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="system-row" href="systems/system-sop-library.html" data-categories="people cadence" aria-label="SOP and QA Library — System 03">
+        <span class="row-num">03</span>
+        <div class="row-content">
+          <span class="row-name">SOP + QA Library</span>
+          <span class="row-desc">Single source of truth for how work gets done</span>
+        </div>
+        <div class="row-tags">
+          <span class="row-tag">People</span>
+          <span class="row-tag">Cadence</span>
+        </div>
+        <span class="row-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="system-row" href="systems/system-order-to-cash.html" data-categories="revenue" aria-label="Order to Cash Cadence — System 04">
+        <span class="row-num">04</span>
+        <div class="row-content">
+          <span class="row-name">Order-to-Cash Cadence</span>
+          <span class="row-desc">Invoice, follow-up, exception handling — revenue stops leaking</span>
+        </div>
+        <div class="row-tags">
+          <span class="row-tag">Revenue</span>
+        </div>
+        <span class="row-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="system-row" href="systems/system-onboarding.html" data-categories="people" aria-label="Onboarding 30 60 90 — System 05">
+        <span class="row-num">05</span>
+        <div class="row-content">
+          <span class="row-name">Onboarding 30/60/90</span>
+          <span class="row-desc">Structured ramp for every hire — role cards, milestones, buddy tracks</span>
+        </div>
+        <div class="row-tags">
+          <span class="row-tag">People</span>
+        </div>
+        <span class="row-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="system-row" href="systems/system-decision-rights.html" data-categories="decisions" aria-label="Decision Rights Framework — System 06">
+        <span class="row-num">06</span>
+        <div class="row-content">
+          <span class="row-name">Decision Rights Framework</span>
+          <span class="row-desc">Who decides what — written down, not assumed</span>
+        </div>
+        <div class="row-tags">
+          <span class="row-tag">Decisions</span>
+        </div>
+        <span class="row-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="system-row" href="systems/system-cross-team.html" data-categories="cadence decisions" aria-label="Cross Team Coordination Layer — System 07">
+        <span class="row-num">07</span>
+        <div class="row-content">
+          <span class="row-name">Cross-Team Coordination Layer</span>
+          <span class="row-desc">Structured handoffs between teams — gaps owned, delays caught early</span>
+        </div>
+        <div class="row-tags">
+          <span class="row-tag">Cadence</span>
+          <span class="row-tag">Decisions</span>
+        </div>
+        <span class="row-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="system-row" href="systems/system-kpi-visibility.html" data-categories="visibility" aria-label="KPI and Visibility Framework — System 08">
+        <span class="row-num">08</span>
+        <div class="row-content">
+          <span class="row-name">KPI + Visibility Framework</span>
+          <span class="row-desc">Numbers that actually inform decisions — owned, current, trusted</span>
+        </div>
+        <div class="row-tags">
+          <span class="row-tag">Visibility</span>
+        </div>
+        <span class="row-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="system-row" href="systems/system-escalation.html" data-categories="decisions" aria-label="Escalation Architecture — System 09">
+        <span class="row-num">09</span>
+        <div class="row-content">
+          <span class="row-name">Escalation Architecture</span>
+          <span class="row-desc">Problems reach the right level at the right time — not too late, not too often</span>
+        </div>
+        <div class="row-tags">
+          <span class="row-tag">Decisions</span>
+        </div>
+        <span class="row-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="system-row" href="systems/system-role-clarity.html" data-categories="people decisions" aria-label="Role Clarity Documentation — System 10">
+        <span class="row-num">10</span>
+        <div class="row-content">
+          <span class="row-name">Role Clarity Documentation</span>
+          <span class="row-desc">Scope, authority, interfaces — written per role, not assumed per title</span>
+        </div>
+        <div class="row-tags">
+          <span class="row-tag">People</span>
+          <span class="row-tag">Decisions</span>
+        </div>
+        <span class="row-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="system-row" href="systems/system-governance-loop.html" data-categories="cadence visibility" aria-label="Governance Loop — System 11">
+        <span class="row-num">11</span>
+        <div class="row-content">
+          <span class="row-name">Governance Loop</span>
+          <span class="row-desc">Regular review so the operating system stays current as the business evolves</span>
+        </div>
+        <div class="row-tags">
+          <span class="row-tag">Cadence</span>
+          <span class="row-tag">Visibility</span>
+        </div>
+        <span class="row-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="system-row" href="systems/system-capital-mapping.html" data-categories="visibility revenue" aria-label="Capital Mapping — System 12">
+        <span class="row-num">12</span>
+        <div class="row-content">
+          <span class="row-name">Capital Mapping</span>
+          <span class="row-desc">Where money actually goes — structured, maintained, decision-ready</span>
+        </div>
+        <div class="row-tags">
+          <span class="row-tag">Visibility</span>
+          <span class="row-tag">Revenue</span>
+        </div>
+        <span class="row-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+    </main>
+
+    <!-- CTA STRIP -->
+    <div class="cta-strip page-reveal">
+      <div class="cta-left">
+        <p class="cta-headline">
+          Found what you need?<br>
+          <em>Let's build it.</em>
+        </p>
+        <p class="cta-sub">
+          We assess, scope, and install. No retainer required to begin.
+        </p>
+      </div>
+      <a class="cta-btn" href="index.html#begin">
+        Begin
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+      <span class="footer-copy">© <span id="yr"></span> ORR — All rights reserved</span>
+      <a class="footer-link" href="codex/codex.html">Codex →</a>
+    </footer>
+
+  </div>
+
+  <script>
+    /* Boot cover */
+    (function () {
+      const cover = document.getElementById('boot-cover');
+      requestAnimationFrame(() => {
+        cover.classList.add('gone');
+        setTimeout(() => cover.setAttribute('aria-hidden', 'true'), 550);
+      });
+    })();
+
+    /* Year */
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    /* Page reveals */
+    const pageRevealEls = document.querySelectorAll('.page-reveal');
+    const ioPage = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          ioPage.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    pageRevealEls.forEach(el => ioPage.observe(el));
+
+    /* Staggered row reveals */
+    const rows = document.querySelectorAll('.system-row');
+    const ioRows = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const idx = Array.from(rows).indexOf(e.target);
+          setTimeout(() => e.target.classList.add('visible'), idx * 55);
+          ioRows.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.04 });
+    rows.forEach(r => ioRows.observe(r));
+
+    /* Filter */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+
+        filterBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+
+        rows.forEach(row => {
+          const cats = (row.dataset.categories || '').split(' ');
+          if (filter === 'all' || cats.includes(filter)) {
+            row.classList.remove('filtered-out');
+          } else {
+            row.classList.add('filtered-out');
+          }
+        });
+      });
+
+      /* Keyboard left/right between filter buttons */
+      btn.addEventListener('keydown', e => {
+        const all = Array.from(filterBtns);
+        const i = all.indexOf(btn);
+        if (e.key === 'ArrowRight') { e.preventDefault(); all[(i + 1) % all.length].focus(); }
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); all[(i - 1 + all.length) % all.length].focus(); }
+      });
+    });
+
+    /* Nav normaliser */
+    (function () {
+      const segs = location.pathname.split('/').filter(Boolean);
+      const last = segs[segs.length - 1] || '';
+      const isDir = !last.includes('.');
+      const up = isDir ? segs.length : segs.length - 1;
+      const P = up ? '../'.repeat(up) : './';
+      const onRoot = segs.length === 0 || /(^|\/)systems\.html$/.test(location.pathname);
+
+      const set = (sel, href) => {
+        const el = document.querySelector(sel);
+        if (el) el.setAttribute('href', href);
+      };
+
+      if (!onRoot) {
+        set('.nav-brand', P + 'index.html');
+        set('.nav-menu a.is-active', P + 'systems.html');
+        set('.nav-menu a[href*="codex"]', P + 'codex/codex.html');
+        set('.nav-menu a[href*="begin"]', P + 'index.html#begin');
+        set('.cta-btn', P + 'index.html#begin');
+        set('.footer-link', P + 'codex/codex.html');
+      }
+    })();
+  </script>
+
+</body>
+</html>

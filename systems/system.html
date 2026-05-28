@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Systems — ORR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant+SC:wght@400;500&family=DM+Sans:wght@300;400&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --page-bg:    #121110;
+      --ink:        #F5F3EF;
+      --ink-soft:   #C8C2B8;
+      --ink-muted:  #7A746E;
+      --line:       #90827D;
+      --line-faint: rgba(144,130,125,0.14);
+      --cta:        #CBB89D;
+      --cta-dim:    rgba(203,184,157,0.08);
+      --cta-hair:   rgba(203,184,157,0.35);
+      --glass:      rgba(18,17,16,0.76);
+
+      --font-display: 'Cormorant Garamond', serif;
+      --font-label:   'Cormorant SC', serif;
+      --font-body:    'DM Sans', sans-serif;
+
+      --topnav-h:    clamp(56px, 7.5vh, 68px);
+      --radius-pill: 999px;
+      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-io:     cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      background: var(--page-bg);
+      color: var(--ink);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(245,243,239,.18) transparent;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(245,243,239,.16);
+      border: 2px solid transparent;
+      border-radius: 8px;
+      background-clip: padding-box;
+    }
+
+    body {
+      font: 400 16px/1.6 var(--font-body);
+      color: var(--ink);
+      background: var(--page-bg);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: color-mix(in srgb, var(--cta) 24%, #000 76%); color: #fff; }
+    :focus-visible { outline: 1.5px solid var(--cta); outline-offset: 3px; border-radius: 4px; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── BOOT COVER ── */
+    #boot-cover {
+      position: fixed; inset: 0;
+      background: var(--page-bg);
+      z-index: 9999; opacity: 1;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+    #boot-cover.gone { opacity: 0; }
+    #boot-cover[aria-hidden="true"] { display: none; }
+
+    /* ── TOP NAV ── */
+    .top-nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--topnav-h);
+      display: flex; align-items: center; gap: 24px;
+      padding: 0 clamp(20px, 5vw, 52px);
+      background: var(--glass);
+      border-bottom: 1px solid var(--line-faint);
+      backdrop-filter: blur(12px) saturate(1.1);
+      -webkit-backdrop-filter: blur(12px) saturate(1.1);
+      z-index: 200;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+
+    .nav-brand { display: inline-flex; align-items: center; }
+    .nav-brand img { height: clamp(28px, 3.4vw, 42px); width: auto; display: block; }
+
+    .nav-menu { margin-left: auto; display: flex; align-items: center; gap: clamp(20px, 2.8vw, 40px); }
+    .nav-menu a {
+      font: 500 11px/1 var(--font-label);
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ink); opacity: 0.82;
+      transition: opacity 0.2s ease, transform 0.15s ease;
+    }
+    .nav-menu a:hover { opacity: 1; transform: translateY(-1px); }
+    .nav-menu a.is-active { opacity: 1; position: relative; }
+    .nav-menu a.is-active::after {
+      content: ''; position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 1px; background: var(--cta); opacity: 0.7;
+    }
+    .nav-cta { padding: 0.5rem 0.9rem; border: 1px solid rgba(203,184,157,0.4); border-radius: var(--radius-pill); }
+
+    /* ── PAGE WRAP ── */
+    .page-wrap { padding-top: var(--topnav-h); min-height: 100vh; position: relative; }
+
+    /* ════════════════════════════════════════════
+       INDEX VIEW
+    ════════════════════════════════════════════ */
+    #index-view {
+      transition: opacity 0.4s ease, transform 0.4s var(--ease-out);
+    }
+    #index-view.is-hidden {
+      opacity: 0; transform: translateY(-10px);
+      pointer-events: none; position: absolute; top: var(--topnav-h); left: 0; right: 0;
+    }
+
+    /* Page header */
+    .page-header {
+      padding: clamp(56px, 9vh, 110px) clamp(20px, 6vw, 80px) clamp(40px, 6vh, 72px);
+      border-bottom: 1px solid var(--line-faint);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: clamp(24px, 4vw, 60px);
+      position: relative;
+    }
+
+    .page-header::before {
+      content: ''; position: absolute;
+      top: 0; left: clamp(20px, 6vw, 80px);
+      width: clamp(48px, 5vw, 68px); height: 1px;
+      background: var(--cta); opacity: 0.45;
+    }
+
+    .header-left { display: flex; flex-direction: column; gap: 0; }
+
+    .page-eyebrow {
+      font: 500 10px/1 var(--font-label);
+      letter-spacing: 0.34em; text-transform: uppercase;
+      color: var(--cta); opacity: 0.7;
+      display: block; margin-bottom: clamp(16px, 2.2vh, 26px);
+    }
+
+    .page-title {
+      font: 300 clamp(48px, 7vw, 104px)/0.94 var(--font-display);
+      letter-spacing: -0.015em; color: var(--ink);
+      margin-bottom: clamp(18px, 2.4vh, 28px);
+    }
+
+    .page-descriptor {
+      font: 300 clamp(16px, 1.45vw, 20px)/1.62 var(--font-display);
+      color: var(--ink-soft); max-width: 58ch; letter-spacing: 0.008em;
+    }
+
+    .header-right { flex-shrink: 0; text-align: right; padding-bottom: 4px; }
+    .stat-number { font: 300 clamp(40px, 5vw, 72px)/1 var(--font-display); color: var(--ink); letter-spacing: -0.02em; display: block; }
+    .stat-label { font: 400 10px/1 var(--font-label); letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-muted); display: block; margin-top: 8px; }
+
+    /* Filter bar */
+    .filter-bar {
+      display: flex; align-items: center; gap: 0;
+      padding: 0 clamp(20px, 6vw, 80px);
+      border-bottom: 1px solid var(--line-faint);
+      overflow-x: auto; scrollbar-width: none;
+    }
+    .filter-bar::-webkit-scrollbar { display: none; }
+
+    .filter-btn {
+      appearance: none; border: none; background: transparent;
+      padding: clamp(14px, 1.8vh, 20px) clamp(14px, 1.6vw, 22px);
+      font: 500 10px/1 var(--font-label);
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ink-muted); cursor: pointer; white-space: nowrap;
+      position: relative; transition: color 0.25s ease; flex-shrink: 0;
+    }
+    .filter-btn:hover { color: var(--ink-soft); }
+    .filter-btn.active { color: var(--ink); }
+    .filter-btn.active::after {
+      content: ''; position: absolute;
+      bottom: 0; left: clamp(14px, 1.6vw, 22px); right: clamp(14px, 1.6vw, 22px);
+      height: 1px; background: var(--cta); opacity: 0.7;
+    }
+
+    /* Systems list */
+    .systems-list { display: flex; flex-direction: column; }
+
+    .system-row {
+      display: grid;
+      grid-template-columns: clamp(44px, 4.5vw, 66px) 1fr auto clamp(36px, 3.6vw, 50px);
+      align-items: center;
+      gap: 0 clamp(18px, 2.8vw, 44px);
+      padding: clamp(18px, 2.4vh, 28px) clamp(20px, 6vw, 80px);
+      border-bottom: 1px solid var(--line-faint);
+      cursor: pointer; position: relative;
+      transition: background 0.25s ease, opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+      opacity: 0; transform: translateY(8px);
+      background: transparent;
+      border: none;
+      width: 100%;
+      text-align: left;
+      color: var(--ink);
+    }
+    .system-row:first-child { border-top: 1px solid var(--line-faint); }
+    .system-row.visible { opacity: 1; transform: none; }
+    .system-row:hover { background: rgba(203,184,157,0.04); }
+
+    .system-row::before {
+      content: ''; position: absolute;
+      left: 0; top: 0; bottom: 0; width: 2px;
+      background: var(--cta); opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .system-row:hover::before { opacity: 0.55; }
+
+    .row-num {
+      font: 300 clamp(11px, 1vw, 14px)/1 var(--font-display);
+      letter-spacing: 0.1em; color: var(--ink-muted); opacity: 0.65;
+    }
+
+    .row-content { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+
+    .row-name {
+      font: 300 clamp(17px, 1.7vw, 24px)/1.1 var(--font-display);
+      color: var(--ink); letter-spacing: 0.005em;
+      transition: color 0.25s ease;
+    }
+    .system-row:hover .row-name { color: var(--cta); }
+
+    .row-desc {
+      font: 400 clamp(12px, 0.95vw, 13.5px)/1.5 var(--font-body);
+      color: var(--ink-muted); letter-spacing: 0.01em;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    .row-tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; flex-shrink: 0; }
+    .row-tag {
+      font: 400 9px/1 var(--font-label);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink-muted); border: 1px solid var(--line-faint);
+      padding: 5px 9px; border-radius: 2px; white-space: nowrap;
+      transition: border-color 0.25s ease, color 0.25s ease;
+    }
+    .system-row:hover .row-tag { border-color: var(--cta-hair); color: var(--ink-soft); }
+
+    .row-arrow {
+      display: grid; place-items: center;
+      width: clamp(32px, 3.2vw, 44px); height: clamp(32px, 3.2vw, 44px);
+      border-radius: 999px; border: 1px solid var(--line-faint);
+      color: var(--ink-muted); flex-shrink: 0;
+      transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+    }
+    .system-row:hover .row-arrow {
+      border-color: var(--cta-hair); color: var(--cta);
+      transform: translateX(3px); background: rgba(203,184,157,0.06);
+    }
+    .row-arrow svg { width: 13px; height: 13px; }
+
+    .system-row.filtered-out { display: none; }
+
+    /* Index CTA strip */
+    .index-cta {
+      padding: clamp(44px, 7vh, 80px) clamp(20px, 6vw, 80px);
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: center; gap: clamp(24px, 4vw, 60px);
+      border-top: 1px solid var(--line-faint);
+    }
+
+    .cta-headline {
+      font: 300 clamp(22px, 2.6vw, 38px)/1.12 var(--font-display);
+      color: var(--ink); letter-spacing: 0.005em; margin-bottom: 10px;
+    }
+    .cta-headline em { font-style: italic; color: var(--cta); }
+    .cta-sub { font: 400 clamp(12px, 1vw, 14px)/1.6 var(--font-body); color: var(--ink-muted); max-width: 52ch; }
+
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: clamp(13px, 1.5vh, 17px) clamp(22px, 2.2vw, 34px);
+      background: var(--cta); color: #1a1816; border-radius: var(--radius-pill);
+      font: 500 11px/1 var(--font-label); letter-spacing: 0.22em; text-transform: uppercase;
+      flex-shrink: 0;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 10px 32px rgba(203,184,157,0.2);
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 48px rgba(203,184,157,0.3); }
+    .cta-btn svg { width: 11px; height: 11px; }
+
+    /* ════════════════════════════════════════════
+       DETAIL VIEW
+    ════════════════════════════════════════════ */
+    #detail-view {
+      display: none;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
+    }
+    #detail-view.is-visible {
+      display: block;
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Back bar */
+    .detail-back-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: clamp(14px, 1.8vh, 22px) clamp(20px, 6vw, 80px);
+      border-bottom: 1px solid var(--line-faint);
+      gap: 24px;
+    }
+
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      font: 500 10px/1 var(--font-label);
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-muted); background: none; border: none;
+      cursor: pointer; padding: 0;
+      transition: color 0.2s ease, gap 0.25s ease;
+    }
+    .back-btn:hover { color: var(--ink); gap: 14px; }
+    .back-btn svg { width: 10px; height: 10px; }
+
+    .detail-position {
+      font: 400 10px/1 var(--font-label);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink-muted); opacity: 0.6;
+    }
+
+    /* Detail hero */
+    .detail-hero {
+      padding: clamp(44px, 7vh, 88px) clamp(20px, 6vw, 80px) clamp(32px, 5vh, 60px);
+      border-bottom: 1px solid var(--line-faint);
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: end; gap: clamp(24px, 4vw, 60px);
+      position: relative;
+    }
+
+    .detail-hero::before {
+      content: ''; position: absolute;
+      top: 0; left: clamp(20px, 6vw, 80px);
+      width: clamp(40px, 4.5vw, 60px); height: 1px;
+      background: var(--cta); opacity: 0.4;
+    }
+
+    .detail-index {
+      font: 500 10px/1 var(--font-label);
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--cta); opacity: 0.7; display: block;
+      margin-bottom: clamp(14px, 2vh, 22px);
+    }
+
+    .detail-name {
+      font: 300 clamp(40px, 6vw, 92px)/0.96 var(--font-display);
+      letter-spacing: -0.01em; color: var(--ink);
+      margin-bottom: clamp(18px, 2.4vh, 28px);
+    }
+
+    .detail-what {
+      font: 300 clamp(16px, 1.5vw, 21px)/1.58 var(--font-display);
+      color: var(--ink-soft); max-width: 64ch; letter-spacing: 0.008em;
+    }
+
+    .detail-tags { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; padding-bottom: 4px; }
+    .detail-tag {
+      font: 400 9px/1 var(--font-label);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink-muted); border: 1px solid var(--line-faint);
+      padding: 6px 12px; border-radius: 2px; white-space: nowrap;
+    }
+
+    /* Detail body — two columns */
+    .detail-body {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 50vh;
+    }
+
+    /* Left col */
+    .detail-col-left {
+      padding: clamp(36px, 5.5vh, 64px) clamp(20px, 6vw, 80px);
+      border-right: 1px solid var(--line-faint);
+      display: flex; flex-direction: column;
+      gap: clamp(40px, 5.5vh, 60px);
+    }
+
+    .d-block { display: flex; flex-direction: column; gap: 0; }
+
+    .d-label {
+      font: 500 9px/1 var(--font-label);
+      letter-spacing: 0.30em; text-transform: uppercase;
+      color: var(--cta); opacity: 0.72; display: block;
+      margin-bottom: 18px; padding-bottom: 11px;
+      border-bottom: 1px solid var(--cta-hair);
+      width: fit-content;
+    }
+
+    .d-who {
+      font: 300 clamp(14px, 1.3vw, 17px)/1.68 var(--font-display);
+      color: var(--ink-soft); letter-spacing: 0.008em; max-width: 50ch;
+    }
+
+    .trigger-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+
+    .trigger-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 13px 0; border-bottom: 1px solid var(--line-faint);
+    }
+    .trigger-item:first-child { border-top: 1px solid var(--line-faint); }
+
+    .trigger-mark {
+      width: 16px; height: 16px; flex-shrink: 0; margin-top: 3px;
+      display: grid; place-items: center;
+    }
+    .trigger-mark svg { width: 10px; height: 10px; color: var(--cta); opacity: 0.55; }
+
+    .trigger-text {
+      font: 400 clamp(12.5px, 1.05vw, 14.5px)/1.58 var(--font-body);
+      color: var(--ink-soft); letter-spacing: 0.008em;
+    }
+
+    /* Right col */
+    .detail-col-right {
+      padding: clamp(36px, 5.5vh, 64px) clamp(20px, 6vw, 80px);
+      display: flex; flex-direction: column; gap: 0;
+    }
+
+    /* Toggle */
+    .comparison-toggle {
+      display: flex; align-items: center;
+      margin-bottom: clamp(24px, 3.5vh, 36px);
+      border: 1px solid var(--line-faint);
+      border-radius: var(--radius-pill);
+      padding: 3px; width: fit-content;
+    }
+
+    .toggle-btn {
+      appearance: none; border: none; background: transparent;
+      padding: 8px 18px; border-radius: var(--radius-pill);
+      font: 500 10px/1 var(--font-label);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink-muted); cursor: pointer;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+    .toggle-btn.active { background: rgba(203,184,157,0.14); color: var(--ink); }
+
+    /* Comparison rows */
+    .comparison-table { display: flex; flex-direction: column; }
+
+    .cmp-row {
+      display: grid;
+      grid-template-columns: clamp(90px, 20%, 140px) 1fr;
+      gap: 0 clamp(14px, 1.8vw, 24px);
+      padding: clamp(13px, 1.6vh, 18px) 0;
+      border-bottom: 1px solid var(--line-faint);
+      align-items: start;
+    }
+    .cmp-row:first-child { border-top: 1px solid var(--line-faint); }
+
+    .cmp-dim {
+      font: 500 9.5px/1.4 var(--font-label);
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--ink-muted); padding-top: 3px;
+    }
+
+    .cmp-val {
+      font: 400 clamp(12.5px, 1.05vw, 14px)/1.58 var(--font-body);
+      color: var(--ink-soft);
+      transition: color 0.3s ease;
+    }
+
+    .cmp-dot {
+      display: inline-block; width: 5px; height: 5px;
+      border-radius: 999px; margin-right: 8px;
+      vertical-align: middle; position: relative; top: -1px; flex-shrink: 0;
+      transition: background 0.3s ease;
+    }
+
+    .comparison-table.state-without .cmp-dot { background: rgba(144,130,125,0.45); }
+    .comparison-table.state-with .cmp-dot { background: var(--cta); opacity: 0.85; }
+    .comparison-table.state-with .cmp-val { color: var(--ink); }
+
+    /* Detail prev/next nav */
+    .detail-nav {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--line-faint);
+    }
+
+    .dnav-btn {
+      display: flex; flex-direction: column; gap: 8px;
+      padding: clamp(24px, 3.8vh, 40px) clamp(20px, 6vw, 80px);
+      background: none; border: none; cursor: pointer;
+      color: var(--ink); text-align: left;
+      transition: background 0.25s ease;
+      position: relative;
+    }
+    .dnav-btn:hover { background: rgba(203,184,157,0.04); }
+    .dnav-btn.dnav-next { border-left: 1px solid var(--line-faint); align-items: flex-end; text-align: right; }
+
+    .dnav-dir {
+      font: 500 9px/1 var(--font-label);
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--cta); opacity: 0.6;
+    }
+
+    .dnav-name {
+      font: 300 clamp(16px, 1.6vw, 22px)/1.1 var(--font-display);
+      color: var(--ink); letter-spacing: 0.005em;
+    }
+
+    .dnav-desc {
+      font: 400 clamp(11px, 0.9vw, 13px)/1.5 var(--font-body);
+      color: var(--ink-muted);
+    }
+
+    .dnav-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 34px; height: 34px; border-radius: 999px;
+      border: 1px solid var(--line-faint); display: grid; place-items: center;
+      color: var(--cta);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .dnav-btn:hover .dnav-arrow { border-color: var(--cta-hair); background: rgba(203,184,157,0.08); }
+    .dnav-btn.dnav-prev .dnav-arrow { right: clamp(20px, 3vw, 40px); }
+    .dnav-btn.dnav-next .dnav-arrow { left: clamp(20px, 3vw, 40px); }
+    .dnav-arrow svg { width: 13px; height: 13px; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      padding: clamp(16px, 2.2vh, 26px) clamp(20px, 6vw, 80px);
+      border-top: 1px solid var(--line-faint);
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .footer-copy { font: 400 10px/1 var(--font-label); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); opacity: 0.5; }
+    .footer-codex { font: 400 10px/1 var(--font-label); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted); opacity: 0.5; transition: opacity 0.2s ease; }
+    .footer-codex:hover { opacity: 0.85; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .page-header, .detail-hero { grid-template-columns: 1fr; }
+      .header-right { text-align: left; }
+      .detail-tags { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+      .detail-body { grid-template-columns: 1fr; }
+      .detail-col-left { border-right: none; border-bottom: 1px solid var(--line-faint); }
+      .detail-nav { grid-template-columns: 1fr; }
+      .dnav-btn.dnav-next { border-left: none; border-top: 1px solid var(--line-faint); align-items: flex-start; text-align: left; }
+      .dnav-btn.dnav-next .dnav-desc { margin-left: 0; }
+      .index-cta { grid-template-columns: 1fr; }
+      .row-tags { display: none; }
+      .system-row { grid-template-columns: clamp(36px, 4.5vw, 52px) 1fr clamp(32px, 3.6vw, 44px); }
+      .dnav-arrow { display: none; }
+    }
+
+    @media (max-width: 560px) {
+      .row-desc { display: none; }
+      .comparison-toggle { width: 100%; }
+      .toggle-btn { flex: 1; text-align: center; }
+    }
+
+    /* ── REVEAL ── */
+    .fade-up { opacity: 0; transform: translateY(10px); transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up, .system-row, #index-view, #detail-view { transition: none !important; opacity: 1 !important; transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="boot-cover" aria-hidden="false"></div>
+
+<!-- NAV -->
+<header class="top-nav">
+  <a class="nav-brand" href="index.html" aria-label="ORR home">
+    <img src="assets/re2.svg" alt="ORR" />
+  </a>
+  <nav class="nav-menu" aria-label="Primary">
+    <a href="systems.html" class="is-active">Systems</a>
+    <a href="codex/codex.html">Codex</a>
+    <a href="index.html#begin" class="nav-cta">Begin</a>
+  </nav>
+</header>
+
+<div class="page-wrap">
+
+  <!-- ════════ INDEX VIEW ════════ -->
+  <div id="index-view">
+
+    <div class="page-header fade-up">
+      <div class="header-left">
+        <span class="page-eyebrow">ORR · Infrastructure</span>
+        <h1 class="page-title">Systems</h1>
+        <p class="page-descriptor">What ORR actually builds. Twelve operational systems — each one targeting a specific failure. Find yours, understand what it does, and see exactly what changes when it runs.</p>
+      </div>
+      <div class="header-right">
+        <span class="stat-number">12</span>
+        <span class="stat-label">Systems</span>
+      </div>
+    </div>
+
+    <div class="filter-bar fade-up" role="group" aria-label="Filter by category">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="cadence">Cadence</button>
+      <button class="filter-btn" data-filter="decisions">Decisions</button>
+      <button class="filter-btn" data-filter="people">People</button>
+      <button class="filter-btn" data-filter="revenue">Revenue</button>
+      <button class="filter-btn" data-filter="visibility">Visibility</button>
+    </div>
+
+    <div class="systems-list" id="systems-list" role="list">
+      <!-- rows injected by JS -->
+    </div>
+
+    <div class="index-cta fade-up">
+      <div>
+        <p class="cta-headline">Found what you need?<br><em>Let's build it.</em></p>
+        <p class="cta-sub">We assess, scope, and install. No retainer required to begin.</p>
+      </div>
+      <a class="cta-btn" href="index.html#begin">
+        Begin
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
+  </div><!-- /index-view -->
+
+  <!-- ════════ DETAIL VIEW ════════ -->
+  <div id="detail-view" aria-live="polite">
+
+    <div class="detail-back-bar">
+      <button class="back-btn" id="back-btn" aria-label="Back to all systems">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        All Systems
+      </button>
+      <span class="detail-position" id="detail-position"></span>
+    </div>
+
+    <div class="detail-hero">
+      <div>
+        <span class="detail-index" id="detail-index"></span>
+        <h2 class="detail-name" id="detail-name"></h2>
+        <p class="detail-what" id="detail-what"></p>
+      </div>
+      <div class="detail-tags" id="detail-tags"></div>
+    </div>
+
+    <div class="detail-body">
+      <div class="detail-col-left">
+        <div class="d-block">
+          <span class="d-label">Who it's for</span>
+          <p class="d-who" id="detail-who"></p>
+        </div>
+        <div class="d-block">
+          <span class="d-label">You need this when</span>
+          <ul class="trigger-list" id="detail-triggers" aria-label="Trigger situations"></ul>
+        </div>
+      </div>
+
+      <div class="detail-col-right">
+        <span class="d-label">Without it — With it</span>
+        <div class="comparison-toggle" role="group" aria-label="Toggle state">
+          <button class="toggle-btn active" id="toggle-without" aria-pressed="true">Without</button>
+          <button class="toggle-btn" id="toggle-with" aria-pressed="false">With</button>
+        </div>
+        <div class="comparison-table state-without" id="comparison-table"></div>
+      </div>
+    </div>
+
+    <nav class="detail-nav" aria-label="Navigate systems">
+      <button class="dnav-btn dnav-prev" id="dnav-prev" aria-label="Previous system">
+        <span class="dnav-dir">← Previous</span>
+        <span class="dnav-name" id="prev-name"></span>
+        <span class="dnav-desc" id="prev-desc"></span>
+        <span class="dnav-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </span>
+      </button>
+      <button class="dnav-btn dnav-next" id="dnav-next" aria-label="Next system">
+        <span class="dnav-dir">Next →</span>
+        <span class="dnav-name" id="next-name"></span>
+        <span class="dnav-desc" id="next-desc"></span>
+        <span class="dnav-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+    </nav>
+
+  </div><!-- /detail-view -->
+
+  <footer class="page-footer">
+    <span class="footer-copy">© <span id="yr"></span> ORR — All rights reserved</span>
+    <a class="footer-codex" href="codex/codex.html">Codex →</a>
+  </footer>
+
+</div><!-- /page-wrap -->
+
+<script>
+/* ════════════════════════════════════════════════════════
+   DATA — all 12 systems
+════════════════════════════════════════════════════════ */
+var SYSTEMS = [
+  {
+    num: '01',
+    name: 'Control Tower',
+    what: 'A weekly operating system for your business. Every week, in one place: what\'s being worked on, who owns it, what\'s blocked, and what needs a decision. That\'s it.',
+    tags: ['Cadence', 'Visibility'],
+    categories: 'cadence',
+    who: 'Founders and teams where work is happening but the full picture only exists in the founder\'s head. Businesses that are moving but not coordinated.',
+    triggers: [
+      'You start your week by asking people what happened last week',
+      'Something dropped and everyone thought someone else was handling it',
+      'A client asked for an update and you had to chase three people to answer',
+      'You can\'t tell, right now, what\'s moving and what\'s stuck',
+      'Your team is busy but you genuinely don\'t know if the right things are getting done'
+    ],
+    rows: [
+      { dim: 'Monday morning', without: 'Reconstructing what happened last week', with: 'Opening a live scoreboard — everything current' },
+      { dim: 'Blockers', without: 'Surface after the damage is already done', with: 'Logged and visible before they cause delay' },
+      { dim: 'Updates', without: 'You chase them — and still don\'t get the full picture', with: 'They exist without anyone being asked' },
+      { dim: 'Dropped work', without: 'Discovered when a client or deadline makes it visible', with: 'Caught in the weekly review before it costs anything' },
+      { dim: 'Your role', without: 'Coordinator by default — not by choice', with: 'Decision-maker — the coordination runs itself' },
+      { dim: 'Team rhythm', without: 'Depends on whoever has the energy to push', with: 'Consistent — built into how the week runs' }
+    ]
+  },
+  {
+    num: '02',
+    name: 'Intake → RACI → Closeout',
+    what: 'A system for how work requests enter the business, get assigned to the right person, and close with a documented outcome. Every request has one path in and one path out.',
+    tags: ['Decisions', 'Cadence'],
+    categories: 'decisions cadence',
+    who: 'Teams where work arrives from multiple directions — Slack, email, verbal conversations — and ownership is assumed rather than assigned.',
+    triggers: [
+      'Work gets done twice because two people thought they owned it',
+      'Work doesn\'t get done because each person thought the other was on it',
+      'The founder is the default owner of anything that falls through the cracks',
+      'Requests arrive and then quietly disappear with no resolution',
+      'You have no record of what was asked, who took it, or what happened',
+      'Decisions sit open for days because nobody knows who\'s supposed to make them'
+    ],
+    rows: [
+      { dim: 'Incoming requests', without: 'Scattered across Slack, email, conversations', with: 'Single intake point, every time' },
+      { dim: 'Ownership', without: 'Assumed, often by nobody', with: 'Assigned explicitly with a named person' },
+      { dim: 'Decision speed', without: 'Waits for whoever notices', with: 'Moves to the right person immediately' },
+      { dim: 'Outcomes', without: 'Often undocumented', with: 'Closed with a record every time' },
+      { dim: 'Founder load', without: 'Default owner of everything unclear', with: 'Involved only when genuinely needed' },
+      { dim: 'Accountability', without: 'Based on who remembers', with: 'Built into the process' }
+    ]
+  },
+  {
+    num: '03',
+    name: 'SOP + QA Library',
+    what: 'A single, maintained document that describes how work gets done in your business. Not filed away — actively used. When someone doesn\'t know how to do something, this is where they look.',
+    tags: ['People', 'Cadence'],
+    categories: 'people cadence',
+    who: 'Businesses where quality depends on who happens to be doing the work that day, and where knowledge lives in people\'s heads rather than anywhere permanent.',
+    triggers: [
+      'A key person leaves and takes the knowledge with them',
+      'Two people do the same task differently and both think they\'re doing it right',
+      'New hires ask questions that nobody has ever written down the answer to',
+      'Quality varies and you can\'t point to why',
+      'You\'ve said the same thing to three different people and it still wasn\'t done the same way',
+      'Training someone new means pulling a senior person off their actual work'
+    ],
+    rows: [
+      { dim: 'Knowledge', without: 'Lives with specific people', with: 'Lives in a document anyone can access' },
+      { dim: 'Quality', without: 'Depends on who\'s doing it', with: 'Consistent regardless of who\'s doing it' },
+      { dim: 'New hire training', without: 'Senior staff pulled in to explain', with: 'New hire reads, references, follows' },
+      { dim: 'When someone leaves', without: 'Knowledge walks out with them', with: 'Process stays behind' },
+      { dim: 'Standards', without: 'Tribal, informal, inconsistent', with: 'Written, agreed, version-controlled' },
+      { dim: 'Error response', without: 'Find who did it wrong', with: 'Find where the process needs updating' }
+    ]
+  },
+  {
+    num: '04',
+    name: 'Order-to-Cash Cadence',
+    what: 'The system that moves money from a closed deal into your bank account reliably. Covers invoice timing, follow-up sequences, exception handling, and who owns each step.',
+    tags: ['Revenue'],
+    categories: 'revenue',
+    who: 'Businesses where deals close cleanly but revenue collection is inconsistent — invoices go out but what happens next is unclear or manual.',
+    triggers: [
+      'You\'ve invoiced but you\'re not sure if it\'s been paid',
+      'Follow-ups happen when someone remembers, not on a schedule',
+      'An invoice exception sits unresolved for weeks',
+      'Cash in the bank doesn\'t match what you believe you\'ve earned',
+      'Someone has to manually track who owes what and chase it themselves',
+      'Revenue leaks not because deals aren\'t closing but because collection isn\'t running'
+    ],
+    rows: [
+      { dim: 'Invoice follow-up', without: 'Happens when someone remembers', with: 'Runs on a defined schedule' },
+      { dim: 'Exceptions', without: 'Sit unresolved until they escalate', with: 'Flagged and routed immediately' },
+      { dim: 'Cash visibility', without: 'Approximate, manually tracked', with: 'Clear, current, owned' },
+      { dim: 'Collection owner', without: 'Unclear, often the founder', with: 'Named, documented, not memory-dependent' },
+      { dim: 'Revenue gaps', without: 'Discovered at month end', with: 'Visible in real time' },
+      { dim: 'Client chasing', without: 'Reactive — you chase when it\'s late', with: 'Proactive — the process runs before it\'s late' }
+    ]
+  },
+  {
+    num: '05',
+    name: 'Onboarding 30/60/90',
+    what: 'A structured plan for every new hire covering their first 90 days. What they learn, what they do, what they should be able to own — defined in advance, not figured out as they go.',
+    tags: ['People'],
+    categories: 'people',
+    who: 'Businesses that are hiring but don\'t have a defined path for what happens after day one. Where "ramped" means different things to different people.',
+    triggers: [
+      'A new hire finishes their first week and you\'re not sure what they should be doing in week two',
+      'Senior staff are being pulled into answering questions a new hire should find themselves',
+      'Someone has been in the role for six weeks and still doesn\'t feel confident',
+      'You\'ve hired the right person but they\'re taking too long to contribute',
+      'Every new hire\'s experience depends on who they happen to sit near',
+      'You\'ve onboarded people three times and done it differently every time'
+    ],
+    rows: [
+      { dim: 'Day ten', without: 'Unclear — whatever feels right', with: 'Defined milestones, clear expectations' },
+      { dim: 'New hire questions', without: 'Go to senior staff', with: 'Go to the onboarding documentation' },
+      { dim: 'Time to contribute', without: 'Unpredictable', with: 'Tracked against a defined ramp' },
+      { dim: 'Senior staff time', without: 'Pulled into onboarding repeatedly', with: 'Protected' },
+      { dim: '"Ramped" means', without: 'Different every time', with: 'Written down, agreed, consistent' },
+      { dim: 'New hire confidence', without: 'Low — no clear path', with: 'Building — milestones give direction' }
+    ]
+  },
+  {
+    num: '06',
+    name: 'Decision Rights Framework',
+    what: 'A document that defines who is allowed to decide what in your business. What each person can decide alone, what needs sign-off, and what needs to escalate — written down, not assumed.',
+    tags: ['Decisions'],
+    categories: 'decisions',
+    who: 'Founders whose team escalates too much — where decisions that shouldn\'t require the founder always end up with the founder anyway.',
+    triggers: [
+      'Your team asks for input on things you feel they should decide themselves',
+      'Decisions sit open because nobody is sure who\'s supposed to make them',
+      'You\'ve delegated a role but still get asked to approve things within that role',
+      'Two people have conflicting ideas about who owns a decision and it comes to you',
+      'You\'re the bottleneck on work you\'re not even doing',
+      'Your team is capable but keeps waiting for permission'
+    ],
+    rows: [
+      { dim: 'Routine decisions', without: 'Come to the founder', with: 'Made at the right level without escalation' },
+      { dim: 'Escalations', without: 'Everything unclear comes up', with: 'Only what genuinely requires the founder' },
+      { dim: 'Role conflict', without: 'Founder arbitrates', with: 'Framework resolves it' },
+      { dim: 'New decisions', without: 'Nobody knows who decides', with: 'Mapped to existing decision categories' },
+      { dim: 'Team confidence', without: 'Low — waiting for permission', with: 'High — authority is clear' },
+      { dim: 'Founder\'s day', without: 'Interrupted by decisions others could make', with: 'Protected for decisions only they can make' }
+    ]
+  },
+  {
+    num: '07',
+    name: 'Cross-Team Coordination Layer',
+    what: 'A structured handoff process between teams or departments. Defines exactly when work passes from one team to another, who receives it, what they receive, and what happens if something\'s missing.',
+    tags: ['Cadence', 'Decisions'],
+    categories: 'cadence decisions',
+    who: 'Businesses with more than one team where work moves between functions — and where the gaps between teams are where things go wrong.',
+    triggers: [
+      'Work finishes in one team and then quietly stalls waiting for the next team',
+      'Teams blame each other for delays because handoff ownership was never defined',
+      'A client goes live late and the root cause was something dropped in the handoff',
+      'You find out about a coordination problem after it\'s already affected a deadline',
+      'Each team performs well individually but together output is slower than it should be',
+      'Nobody owns the gap between teams — so the founder ends up owning it by default'
+    ],
+    rows: [
+      { dim: 'Handoff points', without: 'Informal, assumed, often missed', with: 'Defined trigger, named recipient, documented' },
+      { dim: 'Gap ownership', without: 'Nobody — or the founder', with: 'Named, clear, part of the process' },
+      { dim: 'Delay discovery', without: 'When a client or deadline makes it visible', with: 'Flagged in the weekly sync before damage' },
+      { dim: 'Inter-team conflict', without: 'Frequent — over who dropped what', with: 'Reduced — the process defines ownership' },
+      { dim: 'Client experience', without: 'Inconsistent at transition points', with: 'Smooth regardless of which teams are involved' },
+      { dim: 'Founder role', without: 'Pulled in to resolve coordination failures', with: 'Not needed for coordination that runs itself' }
+    ]
+  },
+  {
+    num: '08',
+    name: 'KPI + Visibility Framework',
+    what: 'A defined set of numbers that tell you how the business is actually performing — collected consistently, owned by specific people, reviewed on a set schedule. Not a dashboard for show. A decision-making tool.',
+    tags: ['Visibility'],
+    categories: 'visibility',
+    who: 'Founders making real business decisions — hiring, pricing, cutting, investing — without a reliable, current, trusted view of the numbers.',
+    triggers: [
+      'You have data but it lives in three different places and none of them agree',
+      'Someone built a spreadsheet six months ago and you\'re not sure if it\'s current',
+      'You\'re making hiring or investment decisions based on what feels right',
+      'Different people quote different versions of the same metric',
+      'You know something is wrong but you can\'t prove it or point to where',
+      'Numbers are reported after decisions have been made rather than informing them'
+    ],
+    rows: [
+      { dim: 'Performance view', without: 'Estimated, approximate, felt', with: 'Measured, current, visible' },
+      { dim: 'Decision basis', without: 'Instinct and assumption', with: 'Data with named owners' },
+      { dim: 'Reporting', without: 'Happens when someone builds something', with: 'Runs on a defined cadence' },
+      { dim: 'Metric consistency', without: 'Different numbers from different people', with: 'One agreed source everyone uses' },
+      { dim: 'Problem detection', without: 'After it\'s become expensive', with: 'Early, while it\'s still addressable' },
+      { dim: 'Capital decisions', without: 'Made on incomplete information', with: 'Made with a current, trusted picture' }
+    ]
+  },
+  {
+    num: '09',
+    name: 'Escalation Architecture',
+    what: 'A defined system for how problems move through your business. What gets handled at each level, what triggers an escalation upward, and how fast each tier needs to respond.',
+    tags: ['Decisions'],
+    categories: 'decisions',
+    who: 'Founders who either hear about everything — including things they shouldn\'t — or hear about nothing until it\'s critical.',
+    triggers: [
+      'Small problems reach you because nobody felt empowered to handle them',
+      'Large problems reach you late because nobody wanted to escalate',
+      'Your team resolves issues inconsistently — same situation, different escalation',
+      'You\'re spending time on things that should have been handled two levels below',
+      'A problem that started small became serious because the path wasn\'t clear',
+      'Your team is uncertain about what warrants bringing something to you'
+    ],
+    rows: [
+      { dim: 'Small problems', without: 'Often reach the founder unnecessarily', with: 'Handled at the right level' },
+      { dim: 'Large problems', without: 'Surface late, after damage is done', with: 'Escalated early, on a defined trigger' },
+      { dim: 'Consistency', without: 'Different people escalate differently', with: 'Same situation escalates the same way' },
+      { dim: 'Founder\'s attention', without: 'Diluted across everything', with: 'Reserved for what genuinely needs it' },
+      { dim: 'Team confidence', without: 'Uncertain — is this worth escalating?', with: 'Clear — the framework tells them' },
+      { dim: 'Problem cost', without: 'Higher — late detection, late response', with: 'Lower — early visibility, early resolution' }
+    ]
+  },
+  {
+    num: '10',
+    name: 'Role Clarity Documentation',
+    what: 'Written definitions of what each role in your business actually owns — not just the job title, but the scope, the decisions they can make, the interfaces with other roles, and what doing the job well looks like.',
+    tags: ['People', 'Decisions'],
+    categories: 'people decisions',
+    who: 'Businesses where people have titles but unclear scope — where overlap and gaps between roles create friction, conflict, and founder arbitration.',
+    triggers: [
+      'Two people in your team conflict over who owns something and it comes to you',
+      'Someone is doing work that belongs to another role and neither person realises it',
+      'Work isn\'t getting done because it sits in a gap between two roles',
+      'A performance conversation is difficult because there\'s no agreed baseline',
+      'A new hire joins and their understanding of the role differs from what you expected',
+      'You\'ve promoted someone and they\'re still operating like their previous role'
+    ],
+    rows: [
+      { dim: 'Role scope', without: 'Assumed, often different per person', with: 'Written, agreed, specific' },
+      { dim: 'Overlap conflicts', without: 'Go to the founder to resolve', with: 'Resolved by the documentation' },
+      { dim: 'Role gaps', without: 'Nobody owns them', with: 'Explicitly assigned or acknowledged' },
+      { dim: 'Performance conversations', without: 'Difficult — no agreed baseline', with: 'Clear — the role definition is the baseline' },
+      { dim: 'New hire expectations', without: 'Set verbally, often misunderstood', with: 'Written down before they join' },
+      { dim: 'Promotions', without: 'Informal shift in behaviour', with: 'Documented change in scope and authority' }
+    ]
+  },
+  {
+    num: '11',
+    name: 'Governance Loop',
+    what: 'A regular review — monthly or quarterly — of whether the operating systems you\'ve built are still working. Checks for drift, outdated processes, metrics that stopped being tracked, and cadences that quietly stopped running.',
+    tags: ['Cadence', 'Visibility'],
+    categories: 'cadence visibility',
+    who: 'Businesses that have built operating infrastructure and want to make sure it stays current as the business grows and changes.',
+    triggers: [
+      'A process was installed six months ago and you\'re not sure if people still follow it',
+      'A metric was important last quarter and nobody is tracking it anymore',
+      'The weekly cadence has slowly turned into a monthly one without anyone deciding that',
+      'SOPs exist but haven\'t been reviewed since they were written',
+      'You feel like things are slipping but can\'t point to exactly where',
+      'The system that worked at fifteen people isn\'t quite working at thirty'
+    ],
+    rows: [
+      { dim: 'Process adherence', without: 'Drifts silently over time', with: 'Reviewed and corrected on a schedule' },
+      { dim: 'Outdated SOPs', without: 'Nobody notices until something breaks', with: 'Flagged and updated before they cause problems' },
+      { dim: 'Cadence health', without: 'Degrades gradually', with: 'Monitored, maintained, adjusted' },
+      { dim: 'System fit', without: 'Built for a previous version of the business', with: 'Kept current as the business evolves' },
+      { dim: 'Drift detection', without: 'Discovered when it\'s already expensive', with: 'Caught early, corrected cheaply' },
+      { dim: 'Infrastructure value', without: 'Declines without maintenance', with: 'Compounds as the business grows' }
+    ]
+  },
+  {
+    num: '12',
+    name: 'Capital Mapping',
+    what: 'A structured, maintained view of how money flows through your business. What is being spent, by which function, on what, and what it produces. Built to be used in decisions — not just reported once and filed.',
+    tags: ['Visibility', 'Revenue'],
+    categories: 'visibility revenue',
+    who: 'Founders making spending, hiring, or investment decisions without a clear, current, trusted picture of where capital is actually going.',
+    triggers: [
+      'You know roughly what you spend but couldn\'t break it down by function right now',
+      'Different people in the business have different ideas about what things cost',
+      'You\'ve made a hiring or investment decision and later realised it was based on incomplete numbers',
+      'Your accountant shows you numbers quarterly but you\'re making decisions daily',
+      'You suspect there\'s capital inefficiency somewhere but can\'t point to where',
+      'You\'re under capital pressure and cutting feels like guessing'
+    ],
+    rows: [
+      { dim: 'Spending visibility', without: 'Approximate, periodic, incomplete', with: 'Current, broken down by function' },
+      { dim: 'Decision basis', without: 'What feels right given rough numbers', with: 'What the actual numbers show' },
+      { dim: 'Inefficiency', without: 'Found late, often after significant cost', with: 'Visible early, addressable before it compounds' },
+      { dim: 'Capital pressure', without: 'Cutting based on instinct', with: 'Cutting based on what the numbers actually show' },
+      { dim: 'Cross-function view', without: 'Different people quote different costs', with: 'One agreed view everyone works from' },
+      { dim: 'Reporting cadence', without: 'Quarterly from the accountant', with: 'Ongoing, owned internally' }
+    ]
+  }
+];
+
+/* ════════════════════════════════════════════════════════
+   STATE
+════════════════════════════════════════════════════════ */
+var currentIdx = -1;
+var isDetail = false;
+
+/* ════════════════════════════════════════════════════════
+   ELEMENTS
+════════════════════════════════════════════════════════ */
+var indexView       = document.getElementById('index-view');
+var detailView      = document.getElementById('detail-view');
+var systemsList     = document.getElementById('systems-list');
+var backBtn         = document.getElementById('back-btn');
+var detailPosition  = document.getElementById('detail-position');
+var detailIndex     = document.getElementById('detail-index');
+var detailName      = document.getElementById('detail-name');
+var detailWhat      = document.getElementById('detail-what');
+var detailTags      = document.getElementById('detail-tags');
+var detailWho       = document.getElementById('detail-who');
+var detailTriggers  = document.getElementById('detail-triggers');
+var compTable       = document.getElementById('comparison-table');
+var toggleWithout   = document.getElementById('toggle-without');
+var toggleWith      = document.getElementById('toggle-with');
+var dnavPrev        = document.getElementById('dnav-prev');
+var dnavNext        = document.getElementById('dnav-next');
+var prevName        = document.getElementById('prev-name');
+var prevDesc        = document.getElementById('prev-desc');
+var nextName        = document.getElementById('next-name');
+var nextDesc        = document.getElementById('next-desc');
+
+/* ════════════════════════════════════════════════════════
+   BUILD INDEX ROWS
+════════════════════════════════════════════════════════ */
+SYSTEMS.forEach(function(s, i) {
+  var btn = document.createElement('button');
+  btn.className = 'system-row';
+  btn.setAttribute('role', 'listitem');
+  btn.setAttribute('data-categories', s.categories);
+  btn.setAttribute('aria-label', s.name + ' — System ' + s.num);
+  btn.innerHTML =
+    '<span class="row-num">' + s.num + '</span>' +
+    '<div class="row-content">' +
+      '<span class="row-name">' + s.name + '</span>' +
+      '<span class="row-desc">' + s.what.split('.')[0] + '.</span>' +
+    '</div>' +
+    '<div class="row-tags">' + s.tags.map(function(t){ return '<span class="row-tag">' + t + '</span>'; }).join('') + '</div>' +
+    '<span class="row-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>';
+
+  btn.addEventListener('click', function() { openSystem(i); });
+  systemsList.appendChild(btn);
+});
+
+/* ════════════════════════════════════════════════════════
+   STAGGERED ROW REVEAL
+════════════════════════════════════════════════════════ */
+var rows = document.querySelectorAll('.system-row');
+var ioRows = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      var idx = Array.from(rows).indexOf(e.target);
+      setTimeout(function() { e.target.classList.add('visible'); }, idx * 50);
+      ioRows.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.04 });
+rows.forEach(function(r) { ioRows.observe(r); });
+
+/* ════════════════════════════════════════════════════════
+   FILTER
+════════════════════════════════════════════════════════ */
+document.querySelectorAll('.filter-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    var f = btn.dataset.filter;
+    document.querySelectorAll('.system-row').forEach(function(row) {
+      var cats = (row.dataset.categories || '').split(' ');
+      row.classList.toggle('filtered-out', f !== 'all' && !cats.includes(f));
+    });
+  });
+});
+
+/* ════════════════════════════════════════════════════════
+   OPEN SYSTEM
+════════════════════════════════════════════════════════ */
+function openSystem(idx) {
+  currentIdx = idx;
+  var s = SYSTEMS[idx];
+
+  /* fill content */
+  detailPosition.textContent = 'System ' + s.num + ' of ' + SYSTEMS.length;
+  detailIndex.textContent    = 'System ' + s.num;
+  detailName.textContent     = s.name;
+  detailWhat.textContent     = s.what;
+
+  detailTags.innerHTML = s.tags.map(function(t) {
+    return '<span class="detail-tag">' + t + '</span>';
+  }).join('');
+
+  detailWho.textContent = s.who;
+
+  detailTriggers.innerHTML = s.triggers.map(function(t) {
+    return '<li class="trigger-item">' +
+      '<span class="trigger-mark" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 1v4l2.5 1.5"/></svg></span>' +
+      '<span class="trigger-text">' + t + '</span>' +
+    '</li>';
+  }).join('');
+
+  /* comparison table */
+  compTable.innerHTML = s.rows.map(function(r) {
+    return '<div class="cmp-row">' +
+      '<span class="cmp-dim">' + r.dim + '</span>' +
+      '<span class="cmp-val"><span class="cmp-dot" aria-hidden="true"></span><span class="val-text">' + r.without + '</span></span>' +
+    '</div>';
+  }).join('');
+
+  /* store with values */
+  compTable.dataset.withoutRows = JSON.stringify(s.rows.map(function(r) { return r.without; }));
+  compTable.dataset.withRows    = JSON.stringify(s.rows.map(function(r) { return r.with; }));
+
+  /* reset toggle */
+  setToggleState('without');
+
+  /* prev/next */
+  var prevIdx = (idx - 1 + SYSTEMS.length) % SYSTEMS.length;
+  var nextIdx = (idx + 1) % SYSTEMS.length;
+  prevName.textContent = SYSTEMS[prevIdx].name;
+  prevDesc.textContent = SYSTEMS[prevIdx].what.split('.')[0] + '.';
+  nextName.textContent = SYSTEMS[nextIdx].name;
+  nextDesc.textContent = SYSTEMS[nextIdx].what.split('.')[0] + '.';
+
+  /* swap views */
+  indexView.classList.add('is-hidden');
+  detailView.style.display = 'block';
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      detailView.classList.add('is-visible');
+    });
+  });
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  isDetail = true;
+}
+
+/* ════════════════════════════════════════════════════════
+   CLOSE DETAIL
+════════════════════════════════════════════════════════ */
+function closeDetail() {
+  detailView.classList.remove('is-visible');
+  setTimeout(function() {
+    detailView.style.display = 'none';
+    indexView.classList.remove('is-hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 420);
+  isDetail = false;
+}
+
+backBtn.addEventListener('click', closeDetail);
+
+/* ════════════════════════════════════════════════════════
+   PREV / NEXT
+════════════════════════════════════════════════════════ */
+dnavPrev.addEventListener('click', function() {
+  var newIdx = (currentIdx - 1 + SYSTEMS.length) % SYSTEMS.length;
+  detailView.classList.remove('is-visible');
+  setTimeout(function() { openSystem(newIdx); }, 300);
+});
+
+dnavNext.addEventListener('click', function() {
+  var newIdx = (currentIdx + 1) % SYSTEMS.length;
+  detailView.classList.remove('is-visible');
+  setTimeout(function() { openSystem(newIdx); }, 300);
+});
+
+/* Keyboard arrow nav when in detail */
+document.addEventListener('keydown', function(e) {
+  if (!isDetail) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+    e.preventDefault();
+    dnavNext.click();
+  }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    e.preventDefault();
+    dnavPrev.click();
+  }
+  if (e.key === 'Escape') closeDetail();
+});
+
+/* ════════════════════════════════════════════════════════
+   TOGGLE WITHOUT / WITH
+════════════════════════════════════════════════════════ */
+function setToggleState(state) {
+  var isWithout = state === 'without';
+  compTable.classList.toggle('state-without', isWithout);
+  compTable.classList.toggle('state-with', !isWithout);
+  toggleWithout.classList.toggle('active', isWithout);
+  toggleWithout.setAttribute('aria-pressed', String(isWithout));
+  toggleWith.classList.toggle('active', !isWithout);
+  toggleWith.setAttribute('aria-pressed', String(!isWithout));
+
+  var vals = isWithout
+    ? JSON.parse(compTable.dataset.withoutRows || '[]')
+    : JSON.parse(compTable.dataset.withRows || '[]');
+
+  compTable.querySelectorAll('.val-text').forEach(function(el, i) {
+    el.textContent = vals[i] || '';
+  });
+}
+
+toggleWithout.addEventListener('click', function() { setToggleState('without'); });
+toggleWith.addEventListener('click', function() { setToggleState('with'); });
+
+[toggleWithout, toggleWith].forEach(function(btn) {
+  btn.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      e.preventDefault();
+      var isNowWithout = compTable.classList.contains('state-without');
+      setToggleState(isNowWithout ? 'with' : 'without');
+      (isNowWithout ? toggleWith : toggleWithout).focus();
+    }
+  });
+});
+
+/* ════════════════════════════════════════════════════════
+   PAGE REVEALS
+════════════════════════════════════════════════════════ */
+var ioFade = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) { e.target.classList.add('visible'); ioFade.unobserve(e.target); }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.fade-up').forEach(function(el) { ioFade.observe(el); });
+
+/* ════════════════════════════════════════════════════════
+   BOOT + YEAR
+════════════════════════════════════════════════════════ */
+(function() {
+  var cover = document.getElementById('boot-cover');
+  requestAnimationFrame(function() {
+    cover.classList.add('gone');
+    setTimeout(function() { cover.setAttribute('aria-hidden', 'true'); }, 550);
+  });
+})();
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ════════════════════════════════════════════════════════
+   NAV NORMALISER
+════════════════════════════════════════════════════════ */
+(function() {
+  var segs = location.pathname.split('/').filter(Boolean);
+  var last = segs[segs.length - 1] || '';
+  var isDir = !last.includes('.');
+  var up = isDir ? segs.length : segs.length - 1;
+  var P = up ? '../'.repeat(up) : './';
+  var onSystems = /(^|\/)systems\.html$/.test(location.pathname) || segs.length === 0;
+  if (onSystems) return;
+
+  var set = function(sel, href) { var el = document.querySelector(sel); if (el) el.setAttribute('href', href); };
+  set('.nav-brand', P + 'index.html');
+  set('.nav-menu a.is-active', P + 'systems.html');
+  set('.nav-menu a[href*="codex"]', P + 'codex/codex.html');
+  set('.nav-menu a[href*="begin"]', P + 'index.html#begin');
+  set('.cta-btn', P + 'index.html#begin');
+  set('.footer-codex', P + 'codex/codex.html');
+})();
+</script>
+
+</body>
+</html>
