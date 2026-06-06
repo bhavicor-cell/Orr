@@ -1,4313 +1,931 @@
 <!DOCTYPE html>
 <html lang="en">
-<head></head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ORR — Engineering Execution Infrastructure</title>
-
-<link rel="preload" as="video" href="./assets/video.webm" type="video/webm" />
-
+<meta name="description" content="ORR diagnoses what's breaking in your operations, installs the systems that fix it, and leaves them running — without you. Fixed scope. Real outcomes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- FONTS · to swap a family, change --disp/--body/--mono in the Control Panel AND this link -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Hanken+Grotesk:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:wght@400&family=Cormorant+SC:wght@500&family=DM+Sans:wght@400&display=swap');
-  /* ============================== GOD-TIER QUIET LUXE BASE ============================== */
-  :root{
-    /* Brand palette */
-    --page-bg:#121110;   /* Near-black background */
-    --ink:#F5F3EF;       /* Primary text (Ivory) */
-    --ink-soft:#EAE6DE;  /* Subtext (Stone) */
-    --line:#90827D;      /* Hairlines / borders (Warm graphite taupe) */
-    --cta:#CBB89D;       /* Champagne highlight */
-    --error:#E56D6D;     /* Controlled red */
+/* ══════════════════════════════════════════════════════════════════════════
+   ◆  CONTROL PANEL  —  the whole site is driven from this block.
+   ──────────────────────────────────────────────────────────────────────────
+   TO REBRAND:
+     • COLOUR — change --pine (accent) · --vellum (bg) · --ink (text).
+                --mint is the accent used ON dark sections (a light tint of pine).
+                --bronze is reserved for the seal only.
+     • FONT   — change --disp / --body / --mono below, AND swap the matching
+                family in the <link> in the document <head> so it loads.
+   RULE: everything below references these variables — it never hardcodes a
+         brand colour or font. That keeps a rebrand to a one-line change.
+   ══════════════════════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-    --section-gap: clamp(120px, 15vh, 180px);
-    --section-pad: clamp(80px, 10vh, 120px);
+:root{
+  /* ── COLOUR ── warm vellum ground · deep pine signal · bronze seal ── */
+  --vellum: #F1ECE1;   /* page ground (warm bone) */
+  --vellum2:#E9E2D3;   /* proof / begin — a half-tone down */
+  --vellum3:#E0D8C6;   /* we-get-it — a touch deeper still */
+  --ink:    #1A1812;   /* warm near-black */
+  --ink72:  rgba(26,24,18,.72);
+  --ink54:  rgba(26,24,18,.54);
+  --ink38:  rgba(26,24,18,.38);
+  --ink18:  rgba(26,24,18,.16);
+  --ink10:  rgba(26,24,18,.10);
 
-    /* BG motion */
-    --video-opacity:0.038;  /* softened motion presence */
-    --video-speed:0.2;     /* slowed down for subtlety */
-    --tint-opacity:0;   /* ivory soft-light film */
+  --pine:   #1A4D40;   /* the signal — deep cypress */
+  --pine-b: #246B59;   /* brighter pine for hover / active */
+  --pine12: rgba(26,77,64,.12);
+  --pine06: rgba(26,77,64,.06);
 
-    /* Typography roles */
-    --font-display: 'Cormorant Garamond', serif;
-    --font-sub: 'Playfair Display', serif;
-    --font-label: 'Cormorant SC', serif;
-    --font-body: 'DM Sans', sans-serif;
+  --dark:   #0E2A24;   /* dark-section ground (reserved) */
+  --dark2:  #0B221D;
+  --crm:    #F1ECE1;   /* text on dark */
+  --crm72:  rgba(241,236,225,.72);
+  --crm54:  rgba(241,236,225,.52);
+  --crm38:  rgba(241,236,225,.34);
+  --crm18:  rgba(241,236,225,.16);
 
-    /* Rhythm */
-    --vh:100svh;
-    --space-sm:14px;
-    --space-md:20px;
-    --space-lg:clamp(24px,3vw,36px);
-    --radius-pill:999px;
+  --mint:   #8FC9B7;   /* the accent ON dark — a light tint of pine */
+  --bronze: #9C7C49;   /* the seal ONLY */
 
-    /* Glass skins */
-    --glass-dark: rgba(12,11,10,.55); /* obsidian lacquer */
-    --glass-veil-1: rgba(245,243,239,.12); /* Ivory Veil top */
-    --glass-veil-2: rgba(245,243,239,.08); /* Ivory Veil bottom */
+  --line:   rgba(26,24,18,.12);   /* the hairline — light */
+  --lineL:  rgba(26,24,18,.07);   /* even lighter, inner rows */
 
-    /* Shadows */
-    --shadow-soft: 0 1px 0 rgba(255,255,255,.03), 0 40px 80px rgba(0,0,0,.60);
-  }
+  /* ── FONT ── (swap here + in the <head> link) ── */
+  --disp:'Schibsted Grotesk', Georgia, serif;             /* display — set LIGHT (300) */
+  --body:'Hanken Grotesk', system-ui, sans-serif;  /* body / interface */
+  --mono:'Space Mono', monospace;               /* labels & codes only */
 
-  *{box-sizing:border-box;margin:0;padding:0}
+  --e1:cubic-bezier(.22,1,.36,1);
+  --e2:cubic-bezier(.16,1,.3,1);
+}
 
-  html{
-    background:#121110;color:var(--ink);
-    /* Subtle, tailored scrollbars */
-    scrollbar-width:thin; scrollbar-color: rgba(245,243,239,.25) transparent;
-  }
-  ::-webkit-scrollbar{ width:10px }
-  ::-webkit-scrollbar-track{ background:transparent }
-  ::-webkit-scrollbar-thumb{
-    background: rgba(245,243,239,.22);
-    border:2px solid transparent; border-radius:8px; background-clip:padding-box;
-  }
-  ::-webkit-scrollbar-thumb:hover{ background: rgba(245,243,239,.35) }
+html{background:var(--vellum);color:var(--ink);scroll-behavior:smooth;-webkit-text-size-adjust:100%;
+  scrollbar-width:thin;scrollbar-color:var(--ink18) transparent}
+::-webkit-scrollbar{width:9px}
+::-webkit-scrollbar-track{background:var(--vellum)}
+::-webkit-scrollbar-thumb{background:var(--ink18);border:3px solid var(--vellum);border-radius:9px}
+body{font-family:var(--body);font-weight:300;line-height:1.62;font-size:16px;background:var(--vellum);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+::selection{background:var(--pine);color:var(--crm)}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
 
-  body{
-    font:400 16px/1.58 var(--font-body);
-    color:var(--ink);
-    background:var(--page-bg);
-    -webkit-font-smoothing:antialiased;
-    text-rendering:optimizeLegibility;
-  }
-  
-  /* ============================== BOOT FADE ============================== */
-  #boot-cover{
-    position:fixed; inset:0; background:#000; z-index:100000; opacity:1; transition:opacity .45s ease;
-    pointer-events:none; user-select:none;
-  }
-  #boot-cover.is-gone{ opacity:0 }
-  #boot-cover[aria-hidden="true"]{ display:none }
+/* paper grain */
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E")}
 
-  /* ============================== GLOBAL BACKGROUND VIDEO ============================== */
-  #site-bg{
-    position:fixed; inset:0; z-index:0; background:var(--page-bg); pointer-events:none;
-    transition: background-color .6s ease;
-  }
+/* progress rail */
+#rail{position:fixed;left:0;top:0;bottom:0;width:2px;background:var(--ink10);z-index:7000;pointer-events:none}
+#railfill{position:absolute;top:0;left:0;right:0;height:0;background:var(--pine)}
 
-  #bg-overlay {
-  position: absolute;
-  inset: 0;
-  background: var(--page-bg);
-  opacity: 0.45;   /* tune between 0.4–0.7 */
-  pointer-events: none;
-  }
-  
-  #bg-video{
-    position:absolute; top:50%; left:50%; min-width:100%; min-height:100%; transform:translate(-50%,-50%);
-    object-fit:cover; opacity:var(--video-opacity); transition:opacity .6s ease;
-  }
-  
+/* seal (broken loop) */
+.seal{display:inline-block}
+.seal .ring{fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round}
+.seal .esc{fill:currentColor}
+.seal-anim .ring{stroke-dasharray:108 18;stroke-dashoffset:126;animation:ringdraw 1.6s var(--e2) .4s forwards}
+.seal-anim .esc{opacity:0;animation:escdrift 2.4s var(--e2) 1.6s infinite}
+@keyframes ringdraw{to{stroke-dashoffset:0}}
+@keyframes escdrift{0%{opacity:0;transform:translate(0,0)}25%{opacity:1}100%{opacity:0;transform:translate(7px,-7px)}}
 
-  /* put this in index.html (or your global CSS) */
-#hero, #partners, #section-7 { scroll-margin-top: var(--topnav-h); }
+/* reveal */
+.r{opacity:0;transform:translateY(22px);transition:opacity 1s var(--e2),transform 1s var(--e2)}
+.r.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
 
 
-  /* ============================== SCROLL STORY STACK ============================== */
-  main#story{
-    position:relative; z-index:1; min-height:var(--vh);
-    scroll-behavior:smooth;}
+/* ══ NAV ══ */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;height:62px;display:flex;align-items:center;padding:0 42px;
+  transition:background .4s,border-color .4s,backdrop-filter .4s;border-bottom:1px solid transparent}
+#nav.solid{background:rgba(241,236,225,.85);backdrop-filter:blur(18px) saturate(1.3);border-color:var(--line)}
+.brand{display:flex;align-items:center;gap:11px}
+.brand .seal{width:26px;height:26px;color:var(--pine)}
+.brand .bw{font-family:var(--disp);font-size:22px;font-weight:400;letter-spacing:.16em;color:var(--ink)}
+.nav-logo{width:55px;height:55px;display:block}
+.nav-mid{position:absolute;left:50%;transform:translateX(-50%);font-family:var(--body);font-size:10px;font-weight:400;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--ink38)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:30px}
+.nav-r a{font-family:var(--body);font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink54);transition:color .25s}
+.nav-r a:hover{color:var(--ink)}
+.nav-cta{border:1px solid var(--ink);padding:8px 18px;color:var(--ink)!important;letter-spacing:.12em;
+  transition:background .25s,color .25s,border-color .25s}
+.nav-cta:hover{background:var(--pine);border-color:var(--pine);color:var(--crm)!important}
+@media(max-width:820px){#nav{padding:0 20px}.nav-mid{display:none}.nav-r{gap:14px}.nav-r a:not(.nav-cta){display:none}}
 
- 
-  section.story{
-    position:relative; display:grid; place-items:center; padding:10vh 6vw; min-height:var(--vh);
-    isolation:isolate;
-  }
+/* shared eyebrow (tagline only — section §-labels removed) */
+.eyebrow{font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--pine);display:inline-flex;align-items:center;gap:12px}
+.eyebrow::before{content:'';width:22px;height:1px;background:var(--pine)}
 
-  /* ============================== TYPE SYSTEM ============================== */
-  .kicker{
-    font:400 14px/1.12 var(--font-special);
-    letter-spacing:.06em; color:var(--ink-soft);
-  }
-  h1{
-    font-family:var(--font-heading); font-weight:400;
-    font-kerning:normal; font-feature-settings:"liga" 1,"kern" 1,"calt" 1;
-    letter-spacing:.01em; text-wrap:balance;
-    font-size:clamp(44px,6vw,98px); line-height:1.02; color:var(--ink);
-  }
-  h2{
-    font-family:var(--font-subhead); font-weight:400;
-    font-feature-settings:"liga" 1,"kern" 1;
-    letter-spacing:.005em; text-wrap:balance;
-    font-size:clamp(28px,3.2vw,46px); line-height:1.08; color:var(--ink);
-  }
-  p{
-    max-width:72ch; font:400 clamp(15px,1.3vw,18px)/1.6 var(--font-body);
-    color:var(--ink-soft);
-  }
+/* ══════════════ §1 HERO ══════════════ */
+#hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 42px 70px;overflow:hidden}
+.hero-wrap{position:relative;max-width:1240px;margin:0 auto;width:100%;display:grid;grid-template-columns:1.35fr .9fr;gap:0 80px;align-items:center}
+.hero-eyebrow{margin-bottom:32px;opacity:0;animation:fIn 1s var(--e2) .3s forwards}
+@keyframes fIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero-h1{font-family:var(--disp);font-weight:300;font-size:clamp(44px,6.4vw,96px);line-height:1.0;letter-spacing:-.02em;margin-bottom:34px}
+.hero-h1 .l{display:block;opacity:0;animation:lUp 1.1s var(--e2) forwards}
+.hero-h1 .l:nth-child(1){animation-delay:.5s}
+.hero-h1 .l:nth-child(2){animation-delay:.68s}
+.hero-h1 em{font-style:italic;color:var(--pine)}
+@keyframes lUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero-sub{font-size:17px;line-height:1.65;color:var(--ink72);max-width:46ch;margin-bottom:40px;
+  opacity:0;animation:fIn 1s var(--e2) 1s forwards}
+.hero-sub b{color:var(--ink);font-weight:400}
+.hero-cta{display:flex;align-items:center;gap:24px;flex-wrap:wrap;opacity:0;animation:fIn 1s var(--e2) 1.2s forwards}
+.btn{display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:var(--vellum);font-family:var(--body);
+  font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:17px 28px;cursor:pointer;border:none;
+  transition:background .3s,gap .3s}
+.btn:hover{background:var(--pine);gap:18px}
+.btn .a{transition:transform .3s}.btn:hover .a{transform:translateX(3px)}
+.btn-link{font-family:var(--body);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink54);
+  padding-bottom:4px;border-bottom:1px solid var(--ink18);transition:color .25s,border-color .25s}
+.btn-link:hover{color:var(--pine);border-color:var(--pine)}
+.hero-seal{position:relative;display:grid;place-items:center;opacity:0;animation:fIn 1.4s var(--e2) .8s forwards}
+.hero-seal svg{width:min(100%,1200px);height:auto;color:var(--pine)}
+.hs-ring{fill:none;stroke:currentColor;stroke-width:1.2;opacity:.5;stroke-dasharray:880 90;stroke-dashoffset:970;animation:loopdraw 2.4s var(--e2) 1s forwards}
+@keyframes loopdraw{to{stroke-dashoffset:0}}
+.hs-ring2{fill:none;stroke:var(--ink18);stroke-width:1}
+.hs-esc{fill:var(--bronze);opacity:0;animation:hlesc 4s var(--e2) 3s infinite}
+@keyframes hlesc{0%{opacity:0;transform:translate(0,0)}20%{opacity:1}100%{opacity:0;transform:translate(22px,-22px)}}
+.hs-label{font-family:var(--mono);font-size:8px;letter-spacing:.22em;fill:var(--ink38);text-transform:uppercase}
+.hero-scroll{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fIn 1s 1.8s forwards}
+.hero-scroll span{font-family:var(--body);font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink38)}
+.hero-scroll i{width:1px;height:30px;background:var(--line);position:relative;overflow:hidden}
+.hero-scroll i::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--pine);animation:tick 1.8s ease infinite}
 
-  /* Reveal */
-  .reveal{opacity:0; transform:translateY(10px); transition:opacity .5s ease, transform .6s cubic-bezier(.22,.61,.36,1)}
-  .is-visible .reveal{opacity:1; transform:none}
+/* hero schematic — self-drawing operating layer */
+.nodeBox{fill:var(--vellum);stroke:var(--ink);stroke-width:3;opacity:0;animation:nIn .7s var(--e2) forwards}
+.nodeBox.b1{animation-delay:1.35s}.nodeBox.b2{animation-delay:1.6s}.nodeBox.b3{animation-delay:1.85s}
+.nodeRed{fill:var(--pine);opacity:0;animation:nIn .6s var(--e2) 2.3s forwards}
+@keyframes nIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.figtxt{font-family:var(--mono);font-size:32px;letter-spacing:.12em;fill:var(--ink54);text-transform:uppercase;font-weight:600}
+.figtag{font-family:var(--mono);font-size:42px;letter-spacing:.16em;fill:var(--pine);text-transform:uppercase;font-weight:700}
+.dl{stroke:var(--ink18);stroke-width:3;fill:none;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.2s var(--e2) forwards}
+.dl.a1{animation-delay:1.8s}.dl.a2{animation-delay:2.2s}.dl.a3{animation-delay:2.6s}.dl.a4{animation-delay:3.0s}
+@keyframes draw{to{stroke-dashoffset:0}}
 
-  /* ============================== LINKS & CTAS ============================== */
-  a{ color:var(--ink); text-decoration:underline; text-underline-offset:4px; text-decoration-color:rgba(200,200,200,.22);
-     transition:opacity .2s ease, transform .12s ease, text-decoration-color .2s ease }
-  a:hover{ text-decoration-color:rgba(200,200,200,.45); transform:translateY(-1px) }
+@keyframes tick{to{top:200%}}
+@media(max-width:880px){.hero-wrap{grid-template-columns:1fr}.hero-seal{display:none}#hero{padding:110px 22px 80px}}
 
-  .nav-btn{
-    display:inline-flex; align-items:center; gap:8px;
-    padding:.6rem 1.05rem; border:1px solid var(--line); border-radius:var(--radius-pill);
-    background:transparent; color:var(--ink); text-decoration:none;
-    letter-spacing:.08em; text-transform:uppercase; font:600 12px/1 var(--font-body);
-    transition:transform .12s ease, box-shadow .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
-    box-shadow:0 1px 0 rgba(255,255,255,.03);
-  }
-  .nav-btn:hover{ transform:translateY(-1px); background:rgba(255,255,255,.03) }
-  .nav-btn:active{ transform:none }
-  .nav-btn.is-primary{
-    background:var(--cta); border-color:transparent; color:#1a1816;
-    box-shadow:0 1px 0 rgba(255,255,255,.06), 0 14px 40px rgba(203,184,157,.25);
-  }
-  .nav-btn.is-primary:hover{ box-shadow:0 1px 0 rgba(255,255,255,.08), 0 18px 60px rgba(203,184,157,.35) }
+/* ══════════════ §2 DIAGNOSTIC ══════════════ */
+#diag{position:relative;z-index:1;background:var(--dark);color:var(--crm);padding:118px 42px}
+.diag-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 55% at 70% 25%,rgba(36,107,89,.16),transparent 70%)}
+.diag-wrap{position:relative;max-width:1080px;margin:0 auto}
+.diag-head{display:grid;grid-template-columns:1fr 1fr;gap:0 70px;align-items:end;margin-bottom:60px;padding-bottom:44px;border-bottom:1px solid var(--crm18)}
+.diag-h2{font-family:var(--disp);font-weight:300;font-size:clamp(36px,4.6vw,64px);line-height:1.02;letter-spacing:-.02em}
+.diag-h2 em{font-style:italic;color:var(--mint)}
+.diag-intro{font-size:15px;line-height:1.78;color:var(--crm54);align-self:end}
+.diag-intro .lead{display:block;font-family:var(--disp);font-style:italic;font-size:20px;color:var(--crm);margin-bottom:13px;letter-spacing:-.01em}
+.diag-intro b{color:var(--crm);font-weight:400}
+.diag-prompt{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--crm54);margin-bottom:24px;display:flex;align-items:center;gap:11px}
+.diag-prompt .ct{color:var(--mint)}
+.chips{display:flex;flex-wrap:wrap;gap:11px;margin-bottom:44px}
+.chip{font-family:var(--body);font-size:14px;font-weight:300;color:var(--crm72);border:1px solid var(--crm18);
+  padding:12px 18px;cursor:pointer;background:transparent;transition:border-color .25s,background .25s,color .25s,transform .12s;line-height:1.3;text-align:left}
+.chip:hover{border-color:var(--crm38)}
+.chip.on{background:var(--pine-b);border-color:var(--pine-b);color:#fff}
+.chip.on:active{transform:scale(.97)}
+.diag-foot{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.diag-run{display:inline-flex;align-items:center;gap:12px;background:var(--vellum);color:var(--ink);font-family:var(--body);
+  font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:16px 30px;border:none;cursor:pointer;transition:gap .3s,opacity .3s}
+.diag-run:hover{gap:18px}
+.diag-run:disabled{opacity:.3;cursor:not-allowed;gap:12px}
+.diag-count{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--crm54)}
+.diag-count b{color:var(--mint);font-weight:400}
+.diag-result{margin-top:50px;border:1px solid var(--crm18);overflow:hidden;max-height:0;opacity:0;transition:max-height .7s var(--e2),opacity .6s ease}
+.diag-result.show{max-height:780px;opacity:1}
+.dr-bar{display:flex;align-items:center;justify-content:space-between;padding:15px 26px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--crm18)}
+.dr-bar .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--crm54)}
+.dr-bar .rr{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--mint)}
+.dr-body{padding:40px 26px 38px;display:grid;grid-template-columns:1fr 1px 1.05fr;gap:0 44px}
+.dr-div{background:var(--crm18)}
+.dr-mode{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mint);margin-bottom:14px}
+.dr-name{font-family:var(--disp);font-weight:300;font-size:clamp(27px,3vw,40px);line-height:1.04;margin-bottom:18px}
+.dr-name em{font-style:italic;color:var(--mint)}
+.dr-desc{font-size:14px;line-height:1.8;color:var(--crm54)}
+.dr-rxl{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--crm38);margin-bottom:14px}
+.dr-rxn{font-family:var(--disp);font-style:italic;font-weight:300;font-size:22px;color:var(--crm);margin-bottom:10px}
+.dr-rxw{font-size:13.5px;line-height:1.72;color:var(--crm54);margin-bottom:26px}
+.dr-cta{display:inline-flex;align-items:center;gap:11px;background:var(--pine-b);color:#fff;font-family:var(--body);
+  font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:14px 24px;transition:gap .3s,filter .3s}
+.dr-cta:hover{gap:17px;filter:brightness(1.1)}
+@media(max-width:820px){#diag{padding:84px 22px}.diag-head{grid-template-columns:1fr;gap:24px}.dr-body{grid-template-columns:1fr;gap:32px}.dr-div{display:none}}
 
-  /* ============================== NAVBAR (GOD-TIER GLASS) ============================== */
-  :root{ --topnav-h: clamp(56px, 7.5vh, 68px) }
-  .top-nav{
-    position:fixed; top:0; left:0; right:0; height:var(--topnav-h);
-    display:flex; align-items:center; gap:24px; padding:0 clamp(16px,5vw,48px);
-    backdrop-filter:saturate(1.12) blur(10px);
-    z-index:6; opacity:0; transform:translateY(-12px); pointer-events:none;
-    transition:opacity .35s ease, transform .35s cubic-bezier(.22,.61,.36,1),
-               background-color .3s ease, color .3s ease, border-color .3s ease, box-shadow .3s ease;
+/* ══════════════ §3 THREE FAILURES ══════════════ */
+#fails{position:relative;z-index:1;background:var(--vellum)}
+.fails-head{max-width:1180px;margin:0 auto;padding:112px 42px 56px;display:grid;grid-template-columns:1fr 1fr;gap:0 80px;align-items:end;border-bottom:1px solid var(--line)}
+.fails-h2{font-family:var(--disp);font-weight:300;font-size:clamp(32px,4vw,56px);line-height:.98;letter-spacing:-.022em}
+.fails-h2 em{font-style:italic;color:var(--pine)}
+.fails-desc{font-size:15px;line-height:1.76;color:var(--ink72);padding-bottom:6px;border-left:1px solid var(--line);padding-left:30px}
+.fails-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr)}
+.fail{padding:58px 44px 64px;border-right:1px solid var(--line);position:relative;transition:background .35s}
+.fail:last-child{border-right:none}
+.fail:hover{background:var(--pine06)}
+.fail::after{content:'';position:absolute;top:0;left:0;bottom:0;width:2px;background:var(--pine);transform:scaleY(0);transform-origin:bottom;transition:transform .5s var(--e1)}
+.fail:hover::after{transform:scaleY(1)}
+.fail-ix{font-family:var(--mono);font-size:9px;letter-spacing:.24em;color:var(--ink38);margin-bottom:34px;display:block}
+.fail-n{font-family:var(--disp);font-weight:300;font-size:clamp(50px,5.4vw,82px);line-height:1;color:var(--pine);letter-spacing:-.03em;margin-bottom:22px;display:block}
+.fail-name{font-family:var(--disp);font-weight:300;font-size:clamp(22px,2.3vw,29px);line-height:1.06;margin-bottom:18px}
+.fail-body{font-size:13.5px;line-height:1.82;color:var(--ink72);margin-bottom:26px}
+.fail-tags{display:flex;flex-wrap:wrap;gap:6px}
+.fail-tag{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink54);border:1px solid var(--line);padding:4px 9px;transition:color .3s,border-color .3s}
+.fail:hover .fail-tag{color:var(--pine);border-color:var(--pine12)}
+@media(max-width:880px){
+  .fails-head{grid-template-columns:1fr;gap:24px;padding:80px 22px 48px}
+  .fails-desc{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:22px}
+  .fails-grid{grid-template-columns:1fr}
+  .fail{padding:48px 22px;border-right:none;border-bottom:1px solid var(--line)}
+}
 
-    /* Obsidian lacquer on dark sections */
-    background: var(--glass-dark);
-    color: var(--ink);
-    border-bottom: 1px solid var(--line);
-    box-shadow: 0 10px 28px rgba(0,0,0,.18);
-  }
-  .top-nav.is-visible{ opacity:.999; transform:none; pointer-events:auto }
+/* ══════════════ §4 PROOF — results ledger ══════════════ */
+#proof{position:relative;z-index:1;background:var(--vellum2)}
+.proof-head{max-width:1100px;margin:0 auto;padding:100px 42px 0}
+.proof-kicker{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--pine);display:block;margin-bottom:22px}
+.proof-h2{font-family:var(--disp);font-weight:300;font-size:clamp(38px,5vw,72px);line-height:.98;letter-spacing:-.022em;max-width:20ch}
+.proof-h2 em{font-style:italic;color:var(--pine)}
+.proof-sub{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink38);margin-top:22px}
+.ledger{max-width:1100px;margin:0 auto;padding:46px 42px 100px}
+.lhdr{display:grid;grid-template-columns:280px 1fr auto 40px;gap:0 48px;padding:0 0 16px}
+.lhdr span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink38)}
+.lhdr .r3{text-align:right}
+.lrow{border-top:1px solid var(--line)}
+.lrow:last-child{border-bottom:1px solid var(--line)}
+.lhead{display:grid;grid-template-columns:280px 1fr auto 40px;gap:0 48px;align-items:center;padding:30px 0;cursor:pointer;position:relative;transition:background .3s}
+.lhead:hover{background:var(--pine06)}
+.lrow.open .lhead{background:var(--pine06)}
+.lmark{position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--pine);transform:scaleY(0);transform-origin:top;transition:transform .4s var(--e1)}
+.lrow.open .lmark{transform:scaleY(1)}
+.lnum{font-family:var(--disp);font-weight:300;font-size:clamp(40px,5vw,68px);line-height:.9;letter-spacing:-.03em;color:var(--ink);padding-left:14px;min-width:180px}
+.lout{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(16px,1.7vw,20px);line-height:1.32;color:var(--ink72)}
+.lsec{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--pine);white-space:nowrap}
+.ltog{justify-self:end;width:30px;height:30px;border:1px solid var(--line);display:grid;place-items:center;color:var(--pine);transition:background .3s,border-color .3s,transform .4s var(--e1)}
+.lrow.open .ltog{background:var(--pine);border-color:var(--pine);color:var(--crm);transform:rotate(45deg)}
+.ltog svg{width:12px;height:12px}
+.lpanel{max-height:0;overflow:hidden;transition:max-height .55s var(--e2)}
+.lpanel-in{padding:48px 0 64px 14px;display:grid;grid-template-columns:1fr 1px 1fr;gap:0 64px}
+.lp-div{background:var(--line)}
+.lp-l{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--pine);margin-bottom:28px;display:block}
+.lp-prob{font-size:13px;line-height:1.84;color:var(--ink72)}
+.lp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+.lp-tag{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink54);border:1px solid var(--line);padding:3px 8px}
+.lp-quote{font-family:var(--disp);font-style:italic;font-weight:300;font-size:16px;line-height:1.5;padding-left:16px;border-left:2px solid var(--pine);margin-bottom:12px}
+.lp-attr{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink38);margin-left:16px}
+@media(max-width:900px){
+  .proof-head{padding:76px 22px 0}
+  .ledger{padding:36px 22px 76px}
+  .lhdr{display:none}
+  .lhead{grid-template-columns:1fr 36px;grid-template-areas:"num tog" "out tog" "sec tog";gap:8px 16px;padding:26px 0}
+  .lnum{grid-area:num;font-size:clamp(38px,12vw,56px)}
+  .lout{grid-area:out}.lsec{grid-area:sec;white-space:normal}.ltog{grid-area:tog;align-self:start}
+  .lpanel-in{grid-template-columns:1fr;gap:28px;padding-left:0}.lp-div{display:none}
+}
 
-  /* Ivory Veil on “on-light” sections — still light ink for readability */
-  body.nav-on-light .top-nav{
-    background: linear-gradient(to bottom, var(--glass-veil-1), var(--glass-veil-2));
-    color: var(--ink);
-    border-bottom: 1px solid rgba(245,243,239,.20);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 12px 36px rgba(0,0,0,.14);
-  }
+/* ══════════════ §5 WE DON'T ADVISE. WE INSTALL. (light, structured) ══════════════ */
+#install{position:relative;z-index:1;background:var(--vellum)}
+.how-wrap{max-width:1100px;margin:0 auto;padding:112px 42px}
+.how-head{display:grid;grid-template-columns:1fr 1.4fr;gap:0 80px;align-items:end;margin-bottom:50px}
+.how-h2{font-family:var(--disp);font-weight:300;font-size:clamp(36px,4.6vw,64px);line-height:1;letter-spacing:-.02em}
+.how-h2 em{font-style:italic;color:var(--pine)}
+.how-desc{font-size:15px;line-height:1.76;color:var(--ink72);border-left:1px solid var(--line);padding-left:30px;padding-bottom:6px}
+.how-steps{display:none}
+.how-tabs{display:flex;gap:0;border-bottom:1px solid var(--line);margin-bottom:46px}
+.how-tab{flex:1;background:none;border:none;cursor:pointer;padding:22px 18px;text-align:left;position:relative;transition:color .3s}
+.how-tab .tn{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--ink38);display:block;margin-bottom:8px}
+.how-tab .tt{font-family:var(--disp);font-weight:300;font-size:clamp(18px,2vw,26px);color:var(--ink54);transition:color .3s}
+.how-tab::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--pine);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--e1)}
+.how-tab.on .tt{color:var(--ink)}
+.how-tab.on .tn{color:var(--pine)}
+.how-tab.on::after{transform:scaleX(1)}
+.how-panel{display:grid;grid-template-columns:1fr 1px 1.1fr;gap:0 56px;align-items:start;min-height:230px}
+.how-p-div{background:var(--line);align-self:stretch}
+.how-p-prob{font-family:var(--disp);font-weight:300;font-size:clamp(20px,2.2vw,28px);line-height:1.4;color:var(--ink);letter-spacing:-.01em}
+.how-p-prob em{font-style:italic;color:var(--pine)}
+.how-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 40px}
+.how-cl{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink38);margin-bottom:16px;display:block}
+.how-tags{display:flex;flex-wrap:wrap;gap:6px}
+.how-tag{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink72);border:1px solid var(--line);padding:4px 9px}
+.how-gets{list-style:none}
+.how-get{font-size:13px;line-height:1.7;color:var(--ink72);display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--lineL)}
+.how-get:last-child{border-bottom:none}
+.how-get::before{content:'—';font-family:var(--mono);color:var(--pine);flex-shrink:0;opacity:.7}
+.how-fade{animation:fade .45s var(--e2)}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(max-width:880px){
+  .how-wrap{padding:80px 22px}
+  .how-head{grid-template-columns:1fr;gap:22px;margin-bottom:36px}
+  .how-desc{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:22px}
+  .how-steps{flex-direction:column}
+  .how-step{border-right:none;border-bottom:1px solid var(--line);width:100%}
+  .how-step:last-child{border-bottom:none}
+  .how-tab .tt{font-size:16px}
+  .how-panel{grid-template-columns:1fr;gap:32px}
+  .how-p-div{display:none}
+  .how-cols{grid-template-columns:1fr;gap:28px}
+}
 
-  .top-nav .brand{ display:inline-flex; align-items:center; gap:10px; text-decoration:none; color:inherit }
-  .top-nav .brand img{ display:block; height: clamp(32px, 3.8vw, 48px); width:auto }
+/* ══════════════ §6 WE GET IT ══════════════ */
+#getit{position:relative;z-index:1;background:var(--vellum3);padding:180px 42px;overflow:hidden;min-height:140vh;display:flex;align-items:center}
+.gi-wrap{max-width:1100px;margin:auto}
+.gi-top{display:flex;align-items:flex-end;gap:60px;margin-bottom:54px;padding-bottom:48px;border-bottom:1px solid var(--line)}
+.gi-big{font-family:var(--disp);font-weight:300;font-size:clamp(84px,14vw,180px);line-height:.9;letter-spacing:-.03em;flex-shrink:0;margin-left:-.04em}
+.gi-rt{padding-bottom:12px;display:flex;flex-direction:column;gap:8px}
+.gi-sm{font-size:clamp(14px,1.6vw,20px);color:var(--ink54)}
+.gi-ag{font-family:var(--disp);font-style:italic;font-weight:400;font-size:clamp(22px,3vw,40px);color:var(--pine);line-height:1.05}
+.gi-body{display:grid;grid-template-columns:1.3fr 1fr;gap:0 70px;align-items:end}
+.gi-copy{font-size:14.5px;line-height:1.8;color:var(--ink72)}
+.gi-copy b{font-family:var(--disp);font-style:italic;font-weight:400;color:var(--pine);font-size:15.5px}
+.gi-trust{display:flex;flex-direction:column;gap:18px}
+.gi-trust-l{display:none}
+.gi-stats{display:flex;gap:32px;flex-wrap:wrap}
+.gi-stat .v{font-family:var(--disp);font-weight:300;font-size:30px;color:var(--ink);line-height:1}
+.gi-stat .k{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink38);margin-top:6px}
+@media(max-width:880px){
+  #getit{padding:80px 22px}
+  .gi-top{flex-direction:column;align-items:flex-start;gap:20px;margin-bottom:44px;padding-bottom:40px}
+  .gi-rt{padding-bottom:0}
+  .gi-body{grid-template-columns:1fr;gap:40px}
+}
 
-  .menu{ margin-left:auto; display:flex; align-items:center; gap: clamp(18px, 2.4vw, 36px) }
-  .menu a{
-    text-decoration:none; color:inherit; opacity:.92;
-    font:600 12px/1.1 var(--font-label); letter-spacing:.20em; text-transform:uppercase;
-    transition:opacity .2s ease, transform .12s ease;
-  }
-  .menu a:hover{ opacity:1; transform:translateY(-1px) }
-  .menu .cta{
-    padding:.55rem .9rem; border:1px solid currentColor; border-radius:var(--radius-pill);
-    background:transparent;
-  }
-  body.nav-on-light .menu .cta{ border-color: rgba(245,243,239,.38) }
+/* ══════════════ §7 ENGAGEMENTS — 3-up ══════════════ */
+#eng{position:relative;z-index:1;background:var(--vellum);padding:112px 42px}
+.eng-wrap{max-width:1180px;margin:0 auto}
+.eng-head{display:grid;grid-template-columns:1fr 1.5fr;gap:0 80px;align-items:end;margin-bottom:56px}
+.eng-kick{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(18px,2vw,24px);color:var(--ink54);display:block;margin-bottom:10px}
+.eng-h2{font-family:var(--disp);font-weight:300;font-size:clamp(28px,3.4vw,48px);line-height:1.02;letter-spacing:-.018em}
+.eng-h2 em{font-style:italic;color:var(--pine)}
+.eng-desc{font-size:14.5px;line-height:1.76;color:var(--ink72);border-left:1px solid var(--line);padding-left:30px;padding-bottom:6px}
+.eng-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line)}
+.eng-card{padding:42px 34px 38px;border-right:1px solid var(--line);position:relative;display:flex;flex-direction:column;transition:background .3s}
+.eng-card:last-child{border-right:none}
+.eng-card:hover{background:var(--pine06)}
+.eng-card.wedge{background:var(--pine);color:var(--crm)}
+.eng-card.wedge:hover{background:var(--pine-b)}
+.eng-badge{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);background:var(--bronze);color:#1A1812;
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;padding:5px 14px;white-space:nowrap}
+.ec-ix{font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--ink38);margin-bottom:28px}
+.eng-card.wedge .ec-ix{color:var(--crm38)}
+.ec-nm{font-family:var(--disp);font-weight:300;font-size:clamp(24px,2.4vw,32px);line-height:1.02;margin-bottom:8px}
+.ec-ty{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--pine);margin-bottom:26px}
+.eng-card.wedge .ec-ty{color:var(--mint)}
+.ec-for{font-family:var(--disp);font-style:italic;font-weight:300;font-size:17px;line-height:1.35;margin-bottom:18px}
+.ec-dsc{font-size:13px;line-height:1.78;color:var(--ink72);margin-bottom:32px;flex:1}
+.eng-card.wedge .ec-dsc{color:var(--crm54)}
+.ec-pr{font-family:var(--disp);font-weight:300;font-size:26px;color:var(--ink);margin-bottom:4px}
+.eng-card.wedge .ec-pr{color:var(--crm)}
+.ec-sc{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;color:var(--ink38);margin-bottom:26px}
+.eng-card.wedge .ec-sc{color:var(--crm38)}
+.ec-cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);padding:12px 0;border-top:1px solid var(--line);transition:gap .3s,color .3s}
+.ec-cta:hover{gap:16px;color:var(--pine)}
+.eng-card.wedge .ec-cta{color:var(--crm);border-color:var(--crm18)}
+.eng-card.wedge .ec-cta:hover{color:var(--mint)}
+.eng-foot{text-align:center;margin-top:44px;font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(16px,1.6vw,21px);color:var(--ink54)}
+.eng-foot a{color:var(--pine);border-bottom:1px solid var(--pine12);transition:border-color .25s}
+.eng-foot a:hover{border-color:var(--pine)}
+@media(max-width:880px){
+  #eng{padding:80px 22px}
+  .eng-head{grid-template-columns:1fr;gap:22px;margin-bottom:40px}
+  .eng-desc{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:22px}
+  .eng-cards{grid-template-columns:1fr}
+  .eng-card{border-right:none;border-bottom:1px solid var(--line);padding:44px 24px}
+  .eng-card:last-child{border-bottom:none}
+  .eng-badge{left:34px;transform:translateY(-50%)}
+}
 
-  /* ============================== LAYOUT HELPERS ============================== */
-  .stack{display:grid; gap:var(--space-md)}
-  .stack-lg{gap:28px}
-  .stack-xl{gap:36px}
+/* ══════════════ §8 SOLVE IT ══════════════ */
+#solve{position:relative;z-index:1;background:var(--vellum);padding:108px 42px 118px;overflow:hidden}
+#solve::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56vw;height:56vw;border-radius:50%;border:1px solid var(--line);pointer-events:none;max-width:720px;max-height:720px}
+.solve-mon{font-family:var(--disp);font-weight:300;font-size:clamp(92px,17vw,228px);line-height:.88;letter-spacing:-.04em;text-align:center;position:relative;z-index:2;margin-bottom:66px}
+.solve-mon em{font-style:italic;color:var(--pine)}
+.solve-split{max-width:880px;margin:0 auto;display:grid;grid-template-columns:1fr 2px 1fr;gap:0 54px;position:relative;z-index:2}
+.solve-spine{background:linear-gradient(to bottom,transparent,var(--line) 12%,var(--line) 88%,transparent)}
+.solve-l{text-align:right}
+.solve-dir{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(16px,1.6vw,21px);color:var(--ink72);line-height:1.6}
+.solve-but{display:block;margin-top:14px;font-family:var(--disp);font-style:italic;font-weight:400;font-size:clamp(16px,1.6vw,21px);color:var(--pine)}
+.solve-con{font-size:14px;line-height:1.82;color:var(--ink72)}
+@media(max-width:760px){#solve{padding:80px 22px}.solve-mon{font-size:clamp(72px,20vw,128px)}.solve-split{grid-template-columns:1fr;gap:36px}.solve-spine{display:none}.solve-l{text-align:left}}
 
-  /* ============================== FOOTER & DETAILS ============================== */
-  footer{ padding:24px 6vw 40px; text-align:center; font-size:13px; color:var(--ink-soft) }
-  ::selection{ background: color-mix(in srgb, var(--cta) 26%, #000 74%); color:#fff }
-  :focus-visible{ outline:2px solid var(--cta); outline-offset:2px; border-radius:6px }
+/* ══════════════ §9 BEGIN ══════════════ */
+#begin{position:relative;z-index:1;background:var(--vellum2);padding:118px 42px 128px}
+.begin-wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1px 1fr;gap:0 90px;align-items:start}
+.begin-div{background:linear-gradient(to bottom,transparent,var(--line) 8%,var(--line) 92%,transparent);align-self:stretch}
+.begin-seal{width:46px;height:46px;color:var(--bronze);margin-bottom:30px}
+.begin-stmt{font-family:var(--disp);font-weight:300;font-size:clamp(28px,3vw,44px);line-height:1.12;letter-spacing:-.01em;margin-bottom:28px}
+.begin-stmt em{display:block;font-style:italic;color:var(--pine)}
+.begin-alt{font-family:var(--body);font-size:13px;letter-spacing:.02em;color:var(--ink54);line-height:1.9}
+.begin-alt a{color:var(--pine);border-bottom:1px solid var(--pine12);transition:border-color .25s}
+.begin-alt a:hover{border-color:var(--pine)}
+.begin-logo{width:110px;height:110px;display:block;margin-bottom:30px}
+.field{position:relative;padding-top:34px;margin-bottom:8px}
+.field::before{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--line)}
+.field::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--pine);transition:width .5s var(--e1)}
+.field:focus-within::after{width:100%}
+.flabel{position:absolute;bottom:9px;left:0;font-family:var(--body);font-size:12px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--ink38);pointer-events:none;transition:bottom .32s var(--e1),font-size .32s,color .32s}
+.field:focus-within .flabel,.field.filled .flabel{bottom:calc(100% - 24px);font-size:9px;letter-spacing:.18em;color:var(--pine)}
+.control{display:block;width:100%;background:transparent;border:none;outline:none;appearance:none;padding:0 0 9px;resize:none;font-family:var(--disp);font-size:clamp(16px,1.5vw,21px);font-weight:300;color:var(--ink);line-height:1.5;caret-color:var(--pine)}
+.control[rows]{height:calc(1.5em + 18px);min-height:calc(1.5em + 18px);overflow-y:hidden}
+.begin-submit{margin-top:36px;display:inline-flex;align-items:center;gap:12px;font-family:var(--body);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:none;border:1px solid var(--ink);padding:15px 32px;cursor:pointer;transition:background .25s,color .25s,border-color .25s,gap .25s}
+.begin-submit:hover{background:var(--pine);border-color:var(--pine);color:var(--crm);gap:18px}
+.begin-status{font-family:var(--body);font-size:12.5px;font-style:italic;color:var(--ink54);min-height:16px;margin-top:18px}
+.begin-conf{font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--ink38);margin-top:8px;line-height:1.7}
+.begin-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+@media(max-width:860px){#begin{padding:80px 22px 96px}.begin-wrap{grid-template-columns:1fr;gap:56px}.begin-div{display:none}}
 
-  @media (prefers-reduced-motion:reduce){
-    .reveal,.top-nav,a,.nav-btn{ transition:none }
-  }
+/* ══════════════ FOOTER ══════════════ */
+footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);border-top:2px solid var(--pine);padding:68px 42px 44px;display:grid;grid-template-columns:1.3fr 1px 1fr 1px 1.3fr;gap:0 56px}
+.ft-div{background:linear-gradient(to bottom,var(--crm18),transparent);align-self:stretch}
+.ft-brand{display:flex;flex-direction:column;gap:16px}
+.ft-bw{display:flex;align-items:center;gap:11px}
+.ft-bw .seal{width:30px;height:30px;color:var(--mint)}
+.ft-bw .w{font-family:var(--disp);font-size:26px;letter-spacing:.14em}
+.ft-logo{width:120px;height:120px;display:block}
+.ft-tag{font-size:12px;color:var(--crm54);line-height:1.55;max-width:34ch}
+.ft-whisper{font-family:var(--disp);font-style:italic;font-size:12px;color:var(--crm38);margin-top:4px}
+.ft-nav{display:flex;flex-direction:column;gap:13px}
+.ft-l{font-family:var(--mono);font-size:8.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--crm38);margin-bottom:2px}
+.ft-nav a{font-size:13px;color:var(--crm54);transition:color .25s}
+.ft-nav a:hover{color:var(--mint)}
+.ft-close{display:flex;flex-direction:column;text-align:right}
+.ft-stmt{font-family:var(--disp);font-weight:300;font-size:18px;line-height:1.35;opacity:.9;margin-bottom:22px}
+.ft-stmt em{font-style:italic;color:var(--crm54);display:block}
+.ft-legal{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.ft-copy{font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--crm38)}
+.ft-ll{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.ft-ll a{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--crm38);transition:color .25s}
+.ft-ll a:hover{color:var(--mint)}
+.ft-disc{font-size:9.5px;line-height:1.6;color:rgba(241,236,225,.26);text-align:right;max-width:48ch;margin-top:8px}
+@media(max-width:860px){
+  footer{grid-template-columns:1fr;padding:52px 22px 38px;gap:38px}
+  .ft-div{display:none}
+  .ft-close,.ft-legal,.ft-ll{text-align:left;align-items:flex-start;justify-content:flex-start}
+  .ft-disc{text-align:left;max-width:100%}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important}
+  .r{opacity:1;transform:none}
+  .seal .ring{stroke-dashoffset:0}
+}
 </style>
 </head>
 <body>
-  <div id="boot-cover" aria-hidden="false"></div>
 
-  <!-- ============================== GLOBAL BACKGROUND LAYER ============================== -->
-  <div id="site-bg" aria-hidden="true">
-  <video id="bg-video" muted playsinline autoplay loop preload="metadata" poster="./assets/video-poster.jpg">
-    <source src="./assets/video.webm" type="video/webm">
-    <source src="./assets/3.mp4" type="video/mp4">
-  </video>
-  <div id="bg-overlay"></div>
-  <div id="bg-tint"></div>
-  </div>
-
-
-  <!-- ============================== TOP NAV ============================== -->
-  <header class="top-nav" aria-label="Site">
-    <a class="brand" data-nav="home" href="#hero" aria-label="ORR home">
-      <img src="./assets/re2.svg" alt="ORR" loading="lazy" />
-    </a>
-    <nav class="menu" aria-label="Primary">
-      <a data-nav="Systems" href="systems/s-index.html">Systems</a>
-      <a data-nav="codex" href="codex/codex.html">Codex</a>
-      <a data-nav="begin" class="cta" href="#begin">Begin</a>
-    </nav>
-  </header>
-  <main id="story">
-
-
-
-
-
-
-    
-
-
-    
-<!-- SECTION 1 — HERO -->
-<section id="hero" class="story hero-orr" aria-label="ORR — Engineering Execution Infrastructure">
-  <style>
-
-    #hero .hero-accent {
-     color: var(--cta);  /* champagne — matches your brand accent */
-    }
-
-    #hero.hero-orr {
-      display: grid;
-      place-items: center;
-      min-height: var(--vh);
-      padding: 0 clamp(20px, 6vw, 60px);
-      position: relative;
-    }
-
-    #hero .hero-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 0;
-      max-width: 1100px;
-    }
-
-    /* ── Logo ── */
-    #hero .hero-logo {
-      width: clamp(160px, 12vw, 1800px);
-      height: auto;
-      display: block;
-      margin-bottom: 20px;
-      margin-top: -30px;
-      opacity: 0.12;
-      animation: orr-fadein 2s ease-out 0.2s forwards;
-    }
-
-    @keyframes orr-fadein {
-      0%   { opacity: 0.12; }
-      15%  { opacity: 0.30; }
-      50%  { opacity: 0.60; }
-      100% { opacity: 1; }
-      
-    }
-
-    /* ── Descriptor ── */
-    #hero .hero-descriptor {
-      font-family: var(--font-label);
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-      margin: 0 0 66px;
-      opacity: 0.12;
-      animation: orr-des 2s ease-out 0.2s forwards;
-    }
-
-    @keyframes orr-des {
-      0%   { opacity: 0.12; }
-      15%  { opacity: 0.30; }
-      50%  { opacity: 0.60; }
-      100% { opacity: 1; }
-      
-    }
-
-    /* ── Main title ── */
-    #hero .hero-title {
-      font-family: var(--font-display);
-      font-weight: 300;
-      font-size: clamp(36px, 5.4vw, 72px);
-      line-height: 1.06;
-      color: var(--ink);
-      letter-spacing: 0.004em;
-      text-wrap: balance;
-      margin: 0 0 24px;
-      opacity: 0;
-      animation: hero-enter 3.5s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
-    }
-
-    /* ── Sub line ── */
-    #hero .hero-sub {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-weight: 300;
-      font-size: clamp(17px, 1.7vw, 24px);
-      line-height: 1.5;
-      color: var(--ink-soft);
-      letter-spacing: 0.02em;
-      margin: 0;
-      opacity: 0;
-      animation: hero-enter 3.5s cubic-bezier(0.16, 1, 0.3, 1) 2s forwards;
-    }
-
-    @keyframes hero-enter {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: none; }
-    }
-
-    /* ── Arrow wrap ── */
-    #hero .hero-scroll-wrap {
-      position: absolute;
-      bottom: 28px;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: center;
-      opacity: 0;
-      animation: arrow-fadein 2s ease-in-out 3.5s forwards;
-    }
-
-    @keyframes arrow-fadein {
-      0%   { opacity: 0; }
-      35%  { opacity: 0.35; }
-      50%  { opacity: 0.65; }
-      100% { opacity: 0.80; }
-    }    
-
-    #hero .hero-scroll {
-      display: block;
-      text-decoration: none;
-    }
-
-    /* ── Arrow SVG bounce ── */
-    #hero .hero-scroll-arrow {
-      width: 40px;
-      height: 40px;
-      display: block;
-      animation: arrow-bounce 2.4s ease-in-out 5.2s infinite;
-    }
-
-    @keyframes arrow-bounce {
-      0%,  100% { transform: translateY(0);    opacity: 1;    }
-      50%        { transform: translateY(10px); opacity: 0.45; }
-    }
-
-    /* ── Reduced motion ── */
-    @media (prefers-reduced-motion: reduce) {
-      #hero .hero-logo,
-      #hero .hero-descriptor,
-      #hero .hero-title,
-      #hero .hero-sub,
-      #hero .hero-scroll-wrap {
-        animation: none;
-        opacity: 1;
-        transform: none;
-      }
-      #hero .hero-scroll-arrow { animation: none; }
-    }
-
-    /* ── Mobile ── */
-    @media (max-width: 640px) {
-      #hero .hero-descriptor { font-size: 8px; letter-spacing: 0.12em; }
-      #hero .hero-title { font-size: clamp(30px, 7.2vw, 38px); }
-      #hero .hero-scroll-wrap { display:none; position: relative; bottom: auto; margin-top: 10px; }
-      #hero .hero-inner { margin-top: 0; } /* shift up on mobile to balance visual weight with smaller logo size */
-      #hero .hero-logo { margin-top: 0; }
-    }
-
-    @media (max-width: 860px) {
-  #hero .hero-title { font-size: clamp(28px, 5vw, 48px); }
-  #hero .hero-descriptor { font-size: 11px; letter-spacing: 0.14em; }
-}
-
-  </style>
-
-  <div class="hero-inner">
-    <img
-      class="hero-logo"
-      src="./assets/re2.svg"
-      alt="ORR"
-      width="200"
-      height="200"
-      decoding="async"
-      loading="eager"
-    />
-    <p class="hero-descriptor">Engineering Execution Infrastructure</p>
-    <h1 class="hero-title">Your business outgrew its <br><span class="hero-accent"> — operating layer.</span></h1>
-    <p class="hero-sub">Most founders discover this too late.</p>
-  </div>
-
-  <div class="hero-scroll-wrap">
-    <a class="hero-scroll" href="#problem" aria-label="Scroll to the problem section">
-      <svg class="hero-scroll-arrow" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 13 L20 26 L32 13" stroke="var(--cta)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M8 20 L20 33 L32 20" stroke="var(--cta)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
-      </svg>
-    </a>
-  </div>
-
-</section>
-
-
-<!-- SECTION 2 — THE PROBLEM -->
-<section id="problem" class="story" aria-label="The Problem">
-  <style>
-    #problem {
-      display: grid;
-      place-items: center;
-      min-height: var(--vh);
-      padding: clamp(80px, 12vh, 140px) clamp(20px, 8vw, 100px);
-    }
-
-    #problem .problem-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      max-width: 860px;
-      gap: 0;
-      min-height: calc(var(--vh) - clamp(160px, 24vh, 280px)); /* add this line */
-    }
-
-    /* Opening lines */
-    #problem .problem-open {
-      font-family: var(--font-display);
-      font-weight: 300;
-      font-size: clamp(30px, 3.8vw, 58px);
-      line-height: 1.12;
-      color: var(--ink);
-      letter-spacing: 0.004em;
-      text-wrap:unset;
-      text-align: center;
-      margin: 100px 0 20px;
-      max-width: 900px;
-      white-space: nowrap;
-    }
-
-    /* Secondary line */
-    #problem .problem-sub {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-weight: 300;
-      font-size: clamp(18px, 1.7vw, 23px);
-      color: var(--ink-soft);
-      letter-spacing: 0.02em;
-      margin: 0 0 clamp(48px, 8vh, 80px);
-    }
-
-    /* Hairline */
-    #problem .problem-line {
-      width: 70%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--line) 20%, var(--line) 80%, transparent);
-      opacity: 0.5;
-      margin: 70px 0 20px;
-    }
-
-    /* Identifier */
-    #problem .problem-label {
-      font-family: var(--font-label);
-      font-size: 20px !important;
-      font-weight: 500;
-      font-style: italic;
-      letter-spacing: 0.12em;
-      text-transform: none;
-      color: var(--cta);
-      margin: 0 0 0;
-      opacity: 0.7;
-    }
-
-    
-
-    #problem .structure-word {
-     letter-spacing: 0.01em;
-     font-weight: 550;
-     font-style: italic;
-     color: var(--cta)!important;
-     line-height: 1.05;
-    }
-
-    #problem .problem-anchor {
-  margin-top: 18px;
-  padding-top: 8px !important;
-  font-size: clamp(13px, 1.1vw, 16px);
-  letter-spacing: 0.08em;
-  opacity: 0.55;
-  max-width: 900px;
-  line-height: 1.7;
-}
-
-    /* Reveal */
-    #problem .reveal-item {
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    #problem.is-visible .reveal-item {
-      opacity: 1;
-      transform: none;
-    }
-    #problem.is-visible .reveal-item:nth-child(1) { transition-delay: 0.05s; }
-    #problem.is-visible .reveal-item:nth-child(2) { transition-delay: 0.12s; }
-    #problem.is-visible .reveal-item:nth-child(3) { transition-delay: 0.19s; }
-    #problem.is-visible .reveal-item:nth-child(4) { transition-delay: 0.26s; }
-    #problem.is-visible .reveal-item:nth-child(5) { transition-delay: 0.33s; }
-    #problem.is-visible .reveal-item:nth-child(6) { transition-delay: 0.40s; }
-    #problem.is-visible .reveal-item:nth-child(7) { transition-delay: 0.47s; }
-    #problem.is-visible .reveal-item:nth-child(8) { transition-delay: 0.54s; }
-
-    @media (prefers-reduced-motion: reduce) {
-      #problem .reveal-item { transition: none; opacity: 1; transform: none; }
-      #problem .problem-item-text { transition: none; }
-    }
-
-    @media (max-width: 640px) {
-      #problem .problem-grid { gap: 14px 24px; }
-      #problem .problem-item-text { display: none; }
-      #problem .problem-open { white-space: normal; line-height: 1.2; margin-top: 40px; font-size: clamp(24px, 6vw, 32px); }
-      #problem .problem-label { font-size: 12.5px!important; letter-spacing: 0.06em; }
-      #problem { padding: 40px 20px; }
-      #problem .problem-sub { font-size: 14px; }
-    }
-  </style>
-
-  <div class="problem-inner">
-
-    <!-- Opening lines -->
-    <p class="problem-open reveal-item">
-      Building business takes passion.<br>
-      & Sustaining it requires <span class="structure-word">STRUCTURE</span>.
-    </p>
-    <p class="problem-sub reveal-item">
-      You bring the first. ORR engineers the second.
-    </p>
-
-    <!-- Hairline -->
-    <div class="problem-line reveal-item"></div>
-
-    <p class="problem-label reveal-item problem-anchor"> From early-stage founders to established businesses — <br>ORR has resolved operational inefficiencies through embedded execution.</p>
-
-  </div>
-</section>
-
-
-<!-- SECTION 3 — OPERATIONAL INEFFICIENCIES -->
-<section id="inefficiencies" class="story" aria-label="Operational Inefficiencies">
-  <style>
-    #inefficiencies {
-      display: block;
-      min-height: var(--vh);
-      padding: 10vh 6vw;
-    }
-
-    #inefficiencies .s3-inner {
-      width: 100%;
-      max-width: 1050px;
-      margin: 0 auto;
-    }
-
-    /* ── Title block ── */
-    #inefficiencies .s3-title-block {
-      text-align: left;
-      margin: 0 0 clamp(48px, 8vh, 80px);
-      margin-left: -20px;
-      
-    }
-
-    @media (max-width: 768px) {
-     #inefficiencies .s3-title-block {
-     margin-left: 0;
-     }
-    }
-
-    #inefficiencies .s3-hook {
-      font-family: var(--font-display);
-      font-size: clamp(42px, 6vw, 74px);
-      font-weight: 300;
-      font-style: italic;
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-      color: var(--ink);
-      display: block;
-      margin: 0 0 18px;
-    }
-
-    #inefficiencies .s3-diagnosis {
-      font-family: var(--font-label);
-      font-size: clamp(12px, 1.2vw, 14px);
-      font-weight: 600;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--cta);
-      display: block;
-      margin: 0 0 32px;
-      margin-left: 18px;
-      padding-left: 12px;
-      border-left: 1px solid rgba(203,184,157,0.35);
-    }
-
-    #inefficiencies .s3-pivot-wrap {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    #inefficiencies .s3-diagnosis .s3-pivot {
-      font-family: var(--font-sub);
-      font-size: 12px;
-      font-weight: 300;
-      font-style: italic;
-      letter-spacing: 0.08em;
-      color: var(--ink-soft)!important;
-      opacity: 1;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    /* ── Cards wrap ── */
-    #inefficiencies .s3-cards-wrap {
-      width: 100%;
-    }
-
-    /* ── Grid: 4 top ── */
-    #inefficiencies .s3-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      margin-bottom: 0px; /* space between two rows */
-    }
-
-    /* ── Row 2: 2 centered ── */
-    #inefficiencies .s3-row-2 {
-      display: flex;
-      justify-content: center;
-    }
-
-    #inefficiencies .s3-row-2 .s3-card {
-      width: 25%;
-    }
-
-    /* ── Card ── */
-    #inefficiencies .s3-card {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      text-align: left;
-      padding: clamp(32px, 3.6vh, 54px) clamp(12px, 1.5vw, 20px);
-      cursor: default;
-      border-left: 1px solid rgba(144,130,125,0.10);
-      transition: border-color 0.4s ease;
-    }
-
-    #inefficiencies .s3-card:hover,
-    #inefficiencies .s3-card.active {
-      border-left-color: rgba(203,184,157,0.60);
-    }
-
-    /* ── Card title ── */
-    #inefficiencies .s3-card-title {
-      font-family: var(--font-sub);
-      font-size: clamp(14px, 1.2vw, 17px);
-      font-weight: 400;
-      color: var(--ink);
-      margin: 0 0 12px;
-      position: relative;
-      display: inline-block;
-      padding-bottom: 6px;
-      white-space: nowrap;
-      letter-spacing: 0.005em;
-      opacity: 0.60;
-      transition: opacity 0.3s ease;
-    }
-
-    #inefficiencies .s3-card-title::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 20px;
-      height: 1px;
-      background: var(--cta);
-      opacity: 0.4;
-      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
-    }
-
-    #inefficiencies .s3-card:hover .s3-card-title,
-    #inefficiencies .s3-card.active .s3-card-title {
-      opacity: 1;
-    }
-
-    #inefficiencies .s3-card:hover .s3-card-title::after,
-    #inefficiencies .s3-card.active .s3-card-title::after {
-      width: 100%;
-      opacity: 0.8;
-    }
-
-    #inefficiencies .s3-pivot {
-  display: inline;
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  color: var(--ink-soft);
-  opacity: 0.38;
-  text-transform: none;
-}
-
-
-    /* ── Card body text — always visible, muted at rest ── */
-    #inefficiencies .s3-card-text {
-      font-family: var(--font-body);
-      font-size: 13px;
-      line-height: 1.7;
-      color: var(--ink-soft);
-      width: 100%;
-      margin: 0;
-      opacity: 0.22;
-      filter: blur(0.4px);
-      transition: opacity 0.4s ease, filter 0.4s ease;
-    }
-
-    #inefficiencies .s3-card:hover .s3-card-text,
-    #inefficiencies .s3-card.active .s3-card-text {
-      opacity: 0.88;
-      filter: none;
-    }
-
-    /* ── Reveal ── */
-    #inefficiencies .reveal-item {
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
-    }
-    #inefficiencies.is-visible .reveal-item { opacity: 1; transform: none; }
-    #inefficiencies.is-visible .reveal-item:nth-child(1) { transition-delay: 0.05s; }
-    #inefficiencies.is-visible .reveal-item:nth-child(2) { transition-delay: 0.18s; }
-    #inefficiencies.is-visible .reveal-item:nth-child(3) { transition-delay: 0.30s; }
-
-    @media (max-width: 768px) {
-      #inefficiencies .s3-row { grid-template-columns: repeat(2, 1fr); }
-      #inefficiencies .s3-row-2 .s3-card { width: 50%; }
-      #inefficiencies .s3-card-title { white-space: normal; }
-      #inefficiencies .s3-rule { width: 30%; }
-      #inefficiencies .s3-hook { font-size: clamp(36px, 8vw, 54px); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      #inefficiencies .reveal-item { transition: none; opacity: 1; transform: none; }
-      #inefficiencies .s3-card-text { opacity: 0.7; filter: none; }
-      #inefficiencies .s3-card-title { opacity: 0.85; }
-    }
-  </style>
-
-  <div class="s3-inner">
-
-    <!-- Title block -->
-    <div class="s3-title-block reveal-item">
-      <span class="s3-hook">What you feel has a name.</span>
-      <div class="s3-pivot-wrap">
-      <span class="s3-diagnosis">Operational Inefficiency <span class="s3-pivot">surfacing as</span></span>
+<div id="rail" aria-hidden="true"><div id="railfill"></div></div>
+
+<!-- NAV -->
+<header id="nav">
+  <a class="brand" href="#hero" aria-label="ORR home">
+  <img src="../assets/ngb.svg" alt="ORR Logo" class="nav-logo"/>
+</a>
+  <span class="nav-mid">Engineering Execution Infrastructure</span>
+  <nav class="nav-r">
+    <a href="#diag">Diagnose</a>
+    <a href="#proof">Work</a>
+    <a href="#install">Systems</a>
+    <a href="#eng">Engage</a>
+    <a href="#begin" class="nav-cta">Begin →</a>
+  </nav>
+</header>
+
+<!-- §1 HERO -->
+<section id="hero">
+  <div class="hero-wrap">
+    <div class="hero-left">
+            <h1 class="hero-h1">
+        <span class="l">Your business runs on you.</span>
+        <span class="l"><em>It shouldn't.</em></span>
+      </h1>
+      <p class="hero-sub">ORR diagnoses what's breaking in your operations, installs the systems that fix it, and <b>leaves them running — without you.</b> Fixed scope, real outcomes — no retainer trap.</p>
+      <div class="hero-cta">
+        <a href="#diag" class="btn">Run the 60-second diagnostic <span class="a">→</span></a>
+        <a href="#begin" class="btn-link">or book a call</a>
       </div>
     </div>
-
-    <div class="s3-cards-wrap">
-
-      <!-- Row 1: 4 cards -->
-      <div class="s3-row reveal-item">
-        <div class="s3-card" tabindex="0">
-          <p class="s3-card-title">Delivery Delays</p>
-          <p class="s3-card-text">Work starts — execution stalls. Revisions compound, clients follow up first, deadlines keep shifting.</p>
-        </div>
-        <div class="s3-card" tabindex="0">
-          <p class="s3-card-title">Revenue Leakage</p>
-          <p class="s3-card-text">Deals close but revenue still leaks. Follow-ups are missed, payments drift, pipelines stay inefficient.</p>
-        </div>
-        <div class="s3-card" tabindex="0">
-          <p class="s3-card-title">Decision Drag</p>
-          <p class="s3-card-text">No accountability means everything comes back to you. The business slows to the founder's speed.</p>
-        </div>
-        <div class="s3-card" tabindex="0">
-          <p class="s3-card-title">Unclear Ownership</p>
-          <p class="s3-card-text">Work is being done but nobody is in charge. Things hold — until they don't, and it all collapses.</p>
-        </div>
-      </div>
-
-      <!-- Row 2: 2 cards centered -->
-      <div class="s3-row-2 reveal-item">
-        <div class="s3-card" tabindex="0">
-          <p class="s3-card-title">Absent Documentation</p>
-          <p class="s3-card-text">Documentation exists on paper. Nobody follows it. Consulted only when something breaks.</p>
-        </div>
-        <div class="s3-card" tabindex="0">
-          <p class="s3-card-title">Growing Pains</p>
-          <p class="s3-card-text">More people, more investment, more scaling — increasing the pain, not reducing it.</p>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-  <script>
-  const s3Cards = document.querySelectorAll('#inefficiencies .s3-card');
-
-  s3Cards.forEach(function(c) {
-    c.addEventListener('click', function() {
-      s3Cards.forEach(function(other) { other.classList.remove('active'); });
-      c.classList.add('active');
-    });
-    c.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        s3Cards.forEach(function(other) { other.classList.remove('active'); });
-        c.classList.add('active');
-      }
-    });
-  });
-
-  s3Cards[0].classList.add('active');
-
-  new IntersectionObserver(function(entries, obs) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.1 }).observe(document.getElementById('inefficiencies'));
-  </script>
-</section>
-
-
-<!-- SECTION 4 — PROOF -->
-<section id="proof" class="story" aria-label="Our Infrastructure in Practice">
-<style>
-  #proof {
-    display: grid;
-    place-items: center;
-    min-height: var(--vh);
-    padding: clamp(80px, 12vh, 140px) clamp(20px, 8vw, 100px);
-    position: relative;
-  }
-
-  #proof .proof-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    max-width: 960px;
-    width: 100%;
-    position: relative;
-    z-index: 1;
-  }
-
-  #proof .proof-label {
-    font-family: var(--font-label);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    opacity: 0.55;
-    margin: -40px 0 clamp(32px, 5vh, 56px);
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  #proof .proof-label::before,
-  #proof .proof-label::after {
-    content: '';
-    width: 24px;
-    height: 1px;
-    background: currentColor;
-    opacity: 0.4;
-    display: block;
-    flex-shrink: 0;
-  }
-
-  /* Big achievement */
-  #proof .proof-hook {
-    font-family: var(--font-display);
-    font-weight: 300;
-    font-size: clamp(26px, 3.2vw, 52px);
-    line-height: 1.08;
-    color: var(--cta);
-    letter-spacing: -0.02em;
-    text-wrap: balance;
-    margin: 0 0 clamp(80px, 11vh, 190px);
-    min-height: clamp(60px, 8vh, 100px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Main frame */
-  #proof .proof-frame {
-    width: 100%;
-    position: relative;
-    padding: clamp(36px, 5vh, 56px) clamp(32px, 4vw, 52px);
-  }
-
-  #proof .proof-corner-tl {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 28px;
-    height: 28px;
-    border-top: 1px solid var(--cta);
-    border-left: 1px solid var(--cta);
-    opacity: 0.4;
-    pointer-events: none;
-  }
-
-  #proof .proof-corner-br {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 28px;
-    height: 28px;
-    border-bottom: 1px solid var(--cta);
-    border-right: 1px solid var(--cta);
-    opacity: 0.4;
-    pointer-events: none;
-  }
-
-  #proof .proof-frame-inner {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 0 clamp(40px, 5vw, 72px);
-    align-items: start;
-  }
-
-  /* Left — problem */
-  #proof .proof-problem {
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  /* Right — founder + tags */
-  #proof .proof-quote-side {
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  #proof .proof-side-label {
-    font-family: var(--font-label);
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--cta);
-    opacity: 0.65;
-    margin: 0 0 14px;
-    display: block;
-  }
-
-  #proof .proof-problem-text {
-    font-family: var(--font-body);
-    font-size: clamp(12.5px, 1vw, 14px);
-    font-weight: 400;
-    line-height: 1.6;
-    color: var(--ink-soft);
-    letter-spacing: 0.008em;
-    margin: 0;
-  }
-
-  /* Codex button — under problem */
-  #proof .proof-codex-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    font-family: var(--font-label);
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.26em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    opacity: 0.5;
-    background: none;
-    border: none;
-    border-bottom: 1px solid transparent;
-    padding: 0 0 1px;
-    margin-top: clamp(20px, 3vh, 28px);
-    cursor: pointer;
-    text-decoration: none;
-    transition: opacity 0.2s ease, gap 0.25s ease, border-color 0.2s ease;
-  }
-  #proof .proof-codex-btn:hover {
-    opacity: 0.9;
-    gap: 13px;
-    border-color: color-mix(in oklab, var(--ink-soft), transparent 60%);
-  }
-  #proof .proof-codex-btn svg {
-    width: 9px;
-    height: 9px;
-    flex-shrink: 0;
-    transition: transform 0.25s ease;
-  }
-  #proof .proof-codex-btn:hover svg {
-    transform: translateX(2px);
-  }
-
-  /* Founder quote */
-  #proof .proof-quote-text {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(14px, 1.2vw, 17px);
-    line-height: 1.65;
-    color: var(--ink);
-    letter-spacing: 0.01em;
-    margin: 0;
-    position: relative;
-    padding-left: 18px;
-  }
-  #proof .proof-quote-text::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 6px;
-    bottom: 6px;
-    width: 1px;
-    background: var(--cta);
-    opacity: 0.35;
-  }
-
-  #proof .proof-quote-attr {
-    font-family: var(--font-label);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    opacity: 0.45;
-    margin: 10px 0 0 18px;
-    display: block;
-  }
-
-  /* Metadata tags — under founder quote */
-  #proof .proof-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    margin-top: clamp(20px, 3vh, 28px);
-    padding-left: 18px;
-  }
-
-  #proof .proof-meta-tag {
-    font-family: var(--font-label);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    opacity: 0.55;
-    border: 1px solid var(--line);
-    border-radius: 2px;
-    padding: 3px 9px;
-  }
-
-  /* Bottom nav */
-  #proof .proof-nav {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-top: clamp(36px, 5vh, 56px);
-  }
-
-  #proof .proof-arrow {
-    width: 40px;
-    height: 40px;
-    border-radius: 999px;
-    border: none;
-    background: transparent;
-    color: var(--cta);
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
-    opacity: 0.6;
-  }
-  #proof .proof-arrow:hover {
-    background: color-mix(in oklab, var(--cta), transparent 93%);
-    transform: scale(1.06);
-    opacity: 1;
-  }
-  #proof .proof-arrow svg {
-    width: 15px;
-    height: 15px;
-  }
-
-  #proof .proof-dots {
-    display: flex;
-    gap: 7px;
-    align-items: center;
-  }
-  #proof .proof-dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 999px;
-    border: 1px solid color-mix(in oklab, var(--cta), transparent 50%);
-    background: transparent;
-    opacity: 0.5;
-    transition: opacity 0.25s ease, background 0.25s ease, transform 0.25s ease, width 0.3s ease;
-    cursor: pointer;
-    padding: 0;
-  }
-  #proof .proof-dot.active {
-    opacity: 1;
-    background: var(--cta);
-    border-color: var(--cta);
-    transform: scale(1.25);
-    width: 14px;
-    border-radius: 3px;
-  }
-
-  /* Reveal */
-  #proof .proof-inner {
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
-  }
-  #proof.in-view .proof-inner {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* Transitions */
-  #proof .proof-hook,
-  #proof .proof-frame {
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-  #proof .proof-transitioning {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-
-  @media (max-width: 720px) {
-    #proof .proof-frame-inner {
-      grid-template-columns: 1fr;
-      gap: clamp(28px, 5vh, 40px) 0;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    #proof .proof-inner { transition: none; opacity: 1; transform: none; }
-    #proof .proof-hook,
-    #proof .proof-frame { transition: none; }
-  }
-</style>
-
-<div class="proof-inner">
-
-  <p class="proof-label">Our Infrastructure in Practice</p>
-
-  <div class="proof-hook" id="proof-hook"></div>
-
-  <div class="proof-frame" id="proof-frame">
-    <div class="proof-corner-tl"></div>
-    <div class="proof-corner-br"></div>
-    <div class="proof-frame-inner">
-
-      <div class="proof-problem">
-        <span class="proof-side-label">The Problem</span>
-        <p class="proof-problem-text" id="proof-problem-text"></p>
-        <a class="proof-codex-btn" id="proof-codex-link" href="#" aria-label="Read Case Study">
-          Read Case Study
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14M13 6l6 6-6 6"/>
-          </svg>
-        </a>
-      </div>
-
-      <div class="proof-quote-side">
-        <span class="proof-side-label">Founder</span>
-        <p class="proof-quote-text" id="proof-quote-text"></p>
-        <span class="proof-quote-attr" id="proof-quote-attr"></span>
-        <div class="proof-meta" id="proof-meta"></div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="proof-nav">
-    <button class="proof-arrow" id="proof-prev" aria-label="Previous">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
-    </button>
-    <div class="proof-dots" id="proof-dots"></div>
-    <button class="proof-arrow" id="proof-next" aria-label="Next">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
-    </button>
-  </div>
-
-</div>
-
-<script>
-(function(){
-  const sec = document.getElementById('proof');
-  if(!sec) return;
-
-  const vignettes = [
-    {
-      hook: 'From 44% to 87% on-time delivery. In five weeks.',
-      problem: 'A 18-person agency delivering across multiple concurrent projects. Deadlines were treated as targets not commitments. Senior staff pulled into fixing work that should never have reached them. Clients followed up before the team did.',
-      quote: 'After a long time, I was finally doing what I was supposed to be doing — not babysitting operations.',
-      attr: 'Founder, Creative Agency',
-      meta: ['Agency', '18 people', '$250K ARR', 'Ops Install Sprint'],
-      codex: '#codex/delivery-infrastructure'
-    },
-    {
-      hook: '$240K in capital inefficiency identified. Restructured in one engagement.',
-      problem: 'A multi-venture education group operating across three verticals under significant capital pressure. Costs distributed with no unified visibility. Decisions being made on assumptions not numbers.',
-      quote: 'I just realised how impactful structured operations can actually be. Choosing to work with ORR was direction-changing.',
-      attr: 'Founder, Education Group',
-      meta: ['Education', '3 verticals', 'Post-Series A', 'Capital Mapping'],
-      codex: '#codex/capital-visibility'
-    },
-    {
-      hook: '80% of decisions moving without the founder. Within 90 days.',
-      problem: 'A bootstrapped B2B business where every decision found its way back to the founder. Department leads existed on paper. The founder was the operating system. The team was not incapable — they had never been told they did not have to wait.',
-      quote: 'After almost 8 months of being disturbed for every little thing — getting out of that was the relief I really needed as a founder.',
-      attr: 'Co-Founder, B2B SaaS',
-      meta: ['B2B SaaS', 'Bootstrapped', '$1.4M ARR', 'Decision Architecture'],
-      codex: '#codex/decision-architecture'
-    },
-    {
-      hook: 'Ramp time cut from 22 days to 9. Without restructuring the team.',
-      problem: 'A funded hybrid team bringing on new hires regularly. No defined path beyond day two. Tribal knowledge was the onboarding system. Senior staff pulled into questions documentation should have answered.',
-      quote: 'I assumed slow ramp was just how hiring worked. Turns out the problem was lack of structure not the people.',
-      attr: 'Founder, Hybrid Tech Team',
-      meta: ['Hybrid Team', 'Funded', 'Scaling', 'Onboarding Sprint'],
-      codex: '#codex/onboarding-systems'
-    },
-    {
-      hook: 'Three departments shipping weekly. Without a single additional hire.',
-      problem: 'A remote development agency where work consistently stalled between teams. Ownership assumed not assigned. Everyone believed someone else was moving critical items. Blockers surfaced late after causing delays.',
-      quote: 'Remote working with the team was putting work on a lag — but ORR introduced layers and it became much more manageable.',
-      attr: 'Founder, Dev Agency',
-      meta: ['Dev Agency', 'Remote', '40 people', 'Control Tower'],
-      codex: '#codex/cross-functional-control'
-    }
-  ];
-
-  let current = 0;
-
-  const hookEl     = document.getElementById('proof-hook');
-  const problemEl  = document.getElementById('proof-problem-text');
-  const codexEl    = document.getElementById('proof-codex-link');
-  const metaEl     = document.getElementById('proof-meta');
-  const quoteEl    = document.getElementById('proof-quote-text');
-  const attrEl     = document.getElementById('proof-quote-attr');
-  const dotsEl     = document.getElementById('proof-dots');
-  const prevBtn    = document.getElementById('proof-prev');
-  const nextBtn    = document.getElementById('proof-next');
-
-  const transitionTargets = [
-    hookEl,
-    document.getElementById('proof-frame')
-  ];
-
-  vignettes.forEach(function(_, i){
-    const d = document.createElement('button');
-    d.className = 'proof-dot' + (i === 0 ? ' active' : '');
-    d.setAttribute('aria-label', 'Vignette ' + (i + 1));
-    d.addEventListener('click', function(){ go(i); });
-    dotsEl.appendChild(d);
-  });
-
-  function render(idx){
-    const v = vignettes[idx];
-    hookEl.textContent = v.hook;
-    problemEl.textContent = v.problem;
-    if(codexEl) codexEl.setAttribute('href', v.codex);
-    metaEl.innerHTML = v.meta.map(function(t){
-      return '<span class="proof-meta-tag">' + t + '</span>';
-    }).join('');
-    quoteEl.textContent = '\u201C' + v.quote + '\u201D';
-    attrEl.textContent = v.attr;
-    dotsEl.querySelectorAll('.proof-dot').forEach(function(d, i){
-      d.classList.toggle('active', i === idx);
-    });
-  }
-
-  function go(idx){
-    current = (idx + vignettes.length) % vignettes.length;
-    transitionTargets.forEach(function(el){ if(el) el.classList.add('proof-transitioning'); });
-    setTimeout(function(){
-      render(current);
-      transitionTargets.forEach(function(el){ if(el) el.classList.remove('proof-transitioning'); });
-    }, 300);
-  }
-
-  prevBtn.addEventListener('click', function(){ go(current - 1); });
-  nextBtn.addEventListener('click', function(){ go(current + 1); });
-
-  let touchStartX = null;
-sec.addEventListener('touchstart', function(e){ touchStartX = e.touches[0].clientX; }, {passive:true});
-sec.addEventListener('touchend', function(e){
-  if(touchStartX === null) return;
-  const dx = e.changedTouches[0].clientX - touchStartX;
-  if(Math.abs(dx) > 40){ dx < 0 ? go(current + 1) : go(current - 1); }
-  touchStartX = null;
-}, {passive:true});
-
-  sec.addEventListener('keydown', function(e){
-    if(e.key === 'ArrowLeft') go(current - 1);
-    if(e.key === 'ArrowRight') go(current + 1);
-  });
-
-  const io = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){
-        sec.classList.add('in-view');
-        io.unobserve(sec);
-      }
-    });
-  }, { threshold: 0.18 });
-  io.observe(sec);
-
-  render(0);
-})();
-</script>
-</section>
-
-
-<!-- SECTION 5 — How Does ORR Work -->
-<section id="s5">
-<style>
-section#s5 {
-  width: 100%;
-  min-height: 100svh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6vh clamp(24px, 6vw, 80px);
-}
-
-.s5-inner {
-  width: 100%;
-  max-width: 1050px;
-  display: grid;
-  grid-template-columns: 1fr clamp(40px, 6vw, 80px) 0.45fr;
-  min-height: min(140vh, 720px);
-  align-items: flex-start;
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.65s cubic-bezier(0.22,0.61,0.36,1), transform 0.65s cubic-bezier(0.22,0.61,0.36,1);
-  /* ADD THIS — pushes left col to edge, right col stays in place */
-  margin-left: clamp(-20px, -2vw, -10px);
-  max-width: 1200px;  /* widen the container slightly */
-}
-
-.s5-inner.s5-loaded {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-
-/* LEFT PANEL */
-.s5-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(28px, 5vh, 42px) 0;
-}
-
-
-
-.s5-pillar-name {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-style: italic;
-  font-size: clamp(36px, 4vw, 56px);
-  line-height: 1.08;
-  color: var(--cta);
-  letter-spacing: 0.004em;
-  margin: 0 0 clamp(32px, 4vh, 42px);
-}
-
-.s5-section-rule {
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(to right, rgba(203,184,157,0.35) 0%, rgba(203,184,157,0.08) 40%, transparent 100%);
-  margin-bottom: clamp(42px, 5.4vh, 72px);
-}
-
-.s5-block-label {
-  font-family: var(--font-label);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--line);
-  display: block;
-  margin-bottom: 14px;
-}
-
-.s5-problem {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(16px, 1.4vw, 20px);
-  line-height: 1.6;
-  color: var(--ink-soft);
-  letter-spacing: 0.01em;
-  margin: 0 0 52px!important;
-  max-width: 72ch;
-}
-
-.s5-problem strong {
-  font-weight: 400;
-  font-style: italic;
-  color: rgba(234,230,222,0.78);
-}
-
-/* BOTTOM GRID — Install + Get side by side */
-.s5-bottom-grid {
-  display: grid;
-  grid-template-columns: 1fr 1px 1fr;
-  align-items: start;
-}
-
-.s5-bottom-col-a {
-  padding-right: 12px;
-}
-
-.s5-bottom-col-b {
-  padding-left: 18px;
-}
-
-.s5-bottom-divider {
-  width: 1px;
-  align-self: stretch;
-  background: linear-gradient(to bottom, transparent, rgba(144,130,125,0.4) 15%, rgba(144,130,125,0.13) 85%, transparent);
-}
-
-/* Install tags — pill style */
-.s5-installs {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.s5-install-tag {
-  font-family: var(--font-body);
-  font-size: 9px;
-  font-weight: 300;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(234, 230, 222, 0.7);
-  border: 1px solid rgba(144,130,125,0.16);
-  padding: 4px 10px;
-  transition: color 0.28s ease, border-color 0.28s ease;
-}
-
-.s5-install-tag:hover {
-  color: rgba(234,230,222,0.48);
-  border-color: rgba(144,130,125,0.3);
-}
-
-/* Get list */
-.s5-get-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 11px;
-}
-
-.s5-get-item {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: clamp(11px, 1vw, 13px);
-  line-height: 1.6;
-  color: rgba(234,230,222,0.78);
-  opacity: 0.75;
-  display: flex;
-  align-items: flex-start;
-  gap: 9px;
-}
-
-.s5-get-item::before {
-  content: '✦';
-  font-size: 11px;
-  color: rgba(234,230,222,0.78);
-  flex-shrink: 0;
-  margin-top: 2px;
-  letter-spacing: -0.04em;
-}
-
-/* Content crossfade */
-.s5-content {
-  transition: opacity 0.22s ease, transform 0.28s cubic-bezier(0.22,0.61,0.36,1);
-}
-.s5-content.is-leaving { opacity: 0; transform: translateY(7px); }
-.s5-content.is-entering { opacity: 0; transform: translateY(-7px); }
-
-.s5-right {
-  position: relative;
-  padding-left: clamp(28px, 3vw, 40px);
-  /* remove border-left from here */
-}
-
-.s5-right::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(203,184,157,0.35) 8%,
-    rgba(203,184,157,0.08) 75%,
-    transparent 100%
-  );
-}
-
-.s5-title-block {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-top: clamp(28px, 4vh, 48px);
-  padding-bottom: clamp(28px, 4vh, 44px);
-}
-
-.s5-headline {
-  font-family: var(--font-display);
-  font-size: clamp(22px, 2vw, 52px);
-  font-weight: 300;
-  font-style: italic;
-  line-height: 1.22;
-  color: rgba(234,230,222,0.7);
-  margin: 0 0 10px;
-  text-align: right;
-  align-self: flex-end;
-  align-items: flex-end;
+    <div class="hero-seal" aria-hidden="true">
+  <svg viewBox="0 0 1600 1200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Top: FOUNDER node (centered, red/pine) -->
+  <rect class="nodeBox b1" x="650" y="120" width="300" height="140" rx="12"/>
+  <text class="figtxt" x="800" y="200" text-anchor="middle">FOUNDER</text>
   
-}
-
-.s5-headline em {
-  color: var(--cta);
-  font-style: italic;
-  font-size: clamp(26px, 2.8vw, 64px);
-}
-
-.s5-subtext {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-style: italic;
-  font-size: clamp(12px, 0.88vw, 15px);
-  color: var(--ink-soft);
-  text-align: right;
-  align-self: flex-end;
-  align-items: flex-end;
-  line-height: 1.7;
-  max-width: 52ch;
-  margin: 0;
-}
-
-/* Progress */
-.s5-progress {
-  height: 1px;
-  background: rgba(144,130,125,0.07);
-  margin-bottom: 28px;
-  position: relative;
-  overflow: hidden;
-}
-
-.s5-progress-fill {
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  background: rgba(203,184,157,0.25);
-  width: 0%;
-}
-
-/* Slabs */
-.s5-slabs {
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-}
-
-.s5-slab {
-  border-top: 1px solid rgba(144,130,125,0.09);
-  padding: clamp(14px, 1.8vh, 20px) 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.s5-slab:last-child {
-  border-bottom: 1px solid rgba(144,130,125,0.09);
-}
-
-/* Active marker — left hairline, no layout shift */
-.s5-slab-mark {
-  width: 1px;
-  height: 20px;
-  flex-shrink: 0;
-  background: var(--cta);
-  opacity: 0;
-  transition: opacity 0.35s ease;
-}
-
-.s5-slab.is-active .s5-slab-mark {
-  opacity: 0.55;
-}
-
-.s5-slab-body { flex: 1; min-width: 0; }
-
-.s5-slab-num {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: 9px;
-  letter-spacing: 0.16em;
-  color: var(--line);
-  display: block;
-  margin-bottom: 3px;
-  transition: color 0.28s ease;
-}
-
-.s5-slab.is-active .s5-slab-num { color: rgba(144,130,125,0.4); }
-.s5-slab:hover:not(.is-active) .s5-slab-num { color: rgba(144,130,125,0.28); }
-
-.s5-slab-name {
-  font-family: var(--font-label);
-  font-size: clamp(10px, 1vw, 12px);
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink);
-  display: block;
-  line-height: 1.4;
-  transition: color 0.28s ease;
-}
-
-.s5-slab.is-active .s5-slab-name { color: rgba(234,230,222,0.8); }
-.s5-slab:hover:not(.is-active) .s5-slab-name { color: rgba(234,230,222,0.48); }
-
-.s5-slab-arrow {
-  font-size: 10px;
-  color: rgba(144,130,125,0.12);
-  flex-shrink: 0;
-  transition: color 0.28s ease, transform 0.28s ease;
-}
-
-.s5-slab.is-active .s5-slab-arrow { color: rgba(203,184,157,0.35); transform: translateX(2px); }
-.s5-slab:hover:not(.is-active) .s5-slab-arrow { color: rgba(203,184,157,0.22); }
-
-/* RESPONSIVE */
-/* ── Tablet (641–860px) ── */
- 
-@media (min-width: 641px) and (max-width: 860px) {
-  .s5-inner {
-    grid-template-columns: 1fr;
-    min-height: unset;
-  }
-
-  .s5-right {
-    padding: 0 0 clamp(28px, 4vh, 44px);
-    order: -1;
-  }
-
-  .s5-right::before { display: none; }
-  .s5-title-block { flex: none; }
-
-  .s5-headline {
-  text-align: right;
-  align-self: flex-end;
-    font-size: clamp(30px, 4.5vw, 40px); /* add this */
-}
-
-.s5-subtext {
-  display: none;
-  text-align: right;
-  align-self: flex-end;
-  font-size: clamp(18px, 3vw, 24px); /* add this */
-}
-
-  .s5-left { padding: clamp(28px, 4vh, 44px) 0; }
-  .s5-bottom-grid { grid-template-columns: 1fr; }
-  .s5-bottom-divider { display: none; }
-  .s5-bottom-col-a { padding-right: 0; margin-bottom: 24px; }
-  .s5-bottom-col-b { padding-left: 0; }
-}
-
-/* ── Mobile (max 640px) — accordion mode ── */
-@media (max-width: 640px) {
-  section#s5 {
-    padding: 8vh 20px;
-    overflow: hidden;
-  }
-
-  .s5-inner {
-    grid-template-columns: 1fr;
-    min-height: unset;
-    gap: 0;
-  }
-
-  /* Header stays at top, left-aligned */
-  .s5-right {
-    order: -1;
-    padding: 0 0 32px;
-  }
-
-  .s5-right::before { display: none; }
-
-  .s5-headline {
-  font-size: clamp(30px, 4.5vw, 40px); /* add this */
-  text-align: right;
-  align-self: flex-end;
-  line-height: 1.3;
-}
-
-  .s5-headline em { font-size: 45px; }
-
- .s5-subtext {
-  font-size: clamp(14px, 3vw, 20px); /* add this */
-
-  text-align: right;
-  align-self: flex-end;
-  max-width: 100%;
-}
-
-  /* Progress bar stays, looks intentional */
-  .s5-progress {
-    margin-bottom: 16px;
-  }
-
-  /* Slabs become accordion triggers */
-  .s5-slab {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px 0;
-    gap: 0;
-  }
-
-  .s5-slab-header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    width: 100%;
-  }
-
-  .s5-slab-arrow {
-    margin-left: auto;
-    transition: transform 0.3s ease, color 0.28s ease;
-  }
-
-  .s5-slab.is-active .s5-slab-arrow {
-    transform: rotate(90deg);
-  }
-
-  /* Inline content panel — hidden by default */
-  .s5-slab-panel {
-    display: none;
-    width: 100%;
-    padding: 16px 0 8px 0;
-    border-top: 1px solid rgba(144,130,125,0.10);
-    margin-top: 14px;
-  }
-
-  .s5-slab.is-active .s5-slab-panel {
-    display: block;
-  }
-
-  .s5-slab-panel-name {
-    font-family: var(--font-display);
-    font-weight: 300;
-    font-style: italic;
-    font-size: 22px;
-    color: var(--cta);
-    line-height: 1.1;
-    margin: 0 0 14px;
-  }
-
-  .s5-slab-panel-problem {
-    font-family: var(--font-display);
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 1.65;
-    color: var(--ink-soft);
-    margin: 0 0 20px;
-  }
-
-  .s5-slab-panel-problem strong {
-    font-weight: 400;
-    font-style: italic;
-    color: rgba(234,230,222,0.78);
-  }
-
-  .s5-slab-panel-label {
-    font-family: var(--font-label);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--line);
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  .s5-slab-panel-tags {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin: 0 0 20px;
-    padding: 0;
-  }
-
-  .s5-slab-panel-tag {
-    font-family: var(--font-body);
-    font-size: 9px;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-    color: rgba(234,230,222,0.7);
-    border: 1px solid rgba(144,130,125,0.18);
-    padding: 4px 10px;
-  }
-
-  .s5-slab-panel-gets {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-  }
-
-  .s5-slab-panel-get {
-    font-family: var(--font-body);
-    font-size: 12px;
-    line-height: 1.6;
-    color: var(--line);
-    display: flex;
-    align-items: flex-start;
-    gap: 9px;
-  }
-
-  .s5-slab-panel-get::before {
-    content: '—';
-    font-size: 9px;
-    color: rgba(203,184,157,0.3);
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  /* Hide the separate left panel entirely on mobile */
-  .s5-left {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .s5-content, .s5-inner { transition: none; }
-}
-</style>
-
-<div class="s5-inner" id="s5Inner">
-
-  <div class="s5-left">
-    <div class="s5-content" id="s5Content">
-
-      
-      <h2 class="s5-pillar-name" id="s5Name">Operational Failures</h2>
-      <div class="s5-section-rule"></div>
-
-      <span class="s5-block-label">The Problem</span>
-      <p class="s5-problem" id="s5Problem"></p>
-
-      <div class="s5-bottom-grid">
-        <div class="s5-bottom-col-a">
-          <span class="s5-block-label">What We Install</span>
-          <ul class="s5-installs" id="s5Installs"></ul>
-        </div>
-        <div class="s5-bottom-divider"></div>
-        <div class="s5-bottom-col-b">
-          <span class="s5-block-label">What You Get</span>
-          <ul class="s5-get-list" id="s5Gets"></ul>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="s5-divider"></div>
-
-  <div class="s5-right">
-
-    <div class="s5-title-block">
-      <h3 class="s5-headline">— 3 ways a business quietly<br><em>breaks its founder.</em></h3>
-      <p class="s5-subtext">These aren't strategic failures. They're operational ones. And they're fixable.</p>
-    </div>
-
-    <div>
-      <div class="s5-progress" aria-hidden="true">
-        <div class="s5-progress-fill" id="s5ProgressFill"></div>
-      </div>
-      <div class="s5-slabs" id="s5Slabs" role="tablist"></div>
-    </div>
-
-  </div>
-
-</div>
-
-<script>
-  (function () {
-
-var PILLARS = [
-  {
-    num: '01',
-    name: 'Operational Failures',
-    problem: 'The work moves when you\'re watching it. The moment you step away — handoffs drop, quality drifts, and somehow the client knows before you do. You\'re not the founder anymore. <strong>You\'re the last line of quality control.</strong>',
-    installs: ['Delivery Gates', 'Handoff Design', 'Definition of Done', 'SOP Frameworks', 'Weekly Delivery Cadence'],
-    gets: ['Work finishes without you in the loop', 'Clients feel consistency — before they have to ask for it', 'You stop being the person who catches everything at the end']
-  },
-  {
-    num: '02',
-    name: 'Governance Failures',
-    problem: 'Nobody knows who owns the decision — so it comes to you. Every approval, every tiebreak, every "just checking" message lands in your lap. Not because your team can\'t decide. <strong>Because the system was never built to let them.</strong>',
-    installs: ['Ownership Matrix', 'Decision Rights Framework', 'Escalation Design', 'Accountability Cadence', 'Role Clarity Documentation'],
-    gets: ['80% of decisions move without reaching you', 'Your team stops waiting — because they no longer have to', 'Accountability lives in the system, not in whoever shouts loudest']
-  },
-  {
-    num: '03',
-    name: 'Foundational Failures',
-    problem: 'The numbers exist. Somewhere. In a spreadsheet someone made six months ago that may or may not be current. You\'re making real decisions — hiring, pricing, cutting — on instinct, <strong>because the visibility was never actually built.</strong> You know something is wrong. You just can\'t prove it yet.',
-    installs: ['KPI Frameworks', 'Capital Mapping', 'Operational Reporting', 'Financial Visibility Framework', 'Performance Tracking'],
-    gets: ['A single source of truth the whole team actually uses', 'Capital decisions backed by numbers — not gut feeling', 'You see what\'s moving, what\'s stalling, and what\'s quietly bleeding']
-  }
-];
-
-  var current = 0;
-  var cycleTimer = null;
-  var rafTimer = null;
-  var progressStart = null;
-  var DURATION = 6000;
-  var paused = false;
-  var isMobile = window.matchMedia('(max-width: 640px)');
-
-  var contentEl  = document.getElementById('s5Content');
-  var nameEl     = document.getElementById('s5Name');
-  var problemEl  = document.getElementById('s5Problem');
-  var installsEl = document.getElementById('s5Installs');
-  var getsEl     = document.getElementById('s5Gets');
-  var slabsEl    = document.getElementById('s5Slabs');
-  var fillEl     = document.getElementById('s5ProgressFill');
-  var innerEl    = document.getElementById('s5Inner');
-
-  function buildSlabs(active) {
-    slabsEl.innerHTML = '';
-    PILLARS.forEach(function (p, i) {
-      var el = document.createElement('div');
-      el.className = 's5-slab' + (i === active ? ' is-active' : '');
-      el.setAttribute('role', 'tab');
-      el.setAttribute('tabindex', i === active ? '0' : '-1');
-      el.setAttribute('aria-selected', String(i === active));
-
-      if (isMobile.matches) {
-        /* ── Accordion slab for mobile ── */
-        el.innerHTML =
-          '<div class="s5-slab-header">' +
-            '<div class="s5-slab-mark"></div>' +
-            '<div class="s5-slab-body">' +
-              '<span class="s5-slab-num">' + p.num + '</span>' +
-              '<span class="s5-slab-name">' + p.name + '</span>' +
-            '</div>' +
-            '<span class="s5-slab-arrow">→</span>' +
-          '</div>' +
-          '<div class="s5-slab-panel">' +
-            '<p class="s5-slab-panel-name">' + p.name + '</p>' +
-            '<p class="s5-slab-panel-problem">' + p.problem + '</p>' +
-            '<span class="s5-slab-panel-label">What We Install</span>' +
-            '<ul class="s5-slab-panel-tags">' +
-              p.installs.map(function(t){ return '<li class="s5-slab-panel-tag">' + t + '</li>'; }).join('') +
-            '</ul>' +
-            '<span class="s5-slab-panel-label">What You Get</span>' +
-            '<ul class="s5-slab-panel-gets">' +
-              p.gets.map(function(g){ return '<li class="s5-slab-panel-get">' + g + '</li>'; }).join('') +
-            '</ul>' +
-          '</div>';
-
-        el.addEventListener('click', function () {
-          var isOpen = el.classList.contains('is-active');
-          slabsEl.querySelectorAll('.s5-slab').forEach(function(s){
-            s.classList.remove('is-active');
-          });
-          if (!isOpen) el.classList.add('is-active');
-        });
-
-      } else {
-        /* ── Original desktop slab ── */
-        el.innerHTML =
-          '<div class="s5-slab-mark"></div>' +
-          '<div class="s5-slab-body">' +
-            '<span class="s5-slab-num">' + p.num + '</span>' +
-            '<span class="s5-slab-name">' + p.name + '</span>' +
-          '</div>' +
-          '<span class="s5-slab-arrow">→</span>';
-
-        el.addEventListener('click', function () { stop(); activate(i); });
-        el.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stop(); activate(i); }
-          if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); stop(); activate((i + 1) % 3); }
-          if (e.key === 'ArrowUp'   || e.key === 'ArrowLeft')  { e.preventDefault(); stop(); activate((i + 2) % 3); }
-        });
-      }
-
-      slabsEl.appendChild(el);
-    });
-  }
-
-  function renderContent(idx) {
-    if (!isMobile.matches) {
-      var p = PILLARS[idx];
-      nameEl.textContent  = p.name;
-      problemEl.innerHTML = p.problem;
-      installsEl.innerHTML = p.installs.map(function (t) {
-        return '<li class="s5-install-tag">' + t + '</li>';
-      }).join('');
-      getsEl.innerHTML = p.gets.map(function (g) {
-        return '<li class="s5-get-item">' + g + '</li>';
-      }).join('');
-    }
-    buildSlabs(idx);
-  }
-
-  function activate(idx) {
-    if (idx === current) return;
-    contentEl.classList.add('is-leaving');
-    setTimeout(function () {
-      current = idx;
-      renderContent(idx);
-      contentEl.classList.remove('is-leaving');
-      contentEl.classList.add('is-entering');
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () { contentEl.classList.remove('is-entering'); });
-      });
-    }, 230);
-    restartProgress();
-  }
-
-  function restartProgress() {
-    cancelAnimationFrame(rafTimer);
-    progressStart = performance.now();
-    fillEl.style.transition = 'none';
-    fillEl.style.width = '0%';
-    tick();
-  }
-
-  function tick() {
-    if (paused) return;
-    var pct = Math.min((performance.now() - progressStart) / DURATION * 100, 100);
-    fillEl.style.width = pct + '%';
-    if (pct < 100) { rafTimer = requestAnimationFrame(tick); }
-  }
-
-  function start() {
-    paused = false;
-    clearTimeout(cycleTimer);
-    cycleTimer = setTimeout(function () {
-      if (!paused) { activate((current + 1) % 3); start(); }
-    }, DURATION);
-    restartProgress();
-  }
-
-  function stop() {
-    paused = true;
-    clearTimeout(cycleTimer);
-    cancelAnimationFrame(rafTimer);
-    fillEl.style.transition = 'opacity 0.4s ease';
-    fillEl.style.opacity = '0';
-  }
-
-  if (!isMobile.matches) {
-    innerEl.addEventListener('mouseenter', function () {
-      if (!paused) { clearTimeout(cycleTimer); cancelAnimationFrame(rafTimer); }
-    });
-    innerEl.addEventListener('mouseleave', function () {
-      if (!paused) { start(); }
-    });
-  }
-
-  renderContent(0);
-  requestAnimationFrame(function () {
-    requestAnimationFrame(function () {
-      innerEl.classList.add('s5-loaded');
-      if (!isMobile.matches) start();
-    });
-  });
-
-})();
-</script>
-
-</section>
-
-
-
-
-<!-- SECTION 6 — WE GET IT -->
-<section id="we-get-it" class="story" aria-label="We Get It">
-<style>
-  #we-get-it {
-    display: grid;
-    place-items: center;
-    min-height: var(--vh);
-    padding: clamp(50px, 9vh, 100px) clamp(24px, 7vw, 100px);
-    position: relative;
-  }
-
-  #we-get-it .wgi-inner {
-    position: relative;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top: 0  !important;
-    min-height: unset !important;
-  }
-
-  /* ══ TOP — two column ══ */
-  #we-get-it .wgi-top {
-    flex: 1;
-    display: flex;
-    align-items: flex-end;
-    gap: clamp(32px, 5vw, 72px);
-  }
-
-  /* LEFT — monument headline */
-  #we-get-it .wgi-left {
-    flex: 0 0 auto;
-  }
-
-  #we-get-it .wgi-big {
-    font-family: var(--font-display);
-    font-weight: 300;
-    font-size: clamp(80px, 16vw, 210px);
-    line-height: 0.92;
-    letter-spacing: -0.025em;
-    color: var(--ink);
-    margin: 0;
-    margin-left: clamp(-40px, -4.6vw, -16px);
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  #we-get-it.in-view .wgi-big {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* RIGHT — small + agree stacked, baseline-aligned to headline */
-  #we-get-it .wgi-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: flex-end;
-    gap: clamp(10px, 1.5vh, 18px);
-    padding-bottom: 0.12em;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.18s,
-                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.18s;
-  }
-
-  #we-get-it.in-view .wgi-right {
-    opacity: 1;
-    transform: none;
-  }
-
-  #we-get-it .wgi-small {
-    font-family: var(--font-display);
-    font-weight: 300;
-    font-size: clamp(14px, 2vw, 29px);
-    line-height: 1;
-    opacity: 0.6;
-    text-align: right;
-    letter-spacing: -0.01em;
-    color: var(--ink-soft);
-    white-space: nowrap;
-  }
-
-  #we-get-it .wgi-agree {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 400;
-    text-align: right;
-    font-size: clamp(22px, 3.2vw, 50px);
-    line-height: 1;
-    letter-spacing: 0.005em;
-    color: var(--cta);
-    white-space: nowrap;
-  }
-
-  /* ══ BOTTOM ROW ══ */
-  #we-get-it .wgi-bottom {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: end;
-    gap: 0 clamp(40px, 6vw, 80px);
-    margin-top: clamp(48px, 8vh, 80px);
-    padding-top: clamp(40px, 7vh, 72px);
-    border-top: 1px solid rgba(144, 130, 125, 0.14);
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.4s,
-                transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
-  }
-
-  #we-get-it.in-view .wgi-bottom {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* ── BOTTOM LEFT — LINKS ── */
-  #we-get-it .wgi-links {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    gap: clamp(24px, 3.5vw, 48px);
-    flex-shrink: 0;
-  }
-
-  #we-get-it .wgi-link-item {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    font-size:12px;
-  }
-
-  #we-get-it .wgi-link-name {
-    font-family: var(--font-label);
-    font-size: 12.5px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--ink);
-    text-decoration: none;
-    opacity: 1;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    position: relative;
-    padding-bottom: 5px;
-    transition: opacity 0.42s ease, gap 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
-  }
-
-  #we-get-it .wgi-link-name::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: var(--cta);
-    opacity: 0.48;
-    transition: opacity 0.25s ease;
-  }
-
-  #we-get-it .wgi-link-name:hover {
-    opacity: 1;
-    gap: 15px;
-  }
-
-  #we-get-it .wgi-link-item:hover .wgi-link-desc {
-    opacity: 0.75;
-  }
-
-  #we-get-it .wgi-link-name:hover::after {
-    opacity: 0.65;
-  }
-
-  #we-get-it .wgi-link-name svg {
-    width: 9px;
-    height: 9px;
-    flex-shrink: 0;
-    opacity: 0.5;
-    transition: transform 0.25s ease, opacity 0.22s ease;
-  }
-
-  #we-get-it .wgi-link-name:hover svg {
-    transform: translateX(2px);
-    opacity: 1;
-  }
-
-  #we-get-it .wgi-link-desc {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(11px, 0.9vw, 13px);
-    line-height: 1.5;
-    color: var(--ink-soft);
-    letter-spacing: 0.01em;
-    opacity: 0.2;
-    margin: 0;
-    transition: opacity 0.22s ease;
-  }
-
-  /* ── BOTTOM RIGHT — BODY ── */
-  #we-get-it .wgi-body-wrap {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-  }
-
-  #we-get-it .wgi-acc {
-    font-style: italic;
-    font-family: var(--font-body)!important;
-    font-weight: 600;
-    color: var(--cta)!important;
-    opacity: 1!important;
-  }
-
-  #we-get-it .wgi-body {
-    font-family: var(--font-body);
-    font-size: clamp(12px, 0.95vw, 13px);
-    font-weight: 400;
-    line-height: 1.82;
-    color: var(--ink-soft);
-    letter-spacing: 0.012em;
-    text-align: right;
-    margin: 0;
-    max-width: 74ch;
-    opacity: 0.6;
-  }
-
-  #we-get-it .wgi-body em {
-    font-style: italic;
-    font-family: var(--font-display);
-    color: var(--ink);
-    opacity: 1;
-  }
-
-/*MOBILE VIEW */
-  @media (max-width: 720px) {
-  #we-get-it {
-    padding: 40px 24px 60px;
-    overflow: hidden;
-  }
-
-  #we-get-it .wgi-inner {
-    min-height: unset;
-    padding-top: 0;
-    gap: 0;
-  }
-
-  /* Stack headline and subline vertically, both left-aligned */
-  #we-get-it .wgi-top {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 12px;
-  }
-
-  #we-get-it .wgi-big {
-    font-size: clamp(64px, 18vw, 96px);
-    margin-left: 0;
-    line-height: 0.95;
-  }
-
-  /* Right block — left-aligned to match headline */
-  #we-get-it .wgi-right {
-    align-items: flex-start;
-    padding-bottom: 0;
-    gap: 6px;
-  }
-
-  #we-get-it .wgi-small {
-    font-size: 14px;
-    white-space: normal;
-    opacity: 0.55;
-    text-align: left;
-  }
-
-  #we-get-it .wgi-agree {
-    font-size: clamp(22px, 6vw, 30px);
-    white-space: normal;
-    text-align: left;
-  }
-
-  /* Bottom section */
-  #we-get-it .wgi-bottom {
-    grid-template-columns: 1fr;
-    gap: 0;
-    margin-top: 40px;
-    padding-top: 32px;
-  }
-
-  /* Body copy first */
-  #we-get-it .wgi-body-wrap {
-    justify-content: flex-start;
-    order: 1;
-    margin-bottom: 36px;
-  }
-
-  #we-get-it .wgi-body {
-    text-align: left;
-    max-width: 100%;
-    font-size: 13px;
-    line-height: 1.8;
-    opacity: 0.7;
-  }
-
-  /* Links below body copy */
-  #we-get-it .wgi-links {
-    order: 2;
-    gap: 32px;
-  }
-
-  /* Show link descriptions on mobile — they add context */
-  #we-get-it .wgi-link-desc {
-    opacity: 0.5;
-    font-size: 12px;
-  }
-}
-
-  @media (prefers-reduced-motion: reduce) {
-    #we-get-it .wgi-big,
-    #we-get-it .wgi-right,
-    #we-get-it .wgi-bottom {
-      transition: none;
-      opacity: 1;
-      transform: none;
-    }
-  }
-</style>
-
-<div class="wgi-inner">
-
-  <div class="wgi-top">
-
-    <div class="wgi-left">
-      <h2 class="wgi-big">We get it.</h2>
-    </div>
-
-    <div class="wgi-right">
-      <span class="wgi-small">— you don't want a retainer &</span>
-      <span class="wgi-agree">Honestly, we agree.</span>
-    </div>
-
-  </div>
-
-  <div class="wgi-bottom">
-
-    <div class="wgi-links">
-
-      <div class="wgi-link-item">
-        <a class="wgi-link-name" href="systems/s-index.html">
-          Systems
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-               aria-hidden="true">
-            <path d="M5 12h14M13 6l6 6-6 6"/>
-          </svg>
-        </a>
-        <p class="wgi-link-desc">What we build and how it holds.</p>
-      </div>
-
-      <div class="wgi-link-item">
-        <a class="wgi-link-name" href="codex/codex.html">
-          Codex
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-               aria-hidden="true">
-            <path d="M5 12h14M13 6l6 6-6 6"/>
-          </svg>
-        </a>
-        <p class="wgi-link-desc">Previous work and how we think.</p>
-      </div>
-
-    </div>
-
-    <div class="wgi-body-wrap">
-      <p class="wgi-body">
-        Most founders need one or two operational failures gone.
-        That's it. <br>The scope is specific, so is the fix. So <em class="wgi-acc">WE ASSESS, WE QUOTE, & WE WORK. </em> <br>
-        Our contracts do the heavy lifting for both of us — what we do,
-        what you get. Full Clarity.
-      </p>
-    </div>
-
-  </div>
-
-</div>
-
-<script>
-(function(){
-  const sec = document.getElementById('we-get-it');
-  if (!sec) return;
-  new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if (entry.isIntersecting){
-        sec.classList.add('in-view');
-      }
-    });
-  }, { threshold: 0.15 }).observe(sec);
-})();
-</script>
-</section>
-
-
-<!-- SECTION 7 — ENGAGEMENT MODES -->
-<section id="engagement" class="story" aria-label="Engagement Modes">
-<style>
-
-  #engagement {
-    display: grid;
-    place-items: center;
-    min-height: var(--vh, 100vh);
-    padding: clamp(60px, 9vh, 110px) clamp(24px, 6vw, 80px);
-    position: relative;
-    isolation: isolate;
-  }
-
-  #engagement .eng-wrap {
-    width: 100%;
-    max-width: 1050px;
-    display: grid;
-    grid-template-rows: auto auto 1fr auto;
-    gap: clamp(28px, 4vh, 48px);
-    opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16,1,0.3,1);
-  }
-
-  #engagement.in-view .eng-wrap {
-    opacity: 1;
-    transform: none;
-  }
-
-  #engagement .eng-top {
-    display: grid;
-    grid-template-columns: 1fr 0.6fr;
-    align-items: end;
-    gap: 0 40px;
-  }
-
-  #engagement .eng-eyebrow {
-    display: block;
-    font-family: var(--font-label);
-    font-size: clamp(22px, 2.5vw, 42px);
-    font-weight: 500;
-    text-transform: none;
-    color: var(--cta);
-    opacity: 0.7;
-    margin-bottom: 0px;
-  }
-
-  #engagement .eng-headline {
-    font-family: var(--font-display);
-    font-weight: 300;
-    font-size: clamp(24px, 3.2vw, 42px);
-    line-height: 1.08;
-    letter-spacing: 0.003em;
-    color: var(--ink);
-    margin: 0;
-  }
-
-  #engagement .eng-headline em {
-    font-style: italic;
-    color: var(--ink-soft);
-  }
-
-  #engagement .eng-sub {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 300;
-    border-left: 1px solid rgba(144, 130, 125, 0.342);
-    padding-left: clamp(12px, 2vw, 20px);
-    font-size: clamp(13px, 1.1vw, 15px);
-    color: rgba(206, 198, 195, 0.83);
-    line-height: 1.7;
-    max-width: 48ch;
-    align-self: end;
-    margin: 0;
-  }
-
-  #engagement .eng-tension {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, rgba(203,184,157,0.15), rgba(203,184,157,0.08) 60%, transparent);
-    position: relative;
-    flex-shrink: 0;
-  }
-
- 
-
-  #engagement .eng-rows {
-    display: flex;
-    flex-direction: column;
-    margin-left: clamp(20px, 3vw, 40px);
-  }
-
-  #engagement .eng-row {
-    display: grid;
-    grid-template-columns: 180px 1fr auto;
-    align-items: start;
-    gap: 0 clamp(24px, 3vw, 56px);
-    padding-left: clamp(12px, 2.5vw, 24px)!important;
-    padding: clamp(22px, 3.2vh, 36px) 0;
-    border-bottom: 1px solid rgba(144,130,125,0.08);
-    cursor: pointer;
-    position: relative;
-    transition: opacity 0.45s ease;
-  }
-
-  #engagement .eng-row:first-child {
-    border-top: 1px solid rgba(144,130,125,0.08);
-  }
-
-  #engagement .eng-row.is-muted {
-    opacity: 0.20;
-  }
-
-  #engagement .eng-row.is-muted:hover {
-    opacity: 0.52;
-  }
-
-  #engagement .eng-row-left {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    padding-top: 3px;
-  }
-
-  #engagement .eng-row-num {
-    font-family: var(--font-display);
-    font-weight: 300;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: rgba(144,130,125,0.4);
-    line-height: 1;
-  }
-
-  #engagement .eng-row-name {
-    font-family: var(--font-label);
-    font-size: clamp(11px, 1vw, 13px);
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--ink);
-    line-height: 1.2;
-  }
-
-  #engagement .eng-row-mid {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  #engagement .eng-row-for {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(15px, 1.45vw, 20px);
-    line-height: 1.3;
-    color: var(--ink);
-    letter-spacing: 0.005em;
-    margin: 0;
-  }
-
-  #engagement .eng-row-desc {
-    font-family: var(--font-body);
-    font-size: clamp(12px, 1vw, 13px);
-    line-height: 1.8;
-    color: var(--ink-soft);
-    opacity: 0.55;
-    margin: 0;
-    max-width: 56ch;
-  }
-
-  #engagement .eng-row-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 5px;
-    padding-top: 3px;
-    flex-shrink: 0;
-  }
-
-  #engagement .eng-row-price {
-    font-family: var(--font-label);
-    font-size: clamp(10px, 0.9vw, 12px);
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--cta);
-    white-space: nowrap;
-  }
-
-  #engagement .eng-row-scope {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(11px, 0.9vw, 13px);
-    color: rgba(144,130,125,0.85);
-    white-space: nowrap;
-    letter-spacing: 0.01em;
-  }
-
-  #engagement .eng-row-amber {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: var(--cta);
-    opacity: 0;
-    transition: opacity 0.45s ease;
-  }
-
-  #engagement .eng-row:not(.is-muted) .eng-row-amber {
-    opacity: 0.6;
-  }
-
+  <!-- Mid-level: Three systems — MASSIVE SPACING -->
+  <rect class="nodeBox b2" x="80" y="440" width="300" height="140" rx="12"/>
+  <text class="figtxt" x="230" y="500" text-anchor="middle">DELIVERY</text>
+  <text class="figtxt" x="230" y="540" text-anchor="middle">GATES</text>
   
-
-  #engagement .eng-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    font-family: var(--font-label);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--ink);
-    background: none;
-    margin-top: 10px;
-    border-bottom: 1px solid rgba(203,184,157,0.35);
-    padding: 1px 0 4px;
-    cursor: pointer;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: border-color 0.3s ease, gap 0.3s cubic-bezier(0.22,0.61,0.36,1), color 0.25s ease;
-  }
-
-  #engagement .eng-cta:hover {
-    border-bottom-color: rgba(203,184,157,0.8);
-    gap: 22px;
-    color: var(--cta);
-    text-decoration: none;
-  }
-
-  #engagement .eng-cta svg {
-    transition: transform 0.28s ease;
-  }
-
-  #engagement .eng-cta:hover svg {
-    transform: translateX(4px);
-  }
-
-  @media (max-width: 760px) {
-    #engagement .eng-top {
-      grid-template-columns: 1fr;
-      gap: 16px 0;
-      align-items: flex-end;
-    }
-
-    #engagement .eng-row {
-      grid-template-columns: 1fr;
-      gap: clamp(12px, 2vh, 18px) 0;
-    }
-
-    #engagement .eng-sub { 
-      display: none;
-   }
-
-    #engagement .eng-row-right {
-      align-items: flex-start;
-    }
-
-    
-
-    #engagement .eng-row.is-muted {
-    opacity: 0.60;
-    }
-   
-    #engagement .eng-cta {
-      align-self: flex-start;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    #engagement .eng-wrap { transition: none; opacity: 1; transform: none; }
-    #engagement .eng-row { transition: none; }
-    #engagement .eng-row-amber { transition: none; }
-    #engagement .eng-tension-pulse { animation: none; }
-  }
-
-</style>
-
-<div class="eng-wrap">
-
-  <div class="eng-top">
-    <div>
-      <span class="eng-eyebrow">That Said</span>
-      <h2 class="eng-headline"><em>For founders who've outgrown a single fix.</em></h2>
+  <rect class="nodeBox b3" x="650" y="440" width="300" height="140" rx="12"/>
+  <text class="figtxt" x="800" y="500" text-anchor="middle">DECISION</text>
+  <text class="figtxt" x="800" y="540" text-anchor="middle">RIGHTS</text>
+  
+  <rect class="nodeBox b4" x="1220" y="440" width="300" height="140" rx="12"/>
+  <text class="figtxt" x="1370" y="500" text-anchor="middle">CAPITAL</text>
+  <text class="figtxt" x="1370" y="540" text-anchor="middle">MAP</text>
+  
+  <!-- Connecting lines (drawing animation) -->
+  <path class="dl a1" d="M800 260 L230 440" pathLength="1"/>
+  <path class="dl a2" d="M800 260 L800 440" pathLength="1"/>
+  <path class="dl a3" d="M800 260 L1370 440" pathLength="1"/>
+  
+  <!-- Output row (red nodes = installed systems) -->
+  <rect class="nodeRed" x="80" y="780" width="300" height="24" rx="6"/>
+  <rect class="nodeRed" x="650" y="780" width="300" height="24" rx="6"/>
+  <rect class="nodeRed" x="1220" y="780" width="300" height="24" rx="6"/>
+  
+  <!-- Bottom label -->
+  <text class="figtag" x="800" y="950" text-anchor="middle">RUNS WITHOUT YOU</text>
+</svg>
+</div>
     </div>
-    <p class="eng-sub">
-      One operational failure is fixable in days. Two or more often means you need a new operating system. <br>
-      <a class="eng-cta" href="#begin">
-      Begin the Engagement
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="1.5"
-           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M5 12h14M13 6l6 6-6 6"/>
-      </svg>
-    </a>
-    </p>
-    
   </div>
+  <div class="hero-scroll" aria-hidden="true"><span>Diagnose</span><i></i></div>
+</section>
 
-  <div class="eng-tension" aria-hidden="true">
-    
+<!-- §2 DIAGNOSTIC -->
+<section id="diag">
+  <div class="diag-glow" aria-hidden="true"></div>
+  <div class="diag-wrap">
+    <div class="diag-head">
+      <div class="r"><h2 class="diag-h2">The symptoms change.<br><em>The failures repeat.</em></h2></div>
+      <p class="diag-intro r d2"><span class="lead">What you feel has a name.</span>Operational pain rarely arrives labelled — it arrives as symptoms. Select the ones that sound like your last thirty days, and <b>ORR names the failure underneath, and what fixes it.</b></p>
+    </div>
+    <div class="r d2">
+      <div class="diag-prompt"><span class="ct">→</span> Select every symptom that sounds like the last 30 days.</div>
+      <div class="chips" id="chips"></div>
+      <div class="diag-foot">
+        <button class="diag-run" id="diagRun" disabled>Run diagnosis →</button>
+        <span class="diag-count" id="diagCount"><b>0</b> symptoms selected</span>
+      </div>
+      <div class="diag-result" id="diagResult">
+        <div class="dr-bar"><span class="l">Diagnostic readout</span><span class="rr" id="drConf">CONFIDENCE — —</span></div>
+        <div class="dr-body">
+          <div>
+            <div class="dr-mode" id="drMode">Primary failure mode</div>
+            <h3 class="dr-name" id="drName"></h3>
+            <p class="dr-desc" id="drDesc"></p>
+          </div>
+          <div class="dr-div"></div>
+          <div>
+            <span class="dr-rxl">Recommended engagement</span>
+            <div class="dr-rxn" id="drRxN"></div>
+            <p class="dr-rxw" id="drRxW"></p>
+            <a class="dr-cta" id="drCta" href="#begin">Begin here →</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="eng-rows" id="engRows">
-
-    <div class="eng-row is-muted" data-idx="0" role="button" tabindex="0" aria-pressed="false">
-      <div class="eng-row-amber" aria-hidden="true"></div>
-      <div class="eng-row-left">
-        <span class="eng-row-num">01</span>
-        <span class="eng-row-name">Ops Install Sprint</span>
-      </div>
-      <div class="eng-row-mid">
-        <p class="eng-row-for">For one specific operational problem that needs to be resolved. Clean & Fast.</p>
-        <p class="eng-row-desc">We diagnose the failure, build the system that fixes it, install it with your team, and hand it over fully documented. You get a working operational fix — the engagement ends when the system runs.</p>
-      </div>
-      <div class="eng-row-right">
-        <span class="eng-row-price">From $2,500</span>
-        <span class="eng-row-scope">7–10 days · Fixed scope</span>
-      </div>
-    </div>
-
-    <div class="eng-row" data-idx="1" role="button" tabindex="0" aria-pressed="true">
-      <div class="eng-row-amber" aria-hidden="true"></div>
-      <div class="eng-row-left">
-        <span class="eng-row-num">02</span>
-        <span class="eng-row-name">Fractional COO</span>
-      </div>
-      <div class="eng-row-mid">
-        <p class="eng-row-for">For when the entire operating layer needs to be held and run weekly.</p>
-        <p class="eng-row-desc">We embed on an ongoing basis. We run your operating cadence — weekly rhythm, cross-team accountability, decision ownership, delivery tracking. Everything that should be running underneath you, runs.</p>
-      </div>
-      <div class="eng-row-right">
-        <span class="eng-row-price">From $5,000 / mo</span>
-        <span class="eng-row-scope">8 wk min · Weekly cadence</span>
-      </div>
-    </div>
-
-    <div class="eng-row is-muted" data-idx="2" role="button" tabindex="0" aria-pressed="false">
-      <div class="eng-row-amber" aria-hidden="true"></div>
-      <div class="eng-row-left">
-        <span class="eng-row-num">03</span>
-        <span class="eng-row-name">Advisory</span>
-      </div>
-      <div class="eng-row-mid">
-        <p class="eng-row-for">For founders who want senior ops thinking available — without any embedded engagement.</p>
-        <p class="eng-row-desc">No embedding, no deliverables, no project scope. You get ongoing access to ORR for operational thinking — decisions, diagnosis, direction. We don't come into your business. You bring the problems to us and we work through them together. Long term. As needed.</p>
-      </div>
-      <div class="eng-row-right">
-        <span class="eng-row-price">Custom</span>
-        <span class="eng-row-scope">Long Term · Fluid</span>
-      </div>
-    </div>
-
+<!-- §3 THREE FAILURES -->
+<section id="fails">
+  <div class="fails-head">
+    <h2 class="fails-h2 r">Three ways a<br>business quietly<br><em>breaks its founder.</em></h2>
+    <p class="fails-desc r d2">These aren't strategic failures — those make headlines. These are operational. Invisible until they're expensive, and every one of them is fixable once it has a name.</p>
   </div>
+  <div class="fails-grid">
+    <div class="fail r">
+      <span class="fail-ix">01 / 03</span><span class="fail-n">01</span>
+      <h3 class="fail-name">Operational Failure</h3>
+      <p class="fail-body">The work moves when you're watching it. The moment you step away, handoffs drop, quality drifts, and the client knows before you do. You're not the founder anymore — you're the last line of quality control.</p>
+      <div class="fail-tags"><span class="fail-tag">Delivery Delays</span><span class="fail-tag">Handoff Breakdown</span><span class="fail-tag">Quality Drift</span></div>
+    </div>
+    <div class="fail r d1">
+      <span class="fail-ix">02 / 03</span><span class="fail-n">02</span>
+      <h3 class="fail-name">Governance Failure</h3>
+      <p class="fail-body">Nobody knows who owns the decision, so it comes to you. Every approval, every tiebreak, every "just checking" lands on your desk. Not because your team can't decide — because the system was never built to let them.</p>
+      <div class="fail-tags"><span class="fail-tag">Decision Drag</span><span class="fail-tag">Unclear Ownership</span><span class="fail-tag">Revenue Leakage</span></div>
+    </div>
+    <div class="fail r d2">
+      <span class="fail-ix">03 / 03</span><span class="fail-n">03</span>
+      <h3 class="fail-name">Foundational Failure</h3>
+      <p class="fail-body">The numbers exist. Somewhere. In a spreadsheet built six months ago that may or may not be current. You're making real decisions — hiring, pricing, cutting — on instinct, because the visibility was never actually built.</p>
+      <div class="fail-tags"><span class="fail-tag">No Visibility</span><span class="fail-tag">Absent Documentation</span><span class="fail-tag">Growing Pains</span></div>
+    </div>
+  </div>
+</section>
 
+<!-- §4 PROOF — ledger -->
+<section id="proof">
+  <div class="proof-head r">
+    <span class="proof-kicker">Named above. Solved below.</span>
+    <h2 class="proof-h2">Operational failures are predictable.<br><em>So are the fixes.</em></h2>
+    <p class="proof-sub">05 engagements · different industries, the same failures · tap any row to open</p>
+  </div>
+  <div class="ledger r d1" id="ledger">
+    <div class="lhdr"><span>Result</span><span>What changed</span><span class="r3">Engagement · Sector</span><span></span></div>
+    <!-- rows injected -->
+  </div>
+</section>
+
+<!-- §5 WE DON'T ADVISE. WE INSTALL. -->
+<section id="install">
+  <div class="how-wrap">
+    <div class="how-head">
+      <h2 class="how-h2 r">We don't advise.<br>We <em>install.</em></h2>
+      <p class="how-desc r d2">Advice leaves when the consultant does. We build the systems into the business and hand them over documented and running. Select a failure to see exactly what gets installed — and what changes.</p>
+    </div>
+    <div class="how-tabs r" id="howTabs">
+      <button class="how-tab on" data-k="op"><span class="tn">Failure 01</span><span class="tt">Operational</span></button>
+      <button class="how-tab" data-k="gov"><span class="tn">Failure 02</span><span class="tt">Governance</span></button>
+      <button class="how-tab" data-k="found"><span class="tn">Failure 03</span><span class="tt">Foundational</span></button>
+    </div>
+    <div class="how-panel r" id="howPanel">
+      <div class="how-p-prob" id="howProb"></div>
+      <div class="how-p-div"></div>
+      <div class="how-cols">
+        <div><span class="how-cl">Installed</span><div class="how-tags" id="howTags"></div></div>
+        <div style="margin-top:0"><span class="how-cl" style="display:block;margin-top:0">What changes</span><ul class="how-gets" id="howGets"></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §6 WE GET IT -->
+<section id="getit">
+  <div class="gi-wrap">
+    <div class="gi-top r">
+      <h2 class="gi-big">We get it.</h2>
+      <div class="gi-rt">
+        <span class="gi-sm">— you don't want a retainer, and</span>
+        <span class="gi-ag">honestly, we agree.</span>
+      </div>
+    </div>
+    <div class="gi-body">
+      <p class="gi-copy r">Most founders need one or two operational failures gone. That's it — the scope is specific, so is the fix. So <b>we assess, we quote, we work.</b> The contract does the heavy lifting for both of us: what we do, what you get. Full clarity, no ambiguity, no dragging it out.</p>
+      <div class="gi-trust r d2">
+  <div class="gi-stats">
+    <div class="gi-stat"><span class="v">100%</span><span class="k">Documented &amp; handed over</span></div>
+    <div class="gi-stat"><span class="v">0</span><span class="k">Retainers required</span></div>
+    <div class="gi-stat"><span class="v">Fixed</span><span class="k">Scope &amp; price, upfront</span></div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- §7 ENGAGEMENTS -->
+<section id="eng">
+  <div class="eng-wrap">
+    <div class="eng-head">
+      <h2 class="eng-h2 r"><span class="eng-kick">That said —</span>For those who've<br>outgrown <em>a single fix.</em></h2>
+      <p class="eng-desc r d2">One operational failure is fixable in days. Two or more usually means the operating layer itself needs rebuilding. One fix, or a new operating system — three ways to engage. The engagement fits the problem, not the other way around.</p>
+    </div>
+    <div class="eng-cards r d1">
+      <div class="eng-card wedge">
+        <span class="eng-badge">Start here</span>
+        <span class="ec-ix">01</span>
+        <h3 class="ec-nm">Ops Install Sprint</h3>
+        <span class="ec-ty">Fixed Scope · The Wedge</span>
+        <p class="ec-for">For one specific failure that needs to be gone. Clean and fast.</p>
+        <p class="ec-dsc">We diagnose it, build the system that fixes it, install it with your team, and hand it over fully documented. The engagement ends when the system runs. The lowest-risk way to find out what ORR does.</p>
+        <div class="ec-pr">From $2,500</div>
+        <span class="ec-sc">7–10 days · one failure</span>
+        <a href="#begin" class="ec-cta">Begin a Sprint →</a>
+      </div>
+      <div class="eng-card">
+        <span class="ec-ix">02</span>
+        <h3 class="ec-nm">Fractional COO</h3>
+        <span class="ec-ty">Embedded · Ongoing</span>
+        <p class="ec-for">For when the whole operating layer needs to be held and run.</p>
+        <p class="ec-dsc">We embed and run your operating cadence — weekly rhythm, cross-team accountability, decision ownership, delivery tracking. Everything that should run underneath you, runs.</p>
+        <div class="ec-pr">From $5,000<span style="font-size:14px;color:var(--ink38)">/mo</span></div>
+        <span class="ec-sc">8 wk minimum · weekly cadence</span>
+        <a href="#begin" class="ec-cta">Explore COO →</a>
+      </div>
+      <div class="eng-card">
+        <span class="ec-ix">03</span>
+        <h3 class="ec-nm">Advisory</h3>
+        <span class="ec-ty">Long Term · Fluid</span>
+        <p class="ec-for">For founders who want senior ops thinking on call — without an embedded engagement.</p>
+        <p class="ec-dsc">No embedding, no deliverables, no project scope. Ongoing access to ORR for the operational calls that matter — decisions, diagnosis, direction. You bring the problems; we work through them.</p>
+        <div class="ec-pr">Custom</div>
+        <span class="ec-sc">As needed · long term</span>
+        <a href="#begin" class="ec-cta">Consider Advisory →</a>
+      </div>
+    </div>
+    <p class="eng-foot r">Not sure which fits? That's what the <a href="#begin">first conversation</a> is for.</p>
+  </div>
+</section>
+
+<!-- §8 SOLVE IT -->
+<section id="solve">
+  <h2 class="solve-mon r">Solve <em>it.</em></h2>
+  <div class="solve-split r d2">
+    <div class="solve-l">
+      <p class="solve-dir">Solve your operational inefficiency —<br>by yourself, by us, or by someone else.</p>
+      <span class="solve-but">But solve it.</span>
+    </div>
+    <div class="solve-spine" aria-hidden="true"></div>
+    <div class="solve-r">
+      <p class="solve-con">It erodes the business from underneath. By the time you feel it clearly enough to act, the cost of fixing it has already doubled. The problem doesn't wait for a convenient moment. Neither should you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- §9 BEGIN -->
+<section id="begin">
+  <div class="begin-wrap">
+    <div class="begin-left r">
+      <img src="../assets/ngb.svg" alt="ORR Logo" class="ft-logo"/>
+      <p class="begin-stmt">The businesses that run without their founders weren't built by accident.<em>They were engineered.</em></p>
+      <p class="begin-alt">Prefer to talk first? <a href="#begin">Book a 20-minute diagnosis call →</a><br>We respond within one business day.</p>
+    </div>
+    <div class="begin-div" aria-hidden="true"></div>
+    <div class="begin-right r d2">
+      <form id="orrForm" action="https://formspree.io/f/xzzjvbvj" method="POST" novalidate>
+        <div class="begin-hp" aria-hidden="true"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
+        <input type="hidden" name="_subject" value="ORR — New inquiry from website">
+        <input type="hidden" name="diagnosis" id="fDiag" value="">
+        <div class="field" id="fld-name"><label class="flabel" for="i-name">Your Name</label>
+          <input class="control" id="i-name" name="name" type="text" placeholder=" " autocomplete="name" required></div>
+        <div class="field" id="fld-email"><label class="flabel" for="i-email">Email</label>
+          <input class="control" id="i-email" name="email" type="email" placeholder=" " autocomplete="email" required></div>
+        <div class="field" id="fld-note"><label class="flabel" for="i-note">What does the problem look like from where you're standing?</label>
+          <textarea class="control" id="i-note" name="note" rows="3" placeholder=" " required></textarea></div>
+        <button type="submit" class="begin-submit" id="orrSubmit">Let's begin <span class="a">→</span></button>
+        <p class="begin-status" id="orrStatus" aria-live="polite"></p>
+        <p class="begin-conf">We respond within one business day · Everything shared is confidential</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-brand">
+    <div class="ft-bw">
+  <img src="../assets/ngb.svg" alt="ORR Logo" class="begin-logo"/>
   
 </div>
-
-<script>
-(function () {
-  var section = document.getElementById('engagement');
-  var rows    = section.querySelectorAll('.eng-row');
-
-  new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) { section.classList.add('in-view'); }
-    });
-  }, { threshold: 0.12 }).observe(section);
-
-  function activate(idx) {
-    rows.forEach(function (r, i) {
-      if (i === idx) {
-        r.classList.remove('is-muted');
-        r.setAttribute('aria-pressed', 'true');
-      } else {
-        r.classList.add('is-muted');
-        r.setAttribute('aria-pressed', 'false');
-      }
-    });
-  }
-
-  rows.forEach(function (row, idx) {
-    row.addEventListener('click', function () { activate(idx); });
-    row.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(idx); }
-    });
-  });
-})();
-</script>
-
-</section>
-
-
-<!-- SECTION 8 — SOLVE IT -->
-<section id="solve-it" class="story" aria-label="Solve It">
-<style>
-  #solve-it {
-    display: grid;
-    place-items: center;
-    min-height: var(--vh);
-    padding: 0 clamp(20px, 6vw, 60px);
-    position: relative;
-    overflow: hidden;
-  }
-
-  #solve-it .si-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 1100px;
-    min-height: var(--vh);
-    padding-top: 20vh;
-    position: relative;
-  }
-
-  /* ── MONUMENT ── */
-  #solve-it .si-monument {
-    font-family: var(--font-display);
-    font-weight: 300;
-    font-size: clamp(120px, 24vw, 300px);
-    line-height: 0.88;
-    letter-spacing: -0.03em;
-    color: var(--ink);
-    text-align: center;
-    margin: 0;
-    white-space: nowrap;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  #solve-it.in-view .si-monument {
-    opacity: 1;
-    transform: none;
-  }
-
-  #solve-it .si-monument .si-it {
-    color: var(--cta);
-    font-style: italic;
-  }
-
-  /* ── SPLIT ROW ── */
-  #solve-it .si-split {
-    display: grid;
-    grid-template-columns: 1fr 1px 1fr;
-    align-items: start;
-    gap: 0 clamp(30px, 4.8vw, 68px);
-    width: 100%;
-    margin-left: 3%;
-    margin-top: clamp(72px, 12vh, 120px);
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.9s ease 0.28s,
-                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.28s;
-  }
-
-  #solve-it.in-view .si-split {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* ── VERTICAL SPINE ── */
-  #solve-it .si-spine {
-    width: 1px;
-    height: 180px;
-    background: linear-gradient(
-      to bottom,
-      transparent,
-      var(--line) 15%,
-      var(--line) 85%,
-      transparent
-    );
-    opacity: 0.4;
-    justify-self: center;
-  }
-
-  /* ── LEFT SIDE — DIRECTIVE ── */
-  #solve-it .si-left {
-    text-align: right;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding-top: 8px;
-  }
-
-  #solve-it .si-directive {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(15px, 1.45vw, 21px);
-    line-height: 1.55;
-    letter-spacing: 0.01em;
-    color: var(--ink-soft);
-    margin: 0;
-    max-width: 38ch;
-  }
-
-  #solve-it .si-but {
-    display: block;
-    margin-top: 14px;
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(15px, 1.45vw, 21px);
-    letter-spacing: 0.01em;
-    color: var(--cta);
-    opacity: 0.9;
-  }
-
-  /* ── RIGHT SIDE — CONSEQUENCE ── */
-  #solve-it .si-right {
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-top: 8px;
-  }
-
-  #solve-it .si-consequence {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(13px, 1.05vw, 15px);
-    line-height: 1.82;
-    letter-spacing: 0.018em;
-    color: var(--ink-soft);
-    margin: 0;
-    max-width: 42ch;
-    opacity: 0.70;
-  }
-
-  /* ── MOBILE ── */
-  @media (max-width: 720px) {
-    #solve-it .si-inner {
-      padding-top: 10vh;
-      align-items: flex-start;
-    }
-
-    #solve-it .si-monument {
-      font-size: clamp(72px, 20vw, 120px);
-      letter-spacing: -0.025em;
-      white-space: normal;
-      text-align: left;
-      width: 100%;
-    }
-
-    #solve-it .si-split {
-      grid-template-columns: 1fr;
-      gap: 0;
-      margin-top: clamp(40px, 7vh, 64px);
-      width: 100%;
-    }
-
-    #solve-it .si-spine {
-      display: block;
-      width: 48px;
-      height: 1px;
-      background: linear-gradient(
-        to right,
-        var(--line) 0%,
-        var(--line) 70%,
-        transparent
-      );
-      opacity: 0.4;
-      margin: 0 0 clamp(28px, 4.5vh, 40px);
-      justify-self: start;
-    }
-
-    #solve-it .si-left {
-      text-align: left;
-      align-items: flex-start;
-      margin-bottom: clamp(28px, 5vh, 44px);
-    }
-
-    #solve-it .si-right {
-      text-align: left;
-      align-items: flex-start;
-      padding-top: 0;
-      padding-left: 16px;
-      border-left: 1px solid rgba(144, 130, 125, 0.18);
-    }
-
-    #solve-it .si-directive {
-      max-width: 100%;
-      font-size: clamp(15px, 4.8vw, 19px);
-    }
-
-    #solve-it .si-but {
-      font-size: clamp(15px, 4.8vw, 19px);
-    }
-
-    #solve-it .si-consequence {
-      max-width: 100%;
-      font-size: clamp(13px, 3.8vw, 15px);
-      opacity: 0.70;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    #solve-it .si-monument,
-    #solve-it .si-split {
-      transition: none;
-      opacity: 1;
-      transform: none;
-    }
-  }
-</style>
-
-<div class="si-inner">
-
-  <h2 class="si-monument">Solve <span class="si-it">IT.</span></h2>
-
-  <div class="si-split">
-
-    <!-- Left — directive -->
-    <div class="si-left">
-      <p class="si-directive">
-        Solve your operational inefficiencies —<br>
-        by yourself, by us, or by someone else.
-      </p>
-      <span class="si-but">But solve it.</span>
-    </div>
-
-    <!-- Spine -->
-    <div class="si-spine" aria-hidden="true"></div>
-
-    <!-- Right — consequence -->
-    <div class="si-right">
-      <p class="si-consequence">
-        It erodes the business from underneath.<br>
-        And by the time you feel it clearly enough<br>
-        to act, the cost of fixing it has already doubled.
-      </p>
-    </div>
-
+    <span class="ft-tag">Engineering Execution Infrastructure — so your business runs without you.</span>
+    
   </div>
-
-</div>
-
-<script>
-(function(){
-  const sec = document.getElementById('solve-it');
-  if (!sec) return;
-  new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if (entry.isIntersecting){
-        sec.classList.add('in-view');
-      }
-    });
-  }, { threshold: 0.25 }).observe(sec);
-})();
-</script>
-</section>
-
-
-<!-- SECTION 9 — ENTRY POINT -->
-<section id="begin" class="story" aria-label="Begin">
-<style>
-  #begin {
-    display: grid;
-    place-items: center;
-    min-height: var(--vh);
-    padding: clamp(80px, 12vh, 140px) clamp(20px, 8vw, 100px);
-    position: relative;
-    overflow: hidden;
-  }
-
-  
-
-  #begin .begin-inner {
-    display: grid;
-    grid-template-columns: 1fr 1px 1fr;
-    gap: 0 clamp(56px, 7vw, 104px);
-    align-items: center;
-    max-width: 1080px;
-    width: 100%;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
-    position: relative;
-    z-index: 1;
-  }
-
-  #begin.in-view .begin-inner {
-    opacity: 1;
-    transform: none;
-  }
-
-  #begin .begin-divider {
-    width: 1px;
-    align-self: stretch;
-    background: linear-gradient(
-      to bottom,
-      transparent,
-      var(--line) 12%,
-      var(--line) 88%,
-      transparent
-    );
-    opacity: 0.3;
-  }
-
-  /* ── LEFT ── */
-  #begin .begin-left {
-    padding-right: clamp(12px, 2vw, 32px);
-  }
-
-  #begin .begin-section-label {
-    font-family: var(--font-label);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.26em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    opacity: 0.5;
-    margin: 0 0 clamp(42px, 5.6vh, 62px);
-    display: block;
-  }
-
-  #begin .begin-statement {
-    font-family: var(--font-display);
-    font-weight: 300;
-    font-size: clamp(26px, 2.6vw, 38px);
-    line-height: 1.18;
-    color: var(--ink);
-    letter-spacing: 0.006em;
-    text-wrap: balance;
-    margin: 0 0 clamp(20px, 3vh, 32px);
-  }
-
-  #begin .begin-statement em {
-    font-style: italic;
-    color: var(--cta);
-    display: block;
-    font-family: var(--font-label);
-    font-size: clamp(23px, 3.5vw, 40px);
-    font-weight: 500;
-    margin-top: 25px;
-  }
-
-  #begin .begin-sig {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    justify-content: flex-end;
-    margin-top: clamp(28px, 4vh, 44px);
-  }
-
-  #begin .begin-sig-rule {
-    width: 28px;
-    height: 1px;
-    background: var(--line);
-    opacity: 0.4;
-    flex-shrink: 0;
-  }
-
-  #begin .begin-sig-text {
-    font-family: var(--font-label);
-    font-size: 9px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    opacity: 0.4;
-  }
-
-  /* ── RIGHT — FORM ── */
-  #begin .begin-right {
-    padding-left: clamp(12px, 1.5vw, 20px);
-  }
-
-  #begin .begin-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    width: 100%;
-  }
-
-  /*
-    ALL THREE FIELDS — same treatment.
-    Label sits on the hairline at rest.
-    Floats up when focused or filled.
-  */
-  #begin .begin-field {
-    position: relative;
-    /* top padding = space the label will float into */
-    padding-top: clamp(36px, 5vh, 38px);
-    padding-bottom: 0;
-    margin-bottom: clamp(8px, 1.5vh, 14px);
-  }
-
-  /* The hairline */
-  #begin .begin-field::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: rgba(144,130,125,0.28);
-    transition: background 0.35s ease;
-    pointer-events: none;
-  }
-
-  #begin .begin-field:focus-within::before {
-    background: rgba(144,130,125,0.5);
-  }
-
-  /* Gold slide on focus */
-  #begin .begin-field::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      rgba(203,184,157,0.85),
-      rgba(203,184,157,0.08)
-    );
-    transition: width 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
-    pointer-events: none;
-  }
-
-  #begin .begin-field:focus-within::after {
-    width: 100%;
-  }
-
-  /*
-    Label — rests on the hairline (bottom: 6px puts it just above the line).
-    Floats to top of padding area when active.
-  */
-  #begin .begin-label {
-    position: absolute;
-    left: 0;
-    bottom: 8px;
-    right: 0;
-    font-family: var(--font-label);
-    font-size: 12.5px;
-    opacity: 0.8;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(188, 174, 162, 0.9);
-    pointer-events: none;
-    white-space: normal;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition:
-      bottom 0.38s cubic-bezier(0.22, 0.61, 0.36, 1),
-      font-size 0.38s ease,
-      letter-spacing 0.38s ease,
-      color 0.38s ease;
-  }
-
-  /* Floated state — triggered by focus OR .is-filled class */
-  #begin .begin-field:focus-within .begin-label,
-  #begin .begin-field.is-filled .begin-label {
-    bottom: calc(100% - clamp(22px, 3vh, 30px));
-    font-size: 7.5px;
-    letter-spacing: 0.26em;
-    color: rgba(203,184,157,0.65);
-  }
-
-  /* Control — transparent, sits above hairline */
-  #begin .begin-control {
-    display: block;
-    width: 100%;
-    appearance: none;
-    border: none;
-    outline: none;
-    border-radius: 0;
-    /* small bottom padding so text clears the hairline */
-    padding: 0 0 7px;
-    background: transparent;
-    color: var(--ink);
-    font-family: var(--font-display);
-    font-size: clamp(16px, 1.6vw, 22px);
-    font-weight: 300;
-    letter-spacing: 0.02em;
-    line-height: 1.5;
-    resize: none;
-    box-shadow: none;
-    -webkit-appearance: none;
-    box-sizing: border-box;
-    /* placeholder transparent — label IS the placeholder */
-    caret-color: var(--cta);
-  }
-
-  #begin .begin-control::placeholder {
-    color: transparent;
-  }
-
-  #begin .begin-control:focus {
-    caret-color: var(--cta);
-  }
-
-  #begin .begin-control[aria-invalid="true"] {
-    color: var(--error, #e56d6d);
-  }
-
-  /* Textarea specific — taller, label floats same way */
-  #begin .begin-control[rows] {
-    height: calc(1.5em + 28px);   /* one line height + bottom padding — matches inputs */
-    min-height: calc(1.5em + 28px);
-    overflow-y: hidden;
-    transition: height 0.2s ease;
-    line-height: 1.65;
-    padding-bottom: 10px;
-  }
-
-  /* ── SUBMIT ── */
-  #begin .begin-submit-wrap {
-    margin-top: clamp(36px, 5vh, 52px);
-    display: flex;
-    align-items: baseline;
-    gap: 24px;
-  }
-
-  #begin .begin-submit {
-    font-family: var(--font-display);
-    font-size: clamp(18px, 1.8vw, 24px);
-    font-weight: 300;
-    font-style: italic;
-    letter-spacing: 0.01em;
-    color: var(--ink);
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: color 0.25s ease, gap 0.25s ease;
-    position: relative;
-  }
-
-  #begin .begin-submit::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 24px;
-    height: 1px;
-    background: var(--ink);
-    opacity: 0.2;
-    transition: opacity 0.25s ease, right 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
-  }
-
-  #begin .begin-submit:hover {
-    color: var(--cta);
-    gap: 16px;
-  }
-
-  #begin .begin-submit:hover::after {
-    opacity: 0;
-    right: 0;
-  }
-
-  #begin .begin-submit:disabled {
-    opacity: 0.45;
-    cursor: default;
-    gap: 10px;
-  }
-
-  #begin .begin-arrow {
-    font-style: normal;
-    font-family: var(--font-label);
-    font-size: 14px;
-    letter-spacing: 0;
-    color: var(--cta);
-    transition: transform 0.25s ease;
-  }
-
-  #begin .begin-submit:hover .begin-arrow {
-    transform: translateX(4px);
-  }
-
-  /* ── META ── */
-  #begin .begin-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-top: clamp(6px, 1vh, 10px);
-  }
-
-  #begin .begin-status {
-    font-family: var(--font-body);
-    font-size: 12px;
-    color: var(--ink-soft);
-    letter-spacing: 0.01em;
-    min-height: 16px;
-    opacity: 0.8;
-    font-style: italic;
-  }
-
-  #begin .begin-confidence {
-    font-family: var(--font-display);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: none;
-    color: var(--ink-soft);
-    opacity: 0.45;
-    margin: 0;
-  }
-
-  /* Honeypot */
-  #begin .begin-hp {
-    position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 860px) {
-    #begin .begin-inner {
-      grid-template-columns: 1fr;
-      gap: clamp(52px, 9vh, 80px) 0;
-    }
-    #begin { padding: 40px 34px; }
-    #begin .begin-section-label { margin-bottom: 20px; }
-    #begin .begin-divider { display: none; }
-    #begin .begin-left,
-    #begin .begin-right { padding: 0; }
-    #begin .begin-statement { font-size: clamp(22px, 5.5vw, 30px); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    #begin .begin-inner { transition: none; opacity: 1; transform: none; }
-    #begin .begin-label { transition: none; }
-    #begin .begin-field:focus-within .begin-label,
-    #begin .begin-field.is-filled .begin-label {
-      bottom: calc(100% - clamp(22px, 3vh, 30px));
-      font-size: 7.5px;
-    }
-    #begin .begin-field::after,
-    #begin .begin-submit,
-    #begin .begin-arrow { transition: none; }
-  }
-</style>
-
-<div class="begin-inner">
-
-  <!-- Left — statement -->
-  <div class="begin-left">
-    <span class="begin-section-label">Begin</span>
-    <p class="begin-statement">
-      The businesses that run without their founders were not built by accident.
-      <em>They were engineered.</em>
-    </p>
-    <div class="begin-sig">
-      <span class="begin-sig-rule"></span>
-      <span class="begin-sig-text">ORR</span>
+  <div class="ft-div"></div>
+  <nav class="ft-nav">
+    <span class="ft-l">Navigate</span>
+    <a href="#diag">Diagnose</a><a href="#proof">Work</a><a href="#install">Systems</a><a href="#eng">Engage</a><a href="#begin">Begin</a>
+  </nav>
+  <div class="ft-div"></div>
+  <div class="ft-close">
+    <p class="ft-stmt">Built in. Not bolted on.<em>So your business runs without you.</em></p>
+    <div class="ft-legal">
+      <span class="ft-copy">© <span id="yr"></span> ORR — All rights reserved</span>
+      <div class="ft-ll"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div>
+      <p class="ft-disc">ORR provides operational consulting, advisory and embedded execution services. Results reflect prior client engagements and are not guarantees of future outcomes. All client information is kept strictly confidential.</p>
     </div>
   </div>
-
-  <!-- Vertical hairline -->
-  <div class="begin-divider"></div>
-
-  <!-- Right — form -->
-  <div class="begin-right">
-    <form id="begin-form" class="begin-form" action="https://formspree.io/f/xzzjvbvj" method="POST" novalidate>
-
-      <div class="begin-hp" aria-hidden="true">
-        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
-      </div>
-      <input type="hidden" name="_subject" value="ORR — New inquiry from website">
-      <input type="hidden" name="_ts" id="begin-ts">
-
-      <!-- Name -->
-      <div class="begin-field" id="field-name">
-        <label class="begin-label" for="begin-name">Your Name</label>
-        <input
-          class="begin-control"
-          id="begin-name"
-          name="name"
-          type="text"
-          placeholder=" "
-          autocomplete="name"
-          required
-        >
-      </div>
-
-      <!-- Email -->
-      <div class="begin-field" id="field-email">
-        <label class="begin-label" for="begin-email">Email</label>
-        <input
-          class="begin-control"
-          id="begin-email"
-          name="email"
-          type="email"
-          placeholder=" "
-          autocomplete="email"
-          required
-        >
-      </div>
-
-      <!-- Problem -->
-      <div class="begin-field" id="field-note">
-        <label class="begin-label" for="begin-note">What does the problem look like from where you're standing?</label>
-        <textarea
-          class="begin-control"
-          id="begin-note"
-          name="note"
-          rows="3"
-          placeholder=" "
-          required
-        ></textarea>
-      </div>
-
-      <!-- Submit -->
-      <div class="begin-submit-wrap">
-        <button class="begin-submit" id="begin-submit" type="submit">
-          Let's begin <span class="begin-arrow">→</span>
-        </button>
-      </div>
-
-      <div class="begin-meta">
-        <p class="begin-status" id="begin-status" aria-live="polite"></p>
-        <p class="begin-confidence">We respond within one business day&nbsp;·&nbsp;Everything shared is confidential</p>
-      </div>
-
-    </form>
-  </div>
-
-</div>
-
-<script>
-(function(){
-  var sec = document.getElementById('begin');
-  if(!sec) return;
-
-  new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){ sec.classList.add('in-view'); }
-    });
-  },{ threshold: 0.1 }).observe(sec);
-
-  /* Float label — mark field as filled when it has content */
-  ['begin-name','begin-email','begin-note'].forEach(function(id){
-    var el = document.getElementById(id);
-    if(!el) return;
-    var field = el.closest('.begin-field');
-    function check(){ field.classList.toggle('is-filled', el.value.length > 0); }
-    el.addEventListener('input', check);
-    el.addEventListener('change', check);
-    check();
-  });
-
-  var form    = document.getElementById('begin-form');
-  var submit  = document.getElementById('begin-submit');
-  var status  = document.getElementById('begin-status');
-  var tsEl    = document.getElementById('begin-ts');
-  var hp      = form.querySelector('input[name="_gotcha"]');
-  var nameEl  = document.getElementById('begin-name');
-  var emailEl = document.getElementById('begin-email');
-  var noteEl  = document.getElementById('begin-note');
-
-  if(!form) return;
-  tsEl.value = String(Date.now());
-
-  function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v||''); }
-  function markBad(el){ el.setAttribute('aria-invalid','true'); }
-  function markOk(el){ el.setAttribute('aria-invalid','false'); }
-
-  form.addEventListener('submit', async function(e){
-    e.preventDefault();
-    if(hp.value) return;
-    if((Date.now() - Number(tsEl.value||0)) < 1200){
-      status.textContent = 'That was too fast — please try again.';
-      return;
-    }
-
-    var pass = true;
-    if(!nameEl.value.trim()){ markBad(nameEl); pass=false; } else markOk(nameEl);
-    if(!isEmail(emailEl.value)){ markBad(emailEl); pass=false; } else markOk(emailEl);
-    if(!noteEl.value.trim()){ markBad(noteEl); pass=false; } else markOk(noteEl);
-    if(!pass){ status.textContent='Please complete all fields.'; return; }
-
-    submit.disabled = true;
-    submit.querySelector('.begin-arrow').textContent='';
-    submit.childNodes[0].textContent='Sending';
-    status.textContent='';
-
-    try {
-      var res = await fetch(form.action,{
-        method:'POST',
-        body: new FormData(form),
-        headers:{ 'Accept':'application/json' }
-      });
-      if(res.ok){
-        form.reset();
-        ['begin-name','begin-email','begin-note'].forEach(function(id){
-          var f = document.getElementById(id);
-          if(f) f.closest('.begin-field').classList.remove('is-filled');
-        });
-        status.textContent='Received. We will be in touch within one business day.';
-        submit.childNodes[0].textContent='Sent';
-      } else {
-        var j = await res.json().catch(function(){ return {}; });
-        status.textContent=(j&&j.errors&&j.errors[0]&&j.errors[0].message)||'Something went wrong. Please try again.';
-        submit.disabled=false;
-        submit.childNodes[0].textContent="Let's begin ";
-        submit.querySelector('.begin-arrow').textContent='→';
-      }
-    } catch(_){
-      status.textContent='Network issue. Please try again.';
-      submit.disabled=false;
-      submit.childNodes[0].textContent="Let's begin ";
-      submit.querySelector('.begin-arrow').textContent='→';
-    }
-  });
-})();
-</script>
-</section>
-
-
-
-<!-- Section 10 Footer-->
-<footer id="site-footer">
-<style>
-  #site-footer {
-    position: relative;
-    padding: clamp(48px, 8vh, 80px) clamp(20px, 8vw, 100px) clamp(32px, 5vh, 56px);
-    display: grid;
-    grid-template-columns: 1fr 1px 1fr 1px 1fr;
-    align-items: start;
-    gap: 0 clamp(32px, 5vw, 72px);
-    border-top: 1px solid transparent;
-    background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
-  }
-
-  #site-footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: clamp(20px, 8vw, 100px);
-    right: clamp(20px, 8vw, 100px);
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--line) 20%, var(--line) 80%, transparent);
-    opacity: 0.45;
-  }
-
-  #site-footer .footer-divider {
-    width: 1px;
-    align-self: stretch;
-    background: linear-gradient(to bottom, var(--line) 0%, var(--line) 70%, transparent);
-    opacity: 0.25;
-  }
-
-  #site-footer .footer-col {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  /* ── Brand ── */
-  #site-footer .footer-brand {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    align-items: center;
-text-align: center;
-  }
-
-  #site-footer .footer-logo {
-    width: clamp(56px, 6vw, 88px);
-    height: auto;
-    display: block;
-    opacity: 0.9;
-  }
-
-  #site-footer .footer-brand-line {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(13px, 1.1vw, 15px);
-    color: var(--ink-soft);
-    letter-spacing: 0.02em;
-    opacity: 0.6;
-    display: block;
-    margin-top: 4px;
-  }
-
-  /* ── Navigation ── */
-  #site-footer .footer-nav {
-    display: flex;
-    font-family: var(--font-label);
-    flex-direction: column;
-    gap: 0;
-    align-items: center;
-    gap: 10px 20px;
-  }
-
-  #site-footer .footer-nav-label {
-    font-family: var(--font-label);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    opacity: 0.5;
-    margin-bottom: 4px;
-    display: block;
-  }
-
-  #site-footer .footer-nav a {
-    font-family: var(--font-display);
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--ink-soft);
-    opacity: 0.65;
-    text-decoration: none;
-    letter-spacing: 0.02em;
-    transition: opacity 0.2s ease;
-    display: block;
-  }
-
-  #site-footer .footer-nav a:hover {
-    opacity: 1;
-    transform: none;
-    text-decoration: none;
-  }
-
-  /* ── Closing ── */
-  #site-footer .footer-closing {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    text-align: right;
-  }
-
-  #site-footer .footer-statement {
-    font-family: var(--font-display);
-    font-weight: 300;
-    font-size: clamp(16px, 1.6vw, 22px);
-    line-height: 1.2;
-    color: var(--ink);
-    letter-spacing: 0.004em;
-    opacity: 0.85;
-    margin: 0 0 clamp(20px, 3vh, 32px);
-  }
-
-  #site-footer .footer-statement em {
-    font-style: italic;
-    color: var(--ink-soft);
-    display: block;
-    opacity: 0.7;
-  }
-
-  /* ── Legal ── */
-  #site-footer .footer-legal {
-    margin-top: clamp(12px, 2vh, 20px);
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    align-items: flex-end;
-  }
-
-  #site-footer .footer-copy {
-    font-family: var(--font-label);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    opacity: 0.4;
-    display: block;
-  }
-
-  #site-footer .footer-legal-links {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-
-  #site-footer .footer-legal-links a {
-    font-family: var(--font-label);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    opacity: 0.35;
-    text-decoration: none;
-    transition: opacity 0.2s ease;
-  }
-
-  #site-footer .footer-legal-links a:hover {
-    opacity: 0.7;
-  }
-
-  #site-footer .footer-disclaimer {
-    font-family: var(--font-body);
-    font-size: 10px;
-    line-height: 1.6;
-    color: var(--ink-soft);
-    opacity: 0.28;
-    text-align: right;
-    max-width: 54ch;
-    margin-top: 10px;
-  }
-
-  /* ── Mobile ── */
-  @media (max-width: 720px) {
-    #site-footer {
-      grid-template-columns: 1fr;
-      gap: clamp(36px, 6vh, 52px) 0;
-      padding: 40px 24px 36px;
-    }
-
-    #site-footer .footer-divider { display: none; }
-
-    /* Brand centered on mobile */
-    #site-footer .footer-brand {
-      align-items: center;
-      text-align: center;
-    }
-
-    #site-footer .footer-logo {
-      width: 44px;
-      margin: 0 auto;
-    }
-
-    #site-footer .footer-brand-line {
-      text-align: center;
-    }
-
-    /* Nav — label on its own line, links flow as row below */
-    #site-footer .footer-nav {
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    #site-footer .footer-nav-label {
-      display: block;
-      width: 100%;
-      margin-bottom: 12px;
-    }
-
-    #site-footer .footer-nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px 20px;
-    }
-
-    #site-footer .footer-nav a {
-      display: inline;
-    }
-
-    /* Closing left-aligned */
-    #site-footer .footer-closing {
-      text-align: left;
-    }
-
-    #site-footer .footer-legal {
-      align-items: flex-start;
-    }
-
-    #site-footer .footer-legal-links {
-      justify-content: flex-start;
-    }
-
-    #site-footer .footer-disclaimer {
-      text-align: left;
-      max-width: 100%;
-    }
-  }
-</style>
-
-  <!-- Left — brand -->
-  <div class="footer-col footer-brand">
-    <img class="footer-logo" src="./assets/re2.svg" alt="ORR" loading="lazy">
-    <span class="footer-brand-line">Engineering Execution Infrastructure</span>
-  </div>
-
-  <!-- Divider -->
-  <div class="footer-divider"></div>
-
-  <!-- Middle — navigation -->
-  <div class="footer-col footer-nav">
-    <span class="footer-nav-label">Navigate</span>
-    <div class="footer-nav-links">
-      <a href="systems/s-index.html">Systems</a>
-      <a href="codex/codex.html">Codex</a>
-      <a href="#begin">Begin</a>
-      <a href="https://www.linkedin.com/in/krutarthe/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="https://www.orrhq.com" target="_blank" rel="noopener noreferrer">orrhq.com</a>
-    </div>
-  </div>
-
-  <!-- Divider -->
-  <div class="footer-divider"></div>
-
-  <!-- Right — closing + legal -->
-  <div class="footer-col footer-closing">
-    <p class="footer-statement">
-      Built in. Not bolted on.
-      <em>Engineering execution infrastructure — so your business runs without you.</em>
-    </p>
-
-    <div class="footer-legal">
-      <span class="footer-copy">© <span id="yr"></span> ORR — All rights reserved</span>
-      <div class="footer-legal-links">
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms of Service</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-      </div>
-      <p class="footer-disclaimer">
-        ORR provides operational consulting, advisory and embedded execution services. Results referenced on this site reflect client engagements and are not guarantees of future outcomes. All client information is kept strictly confidential. Use of this website does not constitute a client relationship.
-      </p>
-    </div>
-  </div>
-
 </footer>
-</main>
 
 <script>
-  /* ===== Viewport height var ===== */
-  function setVH(){
-    const h = Math.max(1, Math.round(window.innerHeight || document.documentElement.clientHeight || 0));
-    document.documentElement.style.setProperty('--vh', h + 'px');
-  }
-  setVH();
-  addEventListener('resize', setVH, {passive:true});
-  addEventListener('orientationchange', setVH);
+/* progress rail */
+const rf=document.getElementById('railfill');
+addEventListener('scroll',()=>{rf.style.height=Math.min(scrollY/(document.body.scrollHeight-innerHeight)*100,100)+'%';},{passive:true});
+/* nav */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>40),{passive:true});
+/* reveal */
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target);}}),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.r').forEach(el=>ro.observe(el));
 
-  /* ===== Autoplay + default playbackRate ===== */
-  (function(){
-    const v = document.getElementById('bg-video');
-    if (!v) return;
-    v.muted = true;
-    try{
-      v.playbackRate = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--video-speed')) || 0.28;
-    }catch(_){}
-    const p = v.play && v.play(); if (p && p.catch) p.catch(function(){});
-  })();
-
-  /* ===== Per-section BG controls + reveal + nav theme ===== */
-  const bgVideo = document.getElementById('bg-video');
-  function applyBG(section){
-    const cs = getComputedStyle(document.documentElement);
-    const defO = parseFloat(cs.getPropertyValue('--video-opacity')) || 0.035;
-    const defS = parseFloat(cs.getPropertyValue('--video-speed'))   || 0.28;
-    const o = parseFloat(section?.dataset?.bgOpacity ?? '');
-    const s = parseFloat(section?.dataset?.bgSpeed   ?? '');
-    const op = Number.isFinite(o) ? o : defO;
-    const sp = Number.isFinite(s) ? s : defS;
-    document.documentElement.style.setProperty('--video-opacity', String(op));
-    try{ if(bgVideo) bgVideo.playbackRate = sp; }catch(_){}
-  }
-
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach((entry)=>{
-      const sec = entry.target;
-      if (!sec) return;
-      if (entry.isIntersecting){
-        sec.classList.add('is-visible');
-        applyBG(sec);
-        document.body.classList.toggle('nav-on-light', sec.classList.contains('on-light'));
-      }
-    });
-  }, {threshold: 0.6});
-  document.querySelectorAll('section.story').forEach(s=> io.observe(s));
-
-  /* ===== Top nav visibility (show after hero) ===== */
-  const topNav = document.querySelector('.top-nav');
-  const hero = document.getElementById('hero');
-  if (topNav && hero){
-    const heroWatcher = new IntersectionObserver((entries)=>{
-      entries.forEach((e)=>{
-        if (e.target !== hero) return;
-        if (e.isIntersecting){
-          topNav.classList.remove('is-visible');
-          document.body.classList.remove('nav-visible');
-        } else {
-          topNav.classList.add('is-visible');
-          document.body.classList.add('nav-visible');
-        }
-      });
-    }, {threshold:0.6});
-    heroWatcher.observe(hero);
-  }
-
-  /* ===== Boot cover ===== */
-  const bootCover = document.getElementById('boot-cover');
-  requestAnimationFrame(()=>{
-    bootCover.classList.add('is-gone');
-    setTimeout(()=> bootCover.setAttribute('aria-hidden','true'), 520);
-  });
-
-  /* ===== Footer year ===== */
-  document.getElementById('yr').textContent = new Date().getFullYear();
-</script>
-
-<script>
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (!target) return;
-
-    const start = window.scrollY;
-    const end = target.getBoundingClientRect().top + window.scrollY;
-    const distance = end - start;
-    const duration = 1400;  // milliseconds — raise for slower, lower for faster
-    let startTime = null;
-
-    function ease(t) {
-      // cubic ease-in-out — slow start, slow end
-      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    }
-
-    function step(timestamp) {
-      if (!startTime) startTime = timestamp;
-      const elapsed = timestamp - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      window.scrollTo(0, start + distance * ease(progress));
-      if (progress < 1) requestAnimationFrame(step);
-    }
-
-    requestAnimationFrame(step);
+/* ── PROOF LEDGER ── */
+const CASES=[
+  {num:'87%',count:87,suf:'%',out:'On-time delivery — up from 44%, in five weeks.',sec:'Creative Agency · 18 ppl',
+   prob:'Delivering across many concurrent projects with deadlines treated as targets, not commitments. Senior staff pulled into fixing work that should never have reached them. Clients followed up before the team did.',
+   tags:['$250K ARR','Ops Install Sprint'],q:'For the first time in a long while, I was doing what I\u2019m supposed to do — not babysitting operations.',a:'Founder, Creative Agency'},
+  {num:'$240K',out:'In capital inefficiency identified and restructured — one engagement.',sec:'Education Group · 3 verticals',
+   prob:'A multi-venture group across three verticals under real capital pressure. Costs distributed with no unified visibility. Decisions made on assumptions, not numbers.',
+   tags:['Post-Series A','Capital Mapping'],q:'I realised how impactful structured operations can be. Working with ORR was direction-changing.',a:'Founder, Education Group'},
+  {num:'80%',count:80,suf:'%',out:'Of decisions moving without the founder — within 90 days.',sec:'B2B SaaS · Bootstrapped',
+   prob:'Every decision found its way back to the founder. Department leads existed on paper. The founder was the operating system — the team wasn\u2019t incapable, they\u2019d just never been told they didn\u2019t have to wait.',
+   tags:['$1.4M ARR','Decision Architecture'],q:'After eight months of being pulled in for every little thing — getting out of that was the relief I needed.',a:'Co-Founder, B2B SaaS'},
+  {num:'9 days',out:'Ramp time, cut from 22 — without restructuring the team.',sec:'Hybrid Team · Funded',
+   prob:'New hires arriving regularly with no defined path beyond day two. Tribal knowledge was the onboarding system. Senior staff pulled into questions documentation should have answered.',
+   tags:['Scaling','Onboarding Sprint'],q:'I assumed slow ramp was just how hiring worked. The problem was structure, not the people.',a:'Founder, Hybrid Tech Team'},
+  {num:'3 depts',out:'Shipping weekly — without a single additional hire.',sec:'Dev Agency · Remote · 40 ppl',
+   prob:'Work consistently stalled between teams. Ownership assumed, not assigned. Everyone believed someone else was moving critical items. Blockers surfaced late, after the delay was already done.',
+   tags:['Control Tower','Cross-Functional'],q:'Remote was putting work on a lag — ORR introduced layers and it became far more manageable.',a:'Founder, Dev Agency'}
+];
+const ledger=document.getElementById('ledger');
+CASES.forEach((c,i)=>{
+  const row=document.createElement('div');row.className='lrow'+(i===0?' open':'');
+  row.innerHTML=
+    '<div class="lhead"><div class="lmark"></div>'+
+      '<span class="lnum" data-c="'+(c.count||'')+'" data-s="'+(c.suf||'')+'">'+(c.count?'0'+(c.suf||''):c.num)+'</span>'+
+      '<span class="lout">'+c.out+'</span>'+
+      '<span class="lsec">'+c.sec+'</span>'+
+      '<span class="ltog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>'+
+    '</div>'+
+    '<div class="lpanel"><div class="lpanel-in">'+
+      '<div><span class="lp-l">The Problem</span><p class="lp-prob">'+c.prob+'</p>'+
+        '<div class="lp-tags">'+c.tags.map(t=>'<span class="lp-tag">'+t+'</span>').join('')+'</div></div>'+
+      '<div class="lp-div"></div>'+
+      '<div><span class="lp-l">Founder</span><blockquote class="lp-quote">\u201C'+c.q+'\u201D</blockquote><span class="lp-attr">'+c.a+'</span></div>'+
+    '</div></div>';
+  ledger.appendChild(row);
+});
+const rows=ledger.querySelectorAll('.lrow');
+function setPanel(row,open){const p=row.querySelector('.lpanel');p.style.maxHeight=open?p.querySelector('.lpanel-in').scrollHeight+'px':'0px';}
+rows.forEach(row=>{
+  row.querySelector('.lhead').addEventListener('click',()=>{
+    const isOpen=row.classList.contains('open');
+    rows.forEach(r=>{r.classList.remove('open');setPanel(r,false);});
+    if(!isOpen){row.classList.add('open');setPanel(row,true);}
   });
 });
-</script>
+const lobs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){
+  setPanel(rows[0],true);
+  ledger.querySelectorAll('.lnum[data-c]').forEach(el=>{const to=parseFloat(el.dataset.c);if(!to||el.dataset.done)return;el.dataset.done=1;
+    const suf=el.dataset.s||'',t0=performance.now(),ez=t=>1-Math.pow(1-t,3);
+    (function s(n){const t=Math.min((n-t0)/1500,1);el.textContent=Math.round(ez(t)*to)+suf;if(t<1)requestAnimationFrame(s);})(t0);});
+  lobs.disconnect();
+}}),{threshold:.3});
+lobs.observe(ledger);
+addEventListener('resize',()=>rows.forEach(r=>{if(r.classList.contains('open'))setPanel(r,true);}));
 
-<noscript><style>html{background:#000}</style></noscript>
+/* ── DIAGNOSTIC ── */
+const SYMPTOMS=[
+  {t:"Work stalls the moment I step away",k:"op"},{t:"Quality drifts when I'm not watching",k:"op"},
+  {t:"Clients chase us before we deliver",k:"op"},{t:"Deadlines are guesses, not commitments",k:"op"},
+  {t:"Every decision routes back to me",k:"gov"},{t:"Nobody clearly owns the outcome",k:"gov"},
+  {t:"My team waits instead of moving",k:"gov"},{t:"Approvals pile up on my desk",k:"gov"},
+  {t:"I make big calls on gut, not numbers",k:"found"},{t:"Our metrics live in a stale spreadsheet",k:"found"},
+  {t:"I can't see what's actually working",k:"found"},{t:"Scaling adds chaos, not leverage",k:"found"}
+];
+const MODE={
+  op:{name:"<em>Operational</em> Failure",desc:"The work depends on your attention to hold its shape. Step back and it loses fidelity — handoffs drop, quality drifts, clients feel it before you do. The fix isn't more effort; it's rails the work runs on without you."},
+  gov:{name:"<em>Governance</em> Failure",desc:"Authority was never distributed, so it concentrates on you by default. Your team isn't incapable of deciding — the system just never gave them permission to. The fix is a decision architecture that lets work move without your sign-off."},
+  found:{name:"<em>Foundational</em> Failure",desc:"You're steering on instinct because the instruments were never built. Real decisions are being made with no visibility into what's working, stalling, or bleeding. The fix is a foundation of numbers you can trust."}
+};
+const RX={
+  sprint:{n:"Ops Install Sprint",w:"One failure dominates, with a clean edge around it. That's a fixed-scope build — diagnose, install, hand over, done. The lowest-risk way to feel what ORR does.",c:"Start with a Sprint →"},
+  coo:{n:"Fractional COO",w:"The pain spans more than one layer. That usually isn't three separate fixes — it's an operating layer that needs to be held and run while it's rebuilt.",c:"Explore Fractional COO →"},
+  advisory:{n:"Advisory",w:"The signal is real but still forming. Senior ops thinking on call will sharpen the diagnosis before you commit to a build.",c:"Consider Advisory →"}
+};
+const chipsEl=document.getElementById('chips'),runBtn=document.getElementById('diagRun'),countEl=document.getElementById('diagCount'),resultEl=document.getElementById('diagResult');
+const sel=new Set();
+SYMPTOMS.forEach((s,i)=>{const b=document.createElement('button');b.className='chip';b.type='button';b.textContent=s.t;
+  b.addEventListener('click',()=>{b.classList.toggle('on');b.classList.contains('on')?sel.add(i):sel.delete(i);
+    const n=sel.size;countEl.innerHTML='<b>'+n+'</b> symptom'+(n===1?'':'s')+' selected';runBtn.disabled=n===0;});
+  chipsEl.appendChild(b);});
+runBtn.addEventListener('click',()=>{
+  const tally={op:0,gov:0,found:0};sel.forEach(i=>tally[SYMPTOMS[i].k]++);
+  const cats=Object.keys(tally).filter(k=>tally[k]>0);let dom='op',mx=-1;cats.forEach(k=>{if(tally[k]>mx){mx=tally[k];dom=k;}});
+  const total=sel.size,spread=cats.length;let rx=total<=1?'advisory':(spread>=2?'coo':'sprint');
+  const m=MODE[dom];document.getElementById('drName').innerHTML=m.name;document.getElementById('drDesc').textContent=m.desc;
+  const r=RX[rx];document.getElementById('drRxN').textContent=r.n;document.getElementById('drRxW').textContent=r.w;document.getElementById('drCta').textContent=r.c;
+  document.getElementById('drConf').textContent='CONFIDENCE — '+Math.min(96,52+mx*9+(total>3?6:0))+'%';
+  const dx='Diagnostic: '+(dom==='op'?'Operational':dom==='gov'?'Governance':'Foundational')+' failure (primary). Symptoms: '+[...sel].map(i=>SYMPTOMS[i].t).join('; ')+'. Suggested: '+r.n+'.';
+  document.getElementById('fDiag').value=dx;
+  const note=document.getElementById('i-note');if(note&&!note.value){note.value='Ran the diagnostic — '+r.n+' looks right. ';note.closest('.field').classList.add('filled');}
+  resultEl.classList.add('show');setTimeout(()=>resultEl.scrollIntoView({behavior:'smooth',block:'center'}),120);
+});
 
-<script>
-/* Normalize nav links from any depth (/, /codex/, /codex/ai/..., etc.) */
-(function () {
-  const segs  = location.pathname.split('/').filter(Boolean);
-  const last  = segs[segs.length - 1] || '';
-  const isDir = !last.includes('.');                  // e.g. /codex/
-  const up    = isDir ? segs.length : segs.length - 1;
-  const P     = up ? '../'.repeat(up) : './';         // prefix back to site root
-  const onIdx = /(^|\/)index\.html$/.test(location.pathname) || segs.length === 0;
+/* ── INSTALL MANIFEST (tabs) ── */
+const HOW={
+  op:{prob:'The work moves when you\u2019re watching it. We install the rails that let it <em>finish without you standing over it.</em>',
+      install:['Delivery Gates','Handoff Design','Definition of Done','SOP Frameworks','Weekly Cadence'],
+      gets:['Work finishes without you in the loop','Clients feel consistency before they ask','You stop catching everything at the end']},
+  gov:{prob:'Every decision routes back to you. We build the decision system so <em>work stops landing on your desk.</em>',
+      install:['Ownership Matrix','Decision Rights','Escalation Design','Accountability Cadence','Role Clarity'],
+      gets:['80% of decisions move without you','The team stops waiting — it no longer has to','Accountability lives in the system']},
+  found:{prob:'You\u2019re steering on instinct. We build visibility from the ground up so <em>you can see what\u2019s really moving.</em>',
+      install:['KPI Frameworks','Capital Mapping','Operational Reporting','Financial Visibility','Performance Tracking'],
+      gets:['One source of truth the team actually uses','Capital decisions backed by numbers','Visibility before it becomes a crisis']}
+};
+const howTabs=document.querySelectorAll('.how-tab'),howProb=document.getElementById('howProb'),howTags=document.getElementById('howTags'),howGets=document.getElementById('howGets'),howPanel=document.getElementById('howPanel');
+function renderHow(k){const h=HOW[k];howProb.innerHTML=h.prob;howTags.innerHTML=h.install.map(t=>'<span class="how-tag">'+t+'</span>').join('');
+  howGets.innerHTML=h.gets.map(g=>'<li class="how-get">'+g+'</li>').join('');
+  howPanel.classList.remove('how-fade');void howPanel.offsetWidth;howPanel.classList.add('how-fade');}
+howTabs.forEach(tb=>tb.addEventListener('click',()=>{howTabs.forEach(t=>t.classList.remove('on'));tb.classList.add('on');renderHow(tb.dataset.k);}));
+renderHow('op');
 
-  const set = (sel, href) => {
-    const el = document.querySelector(sel);
-    if (el) el.setAttribute('href', href);
-  };
+/* ── FORM ── */
+const form=document.getElementById('orrForm'),sub=document.getElementById('orrSubmit'),st=document.getElementById('orrStatus');
+['i-name','i-email','i-note'].forEach(id=>{const el=document.getElementById(id),f=el.closest('.field'),c=()=>f.classList.toggle('filled',el.value.length>0);
+  el.addEventListener('input',c);el.addEventListener('change',c);
+  if(el.tagName==='TEXTAREA')el.addEventListener('input',()=>{el.style.height='auto';el.style.height=el.scrollHeight+'px';});});
+const isEmail=v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v||'');
+form.addEventListener('submit',async e=>{e.preventDefault();if(form.querySelector('[name=_gotcha]').value)return;
+  const n=document.getElementById('i-name'),em=document.getElementById('i-email'),nt=document.getElementById('i-note');let ok=true;
+  [[n,v=>v.trim()],[em,v=>isEmail(v)],[nt,v=>v.trim()]].forEach(([el,fn])=>{const g=fn(el.value);el.setAttribute('aria-invalid',!g);if(!g)ok=false;});
+  if(!ok){st.textContent='Please complete all fields.';return;}
+  sub.disabled=true;sub.querySelector('.a').textContent='…';st.textContent='';
+  try{const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+    if(res.ok){form.reset();document.querySelectorAll('.field').forEach(f=>f.classList.remove('filled'));
+      st.textContent='Received. We will be in touch within one business day.';sub.childNodes[0].textContent='Sent ';sub.querySelector('.a').textContent='✓';}
+    else{st.textContent='Something went wrong. Please try again.';sub.disabled=false;sub.querySelector('.a').textContent='→';}
+  }catch(_){st.textContent='Network issue. Please try again.';sub.disabled=false;sub.querySelector('.a').textContent='→';}
+});
 
-  // Brand → index hero
-  set('.top-nav .brand', onIdx ? '#hero' : P + 'index.html#hero');
-
-  // Clients → index section 2
-  set('.top-nav .menu a[href="#partners"]',
-      onIdx ? '#partners' : P + 'index.html#partners');
-
-  // Begin → index CTA
-  set('.top-nav .menu a[href="#section-7"]',
-      onIdx ? '#section-7' : P + 'index.html#section-7');
-
-  // Codex hub (adjust if your hub file is different)
-  const codex = document.querySelector('.top-nav .menu a[href*="codex"]');
-  if (codex) codex.setAttribute('href', P + 'codex/codex.html');
-})();
+/* smooth anchor */
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(!t)return;e.preventDefault();
+  const s=scrollY,end=t.getBoundingClientRect().top+scrollY,d=end-s;let t0=null;const ez=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+  requestAnimationFrame(function st(ts){if(!t0)t0=ts;const p=Math.min((ts-t0)/1000,1);scrollTo(0,s+d*ez(p));if(p<1)requestAnimationFrame(st);});}));
+document.getElementById('yr').textContent=new Date().getFullYear();
 </script>
 </body>
-
-<script>
-(function(){
-  const root = document.getElementById('partners');
-  if(!root) return;
-
-  // Only run on phones/tablets per our CSS breakpoint
-  const mq = window.matchMedia('(max-width: 720px)');
-  if (!mq.matches) return;
-
-  const panels = [...root.querySelectorAll('.s2-panels .s2-panel')];
-  if (!panels.length) return;
-
-  const wrap = root.querySelector('.s2-panels');
-  // Build arrows + counter once
-  const mk = (cls, title, pathD) => {
-    const b = document.createElement('button');
-    b.className = 's2-arrow ' + cls; b.type = 'button'; b.setAttribute('aria-label', title); b.title = title;
-    b.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${pathD}"/></svg>`;
-    return b;
-  };
-  const left  = mk('left',  'Previous', 'M15 18l-6-6 6-6');
-  const right = mk('right', 'Next',     'M9 6l6 6-6 6');
-  const count = document.createElement('div'); count.className = 's2-count';
-
-  wrap.appendChild(left); wrap.appendChild(right); wrap.appendChild(count);
-
-  let idx = panels.findIndex(p => p.classList.contains('is-active'));
-  if (idx < 0) idx = 0;
-
-  function render(i){
-    idx = (i + panels.length) % panels.length;
-    panels.forEach((p,k) => {
-      const on = k === idx;
-      p.classList.toggle('is-active', on);
-      p.setAttribute('aria-hidden', (!on).toString());
-      p.tabIndex = on ? 0 : -1;
-    });
-    // 01/04 style
-    const cur = (idx+1).toString().padStart(2,'0');
-    const tot = panels.length.toString().padStart(2,'0');
-    count.textContent = `${cur} / ${tot}`;
-  }
-
-  function next(){ render(idx+1); }
-  function prev(){ render(idx-1); }
-
-  left.addEventListener('click', prev);
-  right.addEventListener('click', next);
-
-  // Keyboard support when focus is inside S2
-  root.addEventListener('keydown', (e)=>{
-    if(e.key === 'ArrowLeft'){ e.preventDefault(); prev(); }
-    if(e.key === 'ArrowRight'){ e.preventDefault(); next(); }
-  });
-
-  // Simple swipe (horizontal)
-  let x0 = null; 
-  wrap.addEventListener('touchstart', e => { x0 = e.touches?.[0]?.clientX ?? null; }, {passive:true});
-  wrap.addEventListener('touchend',   e => {
-    if (x0==null) return;
-    const dx = (e.changedTouches?.[0]?.clientX ?? x0) - x0;
-    if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); }
-    x0 = null;
-  }, {passive:true});
-
-  // Keep state on resize (if user rotates)
-  mq.addEventListener?.('change', e => { if(!e.matches){ /* leaving mobile */ } });
-
-  // Initialize
-  render(idx);
-})();
-</script>
-
-
 </html>
