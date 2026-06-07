@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../assets/ngb.svg">
+<meta name="theme-color" content="#F1ECE1">
+<title>Systems — ORR | Engineering Execution Infrastructure</title>
+<meta name="description" content="Twelve systems installed by ORR. What each one is, who it's for, and what changes when you have it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Hanken+Grotesk:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --vellum:#F1ECE1;--vellum2:#E9E2D3;--vellum3:#E0D8C6;
+  --ink:#1A1812;--ink72:rgba(26,24,18,.72);--ink54:rgba(26,24,18,.54);--ink38:rgba(26,24,18,.38);
+  --ink18:rgba(26,24,18,.16);--ink10:rgba(26,24,18,.10);--ink06:rgba(26,24,18,.06);
+  --pine:#1A4D40;--pine-b:#246B59;--pine12:rgba(26,77,64,.12);--pine06:rgba(26,77,64,.06);
+  --dark:#0E2A24;--crm:#F1ECE1;--crm72:rgba(241,236,225,.72);--crm54:rgba(241,236,225,.52);
+  --crm38:rgba(241,236,225,.34);--crm18:rgba(241,236,225,.16);
+  --mint:#8FC9B7;--bronze:#9C7C49;--bronze12:rgba(156,124,73,.12);
+  --line:rgba(26,24,18,.12);--lineL:rgba(26,24,18,.07);
+  --disp:'Newsreader',Georgia,serif;--body:'Hanken Grotesk',system-ui,sans-serif;--mono:'IBM Plex Mono',monospace;
+  --e1:cubic-bezier(.22,1,.36,1);--e2:cubic-bezier(.16,1,.3,1);
+}
+html{background:var(--vellum);color:var(--ink);scroll-behavior:smooth;-webkit-text-size-adjust:100%;
+  scrollbar-width:thin;scrollbar-color:var(--ink18) transparent}
+::-webkit-scrollbar{width:9px}::-webkit-scrollbar-track{background:var(--vellum)}
+::-webkit-scrollbar-thumb{background:var(--ink18);border:3px solid var(--vellum);border-radius:9px}
+body{font-family:var(--body);font-weight:300;line-height:1.62;font-size:16px;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+::selection{background:var(--pine);color:var(--crm)}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E")}
+#rail{position:fixed;left:0;top:0;bottom:0;width:2px;background:var(--ink06);z-index:7000;pointer-events:none}
+#railfill{position:absolute;top:0;left:0;right:0;height:0;background:var(--pine)}
+
+/* ══ NAV ══ */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;height:62px;display:flex;align-items:center;padding:0 42px;
+  transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+#nav.solid{background:rgba(241,236,225,.88);backdrop-filter:blur(18px) saturate(1.3);border-color:var(--line)}
+.brand{display:flex;align-items:center;gap:11px}
+.brand .seal{width:26px;height:26px;color:var(--pine)}
+.brand .bw{font-family:var(--disp);font-size:22px;font-weight:400;letter-spacing:.16em;color:var(--ink)}
+.nav-logo{height:44px;width:auto}
+.nav-mid{position:absolute;left:50%;transform:translateX(-50%);font-family:var(--body);font-size:10px;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--ink38)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:30px}
+.nav-r a{font-family:var(--body);font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--pine);transition:color .25s}
+.nav-r a:hover{color:var(--pine-b)}
+.nav-r a.cur{color:var(--pine)}
+.nav-cta{border:1px solid var(--ink);padding:8px 18px;color:var(--ink)!important;
+  transition:background .25s,color .25s,border-color .25s}
+.nav-cta:hover{background:var(--pine);border-color:var(--pine);color:var(--crm)!important}
+@media(max-width:820px){#nav{padding:0 22px}.nav-mid{display:none}.nav-r a:not(.nav-cta){display:none}}
+
+/* ══ HERO ══ */
+#hero{position:relative;z-index:1;padding:148px 64px 0}
+.hero-w{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;align-items:end;
+  gap:0 80px;padding-bottom:64px;border-bottom:1px solid var(--line)}
+.hero-left{}
+.hero-kicker{font-family:var(--mono);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--pine);margin-bottom:30px;display:flex;align-items:center;gap:14px;
+  opacity:0;animation:fIn .8s var(--e2) .2s forwards}
+.hero-kicker::before{content:'';width:20px;height:1px;background:var(--pine)}
+.hero-h1{font-family:var(--disp);font-weight:300;font-size:clamp(52px,7vw,108px);line-height:.96;letter-spacing:-.03em}
+.hero-h1 .l1{display:block;opacity:0;animation:lUp 1.1s var(--e2) .35s forwards}
+.hero-h1 .l2{display:block;font-style:italic;color:var(--pine);opacity:0;animation:lUp 1.1s var(--e2) .5s forwards}
+.hero-right{display:flex;flex-direction:column;align-items:flex-end;gap:30px;padding-bottom:8px;
+  opacity:0;animation:fIn 1s var(--e2) .7s forwards}
+.hero-counts{display:flex;gap:40px}
+.hcount{text-align:right}
+.hcount-n{font-family:var(--disp);font-weight:300;font-size:48px;line-height:1;letter-spacing:-.03em;color:var(--ink);display:block}
+.hcount-l{font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink38);display:block;margin-top:5px}
+.hero-desc{font-size:14px;line-height:1.72;color:var(--ink54);max-width:34ch;text-align:right}
+@keyframes fIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes lUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media(max-width:900px){
+  #hero{padding:120px 22px 0}
+  .hero-w{grid-template-columns:1fr;gap:36px;padding-bottom:48px}
+  .hero-right{align-items:flex-start}
+  .hero-desc{text-align:left}
+  .hero-counts{justify-content:flex-start}
+  .hcount{text-align:left}
+}
+
+/* ══ FILTER BAR (sticky) ══ */
+#filterbar{position:sticky;top:62px;z-index:800;background:rgba(241,236,225,.92);
+  backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.fb-inner{max-width:1100px;margin:0 auto;padding:0 64px;display:flex;align-items:stretch}
+.fb-group{display:flex;align-items:center;padding:14px 0;border-right:1px solid var(--line)}
+.fb-group:last-child{border-right:none}
+.fb-label{font-family:var(--mono);font-size:8px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink38);padding:0 16px 0 0;flex-shrink:0}
+.fbtn{font-family:var(--body);font-size:11.5px;font-weight:300;background:none;border:none;
+  padding:6px 16px;cursor:pointer;color:var(--ink54);letter-spacing:.02em;
+  position:relative;transition:color .2s;white-space:nowrap}
+.fbtn::after{content:'';position:absolute;bottom:-14px;left:16px;right:16px;height:1px;
+  background:var(--pine);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--e1)}
+.fbtn:hover{color:var(--ink)}
+.fbtn.on{color:var(--pine)}
+.fbtn.on::after{transform:scaleX(1)}
+.fb-sep{width:1px;background:var(--line);margin:0 20px;align-self:stretch}
+@media(max-width:860px){
+  .fb-inner{padding:0 22px;overflow-x:auto;scrollbar-width:none}
+  .fb-inner::-webkit-scrollbar{display:none}
+  .fb-group{border-right:none}
+  .fb-label{display:none}
+  .fbtn::after{bottom:-14px}
+}
+
+/* ══ SYSTEMS LIST ══ */
+#syslist{position:relative;z-index:1;padding:0 64px}
+.sys-w{max-width:1100px;margin:0 auto}
+
+/* Layer header */
+.layer-head{padding:52px 0 24px;display:grid;grid-template-columns:1fr 0.72fr;gap:0 60px;
+  align-items:end;border-bottom:1px solid var(--line)}
+.layer-head.hide{display:none}
+.lh-left{}
+.lh-n{font-family:var(--mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--pine);margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.lh-n::before{content:'';width:18px;height:1px;background:var(--pine)}
+.lh-t{font-family:var(--disp);font-weight:300;font-size:clamp(34px,4.5vw,58px);line-height:.98;letter-spacing:-.025em}
+.lh-desc{font-size:14px;line-height:1.68;color:var(--ink72);border-left:1px solid var(--line);
+  padding-left:26px;padding-bottom:4px}
+@media(max-width:820px){
+  #syslist{padding:0 22px}
+  .layer-head{grid-template-columns:1fr;gap:20px;padding:40px 0 20px}
+  .lh-desc{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:18px}
+}
+
+/* System row — the money element */
+.sys-row{width:100%;background:none;border:none;border-top:none;border-left:none;border-right:none;
+  border-bottom:1px solid var(--line);display:grid;
+  grid-template-columns:52px 1fr auto 32px;
+  align-items:center;gap:0 28px;padding:26px 0;
+  cursor:pointer;text-align:left;color:var(--ink);position:relative;
+  transition:background .25s;
+  opacity:0;transform:translateY(10px);
+  transition:background .25s,opacity .7s var(--e2),transform .7s var(--e2)}
+.sys-row.in{opacity:1;transform:none}
+.sys-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--pine);transform:scaleY(0);transform-origin:bottom;transition:transform .4s var(--e1)}
+.sys-row:hover{background:var(--pine06)}
+.sys-row:hover::before{transform:scaleY(1)}
+.sys-row.hide{display:none}
+
+/* Row parts */
+.sr-n{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink38);
+  text-align:right;padding-right:6px;transition:color .25s}
+.sys-row:hover .sr-n{color:var(--pine)}
+.sr-body{min-width:0}
+.sr-name{font-family:var(--disp);font-weight:300;font-size:clamp(20px,2vw,26px);
+  line-height:1.1;letter-spacing:-.01em;color:var(--ink);
+  transition:color .25s;margin-bottom:5px}
+.sys-row:hover .sr-name{color:var(--pine)}
+.sr-hook{font-family:var(--body);font-size:13px;font-weight:300;line-height:1.5;
+  color:var(--ink54);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:70ch}
+.sr-tag{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink38);border:1px solid var(--line);padding:5px 10px;white-space:nowrap;
+  transition:border-color .25s,color .25s;flex-shrink:0}
+.sys-row:hover .sr-tag{border-color:var(--pine12);color:var(--pine)}
+.sr-arr{width:32px;height:32px;border:1px solid var(--line);display:grid;place-items:center;
+  color:var(--ink38);transition:all .3s var(--e1);flex-shrink:0}
+.sr-arr svg{width:11px;height:11px;transition:transform .3s var(--e1)}
+.sys-row:hover .sr-arr{border-color:var(--pine);color:var(--pine);background:var(--pine06)}
+.sys-row:hover .sr-arr svg{transform:translateX(3px)}
+
+/* Expanded panel */
+.sys-panel{max-height:0;overflow:hidden;transition:max-height .65s var(--e2)}
+.sys-panel-in{padding:10px 0 52px 52px;display:grid;grid-template-columns:1fr 1px 1.15fr;gap:0 52px;align-items:start}
+.sp-div{background:var(--line);align-self:stretch}
+
+/* Panel left */
+.sp-what{font-family:var(--disp);font-weight:300;font-size:clamp(17px,1.7vw,21px);line-height:1.52;
+  color:var(--ink);letter-spacing:-.006em;margin-bottom:30px}
+.sp-section-l{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink38);display:block;margin-bottom:14px}
+.sp-who{font-size:14px;line-height:1.7;color:var(--ink72);margin-bottom:28px}
+.sp-need ul{list-style:none}
+.sp-need li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--lineL);
+  font-size:13px;line-height:1.58;color:var(--ink72)}
+.sp-need li:last-child{border-bottom:none}
+.sp-need li::before{content:'';width:12px;height:12px;border:1px solid var(--pine);
+  border-radius:2px;flex-shrink:0;margin-top:3px;opacity:.6}
+
+/* Panel right — before/after */
+.sp-ba-l{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink38);display:block;margin-bottom:16px}
+.ba-table{border:1px solid var(--line)}
+.ba-head{display:grid;grid-template-columns:1.1fr 1.3fr 1.3fr;background:var(--pine06);
+  border-bottom:1px solid var(--line)}
+.ba-hcell{font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+  padding:12px 16px;color:var(--pine)}
+.ba-hcell:first-child{color:var(--ink38)}
+.ba-row{display:grid;grid-template-columns:1.1fr 1.3fr 1.3fr;border-bottom:1px solid var(--lineL)}
+.ba-row:last-child{border-bottom:none}
+.ba-dim{font-family:var(--mono);font-size:9px;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--ink38);padding:13px 16px;line-height:1.4;align-self:center}
+.ba-wo{font-size:12.5px;line-height:1.5;color:var(--ink54);padding:13px 16px;align-self:center}
+.ba-wi{font-size:12.5px;line-height:1.5;color:var(--pine);padding:13px 16px;
+  background:var(--pine06);border-left:1px solid var(--pine12);align-self:center;font-weight:400}
+
+/* Panel links */
+.sp-links{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px}
+.sp-link{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink72);border:1px solid var(--line);padding:7px 12px;display:inline-flex;
+  align-items:center;gap:8px;transition:all .25s}
+.sp-link:hover{background:var(--pine);border-color:var(--pine);color:var(--crm)}
+.sp-link .a{opacity:.5;transition:transform .25s,opacity .25s}
+.sp-link:hover .a{transform:translateX(2px);opacity:1}
+
+@media(max-width:900px){
+  .sys-panel-in{grid-template-columns:1fr;gap:32px;padding-left:0}
+  .sp-div{display:none}
+  .sr-hook{white-space:normal;max-width:none}
+  .ba-head{display:none}
+  .ba-row{grid-template-columns:1fr;padding:12px 14px;border-bottom:1px solid var(--line)}
+  .ba-dim{padding:0 0 8px;font-size:9px;color:var(--ink)}
+  .ba-wo,.ba-wi{padding:4px 0 4px 18px;background:none;border-left:none;font-size:13px;position:relative}
+  .ba-wo{color:var(--ink54)}.ba-wi{color:var(--pine)}
+  .ba-wo::before{content:'—';position:absolute;left:0;color:var(--ink38)}
+  .ba-wi::before{content:'→';position:absolute;left:0;color:var(--pine)}
+}
+
+/* ══ CTA ══ */
+#ctastrip{position:relative;z-index:1;padding:80px 64px;border-top:1px solid var(--line)}
+.cta-w{max-width:1100px;margin:0 auto;display:flex;align-items:center;
+  justify-content:space-between;gap:40px;flex-wrap:wrap}
+.cta-stmt{font-family:var(--disp);font-weight:300;font-size:clamp(22px,2.8vw,40px);
+  line-height:1.1;letter-spacing:-.015em}
+.cta-stmt em{font-style:italic;color:var(--pine)}
+.cta-btn{display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:var(--vellum);
+  font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  padding:17px 32px;transition:background .3s,gap .3s;flex-shrink:0;border:none;cursor:pointer}
+.cta-btn:hover{background:var(--pine);gap:18px}
+@media(max-width:760px){#ctastrip{padding:60px 22px}}
+
+/* ══ FOOTER ══ */
+footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);border-top:2px solid var(--pine);
+  padding:68px 64px 44px;display:grid;grid-template-columns:1.3fr 1px 1fr 1px 1.3fr;gap:0 56px}
+.ft-div{background:linear-gradient(to bottom,var(--crm18),transparent);align-self:stretch}
+.ft-brand{display:flex;flex-direction:column;gap:16px}
+.ft-bw{display:flex;align-items:center;gap:11px}
+.ft-bw .seal{width:30px;height:30px;color:var(--mint)}
+.ft-bw .w{font-family:var(--disp);font-size:26px;letter-spacing:.14em}
+.ft-logo{height:36px;width:auto}
+.ft-tag{font-size:12px;color:var(--crm54);line-height:1.55;max-width:34ch}
+.ft-nav{display:flex;flex-direction:column;gap:13px}
+.ft-l{font-family:var(--mono);font-size:8.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--crm38);margin-bottom:2px}
+.ft-nav a{font-size:13px;color:var(--crm54);transition:color .25s}
+.ft-nav a:hover{color:var(--mint)}
+.ft-close{display:flex;flex-direction:column;text-align:right}
+.ft-stmt{font-family:var(--disp);font-weight:300;font-size:18px;line-height:1.35;opacity:.9;margin-bottom:22px}
+.ft-stmt em{font-style:italic;color:var(--crm54);display:block}
+.ft-legal{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.ft-copy{font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--crm38)}
+.ft-ll{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.ft-ll a{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--crm38);transition:color .25s}
+.ft-ll a:hover{color:var(--mint)}
+.ft-disc{font-size:9.5px;line-height:1.6;color:rgba(241,236,225,.26);text-align:right;max-width:48ch;margin-top:8px}
+@media(max-width:860px){
+  footer{grid-template-columns:1fr;padding:52px 22px 38px;gap:38px}
+  .ft-div{display:none}
+  .ft-close,.ft-legal,.ft-ll{text-align:left;align-items:flex-start;justify-content:flex-start}
+  .ft-disc{text-align:left;max-width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important}.sys-row{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div id="rail" aria-hidden="true"><div id="railfill"></div></div>
+
+<header id="nav">
+  <a class="brand" href="../index.html" aria-label="ORR home">
+    <img src="../assets/in1.svg" alt="ORR Logo" class="nav-logo"/>
+  </a>
+  <span class="nav-mid">Engineering Execution Infrastructure</span>
+    <nav class="nav-r">
+    <a href="../index.html#diag">Diagnose</a>
+    <a href="../index.html#proof">Work</a>
+    <a class="cur" href="../index.html#install">Systems</a>
+    <a href="../index.html#eng">Engage</a>
+    <a href="codex/codex.html">Codex</a>
+    <a href="../index.html#begin" class="nav-cta">Begin →</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-w">
+    <div class="hero-left">
+      <span class="hero-kicker">The Systems</span>
+      <h1 class="hero-h1">
+        <span class="l1">Twelve systems.</span>
+        <span class="l2">One operating spine.</span>
+      </h1>
+    </div>
+    <div class="hero-right">
+      <div class="hero-counts">
+        <div class="hcount">
+          <span class="hcount-n">12</span>
+          <span class="hcount-l">Systems</span>
+        </div>
+        <div class="hcount">
+          <span class="hcount-n">03</span>
+          <span class="hcount-l">Layers</span>
+        </div>
+      </div>
+      <p class="hero-desc">What gets installed. What it fixes. What changes when you have it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div id="filterbar">
+  <div class="fb-inner">
+    <div class="fb-group">
+      <span class="fb-label">Layer</span>
+      <button class="fbtn on" data-layer="all">All</button>
+      <button class="fbtn" data-layer="op">Operational</button>
+      <button class="fbtn" data-layer="gov">Governance</button>
+      <button class="fbtn" data-layer="found">Foundational</button>
+    </div>
+  </div>
+</div>
+
+<!-- SYSTEMS LIST -->
+<section id="syslist">
+  <div class="sys-w" id="sysWrap">
+    <!-- injected by JS -->
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="ctastrip">
+  <div class="cta-w">
+    <p class="cta-stmt">Not sure which system you need?<br><em>The diagnostic tells you.</em></p>
+    <a href="../index.html#diag" class="cta-btn">Run the 60-second diagnostic →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-brand">
+    <div class="ft-bw">
+      <img src="../assets/cm1.svg" alt="ORR Logo" class="ft-logo"/>
+    </div>
+    <span class="ft-tag">Engineering Execution Infrastructure — so your business runs without you.</span>
+  </div>
+  <div class="ft-div"></div>
+  <nav class="ft-nav">
+    <span class="ft-l">Navigate</span>
+    <a href="../codex/codex.html">Codex</a>
+    <a href="systems.html">Systems</a>
+    <a href="../index.html#eng">Engage</a>
+    <a href="../index.html#begin">Begin</a>
+  </nav>
+  <div class="ft-div"></div>
+  <div class="ft-close">
+    <p class="ft-stmt">Built in. Not bolted on.<em>So your business runs without you.</em></p>
+    <div class="ft-legal">
+      <span class="ft-copy">© <span id="yr"></span> ORR — All rights reserved</span>
+      <div class="ft-ll"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div>
+      <p class="ft-disc">ORR provides operational consulting, advisory and embedded execution services. Results reflect prior client engagements and are not guarantees of future outcomes.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const LAYERS=[
+  {key:'op',n:'Layer 01',t:'Operational',desc:'How work moves, finishes, and holds its quality — without you standing over it.'},
+  {key:'gov',n:'Layer 02',t:'Governance',desc:'How decisions get made and who is allowed to make them — so they stop routing to you.'},
+  {key:'found',n:'Layer 03',t:'Foundational',desc:'How you see the business — the numbers, the money, the visibility to decide on fact.'}
+];
+
+const SYSTEMS=[
+  {n:'01',layer:'op',name:'Control Tower',
+   hook:'Weekly scoreboard — what\'s moving, who owns it, what\'s blocked.',
+   tag:'Operational',
+   what:'A weekly operating system for your business. Every week, in one place: what\'s being worked on, who owns it, what\'s blocked, and what needs a decision. That\'s it.',
+   who:'Founders and teams where work is happening but the full picture only exists in the founder\'s head.',
+   need:['You start your week by asking people what happened last week','Something dropped and everyone thought someone else was handling it','A client asked for an update and you had to chase three people to answer','You can\'t tell right now what\'s moving and what\'s stuck','Your team is busy but you genuinely don\'t know if the right things are getting done'],
+   ba:[['Monday morning','Reconstructing last week','Opening a live scoreboard'],['Blockers','Surface after damage is done','Logged and visible before they delay'],['Updates','You chase them','They exist without asking'],['Dropped work','Discovered when someone complains','Caught before it becomes a problem'],['Your role','Coordinator by default','Decision-maker by choice']],
+   cases:['CS05','CS06','CS08']},
+
+  {n:'02',layer:'op',name:'Intake → RACI → Closeout',
+   hook:'One path in, one named owner, one documented way out.',
+   tag:'Operational',
+   what:'A system for how work requests enter the business, get assigned to the right person, and close with a documented outcome. Every request has one path in and one path out.',
+   who:'Teams where work arrives from multiple directions — Slack, email, verbal conversations — and ownership is assumed rather than assigned.',
+   need:['Work gets done twice because two people thought they owned it','Work doesn\'t get done because each person thought the other was on it','Requests arrive and then quietly disappear with no resolution','You have no record of what was asked, who took it, or what happened','Decisions sit open for days because nobody knows who\'s supposed to make them'],
+   ba:[['Incoming requests','Scattered across Slack, email, conversations','Single intake point, every time'],['Ownership','Assumed, often by nobody','Assigned explicitly with a named person'],['Outcomes','Often undocumented','Closed with a record'],['Founder load','Default owner of anything unclear','Involved only when genuinely needed']],
+   cases:['CS02','CS06','CS08']},
+
+  {n:'03',layer:'op',name:'SOP + QA Library',
+   hook:'How work gets done — written down, maintained, actually used.',
+   tag:'Operational',
+   what:'A single, maintained document that describes how work gets done in your business. Not filed away — actively used. When someone doesn\'t know how to do something, this is where they look.',
+   who:'Businesses where quality depends on who happens to be doing the work that day, and where knowledge lives in people\'s heads rather than anywhere permanent.',
+   need:['A key person leaves and takes the knowledge with them','Two people do the same task differently and both think they\'re right','New hires ask questions nobody has ever written down the answer to','Quality varies and you can\'t point to why'],
+   ba:[['Knowledge','Lives with specific people','Lives in a document anyone can access'],['Quality','Depends on who\'s doing it','Consistent regardless of who\'s doing it'],['Standards','Tribal, informal, inconsistent','Written, agreed, version-controlled'],['New-hire training','Senior staff pulled in to explain','New hire reads, references, follows']],
+   cases:['CS05','CS07']},
+
+  {n:'04',layer:'op',name:'Onboarding 30/60/90',
+   hook:'A defined first ninety days for every hire.',
+   tag:'Operational',
+   what:'A structured plan for every new hire covering their first 90 days. What they learn, what they do, what they should be able to own — defined in advance, not figured out as they go.',
+   who:'Businesses that are hiring but don\'t have a defined path for what happens after day one. Where "ramped" means different things to different people.',
+   need:['A new hire finishes week one and you\'re not sure what they should do in week two','Senior staff answer questions a new hire should be able to find themselves','You\'ve onboarded people three times and done it differently each time'],
+   ba:[['Day ten','Unclear','Defined milestones, clear expectations'],['New-hire questions','Go to senior staff','Go to the documentation'],['Time to contribute','Unpredictable','Tracked against a defined ramp'],['Senior staff time','Pulled into onboarding repeatedly','Protected']],
+   cases:['CS03','CS04','CS07']},
+
+  {n:'05',layer:'op',name:'Cross-Team Coordination Layer',
+   hook:'Structured handoffs so work stops stalling between teams.',
+   tag:'Operational',
+   what:'A structured handoff process between teams or departments. Defines exactly when work passes from one team to another, who receives it, what they receive, and what happens if something\'s missing.',
+   who:'Businesses with more than one team where work moves between functions — and where the gaps between teams are where things go wrong.',
+   need:['Work finishes in one team and quietly stalls waiting for the next','Teams blame each other for delays because handoff ownership was never defined','You find out about a coordination problem after it\'s hit a deadline'],
+   ba:[['Handoff points','Informal, assumed, often missed','Defined trigger, named recipient, documented'],['Gap ownership','Nobody — or the founder','Named, clear, part of the process'],['Inter-team conflict','Frequent — over who dropped what','Reduced — the process defines who owns what']],
+   cases:['CS05','CS08']},
+
+  {n:'06',layer:'gov',name:'Decision Rights Framework',
+   hook:'Who is allowed to decide what — written, not assumed.',
+   tag:'Governance',
+   what:'A document that defines who is allowed to decide what in your business. What each person can decide alone, what needs sign-off, and what needs to escalate — written down, not assumed.',
+   who:'Founders whose team escalates too much — where decisions that shouldn\'t require the founder always end up with the founder anyway.',
+   need:['Your team asks for input on things you feel they should decide themselves','You\'ve delegated a role but still get asked to approve things within it','You\'re the bottleneck on work you\'re not even doing','Your team is capable but keeps waiting for permission'],
+   ba:[['Routine decisions','Come to the founder','Made at the right level without escalation'],['Escalations','Everything unclear comes up','Only what genuinely requires the founder'],['Team confidence','Low — waiting for permission','High — authority is clear'],['Founder\'s day','Interrupted by decisions others could make','Protected for decisions only they can make']],
+   cases:['CS02','CS06']},
+
+  {n:'07',layer:'gov',name:'Escalation Architecture',
+   hook:'How problems move up — and what gets handled where.',
+   tag:'Governance',
+   what:'A defined system for how problems move through your business. What gets handled at each level, what triggers an escalation upward, and how fast each tier needs to respond.',
+   who:'Founders who either hear about everything — including things they shouldn\'t — or hear about nothing until it\'s critical.',
+   need:['Small problems reach you because nobody felt empowered to handle them','Large problems reach you late because nobody wanted to escalate','A problem that started small became serious because the path wasn\'t clear'],
+   ba:[['Small problems','Often reach the founder unnecessarily','Handled at the right level'],['Large problems','Surface late, after damage is done','Escalated early, on a defined trigger'],['Founder\'s attention','Diluted across everything','Reserved for what genuinely needs it']],
+   cases:['CS04']},
+
+  {n:'08',layer:'gov',name:'Role Clarity Documentation',
+   hook:'What each role actually owns — scope, decisions, interfaces.',
+   tag:'Governance',
+   what:'Written definitions of what each role in your business actually owns — not just the job title, but the scope, the decisions they can make, the interfaces with other roles, and what doing the job well looks like.',
+   who:'Businesses where people have titles but unclear scope — where overlap and gaps between roles create friction, conflict, and founder arbitration.',
+   need:['Two people conflict over who owns something and it comes to you','Work sits in a gap between two roles and both think it\'s the other\'s','A performance conversation is hard because there\'s no agreed baseline'],
+   ba:[['Role scope','Assumed, often different per person','Written, agreed, specific'],['Overlap conflicts','Go to the founder to resolve','Resolved by the documentation'],['Performance conversations','Difficult — no agreed baseline','Clear — the role definition is the baseline']],
+   cases:['CS02','CS03','CS07']},
+
+  {n:'09',layer:'gov',name:'Governance Loop',
+   hook:'A regular check that the systems are still running.',
+   tag:'Governance',
+   what:'A regular review — monthly or quarterly — of whether the operating systems you\'ve built are still working. Checks for drift, outdated processes, metrics that stopped being tracked, and cadences that quietly stopped running.',
+   who:'Businesses that have built operating infrastructure and want to make sure it stays current as the business grows and changes.',
+   need:['A process was installed six months ago and you\'re not sure it\'s still followed','A metric mattered last quarter and nobody is tracking it anymore','You feel like things are slipping but can\'t point to exactly where'],
+   ba:[['Process adherence','Drifts silently over time','Reviewed and corrected on a schedule'],['Outdated processes','Nobody notices until something breaks','Flagged and updated before they cause problems'],['Drift detection','Discovered when it\'s already expensive','Caught early, corrected cheaply']],
+   cases:['CS04']},
+
+  {n:'10',layer:'found',name:'Order-to-Cash Cadence',
+   hook:'Money from closed deal to bank account, reliably.',
+   tag:'Foundational',
+   what:'The system that moves money from a closed deal into your bank account reliably. Covers invoice timing, follow-up sequences, exception handling, and who owns each step.',
+   who:'Businesses where deals close cleanly but revenue collection is inconsistent — invoices go out but what happens next is unclear or manual.',
+   need:['You\'ve invoiced but you\'re not sure if it\'s been paid','Follow-ups happen when someone remembers, not on a schedule','Cash in the bank doesn\'t match what you believe you\'ve earned'],
+   ba:[['Invoice follow-up','Happens when someone remembers','Runs on a defined schedule'],['Cash visibility','Approximate, manually tracked','Clear, current, owned'],['Revenue gaps','Discovered at month end','Visible in real time']],
+   cases:['CS01']},
+
+  {n:'11',layer:'found',name:'KPI + Visibility Framework',
+   hook:'The numbers that tell you how the business is really doing.',
+   tag:'Foundational',
+   what:'A defined set of numbers that tell you how the business is actually performing — collected consistently, owned by specific people, reviewed on a set schedule. Not a dashboard for show. A decision-making tool.',
+   who:'Founders making real business decisions — hiring, pricing, cutting, investing — without a reliable, current, trusted view of the numbers.',
+   need:['You have data but it lives in three places and none of them agree','You make hiring or investment calls on feel rather than what the numbers say','Different people quote different versions of the same metric'],
+   ba:[['Performance view','Estimated, approximate, felt','Measured, current, visible'],['Decision basis','Instinct and assumption','Data with named owners'],['Problem detection','After it\'s become expensive','Early, while it\'s still addressable']],
+   cases:['CS01','CS03','CS04']},
+
+  {n:'12',layer:'found',name:'Capital Mapping',
+   hook:'Where the money actually goes — current, by function.',
+   tag:'Foundational',
+   what:'A structured, maintained view of how money flows through your business. What is being spent, by which function, on what, and what it produces. Built to be used in decisions — not just reported once and filed.',
+   who:'Founders making spending, hiring, or investment decisions without a clear, current, trusted picture of where capital is actually going.',
+   need:['You know roughly what you spend but couldn\'t break it down by function right now','You suspect capital inefficiency somewhere but can\'t point to where','You\'re under capital pressure and cutting feels like guessing'],
+   ba:[['Spending visibility','Approximate, periodic, incomplete','Current, broken down by function'],['Decision basis','What feels right given rough numbers','What the actual numbers show'],['Capital-pressure response','Cutting based on instinct','Cutting based on what the numbers actually show']],
+   cases:['CS01']}
+];
+
+/* ── Render ── */
+const wrap=document.getElementById('sysWrap');
+const ARR='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+const TOG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
+
+LAYERS.forEach(layer=>{
+  const systems=SYSTEMS.filter(s=>s.layer===layer.key);
+  const layerEl=document.createElement('div');
+  layerEl.className='sys-layer';layerEl.dataset.layer=layer.key;
+
+  layerEl.innerHTML=`<div class="layer-head" data-layer="${layer.key}">
+    <div class="lh-left"><span class="lh-n">${layer.n}</span><h2 class="lh-t">${layer.t}</h2></div>
+    <p class="lh-desc">${layer.desc}</p>
+  </div>`;
+
+  systems.forEach((s,si)=>{
+    const rowEl=document.createElement('div');
+    rowEl.className='sys-entry';rowEl.dataset.layer=s.layer;
+
+    const need=s.need.map(x=>`<li>${x}</li>`).join('');
+    const baRows=s.ba.map(r=>`<div class="ba-row"><span class="ba-dim">${r[0]}</span><span class="ba-wo">${r[1]}</span><span class="ba-wi">${r[2]}</span></div>`).join('');
+    const cases=s.cases.map(c=>`<a class="sp-link" href="#">${c} <span class="a">→</span></a>`).join('');
+
+    rowEl.innerHTML=`
+      <button class="sys-row" aria-expanded="false">
+        <span class="sr-n">${s.n}</span>
+        <div class="sr-body">
+          <div class="sr-name">${s.name}</div>
+          <div class="sr-hook">${s.hook}</div>
+        </div>
+        <span class="sr-tag">${s.tag}</span>
+        <span class="sr-arr" aria-hidden="true">${ARR}</span>
+      </button>
+      <div class="sys-panel">
+        <div class="sys-panel-in">
+          <div>
+            <p class="sp-what">${s.what}</p>
+            <span class="sp-section-l">Who it's for</span>
+            <p class="sp-who">${s.who}</p>
+            <div class="sp-need" style="margin-top:24px">
+              <span class="sp-section-l">You need this when</span>
+              <ul>${need}</ul>
+            </div>
+          </div>
+          <div class="sp-div"></div>
+          <div>
+            <span class="sp-ba-l">Without it — With it</span>
+            <div class="ba-table">
+              <div class="ba-head">
+                <div class="ba-hcell"></div>
+                <div class="ba-hcell">Without</div>
+                <div class="ba-hcell" style="background:var(--pine06);color:var(--pine)">With it</div>
+              </div>
+              ${baRows}
+            </div>
+            <div class="sp-links" style="margin-top:20px">
+              <span class="sp-section-l" style="display:block;margin-bottom:12px">Installed in</span>
+              ${cases}
+            </div>
+          </div>
+        </div>
+      </div>`;
+    layerEl.appendChild(rowEl);
+  });
+  wrap.appendChild(layerEl);
+});
+
+/* ── Accordion ── */
+const allRows=Array.from(document.querySelectorAll('.sys-row'));
+function setPanel(row,open){
+  const entry=row.closest('.sys-entry');
+  const panel=entry.querySelector('.sys-panel');
+  const panelIn=entry.querySelector('.sys-panel-in');
+  entry.classList.toggle('open',open);
+  panel.style.maxHeight=open?panelIn.scrollHeight+'px':'0px';
+  row.setAttribute('aria-expanded',String(open));
+}
+allRows.forEach(row=>{
+  row.addEventListener('click',()=>{
+    const entry=row.closest('.sys-entry');
+    const isOpen=entry.classList.contains('open');
+    // close all
+    allRows.forEach(r=>setPanel(r,false));
+    if(!isOpen){
+      setPanel(row,true);
+      setTimeout(()=>{
+        const y=row.getBoundingClientRect().top+scrollY-90;
+        scrollTo({top:y,behavior:'smooth'});
+      },60);
+    }
+  });
+});
+addEventListener('resize',()=>allRows.forEach(r=>{if(r.closest('.sys-entry').classList.contains('open'))setPanel(r,true);}),{passive:true});
+
+/* ── Staggered reveal ── */
+const allSysRows=document.querySelectorAll('.sys-row');
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){
+    const idx=Array.from(allSysRows).indexOf(e.target);
+    setTimeout(()=>e.target.classList.add('in'),idx*36);
+    io.unobserve(e.target);
+  }
+}),{threshold:.06});
+allSysRows.forEach(r=>io.observe(r));
+
+/* ── Filter ── */
+let activeLayer='all';
+const fbtns=document.querySelectorAll('.fbtn[data-layer]');
+fbtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    fbtns.forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    activeLayer=btn.dataset.layer;
+    // close all panels first
+    allRows.forEach(r=>setPanel(r,false));
+    // hide/show rows and headers
+    document.querySelectorAll('.sys-entry').forEach(e=>{
+      e.querySelector('.sys-row').classList.toggle('hide',activeLayer!=='all'&&e.dataset.layer!==activeLayer);
+    });
+    document.querySelectorAll('.layer-head').forEach(h=>{
+      const visible=activeLayer==='all'||h.dataset.layer===activeLayer;
+      h.classList.toggle('hide',!visible);
+    });
+  });
+});
+
+/* ── Hash: open system from link e.g. systems.html#control-tower ── */
+function slugOf(name){return name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');}
+function openFromHash(){
+  const h=location.hash.replace('#','');
+  if(!h)return;
+  const row=allRows.find(r=>{
+    const name=r.querySelector('.sr-name').textContent.trim();
+    return slugOf(name)===h;
+  });
+  if(row){allRows.forEach(r=>setPanel(r,false));setPanel(row,true);setTimeout(()=>{const y=row.getBoundingClientRect().top+scrollY-90;scrollTo({top:y,behavior:'smooth'});},300);}
+}
+addEventListener('load',()=>setTimeout(openFromHash,300));
+addEventListener('hashchange',openFromHash);
+
+/* ── Rail ── */
+const rf=document.getElementById('railfill');
+addEventListener('scroll',()=>{rf.style.height=Math.min(scrollY/(document.body.scrollHeight-innerHeight)*100,100)+'%';},{passive:true});
+
+/* ── Nav ── */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>40),{passive:true});
+
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
