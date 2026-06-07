@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="icon" type="image/svg+xml" href="../assets/ngb.svg">
+   <link rel="icon" type="image/svg+xml" img src="assets/ngb.svg">
 <meta name="theme-color" content="#F4F1E9">
 <title>ORR | Engineering Execution Infrastructure</title>
 <meta name="description" content="ORR diagnoses what's breaking in your operations, installs the systems that fix it, and leaves them running — without you. Fixed scope. Real outcomes.">
@@ -112,8 +112,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opa
   letter-spacing:.24em;text-transform:uppercase;color:var(--ink38)}
 .nav-r{margin-left:auto;display:flex;align-items:center;gap:30px}
 .nav-r a{font-family:var(--body);font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ink54);transition:color .25s}
-.nav-r a:hover{color:var(--ink)}
+  color:var(--pine-b);transition:color .25s}
+.nav-r a:hover{color:var(--pine)}
 .nav-cta{border:1px solid var(--ink);padding:8px 18px;color:var(--ink)!important;letter-spacing:.12em;
   transition:background .25s,color .25s,border-color .25s}
 .nav-cta:hover{background:var(--pine);border-color:var(--pine);color:var(--crm)!important}
@@ -481,16 +481,16 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
 <!-- NAV -->
 <header id="nav">
   <a class="brand" href="#hero" aria-label="ORR home">
-  <img src="../assets/in1.svg" alt="ORR Logo" class="nav-logo"/>
+  <img src="assets/in1.svg" alt="ORR Logo" class="nav-logo"/>
 </a>
   <span class="nav-mid">Engineering Execution Infrastructure</span>
   <nav class="nav-r">
-    <a href="#diag">Diagnose</a>
-    <a href="#proof">Work</a>
-    <a href="#install">Systems</a>
-    <a href="#eng">Engage</a>
-    <a href="#begin" class="nav-cta">Begin →</a>
-  </nav>
+    <a href="index.html#diag">Diagnose</a>
+    <a href="work/work.html">Work</a>
+    <a href="systems/systems.html">Systems</a>
+    <a href="index.html#eng">Engage</a>
+    <a href="index.html#begin" class="nav-cta">Begin →</a>
+</nav>
 </header>
 
 <!-- §1 HERO -->
@@ -732,7 +732,7 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
 <section id="begin">
   <div class="begin-wrap">
     <div class="begin-left r">
-      <img src="../assets/in1.svg" alt="ORR Logo" class="ft-logo"/>
+      <img src="assets/in1.svg" alt="ORR Logo" class="ft-logo"/>
       <p class="begin-stmt">The businesses that run without their founders weren't built by accident.<br><em>They were engineered.</em></p>
       <p class="begin-alt">Prefer to talk first? <a href="#begin">Book a 20-minute diagnosis call →</a><br>We respond within one business day.</p>
     </div>
@@ -760,7 +760,7 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
 <footer>
   <div class="ft-brand">
     <div class="ft-bw">
-  <img src="../assets/cm1.svg" alt="ORR Logo" class="begin-logo"/>
+  <img src="assets/cm1.svg" alt="ORR Logo" class="begin-logo"/>
   
 </div>
     <span class="ft-tag">Engineering Execution Infrastructure — <br>so your business runs without you.</span>
@@ -769,14 +769,22 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
   <div class="ft-div"></div>
   <nav class="ft-nav">
     <span class="ft-l">Navigate</span>
-    <a href="#diag">Diagnose</a><a href="#proof">Work</a><a href="#install">Systems</a><a href="#eng">Engage</a><a href="#begin">Begin</a>
-  </nav>
+    <a href="index.html#diag">Diagnose</a>
+    <a href="work/work.html">Work</a>
+    <a href="systems/systems.html">Systems</a>
+    <a href="index.html#eng">Engage</a>
+    <a href="index.html#begin">Begin</a>
+</nav>
   <div class="ft-div"></div>
   <div class="ft-close">
     <p class="ft-stmt">Built in. Not bolted on.<em>So your business runs without you.</em></p>
     <div class="ft-legal">
       <span class="ft-copy">© <span id="yr"></span> ORR — All rights reserved</span>
-      <div class="ft-ll"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div>
+      <div class="ft-ll">
+         <a href="legal/privacy.html">Privacy</a>
+         <a href="legal/terms.html">Terms</a>
+         <a href="legal/disclaimer.html">Disclaimer</a>
+      </div>
       <p class="ft-disc">ORR provides operational consulting, advisory and embedded execution services. Results reflect prior client engagements and are not guarantees of future outcomes. All client information is kept strictly confidential.</p>
     </div>
   </div>
