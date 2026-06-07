@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="../../assets/ngb.svg">
+<link rel="icon" type="image/svg+xml" href="assets/ngb-v2.svg">
 <meta name="theme-color" content="#F1ECE1">
 <title>Insight 01 — Decision Drag · ORR Codex</title>
 <meta name="description" content="Decision drag gets worse with every hire you make. Growth doesn't fix the bottleneck. It multiplies it.">
@@ -48,7 +48,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opa
 .brand{display:flex;align-items:center;gap:11px}
 .brand .seal{width:26px;height:26px;color:var(--pine)}
 .brand .bw{font-family:var(--disp);font-size:22px;font-weight:400;letter-spacing:.16em;color:var(--ink)}
-.nav-logo{height:44px;width:auto}
+.nav-logo{height:55px;width:55px}
 .nav-mid{position:absolute;left:50%;transform:translateX(-50%);font-family:var(--body);font-size:10px;
   letter-spacing:.24em;text-transform:uppercase;color:var(--ink38)}
 .nav-r{margin-left:auto;display:flex;align-items:center;gap:30px}
@@ -224,7 +224,7 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
 .ft-bw{display:flex;align-items:center;gap:11px}
 .ft-bw .seal{width:30px;height:30px;color:var(--mint)}
 .ft-bw .w{font-family:var(--disp);font-size:26px;letter-spacing:.14em}
-.ft-logo{height:36px;width:auto}
+.ft-logo{height:120px;width:120px}
 .ft-tag{font-size:12px;color:var(--crm54);line-height:1.55;max-width:34ch}
 .ft-nav{display:flex;flex-direction:column;gap:13px}
 .ft-l{font-family:var(--mono);font-size:8.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--crm38);margin-bottom:2px}
@@ -259,25 +259,23 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
 <div id="rail" aria-hidden="true"><div id="railfill"></div></div>
 
 <header id="nav">
-  <a class="brand" href="../../index.html" aria-label="ORR home">
-    <img src="../../assets/in1.svg" alt="ORR Logo" class="nav-logo"/>
+  <a class="brand" href="index.html" aria-label="ORR home">
+    <img src="assets/in1.svg" alt="ORR Logo" class="nav-logo"/>
   </a>
   <span class="nav-mid">Engineering Execution Infrastructure</span>
     <nav class="nav-r">
-    <a href="../../index.html#diag">Diagnose</a>
-    <a href="../../index.html#proof">Work</a>
-    <a href="../../index.html#install">Systems</a>
-    <a href="../../index.html#eng">Engage</a>
-    <a class="cur" href="../codex.html">Codex</a>
-    <a href="../../index.html#begin" class="nav-cta">Begin →</a>
-  </nav>
+    <a href="index.html#diag">Diagnose</a>
+    <a href="work/work.html">Work</a>
+    <a href="systems/systems.html">Systems</a>
+    <a href="index.html#begin" class="nav-cta">Begin →</a>
+    </nav>
 </header>
 
 <!-- BREADCRUMB -->
 <nav id="crumb" aria-label="Breadcrumb">
-  <a class="crumb-a" href="../codex.html">Codex</a>
+  <a class="crumb-a" href="codex.html">Codex</a>
   <span class="crumb-sep" aria-hidden="true"></span>
-  <a class="crumb-a" href="../codex.html">Insights</a>
+  <a class="crumb-a" href="codex.html">Insights</a>
   <span class="crumb-sep" aria-hidden="true"></span>
   <span class="crumb-cur">Insight 01</span>
 </nav>
@@ -365,7 +363,7 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
         <span class="connected-kicker">Connected System</span>
         <span class="connected-name">Decision Rights Framework</span>
       </div>
-      <a class="connected-link" href="../../systems.html#decision-rights">
+      <a class="connected-link" href="systems.html#decision-rights">
         See how it works →
       </a>
     </div>
@@ -383,15 +381,15 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
     </div>
     <div class="cta-div" aria-hidden="true"></div>
     <div class="cta-r r d1">
-      <a href="../../index.html#diag" class="cta-btn">Run the 60-second diagnostic →</a>
-      <a href="../../index.html#begin" class="cta-alt">or book a call</a>
+      <a href="index.html#diag" class="cta-btn">Run the 60-second diagnostic →</a>
+      <a href="index.html#begin" class="cta-alt">or book a call</a>
     </div>
   </div>
 </section>
 
 <!-- PREV / NEXT -->
 <nav id="entrynav" aria-label="Navigate entries">
-  <button class="enav" onclick="location.href='../codex.html'" aria-label="Back to Codex">
+  <button class="enav" onclick="location.href='codex.html'" aria-label="Back to Codex">
     <span class="enav-dir">← Codex</span>
     <span class="enav-t">All Entries</span>
     <span class="enav-d">Return to the full index</span>
@@ -407,24 +405,26 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
 <footer>
   <div class="ft-brand">
     <div class="ft-bw">
-      <img src="../../assets/cm1.svg" alt="ORR Logo" class="ft-logo"/>
+      <img src="assets/cm1.svg" alt="ORR Logo" class="ft-logo"/>
     </div>
     <span class="ft-tag">Engineering Execution Infrastructure — so your business runs without you.</span>
   </div>
   <div class="ft-div"></div>
   <nav class="ft-nav">
     <span class="ft-l">Navigate</span>
-    <a href="../codex.html">Codex</a>
-    <a href="../../systems.html">Systems</a>
-    <a href="../../index.html#eng">Engage</a>
-    <a href="../../index.html#begin">Begin</a>
-  </nav>
+    <a href="index.html#diag">Diagnose</a>
+    <a href="work/work.html">Work</a>
+    <a href="systems/systems.html">Systems</a>
+    <a href="index.html#begin">Begin</a>
+</nav>
   <div class="ft-div"></div>
   <div class="ft-close">
     <p class="ft-stmt">Built in. Not bolted on.<em>So your business runs without you.</em></p>
     <div class="ft-legal">
       <span class="ft-copy">© <span id="yr"></span> ORR — All rights reserved</span>
-      <div class="ft-ll"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div>
+      <div class="ft-ll"><a href="../../legal/privacy.html">Privacy</a>
+      <a href="../../legal/terms.html">Terms</a>
+      <a href="../../legal/disclaimer.html">Disclaimer</a></div>
       <p class="ft-disc">ORR provides operational consulting, advisory and embedded execution services. Results reflect prior client engagements and are not guarantees of future outcomes.</p>
     </div>
   </div>
