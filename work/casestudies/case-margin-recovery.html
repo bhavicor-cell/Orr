@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="assets/ngb-v2.svg">
+<link rel="icon" type="image/svg+xml" href="../../assets/ngb-v2.svg">
 <meta name="theme-color" content="#F1ECE1">
 <title>CS01 — $150K Recovered · ORR Work</title>
 <meta name="description" content="How ORR recovered $150K in margin leakage within 90 days across a multi-venture group.">
@@ -41,13 +41,10 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opa
 #rail{position:fixed;left:0;top:0;bottom:0;width:2px;background:var(--ink06);z-index:7000;pointer-events:none}
 #railfill{position:absolute;top:0;left:0;right:0;height:0;background:var(--pine)}
 
-/* ══ NAV ══ */
 #nav{position:fixed;top:0;left:0;right:0;z-index:900;height:62px;display:flex;align-items:center;padding:0 64px;
   transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
 #nav.solid{background:rgba(241,236,225,.88);backdrop-filter:blur(18px) saturate(1.3);border-color:var(--line)}
 .brand{display:flex;align-items:center;gap:11px}
-.brand .seal{width:26px;height:26px;color:var(--pine)}
-.brand .bw{font-family:var(--disp);font-size:22px;font-weight:400;letter-spacing:.16em;color:var(--ink)}
 .nav-logo{height:55px;width:55px}
 .nav-mid{position:absolute;left:50%;transform:translateX(-50%);font-family:var(--body);font-size:10px;
   letter-spacing:.24em;text-transform:uppercase;color:var(--ink38)}
@@ -61,7 +58,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opa
 .nav-cta:hover{background:var(--pine);border-color:var(--pine);color:var(--crm)!important}
 @media(max-width:820px){#nav{padding:0 22px}.nav-mid{display:none}.nav-r a:not(.nav-cta){display:none}}
 
-/* ══ BREADCRUMB ══ */
 #crumb{position:relative;z-index:1;margin-top:62px;padding:14px 64px;
   border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
 .crumb-a{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
@@ -71,11 +67,9 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opa
 .crumb-cur{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink54)}
 @media(max-width:820px){#crumb{padding:14px 22px}}
 
-/* ══ MASTHEAD ══ */
 #masthead{position:relative;z-index:1}
 .mast-w{max-width:1200px;margin:0 auto;padding:0 64px}
 
-/* The big stat — the first thing you see */
 .mast-stat-band{padding:64px 0 48px;border-bottom:1px solid var(--line);
   display:grid;grid-template-columns:auto 1fr;gap:0 64px;align-items:center}
 .mast-stat{font-family:var(--disp);font-weight:300;font-size:clamp(80px,12vw,176px);
@@ -93,7 +87,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opa
   line-height:1.6;color:var(--ink54);max-width:50ch}
 @keyframes fIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* Meta row */
 .mast-meta{display:flex;align-items:center;gap:0;padding:20px 0;border-bottom:1px solid var(--line)}
 .meta-item{padding:0 32px 0 0;margin-right:32px;border-right:1px solid var(--line)}
 .meta-item:last-child{border-right:none;margin-right:0}
@@ -108,30 +101,24 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opa
   .meta-item{padding-right:0;margin-right:0;border-right:none}
 }
 
-/* ══ BODY ══ */
 #body{position:relative;z-index:1}
 .body-w{max-width:1200px;margin:0 auto;padding:0 64px;
   display:grid;grid-template-columns:1fr 340px;gap:0 64px;align-items:start}
 
-/* Reading column */
 .read-col{padding:64px 0 100px}
 
-/* Section label */
 .sec-label{font-family:var(--mono);font-size:9px;letter-spacing:.26em;text-transform:uppercase;
   color:var(--pine);display:flex;align-items:center;gap:12px;margin-bottom:24px}
 .sec-label::before{content:'';width:16px;height:1px;background:var(--pine)}
 
-/* Body text */
 .body-text{font-family:var(--body);font-size:16px;font-weight:300;line-height:1.82;
   color:var(--ink72);margin-bottom:18px;max-width:62ch}
 .body-text:last-child{margin-bottom:0}
 .body-text b{color:var(--ink);font-weight:400}
 
-/* Narrative block */
 .n-block{margin-bottom:56px;padding-bottom:56px;border-bottom:1px solid var(--line)}
 .n-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
 
-/* Bullet list */
 .n-list{list-style:none;margin-top:20px}
 .n-list li{display:flex;gap:16px;align-items:flex-start;
   padding:14px 0;border-bottom:1px solid var(--lineL);
@@ -141,12 +128,10 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opa
 .n-list li::before{content:'';width:8px;height:8px;border:1px solid var(--pine);
   border-radius:50%;flex-shrink:0;margin-top:8px;opacity:.7}
 
-/* Pull quote — inside narrative */
 .pull{border-left:2px solid var(--pine);padding:6px 0 6px 28px;margin:32px 0}
 .pull p{font-family:var(--disp);font-style:italic;font-weight:300;
   font-size:clamp(18px,1.8vw,24px);line-height:1.5;color:var(--ink)}
 
-/* Sidebar column */
 .side-col{padding:64px 0 100px;position:sticky;top:62px;
   max-height:calc(100vh - 62px);overflow-y:auto;
   scrollbar-width:none}
@@ -157,7 +142,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opa
 .side-l{font-family:var(--mono);font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;
   color:var(--ink38);display:block;margin-bottom:20px}
 
-/* Outcome stats */
 .outcome-item{padding:16px 0;border-bottom:1px solid var(--lineL)}
 .outcome-item:first-child{border-top:1px solid var(--lineL)}
 .outcome-item:last-child{border-bottom:none}
@@ -165,7 +149,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opa
   line-height:1;letter-spacing:-.02em;color:var(--pine);display:block;margin-bottom:5px}
 .outcome-d{font-size:13px;line-height:1.55;color:var(--ink54)}
 
-/* Founder quote sidebar */
 .fq{position:relative;padding-left:20px}
 .fq::before{content:'';position:absolute;left:0;top:2px;bottom:2px;
   width:2px;background:var(--pine);opacity:.4}
@@ -174,7 +157,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opa
 .fq-attr{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--ink38)}
 
-/* Systems installed */
 .sys-link{width:100%;background:none;border:none;border-top:none;border-left:none;border-right:none;
   border-bottom:1px solid var(--lineL);display:flex;align-items:center;justify-content:space-between;
   gap:12px;padding:13px 0;cursor:pointer;text-align:left;color:var(--ink);
@@ -192,12 +174,10 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opa
   .read-col{padding-bottom:48px}
 }
 
-/* ══ DARK CTA BAND ══ */
 #ctaband{position:relative;z-index:1;background:var(--dark);color:var(--crm);padding:80px 64px}
 .cta-band-w{max-width:1200px;margin:0 auto;display:grid;
   grid-template-columns:1fr 1px .65fr;gap:0 64px;align-items:center}
 .cta-div{background:linear-gradient(to bottom,transparent,var(--crm18) 20%,var(--crm18) 80%,transparent)}
-.cta-l{}
 .cta-kicker{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
   color:var(--mint);margin-bottom:18px;display:flex;align-items:center;gap:12px}
 .cta-kicker::before{content:'';width:14px;height:1px;background:var(--mint)}
@@ -216,7 +196,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opa
 .cta-alt:hover{color:var(--mint);border-color:var(--mint)}
 @media(max-width:820px){#ctaband{padding:60px 22px}.cta-band-w{grid-template-columns:1fr;gap:36px}.cta-div{display:none}}
 
-/* ══ PREV / NEXT ══ */
 #entrynav{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
 .enav{background:none;border:none;cursor:pointer;text-align:left;color:var(--ink);
   padding:40px 64px;display:flex;flex-direction:column;gap:9px;
@@ -237,7 +216,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opa
   .enav.next{border-left:none;border-top:1px solid var(--line);align-items:flex-start;text-align:left}
 }
 
-/* ══ FOOTER ══ */
 footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);border-top:2px solid var(--pine);
   padding:68px 64px 44px;display:grid;grid-template-columns:1.3fr 1px 1fr 1px 1.3fr;gap:0 56px}
 .ft-div{background:linear-gradient(to bottom,var(--crm18),transparent);align-self:stretch}
@@ -267,7 +245,6 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
   .ft-disc{text-align:left;max-width:100%}
 }
 
-/* reveal */
 .r{opacity:0;transform:translateY(18px);transition:opacity .9s var(--e2),transform .9s var(--e2)}
 .r.in{opacity:1;transform:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
@@ -280,31 +257,28 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
 <div id="rail" aria-hidden="true"><div id="railfill"></div></div>
 
 <header id="nav">
-  <a class="brand" href="index.html" aria-label="ORR home">
-    <img src="assets/in1.svg" alt="ORR Logo" class="nav-logo"/>
+  <a class="brand" href="../../index.html" aria-label="ORR home">
+    <img src="../../assets/in1.svg" alt="ORR Logo" class="nav-logo"/>
   </a>
   <span class="nav-mid">Engineering Execution Infrastructure</span>
     <nav class="nav-r">
-    <a href="index.html#diag">Diagnose</a>
-    <a href="work/work.html">Work</a>
-    <a href="systems/systems.html">Systems</a>
-    <a href="index.html#begin" class="nav-cta">Begin →</a>
+    <a href="../../index.html#diag">Diagnose</a>
+    <a href="../work.html">Work</a>
+    <a href="../../systems/systems.html">Systems</a>
+    <a href="../../index.html#begin" class="nav-cta">Begin →</a>
     </nav>
 </header>
 
-<!-- BREADCRUMB -->
 <nav id="crumb" aria-label="Breadcrumb">
-  <a class="crumb-a" href="Work.html">Work</a>
+  <a class="crumb-a" href="../work.html">Work</a>
   <span class="crumb-sep" aria-hidden="true"></span>
-  <a class="crumb-a" href="Work.html">Case Studies</a>
+  <a class="crumb-a" href="../work.html">Case Studies</a>
   <span class="crumb-sep" aria-hidden="true"></span>
   <span class="crumb-cur">CS01</span>
 </nav>
 
-<!-- MASTHEAD -->
 <section id="masthead">
   <div class="mast-w">
-
     <div class="mast-stat-band">
       <div class="mast-stat" aria-hidden="true">$150K</div>
       <div class="mast-stat-r">
@@ -336,11 +310,9 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
   </div>
 </section>
 
-<!-- BODY -->
 <section id="body">
   <div class="body-w">
 
-    <!-- READ COLUMN -->
     <div class="read-col">
 
       <div class="n-block r">
@@ -382,7 +354,6 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
 
     </div>
 
-    <!-- SIDEBAR -->
     <div class="side-col">
 
       <div class="side-block r">
@@ -415,15 +386,15 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
 
       <div class="side-block r d2">
         <span class="side-l">Systems Installed</span>
-        <button class="sys-link" onclick="location.href='systems.html#order-to-cash'">
+        <button class="sys-link" onclick="location.href='../../systems/systems.html#order-to-cash'">
           Order-to-Cash Cadence
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </button>
-        <button class="sys-link" onclick="location.href='systems.html#capital-mapping'">
+        <button class="sys-link" onclick="location.href='../../systems/systems.html#capital-mapping'">
           Capital Mapping
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </button>
-        <button class="sys-link" onclick="location.href='systems.html#kpi-visibility'">
+        <button class="sys-link" onclick="location.href='../../systems/systems.html#kpi-visibility'">
           KPI + Visibility Framework
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </button>
@@ -432,7 +403,7 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
       <div class="side-block r d3">
         <span class="side-l">Engagement Type</span>
         <p style="font-size:13.5px;line-height:1.7;color:var(--ink72)">Ops Install Sprint — fixed scope, fixed price. Diagnose, build, install, hand over. The engagement ends when the system runs without us.</p>
-        <a href="index.html#eng" style="display:inline-flex;align-items:center;gap:10px;margin-top:16px;font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--pine);border-bottom:1px solid var(--pine12);padding-bottom:3px;transition:gap .3s,border-color .3s">
+        <a href="../../index.html#eng" style="display:inline-flex;align-items:center;gap:10px;margin-top:16px;font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--pine);border-bottom:1px solid var(--pine12);padding-bottom:3px;transition:gap .3s,border-color .3s">
           See engagements <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
@@ -441,7 +412,6 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
   </div>
 </section>
 
-<!-- CTA BAND -->
 <section id="ctaband">
   <div class="cta-band-w">
     <div class="cta-l r">
@@ -451,15 +421,14 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
     </div>
     <div class="cta-div" aria-hidden="true"></div>
     <div class="cta-r r d1">
-      <a href="index.html#diag" class="cta-btn">Run the 60-second diagnostic →</a>
-      <a href="index.html#begin" class="cta-alt">or book a call</a>
+      <a href="../../index.html#diag" class="cta-btn">Run the 60-second diagnostic →</a>
+      <a href="../../index.html#begin" class="cta-alt">or book a call</a>
     </div>
   </div>
 </section>
 
-<!-- PREV / NEXT -->
 <nav id="entrynav" aria-label="Navigate entries">
-  <button class="enav" onclick="location.href='Work.html'" aria-label="Back to Work">
+  <button class="enav" onclick="location.href='../work.html'" aria-label="Back to Work">
     <span class="enav-dir">← Work</span>
     <span class="enav-t">All Entries</span>
     <span class="enav-d">Return to the full index</span>
@@ -471,21 +440,20 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
   </button>
 </nav>
 
-<!-- FOOTER -->
 <footer>
   <div class="ft-brand">
     <div class="ft-bw">
-      <img src="assets/cm1.svg" alt="ORR Logo" class="ft-logo"/>
+      <img src="../../assets/cm1.svg" alt="ORR Logo" class="ft-logo"/>
     </div>
     <span class="ft-tag">Engineering Execution Infrastructure — so your business runs without you.</span>
   </div>
   <div class="ft-div"></div>
   <nav class="ft-nav">
     <span class="ft-l">Navigate</span>
-    <a href="index.html#diag">Diagnose</a>
-    <a href="work/work.html">Work</a>
-    <a href="systems/systems.html">Systems</a>
-    <a href="index.html#begin">Begin</a>
+    <a href="../../index.html#diag">Diagnose</a>
+    <a href="../work.html">Work</a>
+    <a href="../../systems/systems.html">Systems</a>
+    <a href="../../index.html#begin">Begin</a>
 </nav>
   <div class="ft-div"></div>
   <div class="ft-close">
