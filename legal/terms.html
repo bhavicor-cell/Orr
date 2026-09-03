@@ -71,10 +71,14 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opa
   .cursor-dot.grow{width:40px;height:40px;margin:-20px 0 0 -20px;background:var(--mint);mix-blend-mode:difference}
 }
 
-/* ── TRAVELING VERTICAL RAIL ── */
+/* ── TRAVELING VERTICAL RAILS (left + mirrored right) ── */
 #vrail{position:fixed;left:0;top:0;bottom:0;width:2px;z-index:7000;pointer-events:none;
   background:var(--ink10)}
 #vrail-fill{position:absolute;top:0;left:0;width:100%;height:0;
+  background:linear-gradient(to bottom,var(--pine),var(--mint));transition:height .15s linear}
+#vrail-r{position:fixed;right:0;top:0;bottom:0;width:2px;z-index:7000;pointer-events:none;
+  background:var(--ink10)}
+#vrail-r-fill{position:absolute;top:0;left:0;width:100%;height:0;
   background:linear-gradient(to bottom,var(--pine),var(--mint));transition:height .15s linear}
 
 /* ── MAGNETIC BUTTONS (transition) ── */
@@ -184,21 +188,27 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
 #nav{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
 footer{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
 
-@media(max-width:400px){#vrail{width:1px}}
+@media(max-width:400px){#vrail,#vrail-r{width:1px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* ══ DOCUMENT ══ */
-/* HEADER — minimal, on vellum */
-#doc-head{position:relative;padding:calc(62px + clamp(44px,6vw,78px)) var(--pad) clamp(30px,4vw,46px);
- border-bottom:1px solid var(--line)}
-.dh-wrap{max-width:1120px;margin:0 auto}
-.dh-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink38);margin-bottom:20px}
+/* HEADER — dark title block (matches the homepage's dark/cream rhythm) */
+#doc-head{position:relative;padding:calc(62px + clamp(44px,6vw,78px)) var(--pad) clamp(34px,4.4vw,52px);
+ background:var(--dark);color:var(--crm);border-bottom:1px solid var(--crm18);overflow:hidden}
+/* faint blueprint grid, as on the homepage's dark sections */
+#doc-head::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
+ background-image:
+  linear-gradient(rgba(241,236,225,.03) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(241,236,225,.03) 1px,transparent 1px);
+ background-size:60px 60px}
+.dh-wrap{max-width:1120px;margin:0 auto;position:relative}
+.dh-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--crm38);margin-bottom:20px}
 .dh-title{font-family:var(--disp);font-weight:300;font-size:clamp(38px,6vw,74px);line-height:1.0;
- letter-spacing:-.03em;margin-bottom:20px;max-width:18ch}
-.dh-title em{font-style:italic;color:var(--pine)}
+ letter-spacing:-.03em;margin-bottom:20px;max-width:18ch;color:var(--crm)}
+.dh-title em{font-style:italic;color:var(--mint)}
 .dh-stand{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(16px,1.8vw,20px);
- line-height:1.5;color:var(--ink72);max-width:56ch}
-.dh-eff{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink38);margin-top:20px}
+ line-height:1.5;color:var(--crm54);max-width:56ch}
+.dh-eff{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--crm38);margin-top:20px}
 
 /* BODY */
 #doc-body{max-width:1120px;margin:0 auto;padding:clamp(40px,5vw,64px) var(--pad) clamp(56px,7vw,96px);
@@ -278,13 +288,14 @@ table.dt tr:last-child td{border-bottom:none}
 </head>
 <body>
 
-<!-- TRAVELING RAIL -->
+<!-- TRAVELING RAILS -->
 <div id="vrail" aria-hidden="true"><div id="vrail-fill"></div></div>
+<div id="vrail-r" aria-hidden="true"><div id="vrail-r-fill"></div></div>
 <!-- CURSOR -->
 <div class="cursor-dot" id="cursorDot"></div>
 
 <!-- NAV -->
-<header id="nav" class="visible solid">
+<header id="nav" class="visible solid dark-mode">
   <a class="brand" href="../index.html" aria-label="ORR home">
     <img src="../assets/drk.svg" alt="ORR" class="nav-logo nav-logo-dark"/>
     <img src="../assets/crm.svg" alt="ORR" class="nav-logo nav-logo-light"/>
@@ -492,6 +503,9 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 /* rail fill (full-page scroll, identical to homepage) + contents scroll-spy — one frame */
 (function(){
   var vrailFill=document.getElementById('vrail-fill');
+  var vrailRFill=document.getElementById('vrail-r-fill');
+  var nav=document.getElementById('nav');
+  var head=document.getElementById('doc-head');
   var clauses=[].slice.call(document.querySelectorAll('.clause'));
   var links=[].slice.call(document.querySelectorAll('.idx a,.idx-panel a'));
   var map={}; links.forEach(function(a){var h=a.getAttribute('href').slice(1);(map[h]=map[h]||[]).push(a);});
@@ -499,7 +513,12 @@ document.getElementById('yr').textContent = new Date().getFullYear();
   function frame(){
     ticking=false;
     var y=scrollY, vh=innerHeight, total=document.body.scrollHeight-vh;
-    if(vrailFill) vrailFill.style.height=(total>0?Math.min(y/total,1)*100:0)+'%';
+    var pct=(total>0?Math.min(y/total,1)*100:0)+'%';
+    if(vrailFill) vrailFill.style.height=pct;
+    if(vrailRFill) vrailRFill.style.height=pct;
+    /* nav flips dark while the dark title block is under it, cream in the body —
+       this also swaps the logo to the cream mark, same as the homepage */
+    if(nav&&head) nav.classList.toggle('dark-mode', head.getBoundingClientRect().bottom>80);
     var lineY=vh*0.3, cur=null;
     clauses.forEach(function(c){ if(c.getBoundingClientRect().top<=lineY) cur=c.id; });
     links.forEach(function(a){a.classList.remove('on');});
