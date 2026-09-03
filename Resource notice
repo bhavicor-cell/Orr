@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0E2A24">
+<title>Resource Library — Notice | ORR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400&family=Anton&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   ORR — RESOURCE LIBRARY GATE
+   Drop the #orr-gate markup + this block's .orrg-* styles + the
+   script into resources.html. It shows once (localStorage), locks
+   scroll, and requires an affirmative click to proceed.
+   ══════════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --vellum:#F1ECE1;--ink:#1A1812;--ink54:rgba(26,24,18,.68);--ink38:rgba(26,24,18,.54);
+ --pine:#1A4D40;--dark:#0E2A24;--crm:#F1ECE1;--crm72:rgba(241,236,225,.86);
+ --crm54:rgba(241,236,225,.72);--crm38:rgba(241,236,225,.56);--crm18:rgba(241,236,225,.18);
+ --mint:#8FC9B7;--bronze:#9C7C49;
+ --disp:'Newsreader',Georgia,serif;--body:'Hanken Grotesk',system-ui,sans-serif;
+ --mono:'IBM Plex Mono',monospace;--ghost:'Anton',sans-serif;--e2:cubic-bezier(.16,1,.3,1);}
+html,body{background:var(--vellum);color:var(--ink);font-family:var(--body)}
+body{-webkit-font-smoothing:antialiased;min-height:100vh}
+
+/* ── demo backdrop only (NOT part of the component) ── */
+.demo{padding:120px 6vw;max-width:900px;margin:0 auto;filter:blur(0)}
+.demo h1{font-family:var(--disp);font-weight:300;font-size:clamp(34px,6vw,60px);letter-spacing:-.02em;line-height:1.05;margin-bottom:14px}
+.demo h1 em{font-style:italic;color:var(--pine)}
+.demo p{color:var(--ink54);max-width:60ch;line-height:1.8;margin-bottom:14px}
+.demo .tag{font-family:var(--mono);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--bronze);margin-bottom:24px}
+.demo .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px;margin-top:40px}
+.demo .card{border:1px solid rgba(26,24,18,.12);padding:22px;aspect-ratio:4/3;display:flex;flex-direction:column;justify-content:flex-end}
+.demo .card span{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--pine);margin-bottom:8px}
+.demo .card b{font-family:var(--disp);font-weight:400;font-size:18px}
+.demo .reopen{margin-top:50px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+ color:var(--pine);background:none;border:1px solid var(--pine);padding:12px 20px;cursor:pointer;transition:background .25s,color .25s}
+.demo .reopen:hover{background:var(--pine);color:var(--crm)}
+
+/* ══ GATE COMPONENT ══ */
+#orr-gate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
+ padding:24px;background:rgba(11,34,29,.72);backdrop-filter:blur(10px) saturate(1.1);
+ opacity:0;animation:gateFade .5s var(--e2) forwards}
+#orr-gate[hidden]{display:none}
+@keyframes gateFade{to{opacity:1}}
+
+.orrg-card{position:relative;width:min(620px,100%);max-height:calc(100vh - 48px);overflow:hidden;
+ background:var(--dark);color:var(--crm);border:1px solid var(--crm18);
+ box-shadow:0 40px 120px rgba(0,0,0,.55);display:flex;flex-direction:column;
+ transform:translateY(16px) scale(.985);opacity:0;animation:gateRise .6s var(--e2) .08s forwards}
+@keyframes gateRise{to{transform:none;opacity:1}}
+.orrg-card::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
+ background-image:linear-gradient(rgba(241,236,225,.045) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(241,236,225,.045) 1px,transparent 1px);background-size:40px 40px}
+.orrg-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+ background:linear-gradient(90deg,transparent,var(--mint),transparent)}
+
+.orrg-body{position:relative;z-index:1;padding:40px 42px 8px;overflow-y:auto}
+.orrg-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.26em;text-transform:uppercase;
+ color:var(--mint);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.orrg-eyebrow::before{content:'✦';font-size:9px}
+.orrg-h{font-family:var(--disp);font-weight:300;font-size:clamp(26px,4vw,38px);line-height:1.06;
+ letter-spacing:-.02em;margin-bottom:20px}
+.orrg-h em{font-style:italic;color:var(--mint)}
+.orrg-intro{font-size:14px;line-height:1.75;color:var(--crm72);margin-bottom:22px}
+
+.orrg-list{list-style:none;margin:0 0 24px;padding:0;border-top:1px solid var(--crm18)}
+.orrg-list li{position:relative;padding:14px 0 14px 26px;border-bottom:1px solid var(--crm18);
+ font-size:13px;line-height:1.65;color:var(--crm72)}
+.orrg-list li::before{content:'✦';position:absolute;left:0;top:16px;font-size:8px;color:var(--mint);opacity:.85}
+.orrg-list b{color:var(--crm);font-weight:600}
+
+.orrg-fine{font-family:var(--mono);font-size:10px;line-height:1.7;letter-spacing:.02em;color:var(--crm38);margin-bottom:6px}
+.orrg-fine a{color:var(--mint);border-bottom:1px solid rgba(143,201,183,.4)}
+
+.orrg-foot{position:relative;z-index:1;padding:22px 42px calc(28px + env(safe-area-inset-bottom));
+ border-top:1px solid var(--crm18);background:rgba(0,0,0,.18);
+ display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.orrg-leave{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+ color:var(--crm38);background:none;border:none;cursor:pointer;transition:color .25s;padding:8px 0}
+.orrg-leave:hover{color:var(--crm72)}
+.orrg-accept{display:inline-flex;align-items:center;gap:11px;font-family:var(--body);font-size:11px;font-weight:500;
+ letter-spacing:.12em;text-transform:uppercase;color:var(--dark);background:var(--crm);border:none;
+ padding:15px 26px;cursor:pointer;transition:background .3s,gap .3s}
+.orrg-accept:hover{background:var(--mint);gap:16px}
+.orrg-accept .a{transition:transform .3s}.orrg-accept:hover .a{transform:translateX(3px)}
+
+html.orr-lock,html.orr-lock body{overflow:hidden}
+
+@media(max-width:560px){
+ .orrg-body{padding:30px 24px 6px}
+ .orrg-foot{padding:18px 24px calc(22px + env(safe-area-inset-bottom));flex-direction:column-reverse;align-items:stretch}
+ .orrg-accept{justify-content:center;width:100%}
+ .orrg-leave{text-align:center}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ░░ DEMO PAGE BEHIND THE GATE (delete when integrating) ░░ -->
+<div class="demo" aria-hidden="true">
+  <div class="tag">ORR / Resource Library</div>
+  <h1>The library exists so founders can <em>understand their own business.</em></h1>
+  <p>Strategy, execution tools, legal &amp; compliance commentary, governance frameworks — most of it free. This is the page the gate sits in front of.</p>
+  <div class="grid">
+    <div class="card"><span>Article</span><b>The Outsider Test</b></div>
+    <div class="card"><span>Framework</span><b>Business Model Stress-Test</b></div>
+    <div class="card"><span>Commentary</span><b>DPDP — Plain Language</b></div>
+    <div class="card"><span>Template</span><b>Operating Structure</b></div>
+  </div>
+  <button class="reopen" onclick="localStorage.removeItem('orr_resource_notice');location.reload()">↺ Reset &amp; show the notice again</button>
+</div>
+
+<!-- ░░ GATE COMPONENT — lift this block ░░ -->
+<div id="orr-gate" role="dialog" aria-modal="true" aria-labelledby="orrg-title" hidden>
+  <div class="orrg-card">
+    <div class="orrg-body">
+      <div class="orrg-eyebrow">Notice before you continue</div>
+      <h2 class="orrg-h" id="orrg-title">Read this before using the <em>resource library.</em></h2>
+      <p class="orrg-intro">Everything published here — across business, strategy, operations, governance, risk, compliance, and commentary on laws and regulations in various jurisdictions — is provided for <b>general information and education only</b>. By continuing, you acknowledge and agree that:</p>
+      <ul class="orrg-list">
+        <li><b>This is not advice.</b> Nothing here is legal, financial, tax, accounting, regulatory, or other professional advice. ORR is not a law firm or other regulated professional practice. Any material discussing a law is general commentary, not an authoritative or current statement of the law.</li>
+        <li><b>It is general, not specific to you.</b> It is not tailored to your situation, covers subjects that differ by jurisdiction and change over time, and may be simplified, incomplete, or out of date.</li>
+        <li><b>No reliance.</b> Do not act, or refrain from acting, on anything here without advice from a professional qualified and licensed in the relevant field and jurisdiction. <b>All use is at your own risk.</b></li>
+        <li><b>No relationship; no liability.</b> Using the library creates no advisory or engagement relationship with ORR. To the fullest extent permitted by law, ORR accepts no liability for any loss arising from reliance on it.</li>
+        <li><b>Your own use only.</b> Resources are licensed for your own internal business use and may not be resold, redistributed, or republished. All remain the property of ORR or its licensors.</li>
+      </ul>
+      <p class="orrg-fine">Your use of the library is also governed by ORR&rsquo;s <a href="legal/disclaimer.html">Disclaimer</a>, <a href="legal/terms.html">Terms of Use</a>, and <a href="legal/privacy.html">Privacy Policy</a>.</p>
+    </div>
+    <div class="orrg-foot">
+      <button class="orrg-leave" type="button" id="orrgLeave">I don&rsquo;t agree — leave</button>
+      <button class="orrg-accept" type="button" id="orrgAccept">I understand and agree — continue <span class="a">&rarr;</span></button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ░░ GATE SCRIPT — lift this block ░░ */
+(function(){
+  var KEY='orr_resource_notice';        // remembers acceptance
+  var gate=document.getElementById('orr-gate');
+  if(!gate) return;
+  var accept=document.getElementById('orrgAccept');
+  var leave=document.getElementById('orrgLeave');
+
+  function open(){
+    gate.hidden=false;
+    document.documentElement.classList.add('orr-lock');
+    accept.focus();
+    document.addEventListener('keydown',trap);
+  }
+  function close(){
+    gate.hidden=true;
+    document.documentElement.classList.remove('orr-lock');
+    document.removeEventListener('keydown',trap);
+  }
+  function trap(e){
+    if(e.key==='Tab'){ // keep focus inside the dialog
+      var f=[leave,accept];var i=f.indexOf(document.activeElement);
+      if(e.shiftKey&&(i<=0)){e.preventDefault();accept.focus();}
+      else if(!e.shiftKey&&i===f.length-1){e.preventDefault();leave.focus();}
+    }
+  }
+
+  accept.addEventListener('click',function(){
+    try{localStorage.setItem(KEY,new Date().toISOString());}catch(_){}
+    close();
+  });
+  leave.addEventListener('click',function(){
+    // send visitors who decline back to the main site
+    window.location.href='index.html';
+  });
+
+  var seen=false;
+  try{seen=!!localStorage.getItem(KEY);}catch(_){}
+  if(!seen) open();
+})();
+</script>
+</body>
+</html>
