@@ -86,14 +86,11 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;background:var(--vell
 
 /* ══════════════════════════════════════════════════════════════
    SECTION SWEEP LINES — signature architectural element
-   Center-outward line draw on dark section entry
    ══════════════════════════════════════════════════════════════ */
 .sweep-line{position:relative}
 .sweep-line::after{content:'';position:absolute;top:0;left:50%;right:50%;height:1px;
   background:var(--mint);z-index:10;pointer-events:none;transition:none}
 .sweep-line.swept::after{left:0;right:0;transition:left 1s var(--e2),right 1s var(--e2)}
-
-/* Execution is now light/centered — sweep lines apply to remaining dark sections only */
 
 /* ── BLUEPRINT GRID on dark sections ── */
 .blueprint-grid{position:relative}
@@ -105,18 +102,16 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;background:var(--vell
 .blueprint-grid.swept>.bp-grid{opacity:1}
 
 /* ── MAGNETIC BUTTONS ── */
-.btn,.btn-outline,.model-btn,.sb-next,.sb-cta-save,.sb-cta-conv,.nav-cta{
+.btn,.btn-outline,.sb-next,.sb-cta-save,.sb-cta-conv,.nav-cta{
   transition:background .3s,color .3s,border-color .3s,gap .3s,transform .4s var(--spring),box-shadow .3s}
 @media(hover:hover){
-  .btn:hover,.btn-outline:hover,.model-btn:hover{box-shadow:0 4px 20px rgba(26,77,64,.15)}
+  .btn:hover,.btn-outline:hover{box-shadow:0 4px 20px rgba(26,77,64,.15)}
 }
 
 /* ── PHYSICAL CARD HOVER ── */
 @media(hover:hover){
   .pillar{transition:background .35s,transform .5s var(--spring),box-shadow .4s}
   .pillar:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,.08)}
-  .why-cat-cell{transition:background .3s,transform .4s var(--spring),box-shadow .3s}
-  .why-cat-cell:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.06)}
   .friction{transition:background .3s}
   .friction:hover{background:var(--pine06)}
   .phase{transition:background .3s,padding-left .3s var(--e1)}
@@ -151,9 +146,8 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;background:var(--vell
 .hero-h1 .l .char{display:inline-block;opacity:0;transform:translateY(14px);animation:charIn .6s var(--e2) forwards}
 @keyframes charIn{to{opacity:1;transform:none}}
 
-/* (exec-snap and strikethrough removed — section redesigned as centered light layout) */
-
 /* ── STRUCTURE BRIEF RESULT CASCADE ── */
+.sb-result .sb-verdict{opacity:0;transform:translateY(12px);transition:opacity .5s var(--e2) .05s,transform .5s var(--e2) .05s}
 .sb-result .sb-stage{opacity:0;transform:translateY(12px);transition:opacity .5s var(--e2) .1s,transform .5s var(--e2) .1s}
 .sb-result .sb-map{opacity:0;transform:translateY(12px);transition:opacity .5s var(--e2) .3s,transform .5s var(--e2) .3s}
 .sb-result .sb-dep{opacity:0;transform:translateY(12px);transition:opacity .5s var(--e2) .5s,transform .5s var(--e2) .5s}
@@ -161,7 +155,7 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;background:var(--vell
 .sb-result .sb-risk{opacity:0;transform:translateY(12px);transition:opacity .5s var(--e2) .9s,transform .5s var(--e2) .9s}
 .sb-result .sb-phase{opacity:0;transform:translateY(12px);transition:opacity .5s var(--e2) 1.1s,transform .5s var(--e2) 1.1s}
 .sb-result .sb-ctas{opacity:0;transform:translateY(12px);transition:opacity .5s var(--e2) 1.3s,transform .5s var(--e2) 1.3s}
-.sb-result.show .sb-stage,.sb-result.show .sb-map,.sb-result.show .sb-dep,
+.sb-result.show .sb-verdict,.sb-result.show .sb-stage,.sb-result.show .sb-map,.sb-result.show .sb-dep,
 .sb-result.show .sb-roadmap,.sb-result.show .sb-risk,.sb-result.show .sb-phase,
 .sb-result.show .sb-ctas{opacity:1;transform:none}
 
@@ -233,15 +227,6 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;background:var(--vell
 .dark-active .j-waypoint:hover .j-label{color:var(--crm)}
 .dark-active .j-waypoint.active .j-label{color:var(--mint)}
 
-@media(max-width:880px){
-  #journey{right:2px;height:50vh}
-  #journey .j-end{font-size:0}
-  .j-label{display:none!important}
-  .j-trail-dot{width:2px;height:2px}
-  .j-waypoint::before{font-size:7px}
-  .j-waypoint.active::before{font-size:10px}
-}
-
 /* ══════════════════════════════════════════════════════════════
    NAV
    ══════════════════════════════════════════════════════════════ */
@@ -305,10 +290,10 @@ html.m-lock,html.m-lock body{overflow:hidden}
    §01 — HERO
    ══════════════════════════════════════════════════════════════ */
 #hero{position:relative;z-index:1;min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:80px 42px 80px;overflow:visible;background:var(--vellum)}
-.hero-grid{max-width:1240px;margin:0 auto;width:100%;display:grid;grid-template-columns:1.1fr 1fr;gap:0 60px;align-items:center;position:relative}
+.hero-grid{max-width:1320px;margin:0 auto;width:100%;display:grid;grid-template-columns:1.55fr .45fr;gap:0 48px;align-items:center;position:relative}
 
 /* ghost "idea" */
-.hero-ghost{position:absolute;top:-8%;right:0;font-family:var(--ghost);font-size:clamp(180px,22vw,320px);text-transform:lowercase;
+.hero-ghost{position:absolute;top:-2%;right:0;font-family:var(--ghost);font-size:clamp(180px,22vw,320px);text-transform:lowercase;
   color:transparent;-webkit-text-stroke:1px var(--ink10);letter-spacing:-.02em;line-height:.85;pointer-events:none;
   opacity:0;animation:ghostIn 1.8s var(--e2) .3s forwards;user-select:none}
 @keyframes ghostIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
@@ -323,39 +308,43 @@ html.m-lock,html.m-lock body{overflow:hidden}
 .hero-solid em{font-style:normal}
 @keyframes solidIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
-.hero-content{position:relative;z-index:2;margin-left:-40px}
-.hero-h1{font-family:var(--disp);font-weight:300;font-size:clamp(40px,5.5vw,78px);line-height:1.02;letter-spacing:-.025em;margin-bottom:36px}
+/* pull = whatever slack exists outside the 1400 shell, capped at 40px.
+   Self-limiting: reaches 0 exactly when the shell meets the gutter, so it
+   can never drag the headline into the margin at any viewport width. */
+.hero-content{position:relative;z-index:2;
+  margin-left:calc(-1 * min(40px, max(0px, (100vw - 1320px)/2 - var(--pad))))}
+.hero-h1{font-family:var(--disp);font-weight:300;font-size:clamp(44px,6.4vw,94px);line-height:1.0;letter-spacing:-.028em;margin-bottom:36px}
 .hero-h1 .l{display:block;opacity:0;animation:lUp 1.1s var(--e2) forwards}
 .hero-h1 .l:first-child{color:var(--pine);white-space:nowrap}
 .hero-h1 .l:nth-child(1){animation-delay:.5s}
 .hero-h1 .l:nth-child(2){animation-delay:.68s}
 @keyframes lUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 .hero-h1 .rest{position:relative}
-.hero-h1 .rest sup{font-family:var(--body);font-size:16px;font-weight:400;vertical-align:super;color:var(--pine);letter-spacing:0;cursor:pointer;transition:color .3s}
-.hero-h1 .rest sup:hover{color:var(--pine-b)}
-.hero-em{font-style:italic;color:var(--pine);font-weight:300}
+.hero-em{font-style:italic;color:var(--pine);font-weight:300;font-size:1.1em;letter-spacing:-.03em}
 
 .hero-sub{font-family:var(--body);font-size:16px;font-weight:300;line-height:1.72;color:var(--ink72);max-width:62ch;margin-bottom:14px;
   opacity:0;animation:ghostIn 1s var(--e2) 1s forwards}
-.hero-diff{font-family:var(--disp);font-style:italic;font-weight:400;font-size:17px;color:var(--pine);margin-bottom:38px;
+.hero-diff{font-family:var(--disp);font-style:italic;font-weight:300;font-size:16px;
+  letter-spacing:.008em;color:var(--ink38);margin-bottom:38px;
   opacity:0;animation:ghostIn 1s var(--e2) 1.15s forwards}
 .hero-cta-wrap{display:flex;align-items:center;gap:24px;flex-wrap:wrap;opacity:0;animation:ghostIn 1s var(--e2) 1.3s forwards}
 .hero-micro{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink38);margin-top:20px;
   opacity:0;animation:ghostIn 1s var(--e2) 1.5s forwards}
-.hero-asterisk{font-family:var(--body);font-size:12.5px;line-height:1.72;color:var(--ink54);position:absolute;bottom:28px;left:42px;max-width:52ch;
-  opacity:0;animation:ghostIn 1s var(--e2) 2s forwards}
-.hero-asterisk sup{color:var(--pine)}
+
+/* mobile-only hero pieces — hidden until the mobile system turns them on */
+.hero-kicker{display:none}
+.hero-sub-m{display:none}
+.hero-cta-m{display:none}
 
 @media(max-width:880px){
   #hero{padding:calc(60px + env(safe-area-inset-top)) 22px 100px;min-height:100svh}
   .hero-grid{grid-template-columns:1fr;gap:0}
   .hero-ghost{position:relative;top:auto;right:auto;font-size:clamp(100px,28vw,160px);margin-bottom:-20px;opacity:0;animation:ghostIn 1.4s var(--e2) .3s forwards}
   .hero-solid{position:relative;bottom:auto;right:auto;text-align:left;font-size:clamp(48px,14vw,80px);margin-top:20px;margin-bottom:36px}
-  .hero-h1{font-size:clamp(32px,8.5vw,44px);margin-bottom:26px}
+  .hero-h1{font-size:clamp(34px,9vw,52px);margin-bottom:26px}
   .hero-sub{font-size:15px;max-width:none}
   .hero-cta-wrap{flex-direction:column;align-items:stretch}
   .btn{justify-content:center;padding:18px 28px}
-  .hero-asterisk{position:relative;bottom:auto;left:auto;margin-top:40px}
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -371,8 +360,7 @@ html.m-lock,html.m-lock body{overflow:hidden}
 .struct-head{display:grid;grid-template-columns:auto 1fr;gap:0 40px;align-items:end;margin-bottom:70px}
 .struct-h2{font-family:var(--disp);font-weight:300;font-size:clamp(36px,4.8vw,68px);line-height:1.0;letter-spacing:-.025em;min-width:0}
 .struct-h2 em{font-style:italic;color:var(--mint)}
-/* the answer, ghosted — sits in the space the question leaves open */
-.struct-answer{font-family:var(--ghost);font-size:clamp(44px,6vw,96px);text-transform:lowercase;
+.struct-answer{font-family:var(--ghost);font-size:clamp(40px,5.4vw,88px);text-transform:uppercase;
   color:transparent;-webkit-text-stroke:1px var(--crm18);letter-spacing:-.02em;line-height:.82;
   text-align:right;justify-self:end;pointer-events:none;user-select:none;white-space:nowrap;
   opacity:0;transform:translateY(14px);transition:opacity 1.4s var(--e2) .35s,transform 1.4s var(--e2) .35s}
@@ -404,162 +392,142 @@ html.m-lock,html.m-lock body{overflow:hidden}
   #structure{padding:88px 22px 92px}
   .struct-ghost{font-size:clamp(120px,32vw,200px);top:-30px}
   .struct-head{grid-template-columns:1fr;gap:18px 0;margin-bottom:52px}
-  .struct-answer{text-align:left;justify-self:start;font-size:clamp(56px,17vw,96px)}
+  .struct-answer{text-align:left;justify-self:start;font-size:clamp(50px,15vw,88px)}
   .pillars{grid-template-columns:1fr;border-top:none}
   .pillar{border-right:none;border-bottom:1px solid var(--crm18);padding:28px 0 32px}
   .pillar:first-child{border-top:1px solid var(--crm18)}
 }
 
 /* ══════════════════════════════════════════════════════════════
-   §03 — THE FOUNDER PROBLEM (WAGON)
+   §03 — THE PLATE
+   The image is the argument. Everything on it is live type
+   positioned in percentages, so it scales in lockstep with the
+   drawing at every width.
    ══════════════════════════════════════════════════════════════ */
-#wagon{position:relative;z-index:1;background:var(--vellum);padding:100px 42px 120px;overflow:hidden}
-.wagon-wrap{max-width:1200px;margin:0 auto}
+#wagon{position:relative;z-index:1;background:var(--vellum);padding:56px 42px 120px;overflow:hidden}
+.wagon-wrap{max-width:1400px;margin:0 auto}
 
-/* ── FRAMING LINE ── */
-.wagon-frame{font-family:var(--disp);font-weight:300;font-size:clamp(18px,2vw,26px);line-height:1.4;
-  color:var(--ink72);margin-bottom:34px;max-width:46ch}
-.wagon-frame em{font-style:italic;color:var(--pine)}
-
-/* ── DISCOVERY COUNTER ── */
-.wagon-meta{display:flex;justify-content:space-between;align-items:baseline;gap:20px;
-  max-width:1100px;margin:0 auto 30px;padding-bottom:10px;border-bottom:1px solid var(--line)}
-.wagon-meta-hint{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--ink38);transition:opacity .5s}
-.wagon-wrap.engaged .wagon-meta-hint{opacity:.3}
-.wagon-count{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--ink38);white-space:nowrap;transition:color .5s}
-.wagon-count.complete{color:var(--pine)}
-
-/* ── IMAGE STAGE ── */
-.wagon-stage{position:relative;width:100%;max-width:1100px;margin:0 auto 40px}
+/* ── the stage ── */
+.wagon-stage{position:relative;width:96%;margin:0 auto}
 .wagon-stage img{width:100%;height:auto;display:block;
   filter:drop-shadow(0 24px 48px rgba(26,24,18,.07)) drop-shadow(0 6px 14px rgba(26,24,18,.04))}
 
-/* ── HOTSPOT ── */
+/* ── type on the plate ── */
+.wg-zone{position:absolute;pointer-events:none;user-select:none;
+  display:flex;flex-direction:column}
+.wg-conn{font-family:var(--disp);font-style:italic;font-weight:300;
+  font-size:clamp(13px,1.45vw,21px);line-height:1.2;color:var(--ink38);
+  letter-spacing:.004em;white-space:nowrap}
+
+/* ambition — ghost, top right. Outlined like every other ghost on the site. */
+.wg-ambition{top:6%;right:0;align-items:flex-start}
+.wg-ghost{font-family:var(--ghost);font-size:clamp(52px,9.4vw,150px);
+  text-transform:lowercase;line-height:.82;letter-spacing:-.02em;
+  color:transparent;-webkit-text-stroke:1px var(--ink18)}
+.wg-ambition .wg-conn{margin:2px 0 0 clamp(6px,.9vw,14px)}
+
+/* structure — solid, bottom left. The thing you need, made real. */
+.wg-structure{bottom:9%;left:0;align-items:flex-start}
+.wg-solid{font-family:var(--ghost);font-style:italic;font-size:clamp(46px,8.2vw,132px);
+  text-transform:uppercase;line-height:.82;letter-spacing:-.015em;
+  color:rgba(26,77,64,.22);-webkit-text-stroke:1px rgba(26,77,64,.22)}
+.wg-structure .wg-conn{margin:0 0 4px clamp(4px,.6vw,9px)}
+
+/* the bridge — right of the engine */
+/* sits against the engine block, not floating in the corner — the claim
+   and the thing it describes have to be in the same place */
+.wg-bridge{position:absolute;top:33%;right:-1%;width:clamp(150px,15.5vw,240px);
+  font-family:var(--disp);font-weight:300;font-size:clamp(13px,1.35vw,19px);
+  line-height:1.42;letter-spacing:-.008em;color:var(--ink72);display:block;text-align:right}
+.wg-bridge b{font-weight:400;font-style:italic;color:var(--pine)}
+
+/* ══ the stars ══ */
 .hotspot{position:absolute;z-index:10}
 .hotspot.open{z-index:30}
-
-.hotspot-dot{width:28px;height:28px;border-radius:50%;padding:0;
-  border:1.5px solid rgba(26,77,64,.18);background:rgba(241,236,225,.7);
+.hotspot-dot{width:44px;height:44px;border-radius:50%;padding:0;
+  border:1.5px solid var(--pine);background:rgba(241,236,225,.96);
   display:grid;place-items:center;cursor:pointer;
+  backdrop-filter:blur(2px);
+  box-shadow:0 3px 14px rgba(26,77,64,.28);
   transition:border-color .3s,background .3s,transform .35s var(--spring),box-shadow .35s}
-.hotspot-dot::before{content:'✦';font-size:8px;color:var(--pine);opacity:.42;
+.hotspot-dot::before{content:'✦';font-size:17px;color:var(--pine);opacity:1;
   transition:opacity .3s,transform .3s var(--spring)}
 .hotspot-dot:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(26,77,64,.25)}
-
-/* idle pulse — staggered, dies after first interaction */
 @keyframes hotspotPulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(26,77,64,.09)}
-  50%{box-shadow:0 0 0 7px rgba(26,77,64,0)}}
-.hotspot-dot{animation:hotspotPulse 3.4s ease infinite}
-.hotspot:nth-of-type(2) .hotspot-dot{animation-delay:.45s}
-.hotspot:nth-of-type(3) .hotspot-dot{animation-delay:.9s}
-.hotspot:nth-of-type(4) .hotspot-dot{animation-delay:1.35s}
-.hotspot:nth-of-type(5) .hotspot-dot{animation-delay:1.8s}
-.hotspot:nth-of-type(6) .hotspot-dot{animation-delay:2.25s}
+  0%,100%{box-shadow:0 0 0 0 rgba(26,77,64,.11)}
+  50%{box-shadow:0 0 0 10px rgba(26,77,64,0)}}
+.hotspot-dot{animation:hotspotPulse 3.6s ease infinite}
+.hotspot:nth-of-type(2) .hotspot-dot{animation-delay:.5s}
+.hotspot:nth-of-type(3) .hotspot-dot{animation-delay:1s}
+.hotspot:nth-of-type(4) .hotspot-dot{animation-delay:1.5s}
+.hotspot:nth-of-type(5) .hotspot-dot{animation-delay:2s}
 .wagon-stage.engaged .hotspot-dot{animation:none}
-
-/* found state — stays marked once opened */
-.hotspot.found .hotspot-dot{border-color:rgba(26,77,64,.45);background:rgba(241,236,225,.9)}
-.hotspot.found .hotspot-dot::before{opacity:.85}
-
-/* active */
+.hotspot.found .hotspot-dot{border-color:var(--pine);background:var(--vellum)}
+.hotspot.found .hotspot-dot::before{opacity:1}
 .hotspot-dot:hover,.hotspot.open .hotspot-dot{
-  border-color:var(--pine);background:var(--vellum);transform:scale(1.22);
-  box-shadow:0 4px 18px rgba(26,77,64,.16),0 0 0 4px rgba(26,77,64,.06)}
-.hotspot-dot:hover::before,.hotspot.open .hotspot-dot::before{opacity:1;transform:scale(1.15)}
+  border-color:var(--pine);background:var(--vellum);transform:scale(1.18);
+  box-shadow:0 8px 26px rgba(26,77,64,.24),0 0 0 6px rgba(26,77,64,.09)}
+.hotspot-dot:hover::before,.hotspot.open .hotspot-dot::before{opacity:1;transform:scale(1.1)}
 
-/* ── LABEL ── */
+/* label only on approach — the plate stays clean */
 .hotspot-label{position:absolute;white-space:nowrap;top:50%;
-  font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--pine);opacity:.6;pointer-events:none;transition:opacity .3s}
-.hotspot:hover .hotspot-label,.hotspot.open .hotspot-label{opacity:.9}
-.hotspot[data-x="l"] .hotspot-label{left:calc(100% + 9px);transform:translateY(-50%)}
-.hotspot[data-x="r"] .hotspot-label{right:calc(100% + 9px);transform:translateY(-50%)}
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--pine);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s}
+.hotspot:hover .hotspot-label,.hotspot.open .hotspot-label{opacity:.85}
+.hotspot[data-x="l"] .hotspot-label{left:calc(100% + 12px);transform:translateY(-50%) translateX(-4px)}
+.hotspot[data-x="r"] .hotspot-label{right:calc(100% + 12px);transform:translateY(-50%) translateX(4px)}
+.hotspot:hover .hotspot-label,.hotspot.open .hotspot-label{transform:translateY(-50%)}
 
-/* ── EXPAND CARD ── */
-.hotspot-expand{position:absolute;width:250px;padding:17px 19px;
-  background:var(--vellum);border:1px solid rgba(26,77,64,.14);
-  box-shadow:0 14px 40px rgba(26,24,18,.11),0 2px 6px rgba(26,24,18,.04);
-  opacity:0;transform:translateY(7px) scale(.98);pointer-events:none;
-  transition:opacity .32s var(--e2),transform .32s var(--e2)}
+.hotspot-expand{position:absolute;width:min(300px,64vw);padding:24px 25px 22px;
+  background:var(--vellum);border:1px solid rgba(26,77,64,.12);
+  box-shadow:0 24px 60px rgba(26,24,18,.16),0 4px 14px rgba(26,24,18,.06),
+    inset 0 1px 0 rgba(255,255,255,.4);
+  opacity:0;transform:translateY(10px) scale(.97);pointer-events:none;
+  transition:opacity .38s var(--e2),transform .38s var(--e2)}
+.hotspot-expand::before{content:'';position:absolute;top:0;left:22px;right:22px;height:2px;
+  background:linear-gradient(90deg,transparent,var(--pine),transparent)}
 .hotspot.open .hotspot-expand{opacity:1;transform:none;pointer-events:auto}
-.hotspot-expand-name{font-family:var(--disp);font-weight:400;font-size:14.5px;color:var(--pine);margin-bottom:5px}
-.hotspot-expand-desc{font-family:var(--body);font-size:13px;line-height:1.68;color:var(--ink72)}
+.hotspot-expand-name{font-family:var(--disp);font-weight:400;font-style:italic;font-size:17px;
+  color:var(--pine);margin-bottom:9px;letter-spacing:-.005em}
+.hotspot-expand-desc{font-family:var(--body);font-size:13.5px;line-height:1.75;color:var(--ink72)}
+.hotspot[data-x="l"] .hotspot-expand{left:-12px}
+.hotspot[data-x="r"] .hotspot-expand{right:-12px}
+.hotspot[data-y="b"] .hotspot-expand{top:calc(100% + 12px)}
+.hotspot[data-y="t"] .hotspot-expand{bottom:calc(100% + 12px)}
 
-/* card anchoring — driven by data-x / data-y */
-.hotspot[data-x="l"] .hotspot-expand{left:-9px}
-.hotspot[data-x="r"] .hotspot-expand{right:-9px}
-.hotspot[data-y="b"] .hotspot-expand{top:calc(100% + 11px)}
-.hotspot[data-y="t"] .hotspot-expand{bottom:calc(100% + 11px)}
+/* ── positions · calibrate with ?cal ── */
+.hotspot[data-point="ownership"]  {top:50%;left:21%}
+.hotspot[data-point="bottleneck"] {top:66%;left:33%}
+.hotspot[data-point="handholding"]{top:46%;left:41%}
+.hotspot[data-point="authority"]  {top:38%;left:55%}
+.hotspot[data-point="hiring"]     {top:64%;left:63%}
 
-/* ── HOTSPOT POSITIONS — calibrate these with ?cal ── */
-.hotspot[data-point="ownership"]  {top:22%;left:14%}
-.hotspot[data-point="bottleneck"] {top:68%;left:20%}
-.hotspot[data-point="management"] {top:42%;left:42%}
-.hotspot[data-point="overload"]   {top:16%;right:28%}
-.hotspot[data-point="handholding"]{top:48%;right:12%}
-.hotspot[data-point="survival"]   {top:10%;right:16%}
-
-/* ── CALIBRATION MODE (?cal) ── */
+/* ── calibration mode ── */
 .wagon-stage.cal{cursor:crosshair}
 .wagon-stage.cal .hotspot{pointer-events:none;opacity:.35}
 .wagon-stage.cal::after{content:'';position:absolute;inset:0;pointer-events:none;
   background-image:linear-gradient(rgba(26,77,64,.07) 1px,transparent 1px),
     linear-gradient(90deg,rgba(26,77,64,.07) 1px,transparent 1px);
   background-size:5% 5%}
-.cal-read{position:absolute;z-index:60;pointer-events:none;
-  font-family:var(--mono);font-size:10px;letter-spacing:.06em;
-  background:var(--ink);color:var(--vellum);padding:5px 9px;white-space:nowrap}
+.cal-read{position:absolute;z-index:60;pointer-events:none;font-family:var(--mono);
+  font-size:10px;letter-spacing:.06em;background:var(--ink);color:var(--vellum);
+  padding:5px 9px;white-space:nowrap}
 
-/* ── PRINCIPLE ── */
-.wagon-principle{text-align:center;margin-bottom:50px}
-.wagon-principle-text{font-family:var(--disp);font-style:italic;font-weight:300;
-  font-size:clamp(15px,1.5vw,20px);color:var(--ink54);margin-bottom:6px}
-.wagon-principle-bold{font-family:var(--ghost);font-size:clamp(28px,4.5vw,56px);
-  text-transform:uppercase;color:var(--ink);letter-spacing:-.01em;line-height:1;
-  opacity:.1;transition:opacity 1.2s var(--e2)}
-.wagon-wrap.all-found .wagon-principle-bold{opacity:.2}
-
-/* ── PUNCHLINE ── */
+/* ── the landing ── */
 .wagon-punch{font-family:var(--disp);font-weight:300;
-  font-size:clamp(24px,3.2vw,46px);line-height:1.12;letter-spacing:-.02em;
-  text-align:center;padding:0 20px;max-width:720px;margin:0 auto}
+  font-size:clamp(18px,1.9vw,26px);line-height:1.32;letter-spacing:-.015em;
+  color:var(--ink54);text-align:right;max-width:26ch;
+  margin:clamp(-8px, -1vw, -12px) 0 0 auto}
 .wagon-punch em{font-style:italic;color:var(--pine);display:block}
 
-/* ── MOBILE ── */
-@media(max-width:880px){
-  #wagon{padding:72px 22px 88px}
-  .wagon-frame{font-size:clamp(16px,4.5vw,20px)}
-  .wagon-meta{flex-direction:column;gap:4px;align-items:flex-start}
-  .hotspot-dot{width:30px;height:30px}
-  .hotspot-label{display:none}
-  .wagon-principle-bold{font-size:clamp(24px,9vw,40px)}
-  .hotspot[data-point="ownership"]  {top:20%;left:9%}
-  .hotspot[data-point="bottleneck"] {top:66%;left:15%}
-  .hotspot[data-point="management"] {top:41%;left:38%}
-  .hotspot[data-point="overload"]   {top:15%;right:24%}
-  .hotspot[data-point="handholding"]{top:47%;right:8%}
-  .hotspot[data-point="survival"]   {top:7%;right:12%}
-}
-/* card becomes a bottom sheet on narrow screens — never clipped */
-@media(max-width:640px){
-  .hotspot .hotspot-expand{position:fixed;left:16px;right:16px;
-    bottom:calc(18px + env(safe-area-inset-bottom));top:auto;width:auto;
-    padding:20px 22px;transform:translateY(14px);
-    box-shadow:0 -8px 40px rgba(26,24,18,.14)}
-  .hotspot.open .hotspot-expand{transform:none}
-  .hotspot-expand-desc{font-size:13px}
-}
+/* ── mobile-only blocks ── */
+.wg-stack{display:none}
+.wagon-list{display:none}
 
 /* ══════════════════════════════════════════════════════════════
    §04 — EXECUTION WITHOUT STRUCTURE
-   Solve-it visual treatment: massive centered type, ghost circle,
-   spine split — on dark ground
    ══════════════════════════════════════════════════════════════ */
 #execution{position:relative;z-index:1;background:var(--dark);color:var(--crm);padding:120px 42px 130px;overflow:hidden}
-/* SVG placeholder — sits behind all content */
 .exec-svg-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   width:56vw;height:56vw;max-width:740px;max-height:740px;z-index:1;pointer-events:none;
   display:flex;align-items:center;justify-content:center}
@@ -569,29 +537,24 @@ html.m-lock,html.m-lock body{overflow:hidden}
 .exec-svg-placeholder span{font-family:var(--mono);font-size:9px;letter-spacing:.12em;
   text-transform:uppercase;color:var(--crm38);opacity:.5}
 
-/* massive headline */
 .exec-mon{font-family:var(--disp);font-weight:300;font-size:clamp(68px,14vw,196px);line-height:.88;
   letter-spacing:-.04em;text-align:center;position:relative;z-index:2;margin-bottom:10px}
 .exec-mon em{font-style:italic;color:var(--mint);font-size:clamp(30px,7vw,100px);display:block;
   margin-top:6px;letter-spacing:-.02em;line-height:.95}
 
-/* subtitle */
 .exec-sub{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(16px,1.7vw,22px);
   color:var(--crm72);text-align:center;position:relative;z-index:2;margin-bottom:72px}
 
-/* spine split — two columns */
 .exec-split{max-width:880px;margin:0 auto;display:grid;grid-template-columns:1fr 2px 1fr;
   gap:0 54px;position:relative;z-index:2}
 .exec-spine{background:linear-gradient(to bottom,transparent,var(--crm18) 12%,var(--crm18) 88%,transparent)}
 
-/* left column — right-aligned italic */
 .exec-l{text-align:right}
 .exec-dir{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(15px,1.5vw,20px);
   color:var(--crm54);line-height:1.6}
 .exec-but{display:block;margin-top:16px;font-family:var(--disp);font-style:italic;font-weight:400;
   font-size:clamp(15px,1.5vw,20px);color:var(--mint)}
 
-/* right column — body text */
 .exec-con{font-size:14px;line-height:1.82;color:var(--crm72)}
 
 @media(max-width:880px){
@@ -606,177 +569,236 @@ html.m-lock,html.m-lock body{overflow:hidden}
 }
 
 /* ══════════════════════════════════════════════════════════════
-   §05 — WHY ORR — identity left, proof right
+   §05 — WHY ORR — Identity + Proof
    ══════════════════════════════════════════════════════════════ */
 #why{position:relative;z-index:1;background:var(--vellum);padding:120px 42px 100px;overflow:hidden}
-.why-wrap{max-width:1200px;margin:0 auto;position:relative}
-.why-split{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch}
+.why-wrap{max-width:1400px;margin:0 auto}
+.why-split{display:grid;grid-template-columns:.82fr 1.18fr;gap:0}
 
-/* ── LEFT — identity ── */
-.why-identity{display:flex;flex-direction:column;padding-right:clamp(32px,4.4vw,60px);
+.why-identity{display:flex;flex-direction:column;padding-right:clamp(32px,4.8vw,64px);
   border-right:1px solid var(--line)}
-.why-label{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--pine);margin-bottom:22px;display:block}
 
-/* the argument, compressed to one move */
-.why-angle{font-family:var(--disp);font-weight:300;font-size:clamp(17px,1.7vw,21px);
-  line-height:1.5;color:var(--ink72);margin-bottom:10px;max-width:34ch}
-.why-angle b{font-weight:400;color:var(--ink)}
-.why-angle-close{font-family:var(--disp);font-style:italic;font-weight:400;
-  font-size:clamp(17px,1.7vw,21px);line-height:1.45;color:var(--pine);margin-bottom:34px;max-width:32ch}
+.why-logo-zone{flex:0 0 auto;margin-bottom:34px;position:relative;--mark-opacity:.9}
+.why-logo-mark{display:block;height:clamp(78px,9.4vw,132px);width:auto;
+  opacity:var(--mark-opacity);user-select:none;pointer-events:none}
 
-.why-logo-mark{font-family:var(--ghost);font-size:clamp(84px,11vw,150px);
-  text-transform:uppercase;color:var(--ink);opacity:.07;line-height:.8;
-  letter-spacing:.04em;user-select:none;pointer-events:none;margin-bottom:18px}
-
-.why-tagline{font-family:var(--disp);font-weight:300;font-size:clamp(24px,2.6vw,36px);
-  line-height:1.15;letter-spacing:-.015em;color:var(--ink);margin-bottom:20px}
+.why-tagline{font-family:var(--disp);font-weight:300;
+  font-size:clamp(25px,2.7vw,38px);line-height:1.14;letter-spacing:-.015em;
+  color:var(--ink);margin-bottom:22px}
 .why-tagline em{font-style:italic;color:var(--pine)}
 
-.why-prop{font-size:14.5px;line-height:1.78;color:var(--ink72);margin-bottom:14px;max-width:46ch}
+.why-prop{font-size:14.5px;line-height:1.8;color:var(--ink72);margin-bottom:12px;max-width:46ch}
 .why-prop-highlight{font-family:var(--disp);font-style:italic;font-weight:400;
-  font-size:clamp(15px,1.5vw,17px);color:var(--pine);margin-bottom:34px;max-width:42ch}
+  font-size:clamp(15px,1.5vw,17px);color:var(--pine);max-width:44ch}
 
-/* provenance — stated, not badged */
-.why-prov{margin-top:auto;padding-top:26px;border-top:1px solid var(--line)}
-.why-prov-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--ink54);margin-bottom:14px}
-.why-prov-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
-.why-prov-item{font-size:13.5px;line-height:1.6;color:var(--ink72);
-  display:flex;align-items:baseline;gap:11px}
-.why-prov-item::before{content:'✦';color:var(--pine);opacity:.55;font-size:7px;flex-shrink:0;
-  position:relative;top:-1px}
-.why-link{font-family:var(--body);font-size:12px;font-weight:500;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--pine);padding-bottom:3px;
-  border-bottom:1px solid var(--pine12);transition:border-color .25s;align-self:flex-start}
-.why-link:hover{border-color:var(--pine)}
+.why-brands{margin-top:auto;padding-top:28px;border-top:1px solid var(--line)}
+.why-brands-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink54);margin-bottom:15px}
+.why-brands-row{display:flex;align-items:center;gap:12px 28px;flex-wrap:wrap}
+.why-brand-item{font-family:var(--body);font-size:13px;font-weight:400;
+  color:var(--ink54);letter-spacing:.02em;transition:color .3s}
+.why-brand-item:hover{color:var(--ink)}
 
-/* ── RIGHT — proof ── */
-.why-proof{display:flex;flex-direction:column;padding-left:clamp(32px,4.4vw,60px)}
-.why-proof-h2{font-family:var(--disp);font-weight:300;font-size:clamp(26px,3vw,42px);
-  line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin-bottom:8px}
+.why-proof{display:flex;flex-direction:column;padding-left:clamp(32px,4.8vw,64px)}
+.why-proof-h2{font-family:var(--disp);font-weight:300;font-size:clamp(30px,3.7vw,56px);
+  line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin-bottom:10px}
+/* one line from 1025 up — measured to clear the column at every width */
+@media(min-width:1025px){.why-proof-h2{white-space:nowrap}}
 .why-proof-sub{font-family:var(--disp);font-style:italic;font-weight:300;
-  font-size:clamp(15px,1.5vw,18px);color:var(--pine);margin-bottom:32px}
+  font-size:clamp(15px,1.5vw,18px);color:var(--pine);margin-bottom:34px}
 
-.why-catalogue{display:grid;grid-template-columns:1fr 1fr;gap:1px;
-  background:var(--line);border:1px solid var(--line);margin-bottom:26px}
-.why-cat-cell{background:var(--vellum);padding:22px 20px 20px;display:flex;flex-direction:column;
-  transition:background .3s}
-.why-cat-cell:hover{background:var(--pine06)}
-.why-cat-marker{font-size:11px;color:var(--pine);opacity:.4;margin-bottom:12px;line-height:1;
-  transition:opacity .3s,transform .3s var(--spring)}
-.why-cat-cell:hover .why-cat-marker{opacity:.8;transform:scale(1.2)}
-.why-cat-name{font-family:var(--disp);font-weight:400;font-size:16.5px;color:var(--ink);
-  margin-bottom:7px;transition:color .3s}
-.why-cat-cell:hover .why-cat-name{color:var(--pine)}
-.why-cat-desc{font-size:13px;line-height:1.62;color:var(--ink72);margin-bottom:auto}
-.why-cat-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;
-  margin-top:16px;padding-top:11px;border-top:1px solid var(--lineL)}
-.why-cat-tag{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--pine);padding:3px 8px;border:1px solid var(--pine12)}
-.why-cat-count{font-family:var(--mono);font-size:9px;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--ink54);text-align:right}
+.why-tabs{display:flex;gap:0;position:relative;border-bottom:1px solid var(--line)}
+.why-tab{flex:1;min-width:0;padding:12px 6px 14px;cursor:pointer;position:relative;
+  background:none;border:none;text-align:left;font:inherit;
+  display:flex;flex-direction:column;gap:5px;transition:background .3s}
+.why-tab::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;
+  background:var(--pine);transform:scaleX(0);transform-origin:left;
+  transition:transform .45s var(--e2)}
+.why-tab[aria-selected="true"]::after{transform:scaleX(1)}
+.why-tab:focus-visible{outline:none;background:var(--pine06)}
+.why-tab-marker{font-size:8px;color:var(--pine);opacity:0;line-height:1;
+  transition:opacity .3s,transform .3s var(--spring);transform:scale(.5)}
+.why-tab[aria-selected="true"] .why-tab-marker{opacity:.75;transform:scale(1)}
+.why-tab-name{font-family:var(--disp);font-weight:300;font-size:clamp(13px,1.2vw,16px);
+  color:var(--ink54);transition:color .3s;line-height:1.25}
+.why-tab[aria-selected="true"] .why-tab-name{color:var(--ink);font-weight:400}
+.why-tab:hover .why-tab-name{color:var(--ink)}
 
-.why-browse{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;
-  font-family:var(--body);font-size:11.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--pine);padding-bottom:3px;border-bottom:1px solid var(--pine12);
-  transition:gap .3s,border-color .3s;margin-bottom:22px}
-.why-browse:hover{gap:16px;border-color:var(--pine)}
-.why-encourage{font-family:var(--disp);font-style:italic;font-weight:300;
-  font-size:clamp(14px,1.4vw,16px);line-height:1.6;color:var(--ink72);max-width:44ch}
+.why-panes{display:grid;padding-top:26px;flex:1}
+.why-pane{grid-area:1/1;opacity:0;visibility:hidden;transform:translateY(8px);
+  transition:opacity .4s var(--e2),transform .4s var(--e2),visibility .4s}
+.why-pane[aria-hidden="false"]{opacity:1;visibility:visible;transform:none}
+
+.why-pane-desc{font-family:var(--disp);font-style:italic;font-weight:300;
+  font-size:14.5px;line-height:1.58;color:var(--ink72);margin-bottom:20px;max-width:none}
+
+.why-pv-item{display:flex;align-items:center;gap:12px;padding:12px 0;
+  border-bottom:1px solid var(--lineL);
+  transition:padding-left .3s var(--e1),background .3s}
+.why-pv-item:first-of-type{border-top:1px solid var(--lineL)}
+.why-pv-item:hover{padding-left:8px;background:var(--pine06)}
+.why-pv-item::before{content:'✦';font-size:8px;color:var(--pine);opacity:.5;flex-shrink:0}
+.why-pv-title{font-family:var(--body);font-size:13.5px;font-weight:400;
+  color:var(--ink72);transition:color .3s;line-height:1.4}
+.why-pv-item:hover .why-pv-title{color:var(--pine)}
+.why-pv-type{font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink54);margin-left:auto;flex-shrink:0;padding-left:12px}
+
+.why-browse{display:inline-flex;align-items:center;gap:9px;align-self:flex-start;
+  font-family:var(--body);font-size:11.5px;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--pine);margin-top:18px;
+  padding-bottom:3px;border-bottom:1px solid var(--pine12);
+  transition:gap .3s,border-color .3s}
+.why-browse:hover{gap:15px;border-color:var(--pine)}
+
+.why-encourage{padding-top:22px;border-top:1px solid var(--line);margin-top:28px}
+.why-encourage p{font-family:var(--disp);font-style:italic;font-weight:300;
+  font-size:clamp(14px,1.4vw,16px);line-height:1.62;color:var(--ink72);max-width:46ch}
 .why-encourage strong{font-weight:400;color:var(--pine);font-style:normal}
 
+/* mobile-only proof list */
+.why-cats{display:none}
+
 /* ══════════════════════════════════════════════════════════════
-   §06 — THE STRUCTURAL SPECIFICATION
-   Formal engineering document: title block, divisions, leaders,
-   artifact counts, bill of materials
+   §06 — WHAT WORKING WITH US LOOKS LIKE
+   Reading position is the state: the step nearest the reading line
+   is active, everything above it is passed, and the rail fills in
+   behind you. Nothing to discover — it happens as you scroll.
    ══════════════════════════════════════════════════════════════ */
-#spec{position:relative;z-index:1;background:var(--dark);color:var(--crm);padding:120px 42px 100px;overflow:hidden}
-.spec-wrap{max-width:860px;margin:0 auto;position:relative}
-.spec-h2{font-family:var(--disp);font-weight:300;font-size:clamp(32px,4.4vw,60px);line-height:1.04;letter-spacing:-.025em;margin-bottom:10px}
-.spec-sub{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(15px,1.5vw,19px);color:var(--crm54);margin-bottom:56px;max-width:48ch}
+#model{position:relative;z-index:1;background:var(--dark);color:var(--crm);
+  padding:110px 42px 100px;overflow:hidden}
+#model::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.02;
+  background-image:
+    linear-gradient(var(--crm18) 1px,transparent 1px),
+    linear-gradient(90deg,var(--crm18) 1px,transparent 1px);
+  background-size:60px 60px}
 
-/* ── THE DOCUMENT ── */
-.spec-doc{position:relative;border:1px solid var(--crm18);background:rgba(241,236,225,.02)}
-/* corner registration marks */
-.spec-mark{position:absolute;font-family:var(--mono);font-size:11px;color:var(--crm38);opacity:.6;line-height:1;pointer-events:none}
-.spec-mark.tl{top:-6px;left:-6px}.spec-mark.tr{top:-6px;right:-6px}
-.spec-mark.bl{bottom:-6px;left:-6px}.spec-mark.br{bottom:-6px;right:-6px}
+.ew{max-width:1060px;margin:0 auto;position:relative}
 
-/* ── TITLE BLOCK ── */
-.spec-titleblock{border-bottom:1px solid var(--crm18);padding:22px 28px}
-.spec-tb-head{display:flex;justify-content:space-between;align-items:baseline;
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--mint);margin-bottom:12px}
-.spec-tb-rev{color:var(--crm38)}
-.spec-tb-title{font-family:var(--disp);font-weight:300;font-size:clamp(17px,1.9vw,24px);color:var(--crm);margin-bottom:16px;letter-spacing:-.01em}
-.spec-tb-meta{display:flex;gap:26px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--crm38)}
-.spec-tb-meta b{color:var(--mint);font-weight:400;margin-left:6px}
+.ew-header{display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:clamp(34px,4.4vw,56px);gap:24px}
+.ew-h2{font-family:var(--disp);font-weight:300;font-size:clamp(28px,3.4vw,44px);
+  line-height:1.02;letter-spacing:-.025em}
+.ew-h2 em{font-style:italic;color:var(--mint)}
+/* measured: the heading only clears the sub-line's column from 1240 up.
+   Below that it wraps on its own rather than being forced. */
+@media(min-width:1240px){.ew-h2{white-space:nowrap}}
+.ew-h2-sub{font-family:var(--disp);font-style:italic;font-weight:300;
+  font-size:clamp(14px,1.3vw,17px);color:var(--crm72);text-align:right;
+  max-width:40ch;line-height:1.5}
+.ew-h2-sub em{font-style:italic;color:var(--mint)}
 
-/* ── DIVISIONS ── */
-.spec-division{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--mint);opacity:.8;padding:20px 28px 6px}
-.spec-div-note{font-family:var(--disp);font-style:italic;font-weight:300;font-size:11px;
-  letter-spacing:0;text-transform:none;color:var(--crm38);margin-left:8px}
+/* ── the arc ── */
+.vc-track{position:relative}
+.vc-step{display:grid;grid-template-columns:clamp(64px,7vw,104px) 1fr;
+  gap:0 clamp(20px,2.6vw,38px);position:relative;
+  padding:clamp(26px,3.2vw,40px) 0}
+/* the active row glows out from the rail rather than sitting in a box */
+.vc-step::before{content:'';position:absolute;inset:-2px -24px;pointer-events:none;
+  background:linear-gradient(90deg,rgba(143,201,183,.075),rgba(143,201,183,.02) 38%,transparent 72%);
+  opacity:0;transition:opacity .55s var(--e2)}
+.vc-step.active::before{opacity:1}
+.vc-step:first-child{padding-top:0}
+.vc-step:last-child{padding-bottom:0}
 
-/* ── SPEC ROWS ── */
-.spec-item{border-bottom:1px solid rgba(241,236,225,.06)}
-.spec-item:last-of-type{border-bottom:none}
-.spec-row{display:flex;align-items:baseline;padding:15px 28px;cursor:pointer;transition:background .3s}
-.spec-row:hover{background:rgba(143,201,183,.04)}
-.spec-ix{font-family:var(--mono);font-size:10.5px;color:var(--mint);opacity:.75;width:36px;flex-shrink:0}
-.spec-name{font-family:var(--disp);font-weight:300;font-size:clamp(15px,1.5vw,18px);color:var(--crm);transition:color .3s;flex-shrink:0}
-.spec-row:hover .spec-name{color:var(--mint)}
-.spec-leader{flex:1;border-bottom:1px dotted rgba(241,236,225,.14);margin:0 14px;transform:translateY(-5px);min-width:20px}
-.spec-count{font-family:var(--mono);font-size:10.5px;color:var(--crm38);flex-shrink:0;letter-spacing:.06em}
-.spec-tog{width:20px;height:20px;border:1px solid var(--crm18);display:grid;place-items:center;color:var(--mint);
-  margin-left:14px;flex-shrink:0;font-size:11px;line-height:1;align-self:center;
-  transition:background .3s,border-color .3s,transform .4s var(--e1)}
-.spec-item.open .spec-tog{background:var(--pine-b);border-color:var(--pine-b);transform:rotate(45deg);color:#fff}
+.vc-rail{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+.vc-step > div:last-child{position:relative;z-index:1}
+.vc-node{font-size:12px;line-height:1;color:var(--crm18);position:relative;z-index:2;
+  flex-shrink:0;margin-top:8px;
+  transition:color .5s var(--e2),font-size .4s var(--spring),text-shadow .5s}
+.vc-step.passed .vc-node{color:var(--mint);font-size:13px;opacity:.55}
+.vc-step.active .vc-node{color:var(--mint);font-size:18px;opacity:1;
+  text-shadow:0 0 12px rgba(143,201,183,.45),0 0 30px rgba(143,201,183,.16)}
+.vc-line{width:1px;flex:1;background:var(--crm18);margin:8px 0 -1px;position:relative}
+.vc-line::after{content:'';position:absolute;inset:0;background:var(--mint);
+  transform:scaleY(0);transform-origin:top;transition:transform .7s var(--e2)}
+.vc-step.passed .vc-line::after{transform:scaleY(1)}
+.vc-step.active .vc-line::after{transform:scaleY(.35)}
+.vc-step:last-child .vc-line{display:none}
+.vc-ix{position:absolute;top:0;left:0;font-family:var(--mono);font-size:10px;
+  letter-spacing:.18em;color:var(--crm18);transition:color .5s var(--e2)}
+.vc-step.passed .vc-ix{color:var(--crm38)}
+.vc-step.active .vc-ix{color:var(--mint)}
 
-/* ── EXPANDED DETAIL ── */
-.spec-detail{max-height:0;overflow:hidden;transition:max-height .5s var(--e2)}
-.spec-detail-in{padding:4px 28px 22px 64px;display:flex;flex-direction:column;gap:9px}
-.spec-art{font-family:var(--mono);font-size:11.5px;color:var(--crm72);display:flex;align-items:baseline;gap:11px;line-height:1.6;letter-spacing:.02em}
-.spec-art::before{content:'✦';color:var(--mint);flex-shrink:0;font-size:7px;opacity:.8;
-  position:relative;top:-1px}
-.spec-status{color:var(--mint);opacity:.9;margin-left:auto;padding-left:14px;white-space:nowrap;font-size:10.5px}
+.vc-t{font-family:var(--disp);font-weight:300;font-size:clamp(22px,2.6vw,34px);
+  line-height:1.1;letter-spacing:-.02em;color:var(--crm54);margin-bottom:10px;
+  transition:color .55s var(--e2)}
+.vc-step.passed .vc-t{color:var(--crm72)}
+.vc-step.active .vc-t{color:var(--crm)}
+.vc-d{font-size:14px;line-height:1.8;color:var(--crm38);max-width:68ch;
+  transition:color .6s var(--e2)}
+.vc-step.passed .vc-d{color:var(--crm54)}
+.vc-step.active .vc-d{color:var(--crm72)}
+.vc-d b{color:var(--mint);font-weight:400}
+.vc-d em{font-style:italic;color:var(--crm)}
 
-/* ── SUMMARY — bill of materials ── */
-.spec-summary{border-top:1px solid var(--crm18);padding:22px 28px;background:rgba(143,201,183,.03)}
-.spec-sum-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--mint);opacity:.8;margin-bottom:12px}
-.spec-sum-row{display:flex;align-items:baseline;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--crm72);padding:5px 0}
-.spec-sum-val{color:var(--mint);flex-shrink:0;font-size:12px}
-.spec-foot{font-family:var(--mono);font-size:10.5px;color:var(--crm54);margin-top:16px;letter-spacing:.04em;line-height:1.6}
+/* the one place the track splits */
+.vc-fork{display:grid;grid-template-columns:1fr auto 1fr;gap:0 clamp(20px,2.4vw,32px);
+  margin-top:20px;align-items:stretch;max-width:960px}
+.vc-lane{border:1px solid rgba(241,236,225,.09);padding:24px 26px;
+  background:rgba(241,236,225,.015);position:relative;z-index:1;
+  transition:border-color .5s var(--e2),background .5s var(--e2)}
+.vc-step.active .vc-lane{border-color:var(--crm18);background:rgba(241,236,225,.03)}
+.vc-lane:hover{border-color:rgba(143,201,183,.4);background:rgba(143,201,183,.04)}
+.vc-lane-k{font-family:var(--disp);font-style:italic;font-weight:400;font-size:16px;
+  color:var(--mint);margin-bottom:9px}
+.vc-lane-v{font-size:14.5px;line-height:1.75;color:var(--crm38);
+  transition:color .6s var(--e2)}
+.vc-step.active .vc-lane-v,.vc-step.passed .vc-lane-v{color:var(--crm72)}
+.vc-lane:hover .vc-lane-v{color:var(--crm)}
+.vc-or{display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:2px}
+.vc-or span{font-family:var(--disp);font-style:italic;font-size:13px;color:var(--crm38)}
+.vc-or i{flex:1;width:1px;background:var(--crm18)}
 
-/* ── PATH FORWARD — specification notes ── */
-.spec-paths{margin-top:56px}
-.spec-note-block{display:grid;grid-template-columns:64px 1fr;gap:0 20px;padding:26px 0;border-top:1px solid var(--crm18)}
-.spec-note-ix{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mint);padding-top:6px}
-.spec-note-h{font-family:var(--disp);font-weight:300;font-size:clamp(18px,2vw,24px);color:var(--crm);margin-bottom:10px}
-.spec-note-b{font-size:14.5px;line-height:1.75;color:var(--crm72);max-width:56ch;margin-bottom:16px}
-.spec-entry{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(13px,1.2vw,15px);
-  line-height:1.6;color:var(--mint);border-left:2px solid var(--mint);padding-left:16px;margin-bottom:22px;max-width:48ch}
+/* the offer */
+.vc-price{margin-top:18px;padding:18px 22px;position:relative;z-index:1;max-width:58ch;
+  background:linear-gradient(135deg,rgba(143,201,183,.07),rgba(143,201,183,.02));
+  border:1px solid rgba(143,201,183,.14)}
+.vc-price::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--mint)}
+.vc-price p{font-family:var(--disp);font-style:italic;font-weight:300;font-size:13.5px;
+  line-height:1.65;color:var(--crm72)}
+.vc-price b{color:var(--mint);font-weight:400;font-style:normal}
+.vc-price a{font-style:normal;font-weight:400;color:var(--mint);
+  border-bottom:1px solid rgba(143,201,183,.35);padding-bottom:1px;
+  transition:border-color .3s,color .3s}
+.vc-price a:hover{border-color:var(--mint);color:var(--crm)}
+.vc-more{display:inline-flex;align-items:center;gap:9px;margin-top:18px;
+  font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--crm72);border:1px solid var(--crm38);
+  padding:13px 22px;transition:border-color .3s,color .3s,gap .3s}
+.vc-more:hover{border-color:var(--mint);color:var(--mint);gap:15px}
 
-/* ── CLOSER — signature line ── */
-.spec-closer{margin-top:52px;padding-top:28px;border-top:1px solid var(--crm18);
-  display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap}
-.spec-closer-line{font-family:var(--disp);font-style:italic;font-weight:400;font-size:clamp(16px,1.7vw,21px);color:var(--mint)}
-.spec-closer-sig{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--crm38)}
+/* close — the second clause takes its own line */
+.vc-foot{margin-top:clamp(38px,4.6vw,58px);padding-top:clamp(26px,3vw,36px);
+  border-top:1px solid var(--crm18);
+  display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap}
+.vc-foot-l{font-family:var(--disp);font-weight:300;font-size:clamp(18px,2vw,26px);
+  line-height:1.3;letter-spacing:-.015em;color:var(--crm);max-width:34ch}
+.vc-foot-l em{font-style:italic;color:var(--mint);display:block}
+
+.ew-btn{display:inline-flex;align-items:center;gap:12px;
+  background:var(--crm);color:var(--dark);font-family:var(--body);font-size:11px;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;padding:15px 28px;border:none;cursor:pointer;
+  transition:background .3s,gap .3s,box-shadow .3s,transform .2s}
+.ew-btn:hover{background:var(--mint);gap:18px;box-shadow:0 6px 24px rgba(143,201,183,.2)}
+.ew-btn:active{transform:scale(.98)}
 
 @media(max-width:880px){
-  #spec{padding:84px 22px 80px}
-  .spec-titleblock{padding:18px}
-  .spec-tb-meta{gap:14px}
-  .spec-division{padding:16px 18px 6px}
-  .spec-row{padding:14px 18px;flex-wrap:wrap;gap:4px 8px}
-  .spec-leader{display:none}
-  .spec-count{margin-left:auto}
-  .spec-detail-in{padding:2px 18px 18px 18px}
-  .spec-art{flex-wrap:wrap}
-  .spec-status{margin-left:0;padding-left:18px}
-  .spec-summary{padding:18px}
-  .spec-note-block{grid-template-columns:1fr;gap:8px}
-  .spec-closer{flex-direction:column;align-items:flex-start}
+  .ew-header{flex-direction:column;align-items:flex-start;gap:10px}
+  .ew-h2-sub{text-align:left;max-width:44ch}
+  .vc-step{grid-template-columns:1fr;gap:0;padding-left:26px}
+  .vc-rail{position:absolute;top:0;bottom:0;left:0;width:11px}
+  .vc-node{margin-top:4px}
+  .vc-ix{position:relative;display:block;margin-bottom:8px}
+  .vc-fork{grid-template-columns:1fr;gap:12px}
+  .vc-or{flex-direction:row;padding:0}
+  .vc-or i{width:auto;height:1px;flex:1}
+  .vc-more{width:100%;justify-content:center}
+  .vc-foot{flex-direction:column;align-items:stretch}
+  .vc-foot .ew-btn{width:100%;justify-content:center}
+}
+@media(max-width:479px){
+  .vc-t{font-size:clamp(20px,6vw,26px)}
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -787,8 +809,8 @@ html.m-lock,html.m-lock body{overflow:hidden}
 
 .later-left{position:relative;height:clamp(220px,20vw,340px);overflow:visible;margin-left:-60px}
 .later-label{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(22px,2.6vw,34px);
-  letter-spacing:-.01em;color:var(--ink72);line-height:1.3;position:absolute;bottom:110px;left:0;z-index:6;margin:0}
-.later-tick{display:block;width:38px;height:2px;background:var(--pine);position:absolute;bottom:95px;left:0;z-index:6}
+  letter-spacing:-.01em;color:var(--ink72);line-height:1.3;position:absolute;bottom:138px;left:0;z-index:6;margin:0}
+.later-tick{display:block;width:38px;height:2px;background:var(--pine);position:absolute;bottom:122px;left:0;z-index:6}
 .later-big{position:absolute;font-family:var(--ghost);font-size:clamp(160px,24vw,480px);
   text-transform:uppercase;color:transparent;-webkit-text-stroke:1px var(--ink10);line-height:.78;
   letter-spacing:-.02em;z-index:5;white-space:nowrap;pointer-events:none;
@@ -797,7 +819,7 @@ html.m-lock,html.m-lock body{overflow:hidden}
 
 .later-right{padding-top:2px;margin-top:-20px}
 .later-response{font-family:var(--disp);font-weight:300;line-height:1.35;color:var(--ink)}
-.later-response-lead{font-size:clamp(22px,2.4vw,32.5px);letter-spacing:-.02em;white-space:nowrap;margin-bottom:6px;color:var(--pine);text-align:right;margin-right:10px}
+.later-response-lead{font-size:clamp(22px,2.4vw,32.5px);letter-spacing:-.02em;margin-bottom:6px;color:var(--pine);text-align:right;margin-right:10px}
 .later-response-sub{font-size:clamp(16px,1.4vw,20px);color:var(--ink72);max-width:44ch;margin-bottom:22px;line-height:1.6;text-align:right;margin-left:auto;margin-right:10px}
 .later-response-sub em{font-style:italic;color:var(--pine)}
 
@@ -816,7 +838,6 @@ html.m-lock,html.m-lock body{overflow:hidden}
 .friction-body{max-height:0;overflow:hidden;transition:max-height .5s var(--e2)}
 .friction-body-in{padding:0 2px 16px 36px;font-size:13.5px;line-height:1.7;color:var(--ink72);max-width:100%}
 
-/* closing — centered for landing punch */
 .later-closing-top{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(14px,1.3vw,16px);
   color:var(--pine);line-height:1.6;max-width:56ch;margin:56px auto 0;padding:20px 0 0;
   border-top:1px solid var(--line);text-align:center}
@@ -835,7 +856,7 @@ html.m-lock,html.m-lock body{overflow:hidden}
 }
 
 /* ══════════════════════════════════════════════════════════════
-   MID-PAGE STRUCTURE BRIEF NUDGE — floating CTA
+   MID-PAGE STRUCTURE BRIEF NUDGE
    ══════════════════════════════════════════════════════════════ */
 #sb-nudge{position:fixed;bottom:28px;left:50%;z-index:850;
   transform:translateX(-50%) translateY(16px);opacity:0;pointer-events:none;
@@ -852,7 +873,6 @@ html.m-lock,html.m-lock body{overflow:hidden}
   display:grid;place-items:center;cursor:pointer;font-size:9px;color:var(--ink38);
   transition:color .2s,border-color .2s}
 #sb-nudge .nudge-dismiss:hover{color:var(--ink);border-color:var(--ink38)}
-/* dark mode */
 .dark-active #sb-nudge a{background:var(--mint);color:var(--dark)}
 .dark-active #sb-nudge a:hover{background:var(--crm)}
 
@@ -878,6 +898,10 @@ html.m-lock,html.m-lock body{overflow:hidden}
 .sb-prog-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--crm38);margin-top:6px;transition:color .3s}
 .sb-prog-seg.active .sb-prog-label,.sb-prog-seg.done .sb-prog-label{color:var(--mint)}
 
+/* mobile progress bar — injected by JS, hidden until the mobile system turns it on */
+.sb-mbar{display:none;height:2px;background:var(--crm18);margin-bottom:14px}
+.sb-mbar-fill{height:100%;width:0;background:var(--mint);transition:width .45s var(--e2)}
+
 .sb-card{background:rgba(241,236,225,.04);border:1px solid var(--crm18);padding:40px 44px;min-height:280px;
   box-shadow:0 8px 40px rgba(0,0,0,.12)}
 .sb-cluster{display:none}
@@ -888,10 +912,13 @@ html.m-lock,html.m-lock body{overflow:hidden}
 .sb-q:last-child{margin-bottom:0}
 .sb-q-text{font-family:var(--disp);font-weight:300;font-size:clamp(15px,1.4vw,18px);line-height:1.45;color:var(--crm);margin-bottom:14px}
 .sb-opts{display:flex;flex-wrap:wrap;gap:8px}
-.sb-opt{font-family:var(--body);font-size:13.5px;font-weight:400;color:var(--crm72);border:1px solid var(--crm18);
-  padding:10px 16px;cursor:pointer;background:transparent;transition:border-color .25s,background .25s,color .25s;line-height:1.3;text-align:left}
-.sb-opt:hover{border-color:var(--crm38);background:rgba(143,201,183,.06)}
-.sb-opt.sel{background:var(--pine-b);border-color:var(--pine-b);color:#fff}
+.sb-opt{font-family:var(--body);font-size:13.5px;font-weight:400;color:var(--crm54);
+  border:1px solid rgba(241,236,225,.10);padding:10px 16px;cursor:pointer;background:transparent;
+  transition:border-color .3s,background .3s,color .3s,box-shadow .3s;line-height:1.3;text-align:left}
+.sb-opt:hover{color:var(--crm);border-color:var(--crm38);background:rgba(143,201,183,.05)}
+.sb-opt.sel{color:var(--crm);border-color:rgba(143,201,183,.55);
+  background:rgba(143,201,183,.11);box-shadow:inset 2px 0 0 var(--mint)}
+.sb-opt.sel:hover{background:rgba(143,201,183,.14)}
 .sb-open{width:100%;background:rgba(0,0,0,.15);border:1px solid var(--crm18);outline:none;
   font-family:var(--disp);font-size:15px;font-weight:300;color:var(--crm);padding:14px 16px;caret-color:var(--mint);resize:none;line-height:1.5}
 .sb-open:focus{border-color:var(--mint)}
@@ -913,6 +940,9 @@ html.m-lock,html.m-lock body{overflow:hidden}
 .sb-result-header{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mint);
   padding-bottom:14px;border-bottom:1px solid var(--crm18);margin-bottom:32px}
 
+/* mobile-only verdict */
+.sb-verdict{display:none}
+
 .sb-stage{margin-bottom:36px;padding:24px 28px;background:rgba(241,236,225,.04);border:1px solid var(--crm18)}
 .sb-stage-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--crm38);margin-bottom:8px}
 .sb-stage-name{font-family:var(--disp);font-weight:300;font-size:clamp(20px,2.2vw,30px);color:var(--mint);margin-bottom:6px}
@@ -932,6 +962,7 @@ html.m-lock,html.m-lock body{overflow:hidden}
 .sb-dep-overall{display:flex;align-items:center;gap:16px;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--crm18)}
 .sb-dep-overall-label{font-family:var(--disp);font-weight:300;font-size:18px;color:var(--crm)}
 .sb-dep-overall-val{font-family:var(--disp);font-style:italic;font-size:18px;color:var(--mint);margin-left:auto}
+.sb-dep-toggle{display:none}
 .sb-dep-bars{display:grid;gap:10px}
 .sb-dep-row{display:grid;grid-template-columns:120px 1fr 50px;gap:12px;align-items:center}
 .sb-dep-row-label{font-family:var(--body);font-size:12px;color:var(--crm54)}
@@ -990,7 +1021,6 @@ html.m-lock,html.m-lock body{overflow:hidden}
 .btn-outline:hover{background:var(--pine);border-color:var(--pine);color:var(--crm);gap:16px}
 .begin-micro{font-family:var(--body);font-size:12px;color:var(--ink54)}
 
-/* Form — visible by default */
 .begin-form{max-width:480px;margin:40px auto 0;text-align:left}
 .field{position:relative;padding-top:34px;margin-bottom:8px}
 .field::before{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--line)}
@@ -1036,22 +1066,20 @@ footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);borde
   .ft-disc{text-align:left;max-width:100%}
 }
 
-
 /* ══════════════════════════════════════════════════════════════
-   RESPONSIVE SYSTEM
-   One fluid scale, then four corrective bands.
-   Declared last so it settles every earlier section rule.
+   RESPONSIVE SYSTEM — fluid scale + corrective bands
    ══════════════════════════════════════════════════════════════ */
 :root{--pad:clamp(20px,4.4vw,42px)}
 
-/* ── FLUID GUTTERS + SAFE AREAS ── */
-#hero,#structure,#wagon,#execution,#why,#spec,#later,#assess,#begin,footer,#nav{
+#hero,#structure,#wagon,#execution,#why,#model,#later,#assess,#begin,footer,#nav{
   padding-left:max(var(--pad),env(safe-area-inset-left));
   padding-right:max(var(--pad),env(safe-area-inset-right))}
 
-/* ── FLUID VERTICAL RHYTHM ── */
-#structure,#wagon,#execution,#why,#spec,#assess{
+#structure,#execution,#why,#model,#assess{
   padding-top:clamp(72px,8.6vw,120px);padding-bottom:clamp(78px,9.4vw,130px)}
+.hotspot-dot:hover,.hotspot.open .hotspot-dot{
+  border-color:var(--pine);background:var(--vellum);transform:scale(1.18);
+  box-shadow:0 8px 26px rgba(26,77,64,.24),0 0 0 6px rgba(26,77,64,.09)}
 #later{padding-top:clamp(66px,7.6vw,100px);padding-bottom:clamp(84px,11vw,160px)}
 #begin{padding-top:clamp(84px,10vw,140px);
   padding-bottom:calc(clamp(88px,10vw,140px) + env(safe-area-inset-bottom))}
@@ -1059,25 +1087,15 @@ footer{padding-top:clamp(48px,5.4vw,68px);
   padding-bottom:calc(clamp(38px,3.4vw,44px) + env(safe-area-inset-bottom))}
 #hero{padding-top:clamp(96px,10vw,110px);padding-bottom:clamp(90px,9vw,110px)}
 
-/* ── FLUID COMPONENT PADDING ── */
 .sb-card{padding:clamp(22px,3.2vw,44px) clamp(18px,3.4vw,44px)}
-.spec-titleblock,.spec-summary{padding:clamp(18px,2.2vw,22px) clamp(18px,2.6vw,28px)}
-.spec-division{padding:clamp(16px,2vw,20px) clamp(18px,2.6vw,28px) 6px}
-.spec-row{padding:clamp(14px,1.6vw,15px) clamp(18px,2.6vw,28px)}
-.spec-detail-in{padding:2px clamp(18px,2.6vw,28px) 20px clamp(18px,5.4vw,64px)}
-.hotspot-expand{width:min(250px,62vw)}
 
-/* ══ ≤1200px — the ghosts stop crowding the hero copy ══ */
 @media(max-width:1200px){
   .hero-ghost{font-size:clamp(150px,20vw,260px)}
   .hero-solid{font-size:clamp(56px,8.2vw,110px)}
-  .hero-content{margin-left:-20px}
   .later-left{margin-left:-28px}
 }
 
-/* ══ ≤1080px — four-up grids break to two ══ */
 @media(max-width:1080px){
-  .pillars{grid-template-columns:1fr 1fr;gap:16px}
   .why-split{gap:0 clamp(28px,4vw,44px)}
   footer{grid-template-columns:1fr 1fr;gap:36px 44px}
   .ft-div{display:none}
@@ -1087,22 +1105,20 @@ footer{padding-top:clamp(48px,5.4vw,68px);
   .begin-logo{height:clamp(96px,12vw,140px)}
 }
 
-/* ══ ≤1024px — hero goes single column before the ghosts collide ══ */
 @media(max-width:1024px){
   #hero{min-height:auto;padding-top:clamp(104px,13vw,130px)}
   .hero-grid{grid-template-columns:1fr;gap:0}
-  .hero-content{margin-left:0}
   .hero-ghost{position:relative;top:auto;right:auto;text-align:left;
     font-size:clamp(110px,20vw,200px);margin-bottom:-14px;line-height:.8}
   .hero-solid{position:relative;bottom:auto;right:auto;text-align:left;
     font-size:clamp(50px,10vw,96px);margin-top:22px}
-  .hero-asterisk{position:relative;bottom:auto;left:auto;margin-top:40px;max-width:64ch}
   .later-wrap{grid-template-columns:1fr;gap:30px}
   .later-left{margin-left:0;height:auto;min-height:0}
-  .later-label{position:relative;bottom:auto;left:auto;margin-bottom:12px}
+  .later-label{position:relative;bottom:auto;left:auto;margin:-12px 0 12px}
   .later-tick{position:relative;bottom:auto;margin-bottom:14px}
   .later-big{position:relative;bottom:auto;left:auto;display:block;
     font-size:clamp(92px,20vw,260px);margin:0 0 -8px}
+  .later-right{margin-top:0}
   .later-response-lead,.later-response-sub{text-align:left;margin-right:0;margin-left:0}
   .later-response-lead{white-space:normal}
   .frictions{margin-left:0;max-width:none}
@@ -1110,117 +1126,368 @@ footer{padding-top:clamp(48px,5.4vw,68px);
   .exec-split{gap:0 36px}
 }
 
-/* ══ ≤880px — tablet portrait / large phone ══ */
 @media(max-width:880px){
-  .pillars{grid-template-columns:1fr;gap:0}
   .struct-head{grid-template-columns:1fr;gap:18px 0;margin-bottom:clamp(38px,6vw,52px)}
-  .struct-answer{text-align:left;justify-self:start;font-size:clamp(56px,17vw,96px)}
+  .struct-answer{text-align:left;justify-self:start;font-size:clamp(50px,15vw,88px)}
   .sb-map{grid-template-columns:1fr 1fr;gap:10px}
-  .spec-note-block{grid-template-columns:1fr;gap:8px}
-  .why-split{grid-template-columns:1fr;gap:44px}
   .why-identity{padding-right:0;border-right:none;padding-bottom:40px;border-bottom:1px solid var(--line)}
   .why-proof{padding-left:0}
-  .why-logo-mark{font-size:clamp(76px,20vw,120px)}
-  .why-prov{margin-top:30px}
-  .spec-closer{flex-direction:column;align-items:flex-start;gap:14px}
-  /* hotspot cards become a bottom sheet well before they can clip */
-  .hotspot .hotspot-expand{position:fixed;left:16px;right:16px;
-    bottom:calc(18px + env(safe-area-inset-bottom));top:auto;width:auto;
-    padding:20px 22px;transform:translateY(14px);
-    box-shadow:0 -8px 40px rgba(26,24,18,.16)}
-  .hotspot.open .hotspot-expand{transform:none}
-  .hotspot-expand-desc{font-size:13.5px}
-  .hotspot-dot{width:34px;height:34px}
-  .hotspot-label{display:none}
+  .why-logo-mark{height:clamp(66px,17vw,104px)}
+  .why-brands{margin-top:30px}
+  .why-panes{flex:0 0 auto}
   #sb-nudge{max-width:calc(100vw - 76px)}
 }
 
-/* ══ ≤700px — phone: kill every nowrap, widen every tap target ══ */
 @media(max-width:700px){
   .hero-h1 .l:first-child{white-space:normal}
-  .hero-h1{font-size:clamp(31px,8.2vw,46px)}
+  .hero-h1{font-size:clamp(33px,8.8vw,50px)}
   .hero-sub{font-size:15.5px}
   .hero-cta-wrap{flex-direction:column;align-items:stretch}
   .btn,.btn-outline{justify-content:center;padding:17px 24px}
   .nav-logo{width:46px;height:46px}
-  #journey .j-end{display:none}
-  #journey{height:44vh}
-  .j-waypoint{height:30px}
   .exec-mon{font-size:clamp(46px,15vw,96px)}
   .exec-mon em{font-size:clamp(24px,8.4vw,52px)}
   .exec-sub{margin-bottom:clamp(36px,7vw,48px)}
-  .wagon-punch{font-size:clamp(23px,6.6vw,36px)}
-  .sb-opts{gap:7px}
-  .sb-opt{flex:1 1 100%;text-align:left;min-height:46px;display:flex;align-items:center}
   .sb-nav{gap:12px}
   .sb-next{padding:15px 20px}
   .sb-dep-row{grid-template-columns:1fr auto;gap:5px 10px}
   .sb-dep-row-label{grid-area:1/1}
   .sb-dep-row-val{grid-area:1/2}
   .sb-dep-row-track{grid-area:2/1/3/3}
-  .why-catalogue{grid-template-columns:1fr}
-  .why-cat-desc{font-size:13.5px}
-  .spec-leader{display:none}
-  .spec-row{flex-wrap:wrap;gap:4px 10px}
-  .spec-count{margin-left:auto}
-  .spec-art{flex-wrap:wrap}
-  .spec-status{margin-left:0;padding-left:16px}
-  .spec-tb-meta{gap:8px 18px}
   #sb-nudge .nudge-dismiss{width:26px;height:26px;top:-11px;right:-11px;font-size:11px}
   .friction-body-in{padding-left:32px}
 }
 
-/* ══ ≤560px — small phone ══ */
 @media(max-width:560px){
   .sb-map{grid-template-columns:1fr}
   .sb-ctas{flex-direction:column}
   .sb-cta-save,.sb-cta-conv{justify-content:center}
-  .wagon-meta{flex-direction:column;gap:5px;align-items:flex-start}
-  .spec-name{flex-shrink:1}
-  .spec-count{font-size:9.5px}
   .begin-btns{flex-direction:column}
-  .hero-solid{font-size:clamp(46px,13vw,72px)}
   .later-response-lead{font-size:clamp(21px,6.4vw,28px)}
-  .wagon-principle-bold{font-size:clamp(23px,9vw,40px)}
-  .spec-closer-sig{font-size:9px;letter-spacing:.14em}
   .ft-disc{max-width:100%}
 }
 
-/* ══ ≤400px — the floor: nothing may overflow here ══ */
 @media(max-width:400px){
-  #journey{display:none}
   #vrail{width:1px}
-  .struct-answer{font-size:clamp(44px,16vw,64px)}
-  .spec-ix{width:28px}
+  .struct-answer{font-size:clamp(40px,14vw,60px)}
   .sb-card{padding:20px 14px}
   .hotspot-expand{padding:17px 18px}
   #sb-nudge a{padding:11px 16px;font-size:10px;letter-spacing:.08em}
 }
 
-/* ══ SHORT LANDSCAPE — phones turned sideways ══ */
 @media(max-height:520px) and (orientation:landscape){
   #hero{min-height:auto;padding-top:88px;padding-bottom:56px}
   #journey{height:78vh}
-  .hotspot .hotspot-expand{bottom:12px;padding:14px 18px}
-  .hotspot-expand-desc{font-size:12.5px;line-height:1.55}
 }
 
-/* ══ TOUCH — hover states must never latch ══ */
 @media(hover:none){
-  .hotspot-dot{width:36px;height:36px}
-  .pillar:hover,.why-cat-cell:hover{transform:none;box-shadow:none}
+  .hotspot-dot{width:48px;height:48px}
+  .pillar:hover{transform:none;box-shadow:none}
   .sb-opt:hover{transform:none;box-shadow:none}
-}
-
-@media(hover:none){
   .pillar:active,.friction:active{background:var(--pine06)}
-  .btn:active,.btn-outline:active,.model-btn:active{transform:translateY(1px)}
+  .btn:active,.btn-outline:active{transform:translateY(1px)}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
   .r{opacity:1;transform:none}
   .pillar{opacity:1;transform:none}
   .sweep-line::after{left:0;right:0}
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ▓▓ MOBILE SYSTEM ▓▓
+   Declared last. Nothing here fires at ≥1024px except the
+   chrome band, which only removes the journey rail.
+   Bands:  ≤1023 COMPRESSED · ≤880 MOBILE · ≤479 COMPACT
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── BAND 1 · ≤1024 — COMPRESSED ──
+   Matched to 1024 on purpose: that is where the hero already restacks. */
+@media(max-width:1024px){
+  /* the constellation is unreadable and untappable below this width */
+  #journey{display:none!important}
+
+  .pillars{grid-template-columns:1fr 1fr;gap:16px}
+  .hotspot-dot{width:40px;height:40px}
+
+  /* #hero is a flex row. Once the ghosts go position:relative they become
+     flex siblings of .hero-grid and get crushed into a third column.
+     They are a wide-screen device; below this width the kicker carries it. */
+  .hero-ghost,.hero-solid{display:none}
+  .hero-kicker{display:block;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--ink38);
+    margin-bottom:20px;opacity:0;animation:ghostIn .9s var(--e2) .35s forwards}
+  .hero-kicker b{font-weight:400;color:var(--pine)}
+
+  /* the split is already stacked — the divider rule and gutter have to go
+     with it, or a vertical line runs down the middle of a full-width block */
+  .why-split{grid-template-columns:1fr;gap:44px}
+  .why-identity{padding-right:0;border-right:none;
+    padding-bottom:40px;border-bottom:1px solid var(--line)}
+  .why-proof{padding-left:0}
+  .why-brands{margin-top:30px}
+}
+
+/* ── NAV MIDDLE LABEL ──
+   "FROM IDEA TO OPERATING BUSINESS" is absolutely centred while the right-hand
+   links are flowed from the right edge. Below ~1050px the two overlap. */
+@media(max-width:1080px){
+  .nav-mid{display:none}
+}
+
+/* ══ MID-LARGE BAND ══
+   Two negative pulls (.hero-content -40px, .later-left -60px) assume the
+   grid is capped at its max-width and centred with slack either side. Once
+   the viewport drops below max-width + gutters the grid sits flush against
+   the gutter and the pull drags content into — and past — it.
+   Measured: at 1240–1364px the hero headline lands 2px from the viewport
+   edge and the "can I not build this STRUCTURE" label lands at -18px, i.e.
+   its first characters are clipped off-screen entirely. */
+
+/* the LATER? pull only has room from 1484px up */
+@media(max-width:1483px){
+  .later-left{margin-left:0}
+  /* with the pull released the ghost sits 60px further right and reaches
+     deeper into the accordion. .later-right is a static grid item, so a
+     positioned z-index:5 ghost paints over it — the hero already solves
+     this by raising .hero-content. Same fix, same reason. */
+  .later-right{position:relative;z-index:6}
+}
+
+/* ── LATER? RIGHT COLUMN ──
+   Three different boxes were sharing one column: the lead and sub were
+   right-aligned with a 10px right margin, the sub was additionally capped
+   at 44ch, and .frictions was capped at 52ch and pushed right with
+   margin-left:auto. So the text sat 10px inside the accordion's right edge
+   with a ragged left edge that lined up with nothing. Below 1440 — where
+   the lead wraps to two lines and the ragged edge becomes obvious — all
+   three share one box, aligned left with the accordion rows. */
+@media(max-width:1439px){
+  .later-right{margin-top:0}
+  .later-response-lead{white-space:normal}
+  .later-response-lead,.later-response-sub{
+    text-align:left;margin-left:0;margin-right:0;max-width:none}
+  .frictions{margin-left:0;max-width:none}
+}
+
+/* ── BAND 2 · ≤880 — MOBILE ── */
+@media(max-width:880px){
+
+  /* ── performance: the fixed blend-mode overlay costs a full-screen
+     composite on every scroll frame. Off. ── */
+  body::before{display:none}
+
+  /* ── §01 HERO — ghosts out, kicker in, one CTA to the Brief ── */
+  .hero-ghost,.hero-solid,.hero-sub{display:none}
+  .hero-kicker{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ink38);margin-bottom:20px;
+    opacity:0;animation:ghostIn .9s var(--e2) .35s forwards}
+  .hero-kicker b{font-weight:400;color:var(--pine)}
+  .hero-h1{font-size:clamp(34px,9.4vw,54px);line-height:1.02;margin-bottom:22px}
+  .hero-sub-m{display:block;font-family:var(--body);font-size:15.5px;font-weight:300;
+    line-height:1.68;color:var(--ink72);max-width:34ch;margin-bottom:14px;
+    opacity:0;animation:ghostIn 1s var(--e2) 1s forwards}
+  .hero-diff{font-size:16px;margin-bottom:30px}
+  .hero-cta-d{display:none}
+  .hero-cta-m{display:inline-flex;justify-content:center}
+  #hero{padding-bottom:clamp(64px,9vw,88px)}
+
+  /* ── §02 PILLARS — tap to open, one at a time ── */
+  .pillars{grid-template-columns:1fr;gap:0}
+  .pillar{padding:0;background:none;border:none;border-bottom:1px solid var(--crm18);cursor:pointer;
+    transform:none;opacity:1}
+  .pillar:first-child{border-top:1px solid var(--crm18)}
+  .pillar::before{display:none}
+  .pillar-ix{margin:0;position:absolute;top:22px;left:0;font-size:9.5px}
+  .pillar-name{display:flex;align-items:center;justify-content:space-between;gap:14px;
+    font-size:19px;margin:0;padding:19px 0 0 30px;line-height:1.25}
+  .pillar-name::after{content:'+';font-family:var(--body);font-weight:300;font-size:19px;
+    color:var(--mint);opacity:.7;transition:transform .4s var(--e1);flex-shrink:0;line-height:1}
+  .pillar.open .pillar-name::after{transform:rotate(45deg)}
+  .pillar-desc{font-size:13.5px;line-height:1.6;color:var(--crm54);
+    margin:5px 0 0;padding:0 34px 19px 30px}
+  .pillar-detail{max-height:0;overflow:hidden;opacity:0;padding-top:0;border-top:none;
+    margin-left:30px;transition:max-height .5s var(--e2),opacity .35s var(--e2),padding .35s,margin .35s}
+  .pillar.open .pillar-detail{max-height:360px;opacity:1;padding:14px 0 20px;
+    border-top:1px solid var(--crm18)}
+  .pillar-item{font-size:13px;padding:5px 0}
+  .struct-close{margin-top:38px}
+
+  /* ── §03 THE PLATE ──
+     Three text zones and five stars can't share a 340px drawing.
+     The image goes plain, the type stacks beneath it, the stars print.
+     §04 is no longer saying what §03 says, so it stays visible here. ── */
+  .wg-zone,.wg-bridge{display:none}
+  .hotspot{display:none}
+  .wagon-stage{pointer-events:none;margin-bottom:26px}
+
+  .wg-stack{display:block;padding-top:6px}
+  .wg-stack .wg-line{display:flex;flex-direction:column;align-items:flex-start}
+  .wg-stack .wg-conn{display:block;font-size:clamp(14px,4.2vw,18px);color:var(--ink38)}
+  .wg-stack .wg-ghost{font-size:clamp(58px,17vw,96px);
+    color:transparent;-webkit-text-stroke:1px var(--ink18)}
+  .wg-stack .wg-solid{font-size:clamp(52px,15vw,88px);color:var(--pine)}
+  .wg-stack .wg-line + .wg-line{margin-top:14px}
+  .wg-stack .wg-bridge-m{display:block;position:static;width:auto;
+    font-family:var(--disp);font-weight:300;
+    font-size:clamp(16px,4.6vw,20px);line-height:1.45;color:var(--ink72);
+    max-width:30ch;margin-top:24px;padding-top:22px;border-top:1px solid var(--line)}
+  .wg-stack .wg-bridge-m b{font-weight:400;font-style:italic;color:var(--pine)}
+
+  .wagon-list{display:block;list-style:none;margin:30px 0 0;padding:0;
+    border-top:1px solid var(--line)}
+  .wagon-list li{display:flex;gap:13px;padding:17px 0;border-bottom:1px solid var(--line)}
+  .wl-ix{font-size:8px;color:var(--pine);opacity:.65;padding-top:8px;flex-shrink:0}
+  .wl-name{font-family:var(--disp);font-weight:400;font-size:17.5px;color:var(--ink);
+    line-height:1.25;margin-bottom:5px}
+  .wl-desc{font-size:13.5px;line-height:1.68;color:var(--ink72)}
+  .wagon-punch{text-align:left;max-width:none;margin:38px 0 0;
+    font-size:clamp(17px,4.8vw,21px)}
+
+  /* ── §05 WHY ORR — proof becomes credibility first, then four doors ── */
+  .why-identity{display:flex;flex-direction:column}
+  .why-logo-zone{margin-bottom:24px}
+  .why-brands{order:-1;margin:0 0 26px;padding:0 0 20px;
+    border-top:none;border-bottom:1px solid var(--line)}
+  .why-brands-label{margin-bottom:11px}
+  .why-tagline{font-size:clamp(26px,7.4vw,34px);margin-bottom:18px}
+  .why-prop{font-size:14px;max-width:none}
+  .why-proof-h2{font-size:clamp(29px,8vw,38px)}
+  .why-proof-sub{margin-bottom:24px}
+  .why-tabs,.why-panes{display:none}
+  .why-cats{display:block}
+  .why-cat{display:block;padding:17px 0;border-bottom:1px solid var(--lineL)}
+  .why-cat:first-child{border-top:1px solid var(--lineL)}
+  .why-cat-n{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    font-family:var(--disp);font-weight:400;font-size:18px;color:var(--ink);line-height:1.2}
+  .why-cat-n::after{content:'→';font-family:var(--body);font-size:15px;color:var(--pine);
+    opacity:.7;flex-shrink:0}
+  .why-cat-d{display:block;font-size:13px;line-height:1.6;color:var(--ink72);
+    margin-top:5px;max-width:38ch}
+  .why-cat:active{background:var(--pine06)}
+  .why-encourage{margin-top:26px}
+
+  /* ── §06 WORKING WITH US ── */
+  .ew-h2{font-size:clamp(28px,7.6vw,38px)}
+  .vc-lane-k{font-size:15px}
+  .vc-lane-v{font-size:14px}
+
+  /* ── §04 EXECUTION — the ≤1024 rule below resets the row gap to 0 ── */
+  .exec-split{gap:36px}
+
+  /* ── §07 WHY NOW — larger taps, nothing else ── */
+  .friction-head{padding:18px 2px}
+  .friction-tog{width:26px;height:26px}
+
+  /* ── §08 STRUCTURE BRIEF — one question per screen ── */
+  .sb-h2{font-size:clamp(31px,8.4vw,40px)}
+  .sb-sub{font-size:14px;margin-bottom:30px;max-width:34ch}
+  .sb-progress{display:none}
+  .sb-mbar{display:block}
+  .sb-card{min-height:0;padding:26px 20px}
+  .sb-cluster-label{margin-bottom:16px;font-size:9.5px}
+  .sb-q{display:none;margin-bottom:0}
+  .sb-q.q-active{display:block;animation:sbFade .32s var(--e2)}
+  .sb-q-text{font-size:20px;line-height:1.32;margin-bottom:20px}
+  .sb-opts{flex-direction:column;gap:7px}
+  .sb-opt{flex:none;width:100%;text-align:left;padding:14px 16px;font-size:14px;
+    min-height:50px;display:flex;align-items:center;line-height:1.35}
+  .sb-open{font-size:16px}
+  .sb-nav{margin-top:24px}
+  .sb-next{padding:15px 22px}
+
+  /* result */
+  .sb-result-header{margin-bottom:22px}
+  .sb-verdict{display:block;margin-bottom:26px;padding:22px 20px;
+    background:var(--pine);border-left:3px solid var(--mint)}
+  .sb-verdict p{font-family:var(--disp);font-weight:300;font-size:19px;
+    line-height:1.4;color:var(--crm)}
+  .sb-verdict em{font-style:italic;color:var(--mint)}
+  .sb-stage{margin-bottom:26px;padding:20px}
+  .sb-map{grid-template-columns:1fr;gap:8px;margin-bottom:26px}
+  .sb-map-col{padding:0 16px;cursor:pointer}
+  .sb-map-label{margin:0;padding-top:15px}
+  .sb-map-label br{display:none}
+  .sb-map-status{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    margin:0;padding:2px 0 15px;font-size:15px}
+  .sb-map-status::after{content:'+';font-family:var(--body);font-weight:300;font-size:16px;
+    color:var(--mint);opacity:.6;transition:transform .35s var(--e1)}
+  .sb-map-col.open .sb-map-status::after{transform:rotate(45deg)}
+  .sb-map-insight{max-height:0;overflow:hidden;opacity:0;
+    transition:max-height .45s var(--e2),opacity .3s,padding .3s}
+  .sb-map-col.open .sb-map-insight{max-height:320px;opacity:1;padding:0 0 16px}
+  .sb-dep{margin-bottom:26px;padding:20px}
+  .sb-dep-title{margin-bottom:12px}
+  .sb-dep-overall{margin-bottom:0;padding-bottom:0;border-bottom:none}
+  .sb-dep-toggle{display:inline-flex;align-items:center;gap:8px;background:none;border:none;
+    cursor:pointer;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--crm54);padding:14px 0 0}
+  .sb-dep-toggle span{font-family:var(--body);font-size:13px;transition:transform .35s var(--e1)}
+  .sb-dep.open .sb-dep-toggle span{transform:rotate(45deg)}
+  .sb-dep-bars{max-height:0;overflow:hidden;opacity:0;
+    transition:max-height .5s var(--e2),opacity .3s,margin .3s}
+  .sb-dep.open .sb-dep-bars{max-height:340px;opacity:1;margin-top:16px}
+  .sb-roadmap{margin-bottom:26px}
+  .sb-road-step{cursor:pointer;padding:15px 0}
+  .sb-road-why{max-height:0;overflow:hidden;opacity:0;
+    transition:max-height .45s var(--e2),opacity .3s,margin .3s}
+  .sb-road-step.open .sb-road-why{max-height:200px;opacity:1;margin-top:4px}
+  .sb-road-name{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    margin-bottom:0;font-size:15.5px}
+  .sb-road-name::after{content:'+';font-family:var(--body);font-weight:300;font-size:16px;
+    color:var(--mint);opacity:.5;transition:transform .35s var(--e1)}
+  .sb-road-step.open .sb-road-name::after{transform:rotate(45deg)}
+  .sb-risk{margin-bottom:26px;padding:18px 20px}
+  .sb-phase{margin-bottom:26px;padding:20px}
+  /* two CTAs to the same place is one CTA wearing two hats */
+  .sb-cta-conv{display:none}
+  .sb-cta-save{width:100%;justify-content:center;padding:16px 26px}
+
+  /* ── §09 BEGIN — no path backwards at the point of conversion ── */
+  .begin-btns{display:none}
+  .begin-h2{font-size:clamp(25px,6.8vw,32px)}
+  .begin-h2 br{display:none}
+  .begin-sub{font-size:clamp(18px,5.2vw,23px);margin-bottom:0}
+  .begin-form{margin-top:34px}
+
+  /* ── FOOTER ──
+     the ≤1080 two-column rule is declared later in the sheet than the ≤860
+     single-column one, so it was winning on phones. Reasserted here. */
+  footer{grid-template-columns:1fr;gap:34px}
+  .ft-close{grid-column:auto}
+  .ft-disc{max-width:100%}
+  .begin-logo{height:clamp(72px,20vw,96px)}
+  .ft-stmt{font-size:15px}
+  .ft-disc{font-size:12px;line-height:1.6;color:var(--crm72)}
+}
+
+/* ── HEADLINE FIT ──
+   line one is nowrap up to 700px and only just cleared the gutters below
+   ~700. Sized so it holds one line all the way down. ── */
+@media(max-width:700px){
+  .hero-h1{font-size:clamp(30px,8.2vw,42px)}
+}
+
+/* ── BAND 3 · ≤479 — COMPACT. Nothing may overflow here. ── */
+@media(max-width:479px){
+  .hero-h1{font-size:clamp(28px,8.6vw,38px)}
+  .hero-sub-m{font-size:15px}
+  .hero-diff{font-size:15px}
+  .struct-h2{font-size:clamp(30px,8.6vw,38px)}
+  .struct-answer{font-size:clamp(42px,14vw,62px)}
+  .pillar-name{font-size:17.5px}
+  .wl-name{font-size:16.5px}
+  .wagon-punch{font-size:clamp(16px,4.6vw,19px)}
+  .why-tagline{font-size:clamp(24px,7.6vw,30px)}
+  .why-cat-n{font-size:17px}
+  .ew-h2{font-size:clamp(30px,8.8vw,38px)}
+  .sb-q-text{font-size:18.5px}
+  .sb-card{padding:22px 15px}
+  .sb-opt{font-size:13.5px;padding:13px 15px}
+  .sb-verdict p{font-size:17.5px}
+  .later-label{font-size:clamp(18px,5.6vw,22px)}
+  .friction-name{font-size:14.5px}
+  .friction-body-in{padding-left:30px;font-size:13px}
 }
 </style>
 </head>
@@ -1249,7 +1516,7 @@ footer{padding-top:clamp(48px,5.4vw,68px);
     <div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div>
     <div class="j-waypoint" data-target="why"><span class="j-label">Why ORR</span></div>
     <div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div>
-    <div class="j-waypoint" data-target="spec"><span class="j-label">Your path</span></div>
+    <div class="j-waypoint" data-target="model"><span class="j-label">How we work</span></div>
     <div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div>
     <div class="j-waypoint" data-target="later"><span class="j-label">Why now</span></div>
     <div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div><div class="j-trail-dot"></div>
@@ -1276,7 +1543,7 @@ footer{padding-top:clamp(48px,5.4vw,68px);
 <!-- MOBILE MENU -->
 <nav class="mnav" id="mnav" aria-label="Mobile navigation">
   <a href="#structure">Structure</a>
-  <a href="#spec">The Model</a>
+  <a href="#model">How we work</a>
   <a href="resources.html">Resources</a>
   <a href="#begin">Begin</a>
   <span class="mnav-tag">From Idea to Operating Business</span>
@@ -1286,21 +1553,23 @@ footer{padding-top:clamp(48px,5.4vw,68px);
 <section id="hero">
   <div class="hero-grid">
     <div class="hero-content">
+      <span class="hero-kicker" aria-hidden="true">idea <b>&rarr;</b> operating business</span>
       <h1 class="hero-h1">
         <span class="l">You focus on <em class="hero-em">selling.</em></span>
-        <span class="l">We build <span class="rest">the rest.<sup id="asteriskLink">*</sup></span></span>
+        <span class="l">We build <span class="rest">the rest.</span></span>
       </h1>
       <p class="hero-sub">We help early founders turn their idea into a real, operating business — <br>with the structure, the compliance, the operational foundation that most founders either skip or don't know they need.</p>
+      <p class="hero-sub-m">We help early founders turn an idea into a business that actually operates — the structure, the compliance, the foundation underneath it.</p>
       <p class="hero-diff">Building with you, not advising from a zoom call.</p>
       <div class="hero-cta-wrap">
-        <a href="#begin" class="btn">Start with ORR <span class="a">→</span></a>
+        <a href="#begin" class="btn hero-cta-d">Start with ORR <span class="a">→</span></a>
+        <a href="#assess" class="btn hero-cta-m">Get your Structure Brief <span class="a">→</span></a>
       </div>
     </div>
     <div aria-hidden="true"></div>
   </div>
   <div class="hero-ghost" aria-hidden="true">idea</div>
   <div class="hero-solid" aria-hidden="true"><em><span class="hs-op">Operating</span><br><span class="hs-biz">Business</span></em></div>
-  <p class="hero-asterisk" id="heroAsterisk"><sup>*</sup> "The rest" refers to the commercial, legal, operational, and governance structure your business needs to function — not product development, accounting, or technology services. Scope is defined before any engagement begins.</p>
 </section>
 
 <!-- §02 — WHAT A BUSINESS ACTUALLY NEEDS -->
@@ -1369,90 +1638,97 @@ footer{padding-top:clamp(48px,5.4vw,68px);
   </div>
 </section>
 
-<!-- §03 — THE FOUNDER PROBLEM (WAGON) -->
+<!-- §03 — THE PLATE -->
 <section id="wagon">
   <div class="wagon-wrap" id="wagonWrap">
 
-    <p class="wagon-frame r">This is what a business looks like when the founder's capability
-      <em>outpaces the structure holding it together.</em></p>
-
-    <div class="wagon-meta r d1">
-      <span class="wagon-meta-hint">Six failure points — open each one</span>
-      <span class="wagon-count" id="wagonCount">0 of 6 identified</span>
-    </div>
-
-    <div class="wagon-stage r d1" id="wagonStage">
+    <div class="wagon-stage r" id="wagonStage">
       <img src="assets/wgn.png"
-           alt="A massive industrial engine mounted on a fragile wooden wagon — the founder's capability outpacing the business structure"
+           alt="A large industrial engine mounted on a wooden farm wagon — the founder's capability outpacing the structure carrying it"
            loading="lazy">
 
+      <!-- type on the plate -->
+      <div class="wg-zone wg-ambition" aria-hidden="true">
+        <span class="wg-conn">greater the</span>
+        <span class="wg-ghost">ambition</span>
+      </div>
+
+      <p class="wg-bridge">Founders are 2,000hp engines. <br>What they need is <b>a frame that can carry the ambition.</b></p>
+
+      <div class="wg-zone wg-structure" aria-hidden="true">
+        <span class="wg-conn">greater the need for</span>
+        <span class="wg-solid">STRUCTURE</span>
+      </div>
+
+      <!-- the stars -->
       <div class="hotspot" data-point="ownership" data-x="l" data-y="b">
         <button class="hotspot-dot" type="button" aria-expanded="false" aria-label="No ownership"></button>
         <span class="hotspot-label">No ownership</span>
         <div class="hotspot-expand">
-          <div class="hotspot-expand-name">No Ownership</div>
-          <p class="hotspot-expand-desc">Nobody owns anything because nothing was ever assigned. Work happens by proximity, not by design. When everything belongs to everyone, nothing actually gets done.</p>
+          <div class="hotspot-expand-name">No ownership</div>
+          <p class="hotspot-expand-desc">Nobody really owns anything, because nothing was ever properly assigned. Work gets done by whoever's around — which is fine until it's the thing nobody was around for.</p>
         </div>
       </div>
 
       <div class="hotspot" data-point="bottleneck" data-x="l" data-y="t">
         <button class="hotspot-dot" type="button" aria-expanded="false" aria-label="Founder bottleneck"></button>
-        <span class="hotspot-label">Bottleneck</span>
+        <span class="hotspot-label">Founder bottleneck</span>
         <div class="hotspot-expand">
-          <div class="hotspot-expand-name">Founder Bottleneck</div>
-          <p class="hotspot-expand-desc">Every decision, every approval, every "just checking" runs through one person. The wheels can't turn without the founder pushing them.</p>
+          <div class="hotspot-expand-name">Founder bottleneck</div>
+          <p class="hotspot-expand-desc">Everything comes back to you — not the big calls, all of them. Half of it you shouldn't be deciding, but there's no one else who can.</p>
         </div>
       </div>
 
-      <div class="hotspot" data-point="management" data-x="l" data-y="b">
-        <button class="hotspot-dot" type="button" aria-expanded="false" aria-label="No management layer"></button>
-        <span class="hotspot-label">No middle layer</span>
+      <div class="hotspot" data-point="handholding" data-x="l" data-y="b">
+        <button class="hotspot-dot" type="button" aria-expanded="false" aria-label="Everyone needs handholding"></button>
+        <span class="hotspot-label">Everyone needs handholding</span>
         <div class="hotspot-expand">
-          <div class="hotspot-expand-name">No Management Layer</div>
-          <p class="hotspot-expand-desc">There is no middle. It's the founder and everyone else. Every problem, no matter how small, escalates to the same desk.</p>
+          <div class="hotspot-expand-name">Everyone needs handholding</div>
+          <p class="hotspot-expand-desc">It's not that people can't work without you. Nothing's written down, so there's no way for them to know what you actually want.</p>
         </div>
       </div>
 
-      <div class="hotspot" data-point="overload" data-x="r" data-y="b">
-        <button class="hotspot-dot" type="button" aria-expanded="false" aria-label="Decision overload"></button>
-        <span class="hotspot-label">Overload</span>
+      <div class="hotspot" data-point="authority" data-x="r" data-y="b">
+        <button class="hotspot-dot" type="button" aria-expanded="false" aria-label="No authority"></button>
+        <span class="hotspot-label">No authority</span>
         <div class="hotspot-expand">
-          <div class="hotspot-expand-name">Decision Overload</div>
-          <p class="hotspot-expand-desc">The founder doesn't just make the big calls. They make all the calls — because no one else has the authority or the context to decide.</p>
+          <div class="hotspot-expand-name">No authority</div>
+          <p class="hotspot-expand-desc">Nobody really says this one out loud. Most of your early team are friends, or believed in you before this was a company — you can ask them, but telling them is different.</p>
         </div>
       </div>
 
-      <div class="hotspot" data-point="handholding" data-x="r" data-y="b">
-        <button class="hotspot-dot" type="button" aria-expanded="false" aria-label="Constant handholding"></button>
-        <span class="hotspot-label">Handholding</span>
+      <div class="hotspot" data-point="hiring" data-x="r" data-y="t">
+        <button class="hotspot-dot" type="button" aria-expanded="false" aria-label="So you hire"></button>
+        <span class="hotspot-label">So you hire</span>
         <div class="hotspot-expand">
-          <div class="hotspot-expand-name">Constant Handholding</div>
-          <p class="hotspot-expand-desc">Team members can't move independently because the system was never built to let them. Every step needs the founder's guidance.</p>
-        </div>
-      </div>
-
-      <div class="hotspot" data-point="survival" data-x="r" data-y="b">
-        <button class="hotspot-dot" type="button" aria-expanded="false" aria-label="Survival mode"></button>
-        <span class="hotspot-label">Survival mode</span>
-        <div class="hotspot-expand">
-          <div class="hotspot-expand-name">Survival Mode</div>
-          <p class="hotspot-expand-desc">The founder stops building the business and starts just keeping it alive. Growth becomes a concept discussed in theory while the day is spent firefighting.</p>
+          <div class="hotspot-expand-name">So you hire</div>
+          <p class="hotspot-expand-desc">Which seems like the obvious answer, and sometimes it is. Mostly you've added someone to a business with nothing for them to plug into.</p>
         </div>
       </div>
     </div>
 
-    <div class="wagon-principle r d2">
-      <p class="wagon-principle-text">Greater the ambition</p>
-      <div class="wagon-principle-bold" aria-hidden="true">greater the need for STRUCTURE</div>
+    <!-- MOBILE — the same type, stacked under the drawing -->
+    <div class="wg-stack r d1">
+      <div class="wg-line"><span class="wg-conn">greater the</span><span class="wg-ghost">ambition</span></div>
+      <div class="wg-line"><span class="wg-conn">greater the need for</span><span class="wg-solid">STRUCTURE</span></div>
+      <p class="wg-bridge-m">Founders are 2,000hp engines. What they need is <b>a frame that can carry the ambition.</b></p>
     </div>
 
-    <h3 class="wagon-punch r d3">The business isn't running.<br>
-      <em>The founder is running the business.</em></h3>
+    <!-- MOBILE — the same five, read rather than hunted -->
+    <ol class="wagon-list r d2">
+      <li><span class="wl-ix">✦</span><div><div class="wl-name">No ownership</div><p class="wl-desc">Nobody really owns anything, because nothing was ever properly assigned. Work gets done by whoever's around — which is fine until it's the thing nobody was around for.</p></div></li>
+      <li><span class="wl-ix">✦</span><div><div class="wl-name">Founder bottleneck</div><p class="wl-desc">Everything comes back to you — not the big calls, all of them. Half of it you shouldn't be deciding, but there's no one else who can.</p></div></li>
+      <li><span class="wl-ix">✦</span><div><div class="wl-name">Everyone needs handholding</div><p class="wl-desc">It's not that people can't work without you. Nothing's written down, so there's no way for them to know what you actually want.</p></div></li>
+      <li><span class="wl-ix">✦</span><div><div class="wl-name">No authority</div><p class="wl-desc">Nobody really says this one out loud. Most of your early team are friends, or believed in you before this was a company — you can ask them, but telling them is different.</p></div></li>
+      <li><span class="wl-ix">✦</span><div><div class="wl-name">So you hire</div><p class="wl-desc">Which seems like the obvious answer, and sometimes it is. Mostly you've added someone to a business with nothing for them to plug into.</p></div></li>
+    </ol>
+
+    <h2 class="wagon-punch r d3">The business isn't running.<em>The founder is running the business.</em></h2>
 
   </div>
 </section>
 
-<!-- §04 — EXECUTION WITHOUT STRUCTURE -->
+<!-- §04 — EXECUTION WITHOUT STRUCTURE  (desktop only; merged into §03 on mobile) -->
 <section id="execution" class="sweep-line blueprint-grid">
   <div class="bp-grid" aria-hidden="true"></div>
 
@@ -1481,321 +1757,221 @@ footer{padding-top:clamp(48px,5.4vw,68px);
   <div class="why-wrap">
     <div class="why-split">
 
-      <!-- ━━ LEFT: identity ━━ -->
+      <!-- ━━ LEFT: Identity ━━ -->
       <div class="why-identity r">
-        <span class="why-label">Why ORR.</span>
+        <div class="why-logo-zone">
+          <img src="assets/drk.svg" alt="ORR" class="why-logo-mark">
+        </div>
 
-        <p class="why-angle">A lawyer sees <b>exposure</b>. A consultant sees <b>process</b>. A marketer sees <b>positioning</b>.</p>
-        <p class="why-angle-close">Each one is right. None of them sees the whole business.</p>
+        <h2 class="why-tagline">Built <em>to build.</em></h2>
 
-        <div class="why-logo-mark" aria-hidden="true">ORR</div>
+        <p class="why-prop">From building businesses from scratch, to operational expertise at scale, to governance and compliance structuring, to legal competence — ORR gives you what your business needs under one roof.</p>
+        <p class="why-prop-highlight">Instead of hiring six or seven specialists and hoping they coordinate.</p>
 
-        <h2 class="why-tagline">ORR is built <em>to build.</em></h2>
-
-        <p class="why-prop">Business structuring from scratch, operational design at scale, governance and compliance, and legal competence — under one roof, applied to one business at a time.</p>
-        <p class="why-prop-highlight">Instead of hiring six specialists and hoping they think from the point of view of your business.</p>
-
-        <div class="why-prov">
-          <div class="why-prov-label">Where the pattern recognition comes from</div>
-          <div class="why-prov-list">
-            <div class="why-prov-item">Regulated manufacturing, environmental management, and regulatory affairs</div>
-            <div class="why-prov-item">Retail operations at national-chain scale</div>
-            <div class="why-prov-item">Compliance and data protection practice — DPDP and GDPR</div>
-            <div class="why-prov-item">Law, in progress and applied to live commercial work</div>
+        <div class="why-brands">
+          <div class="why-brands-label">Experience across</div>
+          <div class="why-brands-row">
+            <span class="why-brand-item">Loblaws</span>
+            <span class="why-brand-item">Walmart</span>
+            <span class="why-brand-item">Best Buy</span>
+            <span class="why-brand-item">Giant Tiger</span>
           </div>
-          <a href="founder.html" class="why-link">The full story →</a>
         </div>
       </div>
 
-      <!-- ━━ RIGHT: proof ━━ -->
+      <!-- ━━ RIGHT: Proof ━━ -->
       <div class="why-proof r d1">
-        <h3 class="why-proof-h2">Don't take our<br>word for it.</h3>
+        <h3 class="why-proof-h2">Don't take our word for it.</h3>
         <p class="why-proof-sub">See what we build. Use what we publish.</p>
 
-        <div class="why-catalogue">
-          <div class="why-cat-cell">
-            <div class="why-cat-marker">✦</div>
-            <div class="why-cat-name">Strategy</div>
-            <p class="why-cat-desc">Business model analysis, positioning, and competitive landscape mapping — built from operational reality rather than borrowed frameworks.</p>
-            <div class="why-cat-meta">
-              <span class="why-cat-tag">Free</span>
-              <span class="why-cat-count">Articles &amp; guides</span>
-            </div>
-          </div>
+        <div class="why-tabs" role="tablist" aria-label="Resource categories">
+          <button class="why-tab" type="button" role="tab" id="whytab-strategy"
+            aria-controls="whypane-strategy" aria-selected="true" tabindex="0">
+            <span class="why-tab-marker" aria-hidden="true">✦</span>
+            <span class="why-tab-name">Strategy</span>
+          </button>
+          <button class="why-tab" type="button" role="tab" id="whytab-tools"
+            aria-controls="whypane-tools" aria-selected="false" tabindex="-1">
+            <span class="why-tab-marker" aria-hidden="true">✦</span>
+            <span class="why-tab-name">Execution Tools</span>
+          </button>
+          <button class="why-tab" type="button" role="tab" id="whytab-legal"
+            aria-controls="whypane-legal" aria-selected="false" tabindex="-1">
+            <span class="why-tab-marker" aria-hidden="true">✦</span>
+            <span class="why-tab-name">Legal &amp; Compliance</span>
+          </button>
+          <button class="why-tab" type="button" role="tab" id="whytab-governance"
+            aria-controls="whypane-governance" aria-selected="false" tabindex="-1">
+            <span class="why-tab-marker" aria-hidden="true">✦</span>
+            <span class="why-tab-name">Governance</span>
+          </button>
+        </div>
 
-          <div class="why-cat-cell">
-            <div class="why-cat-marker">✦</div>
-            <div class="why-cat-name">Execution Tools</div>
-            <p class="why-cat-desc">Frameworks, spreadsheets, SOPs, and policy documents you can put to work today. Not worksheets — the actual artifacts.</p>
-            <div class="why-cat-meta">
-              <span class="why-cat-tag">Free + paid</span>
-              <span class="why-cat-count">Templates</span>
-            </div>
+        <div class="why-panes">
+          <div class="why-pane" id="whypane-strategy" role="tabpanel"
+            aria-labelledby="whytab-strategy" aria-hidden="false">
+            <p class="why-pane-desc">Business thinking built from operational reality — not theory, not motivation.</p>
+            <a class="why-pv-item" href="resources.html#strategy">
+              <span class="why-pv-title">The Outsider Test</span>
+              <span class="why-pv-type">Article</span>
+            </a>
+            <a class="why-pv-item" href="resources.html#strategy">
+              <span class="why-pv-title">Structure Is Like Health</span>
+              <span class="why-pv-type">Article</span>
+            </a>
+            <a class="why-pv-item" href="resources.html#strategy">
+              <span class="why-pv-title">The Freedom Trap</span>
+              <span class="why-pv-type">Article</span>
+            </a>
+            <a href="resources.html#strategy" class="why-browse">Browse strategy resources <span>→</span></a>
           </div>
-
-          <div class="why-cat-cell">
-            <div class="why-cat-marker">✦</div>
-            <div class="why-cat-name">Legal &amp; Compliance</div>
-            <p class="why-cat-desc">Statutes read in plain language and mapped to real business scenarios, with commentary on what actually reaches a company your size.</p>
-            <div class="why-cat-meta">
-              <span class="why-cat-tag">Free + paid</span>
-              <span class="why-cat-count">Interpretations</span>
-            </div>
+          <div class="why-pane" id="whypane-tools" role="tabpanel"
+            aria-labelledby="whytab-tools" aria-hidden="true">
+            <p class="why-pane-desc">Frameworks and templates you can implement today — the same tools we use with founders.</p>
+            <a class="why-pv-item" href="resources.html#tools">
+              <span class="why-pv-title">Business Model Stress-Test Framework</span>
+              <span class="why-pv-type">Framework</span>
+            </a>
+            <a class="why-pv-item" href="resources.html#tools">
+              <span class="why-pv-title">Operating Structure Template</span>
+              <span class="why-pv-type">Template</span>
+            </a>
+            <a class="why-pv-item" href="resources.html#tools">
+              <span class="why-pv-title">Role &amp; Responsibility Matrix</span>
+              <span class="why-pv-type">Excel</span>
+            </a>
+            <a href="resources.html#tools" class="why-browse">Browse execution tools <span>→</span></a>
           </div>
-
-          <div class="why-cat-cell">
-            <div class="why-cat-marker">✦</div>
-            <div class="why-cat-name">Governance</div>
-            <p class="why-cat-desc">Decision rights, accountability structures, org design, and control systems — built for founders running small teams, not corporate boards.</p>
-            <div class="why-cat-meta">
-              <span class="why-cat-tag">Paid</span>
-              <span class="why-cat-count">Frameworks</span>
-            </div>
+          <div class="why-pane" id="whypane-legal" role="tabpanel"
+            aria-labelledby="whytab-legal" aria-hidden="true">
+            <p class="why-pane-desc">Entire laws interpreted in plain language. Compliance mapped to real businesses.</p>
+            <a class="why-pv-item" href="resources.html#legal">
+              <span class="why-pv-title">DPDP Act 2023 — Plain Language Interpretation</span>
+              <span class="why-pv-type">Interpretation</span>
+            </a>
+            <a class="why-pv-item" href="resources.html#legal">
+              <span class="why-pv-title">Compliance Framework for AI-SaaS</span>
+              <span class="why-pv-type">Framework</span>
+            </a>
+            <a class="why-pv-item" href="resources.html#legal">
+              <span class="why-pv-title">DPDP Rules 2025 — Commentary</span>
+              <span class="why-pv-type">Commentary</span>
+            </a>
+            <a href="resources.html#legal" class="why-browse">Browse legal resources <span>→</span></a>
+          </div>
+          <div class="why-pane" id="whypane-governance" role="tabpanel"
+            aria-labelledby="whytab-governance" aria-hidden="true">
+            <p class="why-pane-desc">Decision structures and accountability frameworks built for founders, not boards.</p>
+            <a class="why-pv-item" href="resources.html#governance">
+              <span class="why-pv-title">Governance Framework for Early-Stage</span>
+              <span class="why-pv-type">Framework</span>
+            </a>
+            <a class="why-pv-item" href="resources.html#governance">
+              <span class="why-pv-title">Decision Rights &amp; Accountability Matrix</span>
+              <span class="why-pv-type">Template</span>
+            </a>
+            <a class="why-pv-item" href="resources.html#governance">
+              <span class="why-pv-title">Policy Control Framework</span>
+              <span class="why-pv-type">Framework</span>
+            </a>
+            <a href="resources.html#governance" class="why-browse">Browse governance resources <span>→</span></a>
           </div>
         </div>
 
-        <a href="resources.html" class="why-browse">Browse all resources <span>→</span></a>
+        <!-- MOBILE — four doors instead of four tabs -->
+        <div class="why-cats">
+          <a class="why-cat" href="resources.html#strategy">
+            <span class="why-cat-n">Strategy</span>
+            <span class="why-cat-d">Business thinking built from operational reality — not theory, not motivation.</span>
+          </a>
+          <a class="why-cat" href="resources.html#tools">
+            <span class="why-cat-n">Execution Tools</span>
+            <span class="why-cat-d">Frameworks and templates you can implement today — the same ones we use with founders.</span>
+          </a>
+          <a class="why-cat" href="resources.html#legal">
+            <span class="why-cat-n">Legal &amp; Compliance</span>
+            <span class="why-cat-d">Entire laws interpreted in plain language. Compliance mapped to real businesses.</span>
+          </a>
+          <a class="why-cat" href="resources.html#governance">
+            <span class="why-cat-n">Governance</span>
+            <span class="why-cat-d">Decision structures and accountability frameworks built for founders, not boards.</span>
+          </a>
+        </div>
 
-        <p class="why-encourage">The library exists so founders can understand their own business properly. Most of it is <strong>free</strong> — use it whether or not you ever speak to us.</p>
+        <div class="why-encourage">
+          <p>The library exists so founders can understand their own business properly. Most of it is <strong>free</strong> — use it whether or not you ever speak to us.</p>
+        </div>
+
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- §06 — THE STRUCTURAL SPECIFICATION -->
-<section id="spec" class="sweep-line blueprint-grid">
-  <div class="bp-grid" aria-hidden="true"></div>
-  <div class="spec-wrap">
-    <h2 class="spec-h2 r">What it actually takes.</h2>
-    <p class="spec-sub r d1">This is the full specification — from idea to operating business. Every line is something that gets built.</p>
+<!-- §06 — WHAT WORKING WITH US LOOKS LIKE -->
+<section id="model" class="sweep-line">
+  <div class="ew">
 
-    <!-- ── THE DOCUMENT ── -->
-    <div class="spec-doc r d2">
-      <span class="spec-mark tl" aria-hidden="true">+</span>
-      <span class="spec-mark tr" aria-hidden="true">+</span>
-      <span class="spec-mark bl" aria-hidden="true">+</span>
-      <span class="spec-mark br" aria-hidden="true">+</span>
-
-      <!-- TITLE BLOCK -->
-      <div class="spec-titleblock">
-        <div class="spec-tb-head">
-          <span>Structural Specification</span>
-          <span class="spec-tb-rev">Rev 01</span>
-        </div>
-        <div class="spec-tb-title">From idea to operating business</div>
-        <div class="spec-tb-meta">
-          <span>Phases <b>00–09</b></span>
-          <span>Artifacts <b>46</b></span>
-          <span>Scale <b>1:1</b></span>
-          <span>Method <b>Built, not advised</b></span>
-        </div>
-      </div>
-
-      <!-- DIVISION A -->
-      <div class="spec-division">Division A — Pre-structural</div>
-
-      <div class="spec-item">
-        <div class="spec-row">
-          <span class="spec-ix">00</span>
-          <span class="spec-name">Before the Business Exists</span>
-          <span class="spec-leader" aria-hidden="true"></span>
-          <span class="spec-count">06 artifacts</span>
-          <span class="spec-tog">+</span>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-in">
-          <div class="spec-art">Idea articulation <span class="spec-status">written</span></div>
-          <div class="spec-art">Problem validation <span class="spec-status">evidenced</span></div>
-          <div class="spec-art">Market sizing <span class="spec-status">mapped</span></div>
-          <div class="spec-art">Competitive landscape <span class="spec-status">mapped</span></div>
-          <div class="spec-art">Business model definition <span class="spec-status">defined</span></div>
-          <div class="spec-art">Founder-market fit <span class="spec-status">assessed</span></div>
-        </div></div>
-      </div>
-
-      <div class="spec-item">
-        <div class="spec-row">
-          <span class="spec-ix">01</span>
-          <span class="spec-name">Shaping the Offer</span>
-          <span class="spec-leader" aria-hidden="true"></span>
-          <span class="spec-count">05 artifacts</span>
-          <span class="spec-tog">+</span>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-in">
-          <div class="spec-art">Core offer definition <span class="spec-status">scoped</span></div>
-          <div class="spec-art">Ideal customer profile <span class="spec-status">documented</span></div>
-          <div class="spec-art">Pricing strategy <span class="spec-status">set</span></div>
-          <div class="spec-art">Positioning &amp; differentiation <span class="spec-status">defined</span></div>
-          <div class="spec-art">MVP scope <span class="spec-status">locked</span></div>
-        </div></div>
-      </div>
-
-      <div class="spec-item">
-        <div class="spec-row">
-          <span class="spec-ix">02</span>
-          <span class="spec-name">Market Testing</span>
-          <span class="spec-leader" aria-hidden="true"></span>
-          <span class="spec-count">04 artifacts</span>
-          <span class="spec-tog">+</span>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-in">
-          <div class="spec-art">Outreach script &amp; tested contact list <span class="spec-status">tested</span></div>
-          <div class="spec-art">Pricing validation <span class="spec-status">validated</span></div>
-          <div class="spec-art">Channel testing <span class="spec-status">tested</span></div>
-          <div class="spec-art">Structured feedback loop <span class="spec-status">running</span></div>
-        </div></div>
-      </div>
-
-      <!-- DIVISION B -->
-      <div class="spec-division">Division B — Structural build</div>
-
-      <div class="spec-item">
-        <div class="spec-row">
-          <span class="spec-ix">03</span>
-          <span class="spec-name">Legal &amp; Structural Foundation</span>
-          <span class="spec-leader" aria-hidden="true"></span>
-          <span class="spec-count">05 artifacts</span>
-          <span class="spec-tog">+</span>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-in">
-          <div class="spec-art">Entity structure &amp; incorporation <span class="spec-status">filed</span></div>
-          <div class="spec-art">Founder agreement <span class="spec-status">drafted &amp; signed</span></div>
-          <div class="spec-art">Bank account &amp; financial setup <span class="spec-status">opened</span></div>
-          <div class="spec-art">Sector-specific licenses &amp; registrations <span class="spec-status">filed</span></div>
-          <div class="spec-art">Client agreement, vendor contracts, NDAs <span class="spec-status">drafted</span></div>
-        </div></div>
-      </div>
-
-      <div class="spec-item">
-        <div class="spec-row">
-          <span class="spec-ix">04</span>
-          <span class="spec-name">Go-to-Market &amp; Distribution</span>
-          <span class="spec-leader" aria-hidden="true"></span>
-          <span class="spec-count">04 artifacts</span>
-          <span class="spec-tog">+</span>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-in">
-          <div class="spec-art">Positioning &amp; messaging <span class="spec-status">finalized</span></div>
-          <div class="spec-art">Website &amp; digital presence <span class="spec-status">built</span></div>
-          <div class="spec-art">Outreach sequence <span class="spec-status">written &amp; loaded</span></div>
-          <div class="spec-art">Sales process &amp; deck <span class="spec-status">documented</span></div>
-        </div></div>
-      </div>
-
-      <div class="spec-item">
-        <div class="spec-row">
-          <span class="spec-ix">05</span>
-          <span class="spec-name">Operations &amp; Delivery</span>
-          <span class="spec-leader" aria-hidden="true"></span>
-          <span class="spec-count">04 artifacts</span>
-          <span class="spec-tog">+</span>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-in">
-          <div class="spec-art">Delivery &amp; fulfillment SOPs <span class="spec-status">written</span></div>
-          <div class="spec-art">CRM, invoicing, project management <span class="spec-status">configured</span></div>
-          <div class="spec-art">Vendor &amp; supplier agreements <span class="spec-status">executed</span></div>
-          <div class="spec-art">Quality control checklist <span class="spec-status">built</span></div>
-        </div></div>
-      </div>
-
-      <div class="spec-item">
-        <div class="spec-row">
-          <span class="spec-ix">06</span>
-          <span class="spec-name">People &amp; Roles</span>
-          <span class="spec-leader" aria-hidden="true"></span>
-          <span class="spec-count">04 artifacts</span>
-          <span class="spec-tog">+</span>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-in">
-          <div class="spec-art">Job descriptions <span class="spec-status">written</span></div>
-          <div class="spec-art">Hiring &amp; onboarding process <span class="spec-status">documented</span></div>
-          <div class="spec-art">Offer letter templates <span class="spec-status">drafted</span></div>
-          <div class="spec-art">Roles &amp; decision rights chart <span class="spec-status">built</span></div>
-        </div></div>
-      </div>
-
-      <!-- DIVISION C -->
-      <div class="spec-division">Division C — Governance &amp; continuity<span class="spec-div-note">— scoped to your specific business; no template version exists</span></div>
-
-      <div class="spec-item">
-        <div class="spec-row">
-          <span class="spec-ix">07</span>
-          <span class="spec-name">Governance &amp; Structure</span>
-          <span class="spec-leader" aria-hidden="true"></span>
-          <span class="spec-count">04 artifacts</span>
-          <span class="spec-tog">+</span>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-in">
-          <div class="spec-art">Operating cadence calendar <span class="spec-status">set up</span></div>
-          <div class="spec-art">Decision-rights framework <span class="spec-status">built</span></div>
-          <div class="spec-art">SOP library <span class="spec-status">written</span></div>
-          <div class="spec-art">Financial reporting system <span class="spec-status">built &amp; populated</span></div>
-        </div></div>
-      </div>
-
-      <div class="spec-item">
-        <div class="spec-row">
-          <span class="spec-ix">08</span>
-          <span class="spec-name">Compliance &amp; Risk</span>
-          <span class="spec-leader" aria-hidden="true"></span>
-          <span class="spec-count">05 artifacts</span>
-          <span class="spec-tog">+</span>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-in">
-          <div class="spec-art">Privacy policy <span class="spec-status">drafted</span></div>
-          <div class="spec-art">Data-protection agreements <span class="spec-status">drafted</span></div>
-          <div class="spec-art">Tax &amp; compliance calendar <span class="spec-status">built — real dates</span></div>
-          <div class="spec-art">Contractual risk review <span class="spec-status">ongoing</span></div>
-          <div class="spec-art">IP protection <span class="spec-status">filed</span></div>
-        </div></div>
-      </div>
-
-      <div class="spec-item">
-        <div class="spec-row">
-          <span class="spec-ix">09</span>
-          <span class="spec-name">Scaling Structure</span>
-          <span class="spec-leader" aria-hidden="true"></span>
-          <span class="spec-count">05 artifacts</span>
-          <span class="spec-tog">+</span>
-        </div>
-        <div class="spec-detail"><div class="spec-detail-in">
-          <div class="spec-art">Data room <span class="spec-status">built &amp; populated</span></div>
-          <div class="spec-art">Cap table <span class="spec-status">built</span></div>
-          <div class="spec-art">Governance formalization <span class="spec-status">structured</span></div>
-          <div class="spec-art">Hiring system <span class="spec-status">systematized</span></div>
-          <div class="spec-art">Weakness diagnosis <span class="spec-status">checkpointed</span></div>
-        </div></div>
-      </div>
-
-      <!-- SUMMARY — bill of materials -->
-      <div class="spec-summary">
-        <div class="spec-sum-label">Specification summary</div>
-        <div class="spec-sum-row"><span>Phases</span><span class="spec-leader" aria-hidden="true"></span><span class="spec-sum-val">10</span></div>
-        <div class="spec-sum-row"><span>Artifacts</span><span class="spec-leader" aria-hidden="true"></span><span class="spec-sum-val">46</span></div>
-        <div class="spec-sum-row"><span>Advice as a substitute for building</span><span class="spec-leader" aria-hidden="true"></span><span class="spec-sum-val">00</span></div>
-        <div class="spec-foot">Scale 1:1 — everything on this specification is built real, not modeled.</div>
-      </div>
+    <div class="ew-header r">
+      <h2 class="ew-h2">What working with us <em>looks like.</em></h2>
+      <p class="ew-h2-sub">Every business needs something different first — <br><em>we build what you need.</em></p>
     </div>
 
-    <!-- ── PATH FORWARD — specification notes ── -->
-    <div class="spec-paths r d3">
-      <div class="spec-note-block">
-        <span class="spec-note-ix">Method</span>
+    <div class="vc-track r d1">
+
+      <div class="vc-step">
+        <div class="vc-rail" aria-hidden="true"><span class="vc-ix">01</span><span class="vc-node">✦</span><span class="vc-line"></span></div>
         <div>
-          <h3 class="spec-note-h">We build this with you.</h3>
-          <p class="spec-note-b">Phase by phase. Artifact by artifact. Each engagement has a defined scope, defined deliverables, and a defined end. You don't buy the entire specification — you buy the next line your business needs.</p>
-          <p class="spec-entry">Phase 01 is designed for founders who are serious but early. We don't always start with a fee — we start with a build. The relationship grows as the business does.</p>
-          <a href="#begin" class="btn">Start a conversation <span class="a">→</span></a>
+          <h3 class="vc-t">You tell us what you're building.</h3>
+          <p class="vc-d">In your words. Your vision, where you're standing, what you expect. Based on that, we'll tell you whether ORR is the right fit — and if we aren't, you'll hear it in that first conversation, <em>which costs nothing.</em></p>
+        </div>
+      </div>
+
+      <div class="vc-step">
+        <div class="vc-rail" aria-hidden="true"><span class="vc-ix">02</span><span class="vc-node">✦</span><span class="vc-line"></span></div>
+        <div>
+          <h3 class="vc-t">We read the business.</h3>
+          <p class="vc-d">We work through the business model, see what it actually needs, and propose a roadmap. It starts by determining what we're actually looking at.</p>
+          <div class="vc-fork">
+            <div class="vc-lane">
+              <div class="vc-lane-k">If nothing's built yet</div>
+              <p class="vc-lane-v">We work out what has to exist for this to be a business at all, and in what order it has to be built.</p>
+            </div>
+            <div class="vc-or" aria-hidden="true"><i></i><span>or</span><i></i></div>
+            <div class="vc-lane">
+              <div class="vc-lane-k">If it's already running</div>
+              <p class="vc-lane-v">We start with what you expect it to be, then diagnose what's actually there — and build the structure that bridges the two.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vc-step">
+        <div class="vc-rail" aria-hidden="true"><span class="vc-ix">03</span><span class="vc-node">✦</span><span class="vc-line"></span></div>
+        <div>
+          <h3 class="vc-t">You get the roadmap.</h3>
+          <p class="vc-d">Scope, deliverables, sequence, estimated charges. On paper, before a single hour of work begins — not a proposal designed to sell you more hours. <em>You decide if it makes sense.</em></p>
+        </div>
+      </div>
+
+      <div class="vc-step">
+        <div class="vc-rail" aria-hidden="true"><span class="vc-ix">04</span><span class="vc-node">✦</span><span class="vc-line"></span></div>
+        <div>
+          <h3 class="vc-t">We build it with you.</h3>
+          <p class="vc-d">We work in phases, and each one is priced for what it actually requires of your business. Scope agreed, cost agreed, before it starts.</p>
+          <div class="vc-price">
+            <p>Phase one carries a <a href="phases.html">nominal fee</a> — enough for both sides to know the fit is right. And if what you're building genuinely excites us, <b>phase one may cost nothing at all.</b></p>
+          </div>
+          <a href="phases.html" class="vc-more">Learn more about phases <span aria-hidden="true">&rarr;</span></a>
         </div>
       </div>
 
     </div>
 
-    <!-- ── CLOSER — signature line ── -->
-    <div class="spec-closer r d4">
-      <span class="spec-closer-line">Wherever you are on the road — we meet you there.</span>
-      <span class="spec-closer-sig">ORR — Structural Specification — Rev 01</span>
+    <div class="vc-foot r d2">
+      <p class="vc-foot-l">Engagements are kept few, <em>so the focus is never divided.</em></p>
+      <a href="#begin" class="ew-btn">Start a conversation <span aria-hidden="true">&rarr;</span></a>
     </div>
+
   </div>
 </section>
 
@@ -2076,6 +2252,7 @@ footer{padding-top:clamp(48px,5.4vw,68px);
         <!-- RESULT -->
         <div class="sb-result" id="sbResult">
           <div class="sb-result-header">YOUR STRUCTURE BRIEF</div>
+          <div class="sb-verdict" id="sbVerdict"><p id="sbVerdictText"></p></div>
           <div class="sb-stage" id="sbStage">
             <div class="sb-stage-label">Your stage</div>
             <div class="sb-stage-name" id="sbStageName">—</div>
@@ -2093,6 +2270,7 @@ footer{padding-top:clamp(48px,5.4vw,68px);
               <span class="sb-dep-overall-label">Overall</span>
               <span class="sb-dep-overall-val" id="sbDepOverall">—</span>
             </div>
+            <button class="sb-dep-toggle" id="sbDepToggle" type="button">Show breakdown <span>+</span></button>
             <div class="sb-dep-bars" id="sbDepBars"></div>
           </div>
           <div class="sb-roadmap" id="sbRoadmap">
@@ -2138,11 +2316,11 @@ footer{padding-top:clamp(48px,5.4vw,68px);
       <form id="orrForm" action="https://formspree.io/f/xzzjvbvj" method="POST" novalidate>
         <div style="position:absolute;left:-9999px" aria-hidden="true"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
         <div class="field"><label class="flabel" for="i-name">Your name</label>
-          <input class="control" id="i-name" name="name" type="text" placeholder=" " autocomplete="name" required></div>
+          <input class="control" id="i-name" name="name" type="text" placeholder=" " autocomplete="name" enterkeyhint="next" required></div>
         <div class="field"><label class="flabel" for="i-email">Your email</label>
-          <input class="control" id="i-email" name="email" type="email" placeholder=" " autocomplete="email" required></div>
+          <input class="control" id="i-email" name="email" type="email" inputmode="email" placeholder=" " autocomplete="email" enterkeyhint="next" required></div>
         <div class="field"><label class="flabel" for="i-note">What's the idea, and what's stopping it from being a business right now?</label>
-          <textarea class="control" id="i-note" name="note" rows="3" placeholder=" " required></textarea></div>
+          <textarea class="control" id="i-note" name="note" rows="3" placeholder=" " enterkeyhint="done" required></textarea></div>
         <button type="submit" class="btn begin-submit">Tell us about your idea <span class="a">→</span></button>
         <p class="begin-conf">We respond within one business day · Everything shared is confidential</p>
       </form>
@@ -2184,438 +2362,585 @@ footer{padding-top:clamp(48px,5.4vw,68px);
 
 <script>
 /* ══════════════════════════════════════════════════════════════
-   CORE — NAV, JOURNEY, REVEALS, INTERACTIONS
+   ORR — CORE
+   One scroll frame. One mobile switch. Nothing runs twice.
    ══════════════════════════════════════════════════════════════ */
 
-/* ── NAV ── */
-const nav=document.getElementById('nav'),hero=document.getElementById('hero'),journey=document.getElementById('journey');
-const sections=document.querySelectorAll('section[id]');
-const darkSections=new Set(['structure','execution','spec','assess']);
+/* ── THE MOBILE SWITCH ──
+   880px is the single structural breakpoint. Everything below it
+   is a different page, not a squeezed one. */
+const MQ = matchMedia('(max-width:880px)');
+let MOBILE = MQ.matches;
+const mqSubs = [];
+const onMQ = fn => mqSubs.push(fn);
+MQ.addEventListener('change', e => { MOBILE = e.matches; mqSubs.forEach(f => f()); });
 
-function updateNav(){
-  const past=scrollY>hero.offsetHeight-100;
-  nav.classList.toggle('visible',past);
-  nav.classList.toggle('solid',past);
-  journey.classList.toggle('past-hero',past);
-  let inDark=false;
-  sections.forEach(s=>{
-    const r=s.getBoundingClientRect();
-    if(r.top<80&&r.bottom>80&&darkSections.has(s.id))inDark=true;
+const REDUCED = matchMedia('(prefers-reduced-motion:reduce)').matches;
+const frameSubs = [];   /* per-frame work registered by sections — one rAF total */
+const HOVERS  = matchMedia('(hover:hover)').matches;
+
+/* ── ELEMENTS ── */
+const nav      = document.getElementById('nav');
+const hero     = document.getElementById('hero');
+const journey  = document.getElementById('journey');
+const vrailFill= document.getElementById('vrail-fill');
+const sbNudge  = document.getElementById('sb-nudge');
+const wagonSec = document.getElementById('wagon');
+const assessSec= document.getElementById('assess');
+const laterSec = document.getElementById('later');
+const sections = [...document.querySelectorAll('section[id]')];
+const darkSections = new Set(['structure','execution','model','assess']);
+
+/* ══ JOURNEY CONSTELLATION (≥1024 only) ══ */
+const jWaypoints = [...document.querySelectorAll('#journey .j-waypoint')];
+const jAllItems  = [...document.querySelectorAll('#journey .j-constellation > *')];
+const jEndBottom = document.querySelector('#journey .j-end.bottom');
+const waypointTargets = ['structure','wagon','execution','why','model','later','assess'];
+
+function easeScrollTo(el){
+  if(!el) return;
+  const start = scrollY, end = el.getBoundingClientRect().top + scrollY, dist = end - start;
+  if(REDUCED){ scrollTo(0,end); return; }
+  let t0 = null;
+  const ease = t => 1 - Math.pow(1 - t, 4);
+  requestAnimationFrame(function step(ts){
+    if(!t0) t0 = ts;
+    const p = Math.min((ts - t0) / 650, 1);
+    scrollTo(0, start + dist * ease(p));
+    if(p < 1) requestAnimationFrame(step);
   });
-  if(nav.classList.contains('dark-mode')!==inDark) nav.classList.toggle('dark-mode',inDark);
 }
-addEventListener('scroll',updateNav,{passive:true});
-updateNav();
 
-/* ── JOURNEY CONSTELLATION ── */
-const jWaypoints=document.querySelectorAll('#journey .j-waypoint');
-const jAllItems=[...document.querySelectorAll('#journey .j-constellation > *')];
-const jEndBottom=document.querySelector('#journey .j-end.bottom');
-const waypointTargets=['structure','wagon','execution','why','spec','later','assess'];
+jWaypoints.forEach(w => w.addEventListener('click', () => easeScrollTo(document.getElementById(w.dataset.target))));
 
-jWaypoints.forEach(w=>{
-  w.addEventListener('click',()=>{
-    const target=document.getElementById(w.dataset.target);
-    if(target){
-      const start=scrollY,end=target.getBoundingClientRect().top+scrollY,dist=end-start;
-      let t0=null;
-      const ease=t=>1-Math.pow(1-t,4);
-      requestAnimationFrame(function step(ts){
-        if(!t0)t0=ts;const p=Math.min((ts-t0)/650,1);
-        scrollTo(0,start+dist*ease(p));
-        if(p<1)requestAnimationFrame(step);
-      });
-    }
+const wpMap = (() => {
+  const out = []; let n = 0;
+  jAllItems.forEach((item,i) => { if(item.classList.contains('j-waypoint')){ out.push({wpIdx:n, itemIdx:i}); n++; } });
+  return out;
+})();
+
+function updateJourney(y, vh, total){
+  let activeIdx = 0;
+  waypointTargets.forEach((id,i) => {
+    const el = document.getElementById(id);
+    if(el && el.offsetParent !== null && el.getBoundingClientRect().top < vh * .4) activeIdx = i;
   });
+  activeIdx = Math.min(activeIdx, jWaypoints.length - 1);
+
+  jWaypoints.forEach((w,i) => {
+    w.classList.remove('active','passed');
+    if(i === activeIdx) w.classList.add('active');
+    else if(i < activeIdx) w.classList.add('passed');
+  });
+
+  const activeWpItemIdx = wpMap[activeIdx] ? wpMap[activeIdx].itemIdx : 0;
+  const nextWpItemIdx   = wpMap[activeIdx+1] ? wpMap[activeIdx+1].itemIdx : jAllItems.length;
+  const currentEl = document.getElementById(waypointTargets[activeIdx]);
+  const nextEl    = activeIdx < waypointTargets.length - 1 ? document.getElementById(waypointTargets[activeIdx+1]) : null;
+
+  let segmentPct = 0;
+  if(currentEl){
+    const currentTop = currentEl.getBoundingClientRect().top + y;
+    const span = nextEl ? (nextEl.getBoundingClientRect().top + y) - currentTop : total - currentTop;
+    if(span > 0) segmentPct = Math.min(Math.max((y - currentTop) / span, 0), 1);
+  }
+
+  const totalLit = activeWpItemIdx + Math.floor(segmentPct * (nextWpItemIdx - activeWpItemIdx));
+  jAllItems.forEach((item,i) => { if(item.classList.contains('j-trail-dot')) item.classList.toggle('lit', i <= totalLit); });
+  if(jEndBottom) jEndBottom.classList.toggle('lit', total > 0 && y / total > .85);
+}
+
+/* ══ NUDGE ══ */
+let nudgeDismissed = false;
+const nudgeDismiss = document.getElementById('nudgeDismiss');
+if(nudgeDismiss) nudgeDismiss.addEventListener('click', () => {
+  nudgeDismissed = true;
+  sbNudge.classList.remove('visible');
 });
 
-function getWaypointItemIndices(){
-  const indices=[];let wpIdx=0;
-  jAllItems.forEach((item,i)=>{if(item.classList.contains('j-waypoint')){indices.push({wpIdx:wpIdx,itemIdx:i});wpIdx++;}});
-  return indices;
-}
-const wpMap=getWaypointItemIndices();
+/* ══ PARALLAX (desktop only) ══ */
+const heroGhost   = document.querySelector('.hero-ghost');
+const structGhost = document.querySelector('.struct-ghost');
 
-function updateJourney(){
-  const total=document.body.scrollHeight-innerHeight;
-  const scrollPct=Math.min(scrollY/total,1);
-  let activeIdx=0;
-  waypointTargets.forEach((id,i)=>{
-    const el=document.getElementById(id);
-    if(el&&el.getBoundingClientRect().top<innerHeight*.4)activeIdx=i;
-  });
-  activeIdx=Math.min(activeIdx,jWaypoints.length-1);
+/* ══ THE SINGLE SCROLL FRAME ══ */
+let ticking = false;
+function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(frame); } }
 
-  jWaypoints.forEach((w,i)=>{
-    w.classList.remove('active','passed');
-    if(i===activeIdx)w.classList.add('active');
-    else if(i<activeIdx)w.classList.add('passed');
-  });
+function frame(){
+  ticking = false;
+  const y = scrollY, vh = innerHeight;
+  const total = document.body.scrollHeight - vh;
 
-  const activeWpItemIdx=wpMap[activeIdx]?wpMap[activeIdx].itemIdx:0;
-  const nextWpItemIdx=wpMap[activeIdx+1]?wpMap[activeIdx+1].itemIdx:jAllItems.length;
-  const currentEl=document.getElementById(waypointTargets[activeIdx]);
-  const nextEl=activeIdx<waypointTargets.length-1?document.getElementById(waypointTargets[activeIdx+1]):null;
+  /* nav */
+  const past = y > hero.offsetHeight - 100;
+  nav.classList.toggle('visible', past);
+  nav.classList.toggle('solid', past);
+  journey.classList.toggle('past-hero', past);
 
-  let segmentPct=0;
-  if(currentEl&&nextEl){
-    const currentTop=currentEl.getBoundingClientRect().top+scrollY;
-    const nextTop=nextEl.getBoundingClientRect().top+scrollY;
-    const segmentLen=nextTop-currentTop;
-    if(segmentLen>0)segmentPct=Math.min(Math.max((scrollY-currentTop)/segmentLen,0),1);
-  }else if(currentEl&&!nextEl){
-    const currentTop=currentEl.getBoundingClientRect().top+scrollY;
-    const remaining=total-currentTop;
-    if(remaining>0)segmentPct=Math.min(Math.max((scrollY-currentTop)/remaining,0),1);
+  /* dark-ground detection — one pass, two thresholds */
+  let navDark = false, midDark = false;
+  for(const s of sections){
+    if(!darkSections.has(s.id)) continue;
+    if(s.offsetParent === null) continue;          /* skipped when display:none */
+    const r = s.getBoundingClientRect();
+    if(r.top < 80 && r.bottom > 80) navDark = true;
+    if(r.top < vh * .5 && r.bottom > vh * .5) midDark = true;
+  }
+  nav.classList.toggle('dark-mode', navDark);
+  document.body.classList.toggle('dark-active', midDark);
+
+  /* journey — only where it is actually rendered */
+  if(innerWidth > 1023) updateJourney(y, vh, total);
+
+  /* nudge — live between the founder problem and the diagnostic */
+  if(sbNudge){
+    if(nudgeDismissed){ sbNudge.classList.remove('visible'); }
+    else{
+      /* opens after the founder problem lands, closes before the objection
+         section — a shorter window on mobile, where it sits over content */
+      const wr = wagonSec.getBoundingClientRect();
+      const endRect = (MOBILE ? laterSec : assessSec).getBoundingClientRect();
+      sbNudge.classList.toggle('visible', wr.bottom < vh * .5 && endRect.top > vh * .7);
+    }
   }
 
-  const segmentItemCount=nextWpItemIdx-activeWpItemIdx;
-  const litInSegment=Math.floor(segmentPct*segmentItemCount);
-  const totalLit=activeWpItemIdx+litInSegment;
+  /* rail */
+  if(vrailFill) vrailFill.style.height = (total > 0 ? Math.min(y / total, 1) * 100 : 0) + '%';
 
-  jAllItems.forEach((item,i)=>{if(item.classList.contains('j-trail-dot'))item.classList.toggle('lit',i<=totalLit);});
-  if(jEndBottom)jEndBottom.classList.toggle('lit',scrollPct>.85);
-
-  let inDark=false;
-  sections.forEach(s=>{
-    const r=s.getBoundingClientRect();
-    if(r.top<innerHeight*.5&&r.bottom>innerHeight*.5&&darkSections.has(s.id))inDark=true;
-  });
-  document.body.classList.toggle('dark-active',inDark);
-}
-addEventListener('scroll',updateJourney,{passive:true});
-updateJourney();
-
-/* ── REVEAL ── */
-const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target);}}),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.r').forEach(el=>ro.observe(el));
-
-/* ── SECTION SWEEP LINES ── */
-const sweepObs=new IntersectionObserver(es=>es.forEach(e=>{
-  if(e.isIntersecting){e.target.classList.add('swept');sweepObs.unobserve(e.target);}
-}),{threshold:.05});
-document.querySelectorAll('.sweep-line').forEach(el=>sweepObs.observe(el));
-
-/* ── (exec-snap and strikethrough removed — section redesigned) ── */
-
-/* ── ASTERISK SCROLL ── */
-const astLink=document.getElementById('asteriskLink');
-const astTarget=document.getElementById('heroAsterisk');
-if(astLink&&astTarget){
-  astLink.addEventListener('click',e=>{
-    e.preventDefault();
-    astTarget.scrollIntoView({behavior:'smooth',block:'center'});
-    astTarget.style.color='var(--pine)';
-    setTimeout(()=>astTarget.style.color='',2000);
-  });
-}
-
-/* ── STRUCTURE BRIEF FLOATING NUDGE ── */
-const sbNudge=document.getElementById('sb-nudge');
-const nudgeDismiss=document.getElementById('nudgeDismiss');
-let nudgeDismissed=false;
-if(sbNudge){
-  function updateNudge(){
-    if(nudgeDismissed){sbNudge.classList.remove('visible');return;}
-    const execRect=document.getElementById('execution').getBoundingClientRect();
-    const assessRect=document.getElementById('assess').getBoundingClientRect();
-    const show=execRect.bottom<innerHeight*.5&&assessRect.top>innerHeight*.7;
-    sbNudge.classList.toggle('visible',show);
+  /* parallax — desktop only; it is pure cost on a phone */
+  if(!MOBILE && !REDUCED){
+    if(heroGhost)   heroGhost.style.transform   = 'translateY(' + (y * .15) + 'px)';
+    if(structGhost) structGhost.style.transform = 'translateX(-50%) translateY(' + ((y - 1000) * .08) + 'px)';
   }
-  addEventListener('scroll',updateNudge,{passive:true});
-  if(nudgeDismiss)nudgeDismiss.addEventListener('click',()=>{nudgeDismissed=true;sbNudge.classList.remove('visible');});
-}
 
-/* ── WAGON HOTSPOTS — discovery, tap/hover/keyboard, calibration ── */
+  for(const f of frameSubs) f();
+}
+addEventListener('scroll', onScroll, {passive:true});
+addEventListener('resize', onScroll, {passive:true});
+frame();
+
+/* ══ REVEALS ══ */
+const ro = new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+}), {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.r').forEach(el => ro.observe(el));
+
+const sweepObs = new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){ e.target.classList.add('swept'); sweepObs.unobserve(e.target); }
+}), {threshold:.05});
+document.querySelectorAll('.sweep-line').forEach(el => sweepObs.observe(el));
+
+const pillarObs = new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){ e.target.querySelectorAll('.pillar').forEach(p => p.classList.add('built')); pillarObs.unobserve(e.target); }
+}), {threshold:.2});
+const pillarsEl = document.querySelector('.pillars');
+if(pillarsEl) pillarObs.observe(pillarsEl);
+
+/* ══════════════════════════════════════════════════════════════
+   §02 — PILLARS: accordion on mobile, static on desktop
+   ══════════════════════════════════════════════════════════════ */
 (function(){
-  const stage=document.getElementById('wagonStage');
-  const wrap=document.getElementById('wagonWrap');
-  const countEl=document.getElementById('wagonCount');
-  if(!stage||!wrap||!countEl)return;
+  const pillars = [...document.querySelectorAll('.pillar')];
+  if(!pillars.length) return;
+  pillars.forEach(p => {
+    p.addEventListener('click', () => {
+      if(!MOBILE) return;
+      const open = p.classList.contains('open');
+      pillars.forEach(o => o.classList.remove('open'));
+      if(!open) p.classList.add('open');
+    });
+  });
+  onMQ(() => { if(!MOBILE) pillars.forEach(p => p.classList.remove('open')); });
+})();
 
-  const spots=[...stage.querySelectorAll('.hotspot')];
-  const found=new Set();
-  const canHover=window.matchMedia('(hover:hover)').matches;
+/* ══════════════════════════════════════════════════════════════
+   §03 — THE PLATE: the stars (desktop / tablet only)
+   On mobile the same five points print as a list instead.
+   ══════════════════════════════════════════════════════════════ */
+(function(){
+  const stage = document.getElementById('wagonStage');
+  if(!stage) return;
+  const spots = [...stage.querySelectorAll('.hotspot')];
 
   function closeAll(){
-    spots.forEach(s=>{
+    spots.forEach(s => {
       s.classList.remove('open');
       s.querySelector('.hotspot-dot').setAttribute('aria-expanded','false');
     });
   }
   function open(s){
+    if(MOBILE) return;
     closeAll();
     s.classList.add('open','found');
     s.querySelector('.hotspot-dot').setAttribute('aria-expanded','true');
-    stage.classList.add('engaged');wrap.classList.add('engaged');
-    found.add(s.dataset.point);
-    render();
-  }
-  function render(){
-    const n=found.size,t=spots.length;
-    countEl.textContent=n===t?'All six — one business':n+' of '+t+' identified';
-    countEl.classList.toggle('complete',n===t);
-    wrap.classList.toggle('all-found',n===t);
+    stage.classList.add('engaged');
   }
 
-  spots.forEach(s=>{
-    const dot=s.querySelector('.hotspot-dot');
-    dot.addEventListener('click',e=>{
+  spots.forEach(s => {
+    const dot = s.querySelector('.hotspot-dot');
+    dot.addEventListener('click', e => {
+      if(MOBILE) return;
       e.stopPropagation();
-      s.classList.contains('open')?closeAll():open(s);
+      s.classList.contains('open') ? closeAll() : open(s);
     });
-    dot.addEventListener('focus',()=>{if(canHover)open(s);});
-    if(canHover){
-      s.addEventListener('mouseenter',()=>open(s));
-      s.addEventListener('mouseleave',()=>{if(!s.contains(document.activeElement))closeAll();});
+    dot.addEventListener('focus', () => { if(HOVERS) open(s); });
+    if(HOVERS){
+      s.addEventListener('mouseenter', () => open(s));
+      s.addEventListener('mouseleave', () => { if(!s.contains(document.activeElement)) closeAll(); });
     }
   });
+  document.addEventListener('click', e => { if(!e.target.closest('.hotspot')) closeAll(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeAll(); });
+  onMQ(() => { if(MOBILE) closeAll(); });
 
-  document.addEventListener('click',e=>{if(!e.target.closest('.hotspot'))closeAll();});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll();});
-
-  /* CALIBRATION MODE — append ?cal to the URL */
+  /* CALIBRATION — append ?cal to the URL */
   if(/[?&]cal/.test(location.search)){
     stage.classList.add('cal');
-    const read=document.createElement('div');
-    read.className='cal-read';read.textContent='move over the image';
+    const read = document.createElement('div');
+    read.className = 'cal-read'; read.textContent = 'move over the image';
     stage.appendChild(read);
-    const pos=e=>{
-      const r=stage.getBoundingClientRect();
-      return{x:((e.clientX-r.left)/r.width*100).toFixed(1),
-             y:((e.clientY-r.top)/r.height*100).toFixed(1),
-             lx:e.clientX-r.left,ly:e.clientY-r.top};
+    const pos = e => {
+      const r = stage.getBoundingClientRect();
+      return { x:((e.clientX-r.left)/r.width*100).toFixed(1),
+               y:((e.clientY-r.top)/r.height*100).toFixed(1),
+               lx:e.clientX-r.left, ly:e.clientY-r.top };
     };
-    stage.addEventListener('mousemove',e=>{
-      const p=pos(e);
-      read.textContent='top:'+p.y+'%; left:'+p.x+'%';
-      read.style.left=(p.lx+16)+'px';read.style.top=(p.ly+16)+'px';
+    stage.addEventListener('mousemove', e => {
+      const p = pos(e);
+      read.textContent = 'top:' + p.y + '%; left:' + p.x + '%';
+      read.style.left = (p.lx + 16) + 'px'; read.style.top = (p.ly + 16) + 'px';
     });
-    stage.addEventListener('click',e=>{
-      const p=pos(e);const txt='top:'+p.y+'%;left:'+p.x+'%';
-      if(navigator.clipboard)navigator.clipboard.writeText(txt);
-      read.textContent='\u2713 copied — '+txt;
+    stage.addEventListener('click', e => {
+      const p = pos(e), txt = 'top:' + p.y + '%;left:' + p.x + '%';
+      if(navigator.clipboard) navigator.clipboard.writeText(txt);
+      read.textContent = '\u2713 copied — ' + txt;
     });
   }
 })();
 
-/* ── (timeline stops removed — replaced by roadmap) ── */
-
-/* ── SPEC ROW ACCORDION (V2 section) ── */
-document.querySelectorAll('.spec-item').forEach(item=>{
-  const row=item.querySelector('.spec-row');
-  if(!row)return;
-  row.addEventListener('click',()=>{
-    const isOpen=item.classList.contains('open');
-    document.querySelectorAll('.spec-item.open').forEach(oi=>{
-      oi.classList.remove('open');
-      const od=oi.querySelector('.spec-detail');if(od)od.style.maxHeight='0';
+/* ══════════════════════════════════════════════════════════════
+   §05 — WHY ORR resource tabs (desktop; replaced by list on mobile)
+   ══════════════════════════════════════════════════════════════ */
+(function(){
+  const tabs = [...document.querySelectorAll('.why-tab')];
+  if(!tabs.length) return;
+  const panes = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+  function select(i, focus){
+    tabs.forEach((t,n) => {
+      const on = n === i;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      if(panes[n]) panes[n].setAttribute('aria-hidden', !on);
     });
-    if(!isOpen){
-      item.classList.add('open');
-      const d=item.querySelector('.spec-detail');
-      d.style.maxHeight=d.querySelector('.spec-detail-in').scrollHeight+'px';
-    }
+    if(focus) tabs[i].focus();
+  }
+  tabs.forEach((tab,i) => {
+    tab.addEventListener('click', () => select(i));
+    tab.addEventListener('keydown', e => {
+      const last = tabs.length - 1;
+      if(e.key === 'ArrowRight'){ e.preventDefault(); select(i === last ? 0 : i+1, true); }
+      else if(e.key === 'ArrowLeft'){ e.preventDefault(); select(i === 0 ? last : i-1, true); }
+      else if(e.key === 'Home'){ e.preventDefault(); select(0, true); }
+      else if(e.key === 'End'){ e.preventDefault(); select(last, true); }
+    });
+  });
+})();
+
+/* ══════════════════════════════════════════════════════════════
+   §06 — WHAT WORKING WITH US LOOKS LIKE
+   Reading position is the state. The step nearest the reading line
+   is active; everything above it is passed and keeps a lit rail.
+   Runs inside the shared scroll frame — no extra listener.
+   ══════════════════════════════════════════════════════════════ */
+(function(){
+  const track = document.querySelector('.vc-track');
+  const steps = [...document.querySelectorAll('.vc-step')];
+  if(!track || !steps.length) return;
+
+  if(REDUCED){
+    steps.forEach(s => s.classList.add('passed'));
+    steps[steps.length - 1].classList.add('active');
+    return;
+  }
+
+  let held = -1;
+
+  function paint(i){
+    if(i === held) return;
+    held = i;
+    steps.forEach((s,n) => {
+      s.classList.toggle('active', n === i);
+      s.classList.toggle('passed', n < i);
+    });
+  }
+
+  function measure(){
+    const readLine = innerHeight * 0.42;
+    let best = -1, bestScore = Infinity;
+    steps.forEach((s,i) => {
+      const r = s.getBoundingClientRect();
+      if(r.bottom < 0 || r.top > innerHeight) return;
+      const spans = r.top <= readLine && r.bottom >= readLine;
+      const score = spans ? -1 : Math.abs((r.top + r.height / 2) - readLine);
+      if(score < bestScore){ bestScore = score; best = i; }
+    });
+    /* step 04 sits against the footer and can never reach the reading line
+       on a tall window, so hand it the state once the track has passed */
+    const tr = track.getBoundingClientRect();
+    if(tr.bottom < readLine + 40) best = steps.length - 1;
+    if(best === -1) best = tr.top > innerHeight ? -1 : steps.length - 1;
+    paint(best);
+  }
+
+  frameSubs.push(measure);
+  measure();
+
+  /* pointing at a step promotes it — an override, not the only way in */
+  if(HOVERS){
+    steps.forEach((s,i) => s.addEventListener('mouseenter', () => paint(i)));
+    track.addEventListener('mouseleave', () => { held = -1; measure(); });
+  }
+})();
+
+/* ══════════════════════════════════════════════════════════════
+   §07 — FRICTION ACCORDION
+   ══════════════════════════════════════════════════════════════ */
+(function(){
+  const items = [...document.querySelectorAll('.friction')];
+  function measure(f){
+    const body = f.querySelector('.friction-body');
+    body.style.maxHeight = f.classList.contains('open')
+      ? body.querySelector('.friction-body-in').scrollHeight + 'px' : '0';
+  }
+  items.forEach(f => {
+    f.querySelector('.friction-head').addEventListener('click', () => {
+      const wasOpen = f.classList.contains('open');
+      items.forEach(o => { o.classList.remove('open'); measure(o); });
+      if(!wasOpen){ f.classList.add('open'); measure(f); }
+    });
+  });
+  /* re-measure after fonts land and on rotate — otherwise text clips */
+  addEventListener('resize', () => items.forEach(measure), {passive:true});
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(() => items.forEach(measure));
+})();
+
+/* ══════════════════════════════════════════════════════════════
+   FORM
+   ══════════════════════════════════════════════════════════════ */
+['i-name','i-email','i-note'].forEach(id => {
+  const el = document.getElementById(id); if(!el) return;
+  const f = el.closest('.field');
+  const c = () => f.classList.toggle('filled', el.value.length > 0);
+  el.addEventListener('input', c); el.addEventListener('change', c);
+  if(el.tagName === 'TEXTAREA') el.addEventListener('input', () => {
+    el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px';
   });
 });
 
-/* ── FRICTION EXPAND ── */
-document.querySelectorAll('.friction').forEach(f=>{
-  f.querySelector('.friction-head').addEventListener('click',()=>{
-    const isOpen=f.classList.contains('open');
-    document.querySelectorAll('.friction.open').forEach(of=>{
-      of.classList.remove('open');of.querySelector('.friction-body').style.maxHeight='0';
-    });
-    if(!isOpen){
-      f.classList.add('open');
-      const body=f.querySelector('.friction-body');
-      body.style.maxHeight=body.querySelector('.friction-body-in').scrollHeight+'px';
-    }
-  });
-});
-
-/* ── FORM FIELDS ── */
-['i-name','i-email','i-note'].forEach(id=>{
-  const el=document.getElementById(id);if(!el)return;
-  const f=el.closest('.field');
-  const c=()=>f.classList.toggle('filled',el.value.length>0);
-  el.addEventListener('input',c);el.addEventListener('change',c);
-  if(el.tagName==='TEXTAREA')el.addEventListener('input',()=>{el.style.height='auto';el.style.height=el.scrollHeight+'px';});
-});
-
-/* ── FORM SUBMIT ── */
-const form=document.getElementById('orrForm');
-if(form)form.addEventListener('submit',async e=>{
+const form = document.getElementById('orrForm');
+if(form) form.addEventListener('submit', async e => {
   e.preventDefault();
-  if(form.querySelector('[name=_gotcha]').value)return;
-  const sub=form.querySelector('.begin-submit');
-  sub.disabled=true;sub.querySelector('.a').textContent='…';
+  if(form.querySelector('[name=_gotcha]').value) return;
+  const sub = form.querySelector('.begin-submit');
+  sub.disabled = true; sub.querySelector('.a').textContent = '…';
   try{
-    const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+    const res = await fetch(form.action, {method:'POST', body:new FormData(form), headers:{'Accept':'application/json'}});
     if(res.ok){
-      form.innerHTML='<div style="text-align:center;padding:30px 0"><p style="font-family:var(--disp);font-size:22px;margin-bottom:12px">Received.</p><p style="font-size:14px;color:var(--ink72);line-height:1.7;max-width:38ch;margin:0 auto">We\'ll respond within one business day with an honest assessment of where your business stands and whether ORR is the right fit.</p><p style="font-family:var(--disp);font-style:italic;color:var(--pine);margin-top:18px;font-size:16px">No pressure. No pitch. Just clarity.</p></div>';
-    }else{sub.disabled=false;sub.querySelector('.a').textContent='→';}
-  }catch(_){sub.disabled=false;sub.querySelector('.a').textContent='→';}
+      form.innerHTML = '<div style="text-align:center;padding:30px 0"><p style="font-family:var(--disp);font-size:22px;margin-bottom:12px">Received.</p><p style="font-size:14px;color:var(--ink72);line-height:1.7;max-width:38ch;margin:0 auto">We\'ll respond within one business day with an honest assessment of where your business stands and whether ORR is the right fit.</p><p style="font-family:var(--disp);font-style:italic;color:var(--pine);margin-top:18px;font-size:16px">No pressure. No pitch. Just clarity.</p></div>';
+    }else{ sub.disabled = false; sub.querySelector('.a').textContent = '→'; }
+  }catch(_){ sub.disabled = false; sub.querySelector('.a').textContent = '→'; }
 });
 
-/* ── MOBILE MENU ── */
-const mBtn=document.getElementById('menuBtn'),mNav=document.getElementById('mnav');
-if(mBtn&&mNav){
-  mBtn.addEventListener('click',()=>{
-    const o=!mNav.classList.contains('open');
-    mNav.classList.toggle('open',o);mBtn.classList.toggle('x',o);
-    mBtn.setAttribute('aria-expanded',o);
-    document.documentElement.classList.toggle('m-lock',o);
+/* ══════════════════════════════════════════════════════════════
+   MOBILE MENU + ANCHORS
+   ══════════════════════════════════════════════════════════════ */
+(function(){
+  const mBtn = document.getElementById('menuBtn'), mNav = document.getElementById('mnav');
+  if(!mBtn || !mNav) return;
+  mBtn.addEventListener('click', () => {
+    const o = !mNav.classList.contains('open');
+    mNav.classList.toggle('open', o); mBtn.classList.toggle('x', o);
+    mBtn.setAttribute('aria-expanded', o);
+    document.documentElement.classList.toggle('m-lock', o);
   });
-  mNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
-    mNav.classList.remove('open');mBtn.classList.remove('x');
+  mNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mNav.classList.remove('open'); mBtn.classList.remove('x');
     mBtn.setAttribute('aria-expanded','false');
     document.documentElement.classList.remove('m-lock');
   }));
-}
+})();
 
-/* ── SMOOTH ANCHOR ── */
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
-  const t=document.querySelector(a.getAttribute('href'));if(!t)return;e.preventDefault();
-  const start=scrollY,end=t.getBoundingClientRect().top+scrollY,dist=end-start;
-  let t0=null;
-  const ease=t=>1-Math.pow(1-t,4);
-  requestAnimationFrame(function step(ts){
-    if(!t0)t0=ts;const p=Math.min((ts-t0)/650,1);
-    scrollTo(0,start+dist*ease(p));
-    if(p<1)requestAnimationFrame(step);
-  });
+document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+  const t = document.querySelector(a.getAttribute('href'));
+  if(!t) return;
+  e.preventDefault();
+  easeScrollTo(t);
 }));
 
-/* ── VERTICAL RAIL ── */
-const vrailFill=document.getElementById('vrail-fill');
-if(vrailFill)addEventListener('scroll',()=>{
-  vrailFill.style.height=(Math.min(scrollY/(document.body.scrollHeight-innerHeight),1)*100)+'%';
-},{passive:true});
+/* ══════════════════════════════════════════════════════════════
+   DESKTOP FLOURISHES — cursor, magnetics, letter stagger
+   ══════════════════════════════════════════════════════════════ */
+if(HOVERS){
+  const dot = document.getElementById('cursorDot');
+  let mx = 0, my = 0, cx = 0, cy = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.classList.add('active'); });
+  document.addEventListener('mouseleave', () => dot.classList.remove('active'));
+  const sel = 'a,button,.pillar,.hotspot-dot,.friction,.sb-opt,.vc-lane';
+  document.addEventListener('mouseover', e => { if(e.target.closest(sel)) dot.classList.add('grow'); });
+  document.addEventListener('mouseout',  e => { if(e.target.closest(sel)) dot.classList.remove('grow'); });
+  (function loop(){ cx += (mx-cx)*.12; cy += (my-cy)*.12; dot.style.transform = 'translate(' + cx + 'px,' + cy + 'px)'; requestAnimationFrame(loop); })();
 
-/* ── CUSTOM CURSOR ── */
-if(window.matchMedia('(hover:hover)').matches){
-  const dot=document.getElementById('cursorDot');
-  let mx=0,my=0,cx=0,cy=0;
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.classList.add('active');});
-  document.addEventListener('mouseleave',()=>dot.classList.remove('active'));
-  const sel='a,button,.pillar,.hotspot-dot,.friction,.sb-opt,.phase';
-  document.addEventListener('mouseover',e=>{if(e.target.closest(sel))dot.classList.add('grow');});
-  document.addEventListener('mouseout',e=>{if(e.target.closest(sel))dot.classList.remove('grow');});
-  (function loop(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;dot.style.transform=`translate(${cx}px,${cy}px)`;requestAnimationFrame(loop);})();
+  document.querySelectorAll('.btn,.btn-outline,.nav-cta').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      btn.style.transform = 'translate(' + ((e.clientX-r.left-r.width/2)*.15) + 'px,' + ((e.clientY-r.top-r.height/2)*.15) + 'px)';
+    });
+    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+  });
 }
 
-/* ── GHOST PARALLAX ── */
-const heroGhost=document.querySelector('.hero-ghost');
-const structGhost=document.querySelector('.struct-ghost');
-function parallax(){
-  const s=scrollY;
-  if(heroGhost)heroGhost.style.transform=`translateY(${s*.15}px)`;
-  if(structGhost)structGhost.style.transform=`translateX(-50%) translateY(${(s-1000)*.08}px)`;
-}
-addEventListener('scroll',parallax,{passive:true});
-
-/* ── HERO LETTER STAGGER ── */
-document.querySelectorAll('.hero-h1 .l').forEach((line,li)=>{
-  const html=line.innerHTML;
-  if(!line.querySelector('.char')&&!line.querySelector('span:not(.rest):not(.l)')){
-    let newHtml='';let charIdx=0;
-    const temp=document.createElement('div');temp.innerHTML=html;
-    temp.childNodes.forEach(node=>{
-      if(node.nodeType===3){
-        [...node.textContent].forEach(ch=>{
-          const delay=li*.18+charIdx*.025;
-          newHtml+=ch===' '?' ':`<span class="char" style="animation-delay:${(.5+delay).toFixed(3)}s">${ch}</span>`;
+document.querySelectorAll('.hero-h1 .l').forEach((line, li) => {
+  const html = line.innerHTML;
+  if(!line.querySelector('.char') && !line.querySelector('span:not(.rest):not(.l)')){
+    let newHtml = '', charIdx = 0;
+    const temp = document.createElement('div'); temp.innerHTML = html;
+    temp.childNodes.forEach(node => {
+      if(node.nodeType === 3){
+        [...node.textContent].forEach(ch => {
+          const delay = li*.18 + charIdx*.025;
+          newHtml += ch === ' ' ? ' ' : '<span class="char" style="animation-delay:' + (.5+delay).toFixed(3) + 's">' + ch + '</span>';
           charIdx++;
         });
-      }else{newHtml+=node.outerHTML;charIdx+=node.textContent.length;}
+      }else{ newHtml += node.outerHTML; charIdx += node.textContent.length; }
     });
-    line.innerHTML=newHtml;
+    line.innerHTML = newHtml;
   }
 });
 
-/* ── PILLAR CONSTRUCTION ── */
-const pillarObs=new IntersectionObserver(es=>es.forEach(e=>{
-  if(e.isIntersecting){e.target.querySelectorAll('.pillar').forEach(p=>p.classList.add('built'));pillarObs.unobserve(e.target);}
-}),{threshold:.2});
-const pillarsEl=document.querySelector('.pillars');
-if(pillarsEl)pillarObs.observe(pillarsEl);
-
-/* ── MAGNETIC BUTTONS ── */
-if(window.matchMedia('(hover:hover)').matches){
-  document.querySelectorAll('.btn,.btn-outline,.model-btn,.nav-cta').forEach(btn=>{
-    btn.addEventListener('mousemove',e=>{
-      const r=btn.getBoundingClientRect();
-      const x=(e.clientX-r.left-r.width/2)*.15;
-      const y=(e.clientY-r.top-r.height/2)*.15;
-      btn.style.transform=`translate(${x}px,${y}px)`;
-    });
-    btn.addEventListener('mouseleave',()=>{btn.style.transform='';});
-  });
-}
-
-/* ── MOBILE PRESS FEEDBACK ── */
-if(window.matchMedia('(hover:none)').matches){
-  document.querySelectorAll('.btn,.btn-outline,.model-btn,.sb-opt,.sb-next,.sb-cta-save,.sb-cta-conv,.pillar,.hotspot-dot').forEach(el=>{
-    el.addEventListener('touchstart',()=>el.style.transform='scale(.97)',{passive:true});
-    el.addEventListener('touchend',()=>{setTimeout(()=>el.style.transform='',150);},{passive:true});
-  });
-}
-
 /* ══════════════════════════════════════════════════════════════
-   STRUCTURE BRIEF DIAGNOSTIC
+   §08 — STRUCTURE BRIEF
+   Desktop: five clusters.  Mobile: one question per screen,
+   auto-advancing, with a single progress hairline.
    ══════════════════════════════════════════════════════════════ */
 (function(){
-  const clusters=document.querySelectorAll('.sb-cluster');
-  const rail=document.querySelectorAll('.sb-prog-seg');
-  const backBtn=document.getElementById('sbBack');
-  const nextBtn=document.getElementById('sbNext');
-  const counter=document.getElementById('sbCounter');
-  const result=document.getElementById('sbResult');
-  if(!clusters.length||!nextBtn)return;
+  const card     = document.getElementById('sbCard');
+  const clusters = [...document.querySelectorAll('.sb-cluster')];
+  const allQ     = [...document.querySelectorAll('.sb-q')];
+  const rail     = [...document.querySelectorAll('.sb-prog-seg')];
+  const progress = document.getElementById('sbProgress');
+  const navRow   = document.getElementById('sbNav');
+  const backBtn  = document.getElementById('sbBack');
+  const nextBtn  = document.getElementById('sbNext');
+  const counter  = document.getElementById('sbCounter');
+  const result   = document.getElementById('sbResult');
+  if(!clusters.length || !nextBtn) return;
 
-  let cur=0;const ans={};const hats=new Set();const TC=clusters.length;
+  /* mobile hairline */
+  const mbar = document.createElement('div'); mbar.className = 'sb-mbar';
+  const mfill = document.createElement('div'); mfill.className = 'sb-mbar-fill';
+  mbar.appendChild(mfill);
+  progress.parentNode.insertBefore(mbar, progress);
 
-  function showC(i){
-    clusters.forEach(c=>c.classList.remove('active'));
-    clusters[i].classList.add('active');
-    rail.forEach((r,j)=>{r.classList.remove('active','done');if(j<i)r.classList.add('done');if(j===i)r.classList.add('active');});
-    counter.textContent=(i+1)+' of '+TC;
-    backBtn.disabled=i===0;
-    checkNext();
-  }
+  const ans = {}; const hats = new Set();
+  let steps = [], cur = 0, finished = false;
 
-  function checkNext(){
-    const cl=clusters[cur];const qs=cl.querySelectorAll('.sb-q');let ok=true;
-    qs.forEach(q=>{
-      if(q.querySelector('.sb-open'))return;
-      const hasMulti=q.querySelector('.sb-multi');
-      if(hasMulti){if(!hats.size&&cur===3)ok=true;return;}
-      if(!q.querySelector('.sb-opt.sel'))ok=false;
+  const buildSteps = () => { steps = MOBILE ? allQ.slice() : clusters.slice(); };
+
+  function show(i){
+    cur = Math.max(0, Math.min(i, steps.length - 1));
+    clusters.forEach(c => c.classList.remove('active'));
+    allQ.forEach(q => q.classList.remove('q-active'));
+
+    let clusterIdx;
+    if(MOBILE){
+      const q = steps[cur];
+      const c = q.closest('.sb-cluster');
+      c.classList.add('active');
+      q.classList.add('q-active');
+      clusterIdx = clusters.indexOf(c);
+    }else{
+      steps[cur].classList.add('active');
+      clusterIdx = cur;
+    }
+
+    rail.forEach((r,j) => {
+      r.classList.remove('active','done');
+      if(j < clusterIdx) r.classList.add('done');
+      if(j === clusterIdx) r.classList.add('active');
     });
-    nextBtn.disabled=!ok;
-    nextBtn.textContent=cur===TC-1?'See your Structure Brief →':'Next →';
+    mfill.style.width = ((cur + 1) / steps.length * 100) + '%';
+    counter.textContent = (cur + 1) + ' of ' + steps.length;
+    backBtn.disabled = cur === 0;
+    check();
   }
 
-  document.querySelectorAll('.sb-opt').forEach(opt=>{
-    opt.addEventListener('click',()=>{
-      const q=opt.closest('.sb-q');const isMulti=opt.classList.contains('sb-multi');
+  function check(){
+    const qs = MOBILE ? [steps[cur]] : [...steps[cur].querySelectorAll('.sb-q')];
+    let ok = true;
+    qs.forEach(q => {
+      if(q.querySelector('.sb-open')) return;      /* free text is optional */
+      if(q.querySelector('.sb-multi')) return;     /* multi-select is optional */
+      if(!q.querySelector('.sb-opt.sel')) ok = false;
+    });
+    nextBtn.disabled = !ok;
+    nextBtn.textContent = cur === steps.length - 1
+      ? (MOBILE ? 'See your Brief →' : 'See your Structure Brief →')
+      : 'Next →';
+  }
+
+  /* keep the live question at a comfortable reading height on a phone */
+  function park(){
+    if(!MOBILE) return;
+    const t = card.getBoundingClientRect().top;
+    if(t < 62 || t > 190) scrollTo({top: card.getBoundingClientRect().top + scrollY - 86, behavior: REDUCED ? 'auto' : 'smooth'});
+  }
+
+  document.querySelectorAll('.sb-opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const q = opt.closest('.sb-q');
+      const isMulti = opt.classList.contains('sb-multi');
       if(isMulti){
         opt.classList.toggle('sel');
-        if(opt.classList.contains('sel'))hats.add(opt.dataset.sv);else hats.delete(opt.dataset.sv);
+        opt.classList.contains('sel') ? hats.add(opt.dataset.sv) : hats.delete(opt.dataset.sv);
       }else{
-        q.querySelectorAll('.sb-opt').forEach(o=>o.classList.remove('sel'));
-        opt.classList.add('sel');ans[q.dataset.sq]=opt.dataset.sv;
+        q.querySelectorAll('.sb-opt').forEach(o => o.classList.remove('sel'));
+        opt.classList.add('sel');
+        ans[q.dataset.sq] = opt.dataset.sv;
       }
-      checkNext();
+      check();
+      /* one tap, one question, no Next hunting */
+      if(MOBILE && !isMulti && cur < steps.length - 1){
+        setTimeout(() => { if(steps[cur] === q){ show(cur + 1); park(); } }, 260);
+      }
     });
   });
 
-  nextBtn.addEventListener('click',()=>{if(cur<TC-1){cur++;showC(cur);}else compute();});
-  backBtn.addEventListener('click',()=>{if(cur>0){cur--;showC(cur);}});
+  nextBtn.addEventListener('click', () => {
+    if(cur < steps.length - 1){ show(cur + 1); park(); } else compute();
+  });
+  backBtn.addEventListener('click', () => { if(cur > 0){ show(cur - 1); park(); } });
 
+  onMQ(() => {
+    if(finished) return;
+    const c = MOBILE
+      ? clusters.indexOf(steps[cur])                       /* was cluster → go to its first question */
+      : clusters.indexOf(steps[cur].closest('.sb-cluster'));/* was question → go to its cluster */
+    buildSteps();
+    if(MOBILE){
+      const firstQ = clusters[Math.max(c,0)].querySelector('.sb-q');
+      show(steps.indexOf(firstQ));
+    }else{
+      show(Math.max(c,0));
+    }
+  });
+
+  buildSteps();
+  show(0);
+
+  /* ── SCORING ── */
   function compute(){
-    const S={crystal:1,mostly:.65,forming:.3,set:1,drafted:.6,gut:.3,none:0,
+    finished = true;
+    const S = {crystal:1,mostly:.65,forming:.3,set:1,drafted:.6,gut:.3,none:0,
       revenue:1,some:.6,free:.3,pre:0,system:1,hustle:.5,referral:.4,not_yet:0,
       high:1,medium:.6,low:.3,strong:1,decent:.6,weak:.2,
       yes:1,partial:.5,no:0,
@@ -2629,25 +2954,25 @@ if(window.matchMedia('(hover:none)').matches){
       mapped:1,aware:.5,vague:.2,blind:0,
       yes_managed:1,yes_loose:.3,minimal:.6,
       documented:1,nothing_written:.1,dont_know:0};
-    const v=k=>S[ans[k]]!==undefined?S[ans[k]]:0.5;
+    const v = k => S[ans[k]] !== undefined ? S[ans[k]] : .5;
 
-    const bizScore=(v('offer')+v('pricing')+v('model'))/3;
-    const mktScore=(v('acquisition')+v('first10')+v('position')+v('visibility'))/4;
-    const opsScore=(v('entity')+v('delivery')+v('team')+v('contracts'))/4;
-    const govScore=(v('regulations')+v('data_handling')+v('policies2'))/3;
+    const bizScore = (v('offer') + v('pricing') + v('model')) / 3;
+    const mktScore = (v('acquisition') + v('first10') + v('position') + v('visibility')) / 4;
+    const opsScore = (v('entity') + v('delivery') + v('team') + v('contracts')) / 4;
+    const govScore = (v('regulations') + v('data_handling') + v('policies2')) / 3;
 
-    const depDecision=1-v('decisions2');
-    const depAway=1-v('twoweeks');
-    const depHats=Math.min(hats.size/8,1);
-    const depTime=ans.time_split==='everything'?1:ans.time_split==='running'?.8:ans.time_split==='building'?.4:.2;
-    const depOverall=(depDecision+depAway+depHats+depTime)/4;
+    const depDecision = 1 - v('decisions2');
+    const depAway     = 1 - v('twoweeks');
+    const depHats     = Math.min(hats.size / 8, 1);
+    const depTime     = ans.time_split === 'everything' ? 1 : ans.time_split === 'running' ? .8 : ans.time_split === 'building' ? .4 : .2;
+    const depOverall  = (depDecision + depAway + depHats + depTime) / 4;
 
-    function status(s){if(s>=.7)return{t:'Strong',c:'strong'};if(s>=.4)return{t:'Developing',c:'developing'};return{t:'Needs attention',c:'needs'};}
-    function depLabel(d){return d>=.75?'Critical':d>=.5?'High':d>=.25?'Moderate':'Low';}
+    const status = s => s >= .7 ? {t:'Strong',c:'strong'} : s >= .4 ? {t:'Developing',c:'developing'} : {t:'Needs attention',c:'needs'};
+    const depLabel = d => d >= .75 ? 'Critical' : d >= .5 ? 'High' : d >= .25 ? 'Moderate' : 'Low';
 
-    const bs=status(bizScore),ms=status(mktScore),os=status(opsScore),gs=status(govScore);
+    const bs = status(bizScore), ms = status(mktScore), os = status(opsScore), gs = status(govScore);
 
-    const stages={
+    const stages = {
       idea:{name:'Idea Stage',desc:'You\'re at the very beginning — shaping the concept. Everything is still open, which is both the opportunity and the challenge. The priority right now is validating the idea and defining your offer before building anything around it.'},
       validating:{name:'Validation Stage',desc:'You\'re testing whether this works. The smartest thing you can do at this stage is talk to real potential customers and get actual evidence before committing resources to structure.'},
       preparing:{name:'Pre-Launch',desc:'You\'re getting ready to go live. This is the highest-leverage moment to build structure — before habits form, before people are hired, before the chaos of operations begins.'},
@@ -2655,81 +2980,107 @@ if(window.matchMedia('(hover:none)').matches){
       operating:{name:'Operating',desc:'You have customers and revenue. The question is no longer whether the business works — it\'s whether it can work without you holding every piece together.'},
       growing:{name:'Growth Stage',desc:'Growth is exposing the cracks. Whatever structure you have is being stress-tested. The gaps are becoming visible — and they\'ll only get more expensive to fix later.'}
     };
-    const stg=stages[ans.stage]||stages.idea;
-    document.getElementById('sbStageName').textContent=stg.name;
-    document.getElementById('sbStageDesc').textContent=stg.desc;
+    const stg = stages[ans.stage] || stages.idea;
+    document.getElementById('sbStageName').textContent = stg.name;
+    document.getElementById('sbStageDesc').textContent = stg.desc;
 
-    const insights={
+    const insights = {
       business:{strong:'Your business model is clearly defined — offer, pricing, and validation are in solid shape. This foundation supports everything else.',developing:'Your business model has shape but parts are still shifting. Locking in clarity on what you sell and how you price it will make every other decision easier.',needs:'Your business model needs more definition before other structure can be built reliably. Without a clear offer and validated pricing, operational and legal structure will be built on assumptions.'},
       market:{strong:'You have a clear path to customers and know how to reach them. Your positioning gives you an edge.',developing:'You have some customer traction but your acquisition approach isn\'t yet systematic. Moving from personal hustle to a repeatable distribution system is the next step.',needs:'Your route to customers isn\'t clear yet. Before investing in operations or compliance, you need to know who buys, how they find you, and why they choose you.'},
       operating:{strong:'Your operating foundation is solid — entity, processes, roles, and agreements are in place. The business can function with less direct involvement from you.',developing:'Some operating foundations exist but gaps remain. Work is getting done but it still depends heavily on you knowing how things work rather than systems carrying that knowledge.',needs:'Your operating infrastructure is minimal. Processes, agreements, roles, and legal foundations need to be built so the business can deliver consistently without you being the system.'},
       governance:{strong:'You understand your regulatory landscape, have policies in place, and compliance is being actively managed. The business is protected.',developing:'You have some awareness of your compliance obligations but formal policies and monitoring are incomplete. This is manageable now but becomes a real liability as you grow.',needs:'Governance and compliance are largely unaddressed. This is common at early stages but creates real exposure — particularly around data, regulations, and legal obligations that exist whether you\'ve addressed them or not.'}
     };
 
-    const cols=document.querySelectorAll('.sb-map-col');
-    const sts=[bs,ms,os,gs];const keys=['business','market','operating','governance'];
-    const ids=['sbBiz','sbMkt','sbOps','sbGov'];const iids=['sbBizI','sbMktI','sbOpsI','sbGovI'];
-    sts.forEach((s,i)=>{
-      cols[i].className='sb-map-col '+s.c;
-      document.getElementById(ids[i]).textContent=s.t;
-      document.getElementById(iids[i]).textContent=insights[keys[i]][s.c==='strong'?'strong':s.c==='developing'?'developing':'needs'];
+    const cols = [...document.querySelectorAll('.sb-map-col')];
+    const sts = [bs,ms,os,gs], keys = ['business','market','operating','governance'];
+    const ids = ['sbBiz','sbMkt','sbOps','sbGov'], iids = ['sbBizI','sbMktI','sbOpsI','sbGovI'];
+    sts.forEach((s,i) => {
+      cols[i].className = 'sb-map-col ' + s.c;
+      document.getElementById(ids[i]).textContent = s.t;
+      document.getElementById(iids[i]).textContent = insights[keys[i]][s.c];
+    });
+    /* mobile: the four columns become tappable rows */
+    cols.forEach(c => c.addEventListener('click', () => { if(MOBILE) c.classList.toggle('open'); }));
+
+    document.getElementById('sbDepOverall').textContent = depLabel(depOverall);
+    const depBars = document.getElementById('sbDepBars'); depBars.innerHTML = '';
+    [{label:'Decision authority',val:depDecision},{label:'Operational reliance',val:depAway},
+     {label:'Role spread',val:depHats},{label:'Time allocation',val:depTime}].forEach(d => {
+      const pct = Math.round(d.val * 100);
+      depBars.innerHTML += '<div class="sb-dep-row"><span class="sb-dep-row-label">' + d.label + '</span><div class="sb-dep-row-track"><div class="sb-dep-row-fill" style="width:' + pct + '%"></div></div><span class="sb-dep-row-val">' + pct + '%</span></div>';
+    });
+    const depBlock = document.getElementById('sbDep');
+    const depToggle = document.getElementById('sbDepToggle');
+    if(depToggle) depToggle.addEventListener('click', () => {
+      const open = depBlock.classList.toggle('open');
+      depToggle.firstChild.nodeValue = open ? 'Hide breakdown ' : 'Show breakdown ';
     });
 
-    document.getElementById('sbDepOverall').textContent=depLabel(depOverall);
-    const depBars=document.getElementById('sbDepBars');depBars.innerHTML='';
-    [{label:'Decision authority',val:depDecision},{label:'Operational reliance',val:depAway},{label:'Role spread',val:depHats},{label:'Time allocation',val:depTime}].forEach(d=>{
-      const pct=Math.round(d.val*100);
-      depBars.innerHTML+=`<div class="sb-dep-row"><span class="sb-dep-row-label">${d.label}</span><div class="sb-dep-row-track"><div class="sb-dep-row-fill" style="width:${pct}%"></div></div><span class="sb-dep-row-val">${pct}%</span></div>`;
-    });
-
-    const pillars=[
+    const pillars = [
       {name:'Business Structure',s:bizScore,why:'Define your offer, pricing, and revenue model clearly before building operational systems on top of them.'},
       {name:'Market Structure',s:mktScore,why:'Build a repeatable path to customers — positioning, distribution, and visibility — so revenue isn\'t dependent on personal hustle alone.'},
       {name:'Operating Structure',s:opsScore,why:'Establish the legal foundation, processes, roles, and agreements that let the business deliver consistently without founder dependency.'},
       {name:'Governance Structure',s:govScore,why:'Map your regulatory exposure, build policies, and create compliance cadence before growth makes these gaps into liabilities.'}
     ];
-    if(depOverall>=.6)pillars.push({name:'Founder Dependency',s:1-depOverall,why:'Restructure decision authority, role ownership, and operational reliance so the business can function without you touching everything.'});
-    pillars.sort((a,b)=>a.s-b.s);
-    const steps=document.getElementById('sbRoadSteps');steps.innerHTML='';
-    pillars.forEach((p,i)=>{
-      steps.innerHTML+=`<div class="sb-road-step"><span class="sb-road-ix">${i===0?'<span style="font-size:12px">✦</span>':'<span style="font-size:8px;opacity:.5">✦</span>'}</span><div><div class="sb-road-name">${p.name}</div><p class="sb-road-why">${p.why}</p></div></div>`;
+    if(depOverall >= .6) pillars.push({name:'Founder Dependency',s:1-depOverall,why:'Restructure decision authority, role ownership, and operational reliance so the business can function without you touching everything.'});
+    pillars.sort((a,b) => a.s - b.s);
+
+    const steps2 = document.getElementById('sbRoadSteps'); steps2.innerHTML = '';
+    pillars.forEach((p,i) => {
+      steps2.innerHTML += '<div class="sb-road-step"><span class="sb-road-ix">' +
+        (i === 0 ? '<span style="font-size:12px">✦</span>' : '<span style="font-size:8px;opacity:.5">✦</span>') +
+        '</span><div><div class="sb-road-name">' + p.name + '</div><p class="sb-road-why">' + p.why + '</p></div></div>';
     });
+    /* mobile: step one is the answer, the rest open on demand */
+    const roadSteps = [...steps2.querySelectorAll('.sb-road-step')];
+    if(roadSteps[0]) roadSteps[0].classList.add('open');
+    roadSteps.forEach(s => s.addEventListener('click', () => { if(MOBILE) s.classList.toggle('open'); }));
 
-    let risk='';
-    if(govScore<.4&&(ans.data_handling==='yes_loose'||ans.data_handling==='yes_managed'))
-      risk='You\'re handling personal data without formal policies in place. As regulations tighten globally, this is one of the fastest ways for an early business to face real legal exposure. This should be addressed regardless of other priorities.';
-    else if(ans.entity==='informal')
-      risk='Operating without formal legal establishment means personal liability isn\'t separated from business liability. Until the entity is registered properly, you\'re personally exposed to every risk the business creates.';
-    else if(depOverall>=.75)
-      risk='Your business is critically dependent on you for daily operations. If anything takes you out — illness, burnout, a personal emergency — the business has no ability to continue. This isn\'t just a scaling problem, it\'s a continuity risk.';
-    else if(ans.contracts==='verbal'||ans.contracts==='nothing')
-      risk='Key business relationships are operating without formal agreements. This works until it doesn\'t — and when it doesn\'t, the absence of documentation makes resolution significantly harder and more expensive.';
+    /* the verdict — one sentence, said first, mobile only */
+    const verdicts = {
+      'Business Structure':'The weakest part of your business right now is <em>Business Structure</em> — what you sell and why it is worth paying for. Everything else gets built on top of that answer.',
+      'Market Structure':'The weakest part of your business right now is <em>Market Structure</em> — how customers actually find you. Until that is systematic, revenue depends on your personal effort.',
+      'Operating Structure':'The weakest part of your business right now is <em>Operating Structure</em> — the legal, process and role foundation. Until it exists, the business cannot run without you.',
+      'Governance Structure':'The weakest part of your business right now is <em>Governance Structure</em> — regulatory exposure, policy and accountability. That liability is already running whether or not you have addressed it.',
+      'Founder Dependency':'The weakest part of your business right now is <em>how much of it only works when you touch it.</em> That is not an effort problem. It is a structural one.'
+    };
+    document.getElementById('sbVerdictText').innerHTML = verdicts[pillars[0].name] || verdicts['Operating Structure'];
+
+    let risk = '';
+    if(govScore < .4 && (ans.data_handling === 'yes_loose' || ans.data_handling === 'yes_managed'))
+      risk = 'You\'re handling personal data without formal policies in place. As regulations tighten globally, this is one of the fastest ways for an early business to face real legal exposure. This should be addressed regardless of other priorities.';
+    else if(ans.entity === 'informal')
+      risk = 'Operating without formal legal establishment means personal liability isn\'t separated from business liability. Until the entity is registered properly, you\'re personally exposed to every risk the business creates.';
+    else if(depOverall >= .75)
+      risk = 'Your business is critically dependent on you for daily operations. If anything takes you out — illness, burnout, a personal emergency — the business has no ability to continue. This isn\'t just a scaling problem, it\'s a continuity risk.';
+    else if(ans.contracts === 'verbal' || ans.contracts === 'nothing')
+      risk = 'Key business relationships are operating without formal agreements. This works until it doesn\'t — and when it doesn\'t, the absence of documentation makes resolution significantly harder and more expensive.';
     else
-      risk='No single critical risk stands out, but the areas flagged as "Needs attention" above should be addressed before growth amplifies any gaps that currently feel manageable.';
-    document.getElementById('sbRiskText').textContent=risk;
+      risk = 'No single critical risk stands out, but the areas flagged as "Needs attention" above should be addressed before growth amplifies any gaps that currently feel manageable.';
+    document.getElementById('sbRiskText').textContent = risk;
 
-    const weakest=pillars[0].name;
-    const phaseMap={
+    const phaseMap = {
       'Business Structure':{name:'Phase 01 — Validate',desc:'Start with business model validation, offer architecture, and strategic direction. This is the foundation everything else builds on.'},
       'Market Structure':{name:'Phase 04 — Position',desc:'Focus on positioning, brand identity, distribution planning, and building a repeatable customer acquisition system.'},
       'Operating Structure':{name:'Phase 03 — Build',desc:'Build the operating infrastructure — legal foundation, role design, processes, contracts, and vendor systems.'},
       'Governance Structure':{name:'Phase 06 — Strengthen',desc:'Address governance gaps — compliance mapping, policy frameworks, decision rights, and accountability structure.'},
       'Founder Dependency':{name:'Phase 03 — Build',desc:'Build the operating infrastructure that lets others own decisions and delivery — so the business stops depending on you for everything.'}
     };
-    const ph=phaseMap[weakest]||phaseMap['Operating Structure'];
-    document.getElementById('sbPhaseName').textContent=ph.name;
-    document.getElementById('sbPhaseDesc').textContent=ph.desc;
+    const ph = phaseMap[pillars[0].name] || phaseMap['Operating Structure'];
+    document.getElementById('sbPhaseName').textContent = ph.name;
+    document.getElementById('sbPhaseDesc').textContent = ph.desc;
 
-    clusters.forEach(c=>c.classList.remove('active'));
-    document.getElementById('sbNav').style.display='none';
-    rail.forEach(r=>{r.classList.remove('active');r.classList.add('done');});
+    clusters.forEach(c => c.classList.remove('active'));
+    allQ.forEach(q => q.classList.remove('q-active'));
+    navRow.style.display = 'none';
+    mbar.style.display = 'none';
+    rail.forEach(r => { r.classList.remove('active'); r.classList.add('done'); });
     result.classList.add('show');
-    setTimeout(()=>result.scrollIntoView({behavior:'smooth',block:'start'}),200);
+    setTimeout(() => result.scrollIntoView({behavior: REDUCED ? 'auto' : 'smooth', block:'start'}), 200);
   }
 })();
 
-/* year */
-document.getElementById('yr').textContent=new Date().getFullYear();
+document.getElementById('yr').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
