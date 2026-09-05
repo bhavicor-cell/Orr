@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#F1ECE1">
 <title>ORR | From Idea to Operating Business</title>
-<meta name="description" content="ORR helps early founders turn their idea into a real, operating business — structured, compliant, and built to run without you holding it all together.">
+<meta name="description" content="ORR helps early founders build the initial structure every business needs — the strategy, the frameworks, the compliance groundwork, the operational foundation — so it can actually run.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Hanken+Grotesk:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400&family=Anton&display=swap" rel="stylesheet">
@@ -291,6 +291,16 @@ html.m-lock,html.m-lock body{overflow:hidden}
    ══════════════════════════════════════════════════════════════ */
 #hero{position:relative;z-index:1;min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:80px 42px 80px;overflow:visible;background:var(--vellum)}
 .hero-grid{max-width:1320px;margin:0 auto;width:100%;display:grid;grid-template-columns:1.55fr .45fr;gap:0 48px;align-items:center;position:relative}
+.hero-link{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);
+  font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink);position:relative;padding:4px 0;transition:color .3s,gap .3s}
+.hero-link::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--pine);transform:scaleX(0);transform-origin:right;
+  transition:transform .4s var(--e1)}
+.hero-link:hover{color:var(--pine);gap:14px}
+.hero-link:hover::after{transform:scaleX(1);transform-origin:left}
+.hero-link .a{transition:transform .3s}
+.hero-link:hover .a{transform:translateX(3px)}
 
 /* ghost "idea" */
 .hero-ghost{position:absolute;top:-2%;right:0;font-family:var(--ghost);font-size:clamp(180px,22vw,320px);text-transform:lowercase;
@@ -324,9 +334,9 @@ html.m-lock,html.m-lock body{overflow:hidden}
 
 .hero-sub{font-family:var(--body);font-size:16px;font-weight:300;line-height:1.72;color:var(--ink72);max-width:62ch;margin-bottom:14px;
   opacity:0;animation:ghostIn 1s var(--e2) 1s forwards}
-.hero-diff{font-family:var(--disp);font-style:italic;font-weight:300;font-size:16px;
-  letter-spacing:.008em;color:var(--ink38);margin-bottom:38px;
-  opacity:0;animation:ghostIn 1s var(--e2) 1.15s forwards}
+.hero-diff{font-family:var(--disp);font-style:italic;font-weight:400;font-size:16px;
+  letter-spacing:.008em;color:var(--pine);margin-bottom:38px;
+  opacity:0;animation:ghostIn 1s var(--e2) 1.15s forwards; text-shadow:0 0 20px rgba(26,77,64,.12);}
 .hero-cta-wrap{display:flex;align-items:center;gap:24px;flex-wrap:wrap;opacity:0;animation:ghostIn 1s var(--e2) 1.3s forwards}
 .hero-micro{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink38);margin-top:20px;
   opacity:0;animation:ghostIn 1s var(--e2) 1.5s forwards}
@@ -1558,13 +1568,16 @@ footer{padding-top:clamp(48px,5.4vw,68px);
         <span class="l">You focus on <em class="hero-em">selling.</em></span>
         <span class="l">We build <span class="rest">the rest.</span></span>
       </h1>
-      <p class="hero-sub">We help early founders turn their idea into a real, operating business — <br>with the structure, the compliance, the operational foundation that most founders either skip or don't know they need.</p>
+      <p class="hero-sub">Helping early founders build the initial structure every business needs — the strategy, the frameworks, the compliance groundwork, the operational foundation — so it can actually run.</p>
       <p class="hero-sub-m">We help early founders turn an idea into a business that actually operates — the structure, the compliance, the foundation underneath it.</p>
-      <p class="hero-diff">Building with you, not advising from a zoom call.</p>
-      <div class="hero-cta-wrap">
-        <a href="#begin" class="btn hero-cta-d">Start with ORR <span class="a">→</span></a>
+      <p class="hero-diff">Use what we publish. Or bring us in to put it in place.</p>
+            <div class="hero-cta-wrap">
+        <a href="resources.html" class="btn hero-cta-d">Browse Resources <span class="a">→</span></a>
+        <a href="#begin" class="hero-link hero-cta-d">Request a Collaboration <span class="a">→</span></a>
         <a href="#assess" class="btn hero-cta-m">Get your Structure Brief <span class="a">→</span></a>
       </div>
+
+       
     </div>
     <div aria-hidden="true"></div>
   </div>
@@ -1578,7 +1591,7 @@ footer{padding-top:clamp(48px,5.4vw,68px);
   <div class="struct-glow" aria-hidden="true"></div>
   <div class="struct-ghost" aria-hidden="true">idea</div>
   <div class="struct-wrap">
-    <p class="struct-lead r">Between an idea and an operating business, there is a lot that needs to exist.</p>
+    <p class="struct-lead r">Between an idea and an operating business, there's a lot that needs to exist — and most of it isn't the product.</p>
     <div class="struct-head r d1">
       <h2 class="struct-h2">What does a business<br><em>actually need?</em></h2>
       <span class="struct-answer" aria-hidden="true">structure</span>
@@ -1590,10 +1603,10 @@ footer{padding-top:clamp(48px,5.4vw,68px);
         <h3 class="pillar-name">Business Structure</h3>
         <p class="pillar-desc">What you sell, to whom, and why it works.</p>
         <div class="pillar-detail">
-          <div class="pillar-item">Clear business model &amp; offer architecture</div>
-          <div class="pillar-item">Customer identification &amp; market validation</div>
-          <div class="pillar-item">Pricing &amp; revenue model</div>
-          <div class="pillar-item">Delivery model design</div>
+          <div class="pillar-item">Business Model &amp; Offer Design</div>
+          <div class="pillar-item">Customer Identification &amp; Market Validation</div>
+          <div class="pillar-item">Pricing &amp; Revenue Architecture</div>
+          <div class="pillar-item">Delivery Model Design</div>
         </div>
       </div>
       <div class="pillar" data-pillar="market">
@@ -1601,10 +1614,10 @@ footer{padding-top:clamp(48px,5.4vw,68px);
         <h3 class="pillar-name">Market Structure</h3>
         <p class="pillar-desc">How customers find you and how you reach them.</p>
         <div class="pillar-detail">
-          <div class="pillar-item">Market research &amp; competitive landscape</div>
-          <div class="pillar-item">Distribution &amp; outreach systems</div>
-          <div class="pillar-item">Positioning &amp; brand identity</div>
-          <div class="pillar-item">Digital &amp; physical visibility plan</div>
+          <div class="pillar-item">Market Landscape &amp; Competitive Positioning</div>
+          <div class="pillar-item">Distribution &amp; Outreach Systems</div>
+          <div class="pillar-item">Brand Identity &amp; Messaging</div>
+          <div class="pillar-item">Digital &amp; Physical Visibility Plan</div>
         </div>
       </div>
       <div class="pillar" data-pillar="operating">
@@ -1612,10 +1625,10 @@ footer{padding-top:clamp(48px,5.4vw,68px);
         <h3 class="pillar-name">Operating Structure</h3>
         <p class="pillar-desc">What makes the business actually run day to day.</p>
         <div class="pillar-detail">
-          <div class="pillar-item">Legal entity &amp; establishment</div>
-          <div class="pillar-item">Contracts, agreements &amp; vendor systems</div>
-          <div class="pillar-item">Roles, responsibilities &amp; team design</div>
-          <div class="pillar-item">Processes, workflows &amp; operational cadence</div>
+          <div class="pillar-item">Entity Setup &amp; Establishment Guidance</div>
+          <div class="pillar-item">Foundational Agreements &amp; Vendor Systems</div>
+          <div class="pillar-item">Roles, Responsibilities &amp; Team Design</div>
+          <div class="pillar-item">Processes, Workflows &amp; Operational Cadence</div>
         </div>
       </div>
       <div class="pillar" data-pillar="governance">
@@ -1623,17 +1636,17 @@ footer{padding-top:clamp(48px,5.4vw,68px);
         <h3 class="pillar-name">Governance Structure</h3>
         <p class="pillar-desc">What keeps it compliant, accountable, and scalable.</p>
         <div class="pillar-detail">
-          <div class="pillar-item">Regulatory exposure mapping</div>
-          <div class="pillar-item">Compliance planning &amp; cadence</div>
-          <div class="pillar-item">Policy &amp; control frameworks</div>
-          <div class="pillar-item">Decision rights &amp; accountability structure</div>
+          <div class="pillar-item">Regulatory Awareness &amp; Exposure Identification</div>
+          <div class="pillar-item">Compliance Groundwork &amp; Cadence</div>
+          <div class="pillar-item">Policy &amp; Control Frameworks</div>
+          <div class="pillar-item">Decision Rights &amp; Accountability Structure</div>
         </div>
       </div>
     </div>
 
     <div class="struct-close r d3">
       <p class="struct-close-a">Most founders either carry all of this alone — or don't know half of it exists until something breaks.</p>
-      <p class="struct-close-b">We build it with you. Pillar by pillar. Phase by phase.</p>
+      <p class="struct-close-b">Every pillar has resources you can use today. And when you need it built — We build it with you.</p>
     </div>
   </div>
 </section>
@@ -1723,7 +1736,7 @@ footer{padding-top:clamp(48px,5.4vw,68px);
       <li><span class="wl-ix">✦</span><div><div class="wl-name">So you hire</div><p class="wl-desc">Which seems like the obvious answer, and sometimes it is. Mostly you've added someone to a business with nothing for them to plug into.</p></div></li>
     </ol>
 
-    <h2 class="wagon-punch r d3">The business isn't running.<em>The founder is running the business.</em></h2>
+    <h2 class="wagon-punch r d3">The business isn't running. The founder is running the business. <em>That's what structure solves. Not theory — systems, frameworks, and operational foundations you can put in place now.</em></h2>
 
   </div>
 </section>
@@ -1731,11 +1744,6 @@ footer{padding-top:clamp(48px,5.4vw,68px);
 <!-- §04 — EXECUTION WITHOUT STRUCTURE  (desktop only; merged into §03 on mobile) -->
 <section id="execution" class="sweep-line blueprint-grid">
   <div class="bp-grid" aria-hidden="true"></div>
-
-  <!-- SVG PLACEHOLDER — replace contents with your SVG -->
-  <div class="exec-svg-wrap" aria-hidden="true">
-    <div class="exec-svg-placeholder"><span>SVG goes here</span></div>
-  </div>
 
   <h2 class="exec-mon r">Execution<br><em>without Structure.</em></h2>
   <p class="exec-sub r d1">just makes you busy, not operational.</p>
@@ -1747,7 +1755,7 @@ footer{padding-top:clamp(48px,5.4vw,68px);
     </div>
     <div class="exec-spine" aria-hidden="true"></div>
     <div class="exec-r">
-      <p class="exec-con">Advisors, coaches, and consultants will tell you what your business needs. None of them build it. The structure either gets executed — or it stays in your head.</p>
+      <p class="exec-con">The structure either gets executed — or it stays in your head. We hand you the system to execute it — or we build it into your business ourselves.</p>
     </div>
   </div>
 </section>
@@ -1765,17 +1773,12 @@ footer{padding-top:clamp(48px,5.4vw,68px);
 
         <h2 class="why-tagline">Built <em>to build.</em></h2>
 
-        <p class="why-prop">From building businesses from scratch, to operational expertise at scale, to governance and compliance structuring, to legal competence — ORR gives you what your business needs under one roof.</p>
+        <p class="why-prop">From building businesses from scratch, to operational expertise at scale, to governance and compliance structuring — ORR gives you what your business needs under one roof.</p>
         <p class="why-prop-highlight">Instead of hiring six or seven specialists and hoping they coordinate.</p>
 
         <div class="why-brands">
-          <div class="why-brands-label">Experience across</div>
-          <div class="why-brands-row">
-            <span class="why-brand-item">Loblaws</span>
-            <span class="why-brand-item">Walmart</span>
-            <span class="why-brand-item">Best Buy</span>
-            <span class="why-brand-item">Giant Tiger</span>
-          </div>
+          <div class="why-brands-label">Built on operational experience at enterprise retail scale — from systems that serve millions, applied to businesses just getting started.</div>
+          
         </div>
       </div>
 
@@ -1798,7 +1801,7 @@ footer{padding-top:clamp(48px,5.4vw,68px);
           <button class="why-tab" type="button" role="tab" id="whytab-legal"
             aria-controls="whypane-legal" aria-selected="false" tabindex="-1">
             <span class="why-tab-marker" aria-hidden="true">✦</span>
-            <span class="why-tab-name">Legal &amp; Compliance</span>
+            <span class="why-tab-name">Regulatory &amp; Compliance</span>
           </button>
           <button class="why-tab" type="button" role="tab" id="whytab-governance"
             aria-controls="whypane-governance" aria-selected="false" tabindex="-1">
@@ -1827,7 +1830,7 @@ footer{padding-top:clamp(48px,5.4vw,68px);
           </div>
           <div class="why-pane" id="whypane-tools" role="tabpanel"
             aria-labelledby="whytab-tools" aria-hidden="true">
-            <p class="why-pane-desc">Frameworks and templates you can implement today — the same tools we use with founders.</p>
+            <p class="why-pane-desc">Frameworks and templates you can implement today — built for founders who need to move, not plan.</p>
             <a class="why-pv-item" href="resources.html#tools">
               <span class="why-pv-title">Business Model Stress-Test Framework</span>
               <span class="why-pv-type">Framework</span>
@@ -1844,7 +1847,7 @@ footer{padding-top:clamp(48px,5.4vw,68px);
           </div>
           <div class="why-pane" id="whypane-legal" role="tabpanel"
             aria-labelledby="whytab-legal" aria-hidden="true">
-            <p class="why-pane-desc">Entire laws interpreted in plain language. Compliance mapped to real businesses.</p>
+            <p class="why-pane-desc">Entire laws interpreted in plain language. Compliance groundwork mapped to real businesses.</p>
             <a class="why-pv-item" href="resources.html#legal">
               <span class="why-pv-title">DPDP Act 2023 — Plain Language Interpretation</span>
               <span class="why-pv-type">Interpretation</span>
@@ -1857,7 +1860,7 @@ footer{padding-top:clamp(48px,5.4vw,68px);
               <span class="why-pv-title">DPDP Rules 2025 — Commentary</span>
               <span class="why-pv-type">Commentary</span>
             </a>
-            <a href="resources.html#legal" class="why-browse">Browse legal resources <span>→</span></a>
+            <a href="resources.html#legal" class="why-browse">Browse Regulatory Resources <span>→</span></a>
           </div>
           <div class="why-pane" id="whypane-governance" role="tabpanel"
             aria-labelledby="whytab-governance" aria-hidden="true">
@@ -1886,10 +1889,10 @@ footer{padding-top:clamp(48px,5.4vw,68px);
           </a>
           <a class="why-cat" href="resources.html#tools">
             <span class="why-cat-n">Execution Tools</span>
-            <span class="why-cat-d">Frameworks and templates you can implement today — the same ones we use with founders.</span>
+            <span class="why-cat-d">Frameworks and templates you can implement today — built for founders who need to move, not plan.</span>
           </a>
           <a class="why-cat" href="resources.html#legal">
-            <span class="why-cat-n">Legal &amp; Compliance</span>
+            <span class="why-cat-n">Regulatory &amp; Compliance</span>
             <span class="why-cat-d">Entire laws interpreted in plain language. Compliance mapped to real businesses.</span>
           </a>
           <a class="why-cat" href="resources.html#governance">
@@ -1922,7 +1925,7 @@ footer{padding-top:clamp(48px,5.4vw,68px);
         <div class="vc-rail" aria-hidden="true"><span class="vc-ix">01</span><span class="vc-node">✦</span><span class="vc-line"></span></div>
         <div>
           <h3 class="vc-t">You tell us what you're building.</h3>
-          <p class="vc-d">In your words. Your vision, where you're standing, what you expect. Based on that, we'll tell you whether ORR is the right fit — and if we aren't, you'll hear it in that first conversation, <em>which costs nothing.</em></p>
+          <p class="vc-d">In your words. Your vision, where you're standing, what you expect. Based on that, we'll tell you whether ORR is the right fit — and if we aren't, you'll hear it in that first conversation, <em>which costs nothing.</em> <br>Already know what you need? Browse our resources and start building today. Want ORR involved? Here's how that works.</p>
         </div>
       </div>
 
@@ -1959,7 +1962,7 @@ footer{padding-top:clamp(48px,5.4vw,68px);
           <h3 class="vc-t">We build it with you.</h3>
           <p class="vc-d">We work in phases, and each one is priced for what it actually requires of your business. Scope agreed, cost agreed, before it starts.</p>
           <div class="vc-price">
-            <p>Phase one carries a <a href="phases.html">nominal fee</a> — enough for both sides to know the fit is right. And if what you're building genuinely excites us, <b>phase one may cost nothing at all.</b></p>
+            <p>ORR also publishes frameworks, templates, and implementation kits — built from the same methodology. Use them independently, or <b>bring us in when you need something custom.</b></p>
           </div>
           <a href="phases.html" class="vc-more">Learn more about phases <span aria-hidden="true">&rarr;</span></a>
         </div>
@@ -2019,7 +2022,7 @@ footer{padding-top:clamp(48px,5.4vw,68px);
             <span class="friction-name">Compliance doesn't wait.</span>
             <span class="friction-tog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
           </div>
-          <div class="friction-body"><div class="friction-body-in">Legal and regulatory exposure exists the moment your business operates — whether you've addressed it or not. Regulations don't care about your timeline. The liability is already running.</div></div>
+          <div class="friction-body"><div class="friction-body-in">Regulatory exposure exists the moment your business operates — whether you've addressed it or not. Regulations don't care about your timeline. The liability is already running.</div></div>
         </div>
       </div>
 
@@ -2033,7 +2036,7 @@ footer{padding-top:clamp(48px,5.4vw,68px);
   <div class="bp-grid" aria-hidden="true"></div>
   <div class="sb-wrap">
     <h2 class="sb-h2 r">Get your<em> Structure Brief.</em></h2>
-    <p class="sb-sub r d1">Describe where your business is right now.<br><strong>Takes about 4 minutes. You'll get a full structural assessment.</strong></p>
+    <p class="sb-sub r d1">Describe where your business is right now.<br><strong>Takes about 4 minutes. You'll get a full structural overview.</strong></p>
 
     <div class="r d2">
       <div class="sb-progress" id="sbProgress">
@@ -2198,7 +2201,7 @@ footer{padding-top:clamp(48px,5.4vw,68px);
               <button class="sb-opt sb-multi" data-sv="finance">Finance &amp; accounting</button>
               <button class="sb-opt sb-multi" data-sv="hr">Hiring &amp; people management</button>
               <button class="sb-opt sb-multi" data-sv="marketing">Marketing &amp; brand</button>
-              <button class="sb-opt sb-multi" data-sv="legal">Legal &amp; compliance</button>
+              <button class="sb-opt sb-multi" data-sv="legal">Regulatory &amp; compliance</button>
               <button class="sb-opt sb-multi" data-sv="support">Customer support</button>
             </div>
           </div>
@@ -2306,7 +2309,7 @@ footer{padding-top:clamp(48px,5.4vw,68px);
 <section id="begin">
   <div class="begin-wrap">
     <h2 class="begin-h2 r">A business should not require its founder<br>to hold the entire thing together.</h2>
-    <p class="begin-sub r d1">Let's build what it needs to operate.</p>
+    <p class="begin-sub r d1">Start with what it needs to operate.</p>
     <div class="begin-btns r d2">
       <a href="#assess" class="btn-outline">Diagnose your business <span>→</span></a>
     </div>
@@ -2319,9 +2322,9 @@ footer{padding-top:clamp(48px,5.4vw,68px);
           <input class="control" id="i-name" name="name" type="text" placeholder=" " autocomplete="name" enterkeyhint="next" required></div>
         <div class="field"><label class="flabel" for="i-email">Your email</label>
           <input class="control" id="i-email" name="email" type="email" inputmode="email" placeholder=" " autocomplete="email" enterkeyhint="next" required></div>
-        <div class="field"><label class="flabel" for="i-note">What's the idea, and what's stopping it from being a business right now?</label>
+        <div class="field"><label class="flabel" for="i-note">What are you building, and what does it need right now?</label>
           <textarea class="control" id="i-note" name="note" rows="3" placeholder=" " enterkeyhint="done" required></textarea></div>
-        <button type="submit" class="btn begin-submit">Tell us about your idea <span class="a">→</span></button>
+        <button type="submit" class="btn begin-submit">Tell us about your business <span class="a">→</span></button>
         <p class="begin-conf">We respond within one business day · Everything shared is confidential</p>
       </form>
     </div>
