@@ -2428,6 +2428,9 @@ DOCS["nis2"] = {
     mainPane.scrollTop = 0;
     overlay.classList.add("open");
     document.body.style.overflow = "hidden";
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => overlay.classList.add("show"));
+    });
 
     // on mobile, opening a document should close the drawer nav so the reading pane is visible
     closeMobileNav();
@@ -2437,9 +2440,10 @@ DOCS["nis2"] = {
   }
 
   function closeReader(){
-    overlay.classList.remove("open");
+    overlay.classList.remove("show");
     document.body.style.overflow = "";
     closeMobileNav();
+    setTimeout(() => overlay.classList.remove("open"), 320);
   }
 
   function openMobileNav(){
