@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FAF7F0">
+<title>DIFC Data Protection Law | The Law, Plainly | ORR</title>
+<meta name="description" content="The DIFC Data Protection Law No. 5 of 2020, as amended — restated article by article, in plain English. A reading companion for founders, not a substitute for the official text.">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="../../assets/ngb.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ══════════════════════════════════════════════════════════════
+   PALETTE — lighter, warmer, index-matched. Dark reserved for the
+   masthead only; the reading surface stays paper-bright throughout.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --vellum: #FAF7F0;
+  --paper:  #FFFFFF;
+  --paper2: #F5F1E8;
+  --ink:    #211E17;
+  --ink80:  rgba(33,30,23,.90);
+  --ink65:  rgba(33,30,23,.72);
+  --ink48:  rgba(33,30,23,.56);
+  --ink32:  rgba(33,30,23,.38);
+  --ink14:  rgba(33,30,23,.13);
+  --ink08:  rgba(33,30,23,.075);
+  --pine:   #1A4D40;
+  --pine-b: #246B59;
+  --pine-l: #3D8570;
+  --pine08: rgba(26,77,64,.07);
+  --pine14: rgba(26,77,64,.13);
+  --dark:   #0E2A24;
+  --crm:    #FAF7F0;
+  --crm80:  rgba(250,247,240,.90);
+  --crm60:  rgba(250,247,240,.68);
+  --crm40:  rgba(250,247,240,.46);
+  --crm16:  rgba(250,247,240,.16);
+  --mint:   #93CDBB;
+  --bronze: #A9895A;
+  --gold:   #C9A15F;
+  --line:   rgba(33,30,23,.11);
+  --lineL:  rgba(33,30,23,.06);
+  --disp:'Newsreader', Georgia, serif;
+  --body:'Hanken Grotesk', system-ui, sans-serif;
+  --mono:'IBM Plex Mono', monospace;
+  --e1:cubic-bezier(.22,1,.36,1);
+  --e2:cubic-bezier(.16,1,.3,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --pad:clamp(22px,4.6vw,56px);
+  --shell:1560px;
+}
+html{background:var(--vellum);color:var(--ink);-webkit-text-size-adjust:100%;scrollbar-width:none;overflow-x:hidden;overflow-x:clip}
+html::-webkit-scrollbar{display:none}
+body{font-family:var(--body);font-weight:400;line-height:1.75;font-size:16.5px;background:var(--vellum);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;overflow-x:clip;cursor:default;letter-spacing:.005em}
+::selection{background:var(--pine);color:var(--crm)}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.2;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E")}
+@media(hover:hover){
+  .cursor-dot{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--pine);pointer-events:none;z-index:9990;
+    mix-blend-mode:exclusion;transition:width .3s var(--spring),height .3s var(--spring),margin .3s var(--spring),opacity .3s;margin:-4px 0 0 -4px;opacity:0}
+  .cursor-dot.active{opacity:1}
+  .cursor-dot.grow{width:40px;height:40px;margin:-20px 0 0 -20px;background:var(--mint);mix-blend-mode:difference}
+}
+#vrail{position:fixed;left:0;top:0;bottom:0;width:2px;z-index:7000;pointer-events:none;background:var(--ink08)}
+#vrail-fill{position:absolute;top:0;left:0;width:100%;height:0;background:linear-gradient(to bottom,var(--pine),var(--mint));transition:height .15s linear}
+#vrail-r{position:fixed;right:0;top:0;bottom:0;width:2px;z-index:7000;pointer-events:none;background:var(--ink08)}
+#vrail-r-fill{position:absolute;top:0;left:0;width:100%;height:0;background:linear-gradient(to bottom,var(--pine),var(--mint));transition:height .15s linear}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;height:64px;display:flex;align-items:center;padding:0 42px;
+  opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .5s var(--e2),transform .5s var(--e2),background .4s,border-color .4s,backdrop-filter .4s;border-bottom:1px solid transparent}
+#nav.visible{opacity:1;transform:none;pointer-events:auto}
+#nav.solid{background:rgba(250,247,240,.86);backdrop-filter:blur(18px) saturate(1.3);border-color:var(--line)}
+#nav.dark-mode{background:rgba(14,42,36,.88);border-color:var(--crm16)}
+#nav.dark-mode .nav-mid{color:var(--crm40)}
+#nav.dark-mode .nav-r a{color:var(--mint)}
+#nav.dark-mode .nav-cta{border-color:var(--crm);color:var(--crm)!important}
+#nav.dark-mode .nav-cta:hover{background:var(--mint);border-color:var(--mint);color:var(--dark)!important}
+.brand{display:flex;align-items:center;gap:11px;position:relative}
+.nav-logo{width:55px;height:55px;display:block;transition:opacity .5s var(--e2)}
+.nav-logo-dark{opacity:1}
+.nav-logo-light{position:absolute;top:0;left:0;opacity:0}
+#nav.dark-mode .nav-logo-dark{opacity:0}
+#nav.dark-mode .nav-logo-light{opacity:1}
+.nav-mid{font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--ink48);position:absolute;left:50%;transform:translateX(-50%)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:30px}
+.nav-r a{font-family:var(--body);font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--pine-b);transition:color .25s}
+.nav-r a:hover{color:var(--pine)}
+.nav-cta{border:1px solid var(--ink);padding:8px 18px;color:var(--ink)!important;letter-spacing:.12em;transition:background .25s,color .25s,border-color .25s}
+.nav-cta:hover{background:var(--pine);border-color:var(--pine);color:var(--crm)!important}
+.menu-btn{display:none;position:relative;width:44px;height:44px;margin-right:-10px;background:none;border:0;cursor:pointer}
+.menu-btn i{position:absolute;left:11px;right:11px;height:1.5px;background:var(--ink);transition:top .34s var(--e1),transform .34s var(--e1)}
+.menu-btn i:first-child{top:18px}.menu-btn i:last-child{top:26px}
+.menu-btn.x i:first-child{top:22px;transform:rotate(45deg)}.menu-btn.x i:last-child{top:22px;transform:rotate(-45deg)}
+#nav.dark-mode .menu-btn i{background:var(--crm)}
+.mnav{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;z-index:899;background:rgba(250,247,240,.98);backdrop-filter:blur(20px) saturate(1.3);
+  flex-direction:column;padding:22px 22px calc(30px + env(safe-area-inset-bottom));opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .4s var(--e2),transform .4s var(--e2)}
+.mnav.open{opacity:1;transform:none;pointer-events:auto}
+.mnav a{font-family:var(--disp);font-weight:300;font-size:clamp(28px,8.5vw,38px);letter-spacing:-.015em;color:var(--ink);padding:20px 2px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(10px);transition:opacity .5s var(--e2),transform .5s var(--e2)}
+.mnav a::after{content:'→';font-family:var(--body);font-size:17px;color:var(--pine);opacity:.7}
+.mnav.open a{opacity:1;transform:none}
+.mnav.open a:nth-child(1){transition-delay:.05s}
+.mnav.open a:nth-child(2){transition-delay:.1s}
+.mnav.open a:nth-child(3){transition-delay:.15s}
+.mnav-tag{margin-top:auto;font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--ink32);opacity:0;transition:opacity .6s var(--e2) .3s}
+.mnav.open .mnav-tag{opacity:1}
+html.m-lock,html.m-lock body{overflow:hidden}
+@media(max-width:820px){
+  #nav{padding:0 max(18px,env(safe-area-inset-right)) 0 max(18px,env(safe-area-inset-left))}
+  .nav-mid{display:none}.nav-r a:not(.nav-cta){display:none}.nav-cta{padding:10px 16px}.menu-btn{display:block}.mnav{display:flex}
+}
+@media(max-width:1080px){.nav-mid{display:none}}
+#nav{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+
+/* FOOTER */
+footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);border-top:1px solid var(--crm16);padding:68px 42px 44px;display:grid;grid-template-columns:1.3fr 1px 1fr 1px 1.3fr;gap:0 56px}
+.ft-div{background:linear-gradient(to bottom,var(--crm16),transparent);align-self:stretch}
+.ft-brand span{font-family:var(--disp);font-size:14px;color:var(--crm60);line-height:1.55;display:block;margin-top:12px}
+.ft-bw{font-family:var(--disp);font-weight:300;font-size:28px;letter-spacing:.08em;color:var(--crm)}
+.begin-logo{height:160px;width:auto;display:block}
+.ft-nav{display:flex;flex-direction:column;gap:13px}
+.ft-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--crm40);margin-bottom:2px}
+.ft-nav a{font-size:13px;color:var(--crm60);transition:color .25s}
+.ft-nav a:hover{color:var(--mint)}
+.ft-close{display:flex;flex-direction:column;text-align:right}
+.ft-stmt{font-family:var(--disp);font-style:italic;font-weight:300;font-size:16px;line-height:1.45;color:var(--crm60);margin-bottom:22px}
+.ft-legal{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.ft-copy{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--crm40)}
+.ft-ll{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.ft-ll a{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--crm40);transition:color .25s}
+.ft-ll a:hover{color:var(--mint)}
+.ft-disc{font-size:11px;line-height:1.68;color:var(--crm60);text-align:right;max-width:52ch;margin-top:8px}
+footer{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+@media(max-width:1080px){
+  footer{grid-template-columns:1fr 1fr;gap:36px 44px}.ft-div{display:none}.ft-close{grid-column:1/-1;text-align:left}
+  .ft-legal,.ft-ll{align-items:flex-start;justify-content:flex-start}.ft-disc{text-align:left;max-width:60ch}.begin-logo{height:clamp(96px,12vw,140px)}
+}
+@media(max-width:880px){
+  footer{grid-template-columns:1fr;padding:52px 22px calc(38px + env(safe-area-inset-bottom));gap:34px}.ft-div{display:none}
+  .ft-close{grid-column:auto;text-align:left}.ft-legal,.ft-ll{align-items:flex-start;justify-content:flex-start}
+  .begin-logo{height:clamp(72px,20vw,96px)}.ft-stmt{font-size:15px}.ft-disc{font-size:12px;line-height:1.6;color:var(--crm80);max-width:100%}
+}
+@media(max-width:400px){#vrail,#vrail-r{width:1px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ══════════════════════════════════════════════════════════════
+   DOCUMENT HEADER — restrained dark band, generous vertical rhythm
+   ══════════════════════════════════════════════════════════════ */
+#doc-head{position:relative;padding:calc(64px + clamp(52px,7vw,92px)) var(--pad) clamp(46px,5.6vw,68px);
+ background:var(--dark);color:var(--crm);border-bottom:1px solid var(--crm16);overflow:hidden}
+#doc-head::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.45;
+ background-image:linear-gradient(rgba(250,247,240,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(250,247,240,.025) 1px,transparent 1px);background-size:64px 64px}
+#doc-head::after{content:'';position:absolute;top:-30%;right:-6%;width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(circle,rgba(147,205,187,.10),transparent 68%);pointer-events:none}
+.dh-wrap{max-width:var(--shell);margin:0 auto;position:relative;padding-left:clamp(0px,4vw,64px)}
+.dh-crumb{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--crm40);margin-bottom:22px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.dh-crumb a{color:var(--crm60);transition:color .2s}
+.dh-crumb a:hover{color:var(--mint)}
+.dh-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--mint);margin-bottom:24px}
+.dh-title{font-family:var(--disp);font-weight:300;font-size:clamp(42px,6.4vw,84px);line-height:1.0;
+ letter-spacing:-.03em;margin-bottom:24px;max-width:19ch;color:var(--crm)}
+.dh-title em{font-style:italic;color:var(--mint)}
+.dh-stand{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(17px,1.9vw,21px);
+ line-height:1.55;color:var(--crm60);max-width:66ch}
+.dh-note{font-family:var(--body);font-size:14px;line-height:1.72;color:var(--crm80);max-width:64ch;margin-top:16px}
+.dh-companion{font-family:var(--body);font-size:13px;color:var(--crm40);margin-top:18px;max-width:64ch;
+  display:flex;align-items:center;gap:9px}
+.dh-companion::before{content:'';width:14px;height:1px;background:var(--crm40)}
+.dh-meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:32px;padding-top:26px;border-top:1px solid var(--crm16)}
+.dh-meta-item{display:flex;flex-direction:column;gap:5px}
+.dh-meta-k{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--crm40)}
+.dh-meta-v{font-family:var(--body);font-size:13px;color:var(--crm80)}
+
+/* ══════════════════════════════════════════════════════════════
+   BODY — wider shell, much more generous index, wider reading column
+   ══════════════════════════════════════════════════════════════ */
+#doc-body{max-width:var(--shell);margin:0 auto;padding:clamp(52px,6vw,80px) var(--pad) clamp(64px,8vw,110px);
+ display:grid;grid-template-columns:224px 1fr;gap:0 clamp(96px,10vw,160px);align-items:start}
+
+/* ── the index — a real index: leaders, quiet type, no chrome ── */
+.idx{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 128px);overflow-y:auto;scrollbar-width:none;
+  padding-right:4px}
+.idx::-webkit-scrollbar{display:none}
+.idx-label{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink32);
+ padding-bottom:16px;margin-bottom:4px;border-bottom:1.5px solid var(--ink);display:flex;align-items:baseline;justify-content:space-between}
+.idx-label span:first-child{color:var(--ink);font-weight:500}
+.idx-label-count{font-family:var(--mono);font-size:9px;color:var(--ink32);letter-spacing:.06em}
+
+.idx-chgroup{border-bottom:1px solid var(--lineL)}
+.idx-chgroup:last-child{border-bottom:none}
+.idx-chhead{display:block;width:100%;background:none;border:none;
+ text-align:left;cursor:pointer;padding:15px 2px 15px 0;position:relative;transition:opacity .2s}
+.idx-chhead:hover{opacity:.7}
+.idx-chlabel{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink32);display:block;margin-bottom:3px}
+.idx-chname-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.idx-chname{font-family:var(--disp);font-weight:400;font-size:14px;color:var(--ink);line-height:1.35;letter-spacing:-.005em;max-width:100%}
+.idx-chleader{flex:1;border-bottom:1px dotted var(--ink14);margin-bottom:4px;min-width:8px;align-self:flex-end}
+.idx-chchev{font-family:var(--body);font-weight:300;font-size:14px;color:var(--ink32);
+ transition:transform .35s var(--e1);flex-shrink:0}
+.idx-chgroup.open .idx-chchev{transform:rotate(45deg)}
+.idx-chgroup.current .idx-chlabel{color:var(--pine-b)}
+.idx-chgroup.current .idx-chname{color:var(--pine);font-style:italic}
+.idx-chbody{max-height:0;overflow:hidden;transition:max-height .45s var(--e2)}
+.idx-chbody-in{padding:0 0 14px 2px}
+.idx-chbody-in a{display:flex;gap:10px;align-items:baseline;padding:6px 0;font-size:12.5px;line-height:1.5;color:var(--ink48);
+ transition:color .2s}
+.idx-chbody-in a .n{font-family:var(--mono);font-size:9px;color:var(--ink32);flex-shrink:0;min-width:14px;transition:color .2s}
+.idx-chbody-in a:hover{color:var(--ink)}
+.idx-chbody-in a.on{color:var(--pine);font-weight:500}
+.idx-chbody-in a.on .n{color:var(--pine)}
+.idx-foot{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);
+ font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--ink32);line-height:1.85}
+.idx-mobile{display:none}
+
+/* ── the reading column — wider still ── */
+.content{min-width:0;max-width:1020px}
+.lead-note{margin-bottom:clamp(40px,4.6vw,58px);padding:22px 26px;background:transparent;border:1px solid var(--ink14);
+  border-left:3px solid var(--ink32);border-radius:0 10px 10px 0}
+.lead-note p{font-size:12.5px;line-height:1.75;color:var(--ink48);font-family:var(--body)}
+.lead-note p + p{margin-top:10px}
+.lead-note strong{color:var(--ink65);font-weight:600}
+.lead-note .ln-label{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink32);margin-bottom:10px;display:block}
+
+.chap-divider{display:flex;align-items:baseline;gap:16px;margin:clamp(52px,6vw,76px) 0 clamp(26px,3vw,34px);
+ padding-bottom:16px;border-bottom:2px solid var(--pine14)}
+.content .clause:first-of-type ~ .chap-divider:first-of-type,
+.content > .chap-divider:first-child{margin-top:0}
+.chap-divider-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--pine);flex-shrink:0}
+.chap-divider-name{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(21px,2.3vw,29px);color:var(--ink);line-height:1.2}
+
+.clause{padding-top:clamp(28px,3.4vw,38px);margin-top:clamp(28px,3.4vw,38px);border-top:1px solid var(--line);scroll-margin-top:96px}
+.chap-divider + .clause{border-top:none;margin-top:0;padding-top:0}
+.cl-head{display:flex;align-items:baseline;gap:18px;margin-bottom:16px}
+.cl-num{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--pine);padding-top:6px;flex-shrink:0;white-space:nowrap;
+  background:var(--pine08);padding:4px 9px;border-radius:5px;margin-top:2px}
+.cl-title{font-family:var(--disp);font-weight:300;font-size:clamp(22px,2.6vw,31px);line-height:1.16;letter-spacing:-.02em;color:var(--ink)}
+.cl-subhead{font-family:var(--disp);font-style:italic;font-weight:400;font-size:clamp(17px,1.8vw,20px);
+  letter-spacing:-.005em;color:var(--pine);margin:28px 0 12px;padding-top:20px;border-top:1px solid var(--lineL)}
+.clause .cl-subhead:first-of-type{margin-top:22px}
+.clause p{font-size:15.5px;line-height:1.85;color:var(--ink65);margin-bottom:14px;max-width:88ch}
+.clause p:last-child{margin-bottom:0}
+.clause strong{font-weight:600;color:var(--ink)}
+.pen-list{list-style:none;counter-reset:pen;margin:6px 0 0;padding:0;max-width:88ch}
+.pen-list li{counter-increment:pen;position:relative;padding:13px 0 13px 38px;font-size:15px;line-height:1.75;
+  color:var(--ink65);border-bottom:1px solid var(--lineL)}
+.pen-list li:first-child{border-top:1px solid var(--lineL)}
+.pen-list li::before{content:counter(pen,decimal-leading-zero);position:absolute;left:0;top:13px;
+  font-family:var(--mono);font-size:11px;color:var(--pine)}
+
+.map-clear{margin-top:clamp(52px,5.8vw,76px);padding:28px 30px;background:var(--pine08);border-left:3px solid var(--pine);
+  max-width:none;border-radius:0 12px 12px 0}
+.map-clear p{font-family:var(--disp);font-style:italic;font-weight:300;font-size:15px;line-height:1.72;color:var(--ink65)}
+
+.sources-block{margin-top:clamp(32px,3.8vw,44px);padding-top:22px;border-top:1px solid var(--line);max-width:none}
+.sources-label{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink32);margin-bottom:9px}
+.sources-block p{font-size:12.5px;line-height:1.7;color:var(--ink48)}
+
+.doc-close{margin-top:clamp(52px,6vw,78px);padding-top:clamp(30px,3.6vw,40px);border-top:1px solid var(--line);
+ display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
+.doc-close p{font-family:var(--disp);font-style:italic;font-weight:300;font-size:14.5px;color:var(--ink48);max-width:44ch;line-height:1.58}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-size:11.5px;font-weight:500;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--ink);border:1px solid var(--ink);padding:14px 24px;background:none;
+  cursor:pointer;transition:background .3s,color .3s,border-color .3s,gap .3s;white-space:nowrap;border-radius:2px}
+.btn-outline:hover{background:var(--pine);border-color:var(--pine);color:var(--crm);gap:15px}
+
+@media(max-width:1360px){
+  #doc-body{grid-template-columns:214px 1fr;gap:0 56px}
+  .content{max-width:none}
+}
+
+@media(max-width:960px){
+ #doc-body{grid-template-columns:1fr;gap:0}
+ .idx{display:none}
+ .idx-mobile{display:block;position:sticky;top:64px;z-index:80;margin:0 calc(-1*var(--pad)) clamp(30px,5vw,42px);
+  background:rgba(250,247,240,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+ .idx-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px var(--pad);
+  background:none;border:none;cursor:pointer;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--pine)}
+ .idx-toggle .chev{transition:transform .35s var(--e1)}
+ .idx-mobile.open .idx-toggle .chev{transform:rotate(45deg)}
+ .idx-panel{max-height:0;overflow:hidden;transition:max-height .45s var(--e2)}
+ .idx-panel-in{padding:4px var(--pad) 20px;max-height:62vh;overflow-y:auto}
+ .idxm-chap{font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--pine);
+   padding:16px 0 8px;opacity:.9}
+ .idx-panel a{display:flex;gap:12px;padding:10px 0;font-size:13.5px;color:var(--ink65);border-bottom:1px solid var(--lineL)}
+ .idx-panel a .n{font-family:var(--mono);font-size:10.5px;color:var(--pine);min-width:38px}
+ .content{max-width:none}
+ .doc-close{flex-direction:column;align-items:stretch;text-align:left}
+ .btn-outline{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div id="vrail" aria-hidden="true"><div id="vrail-fill"></div></div>
+<div id="vrail-r" aria-hidden="true"><div id="vrail-r-fill"></div></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<header id="nav" class="visible solid dark-mode">
+  <a class="brand" href="../../index.html" aria-label="ORR home">
+    <img src="../../assets/drk.svg" alt="ORR" class="nav-logo nav-logo-dark"/>
+    <img src="../../assets/crm.svg" alt="ORR" class="nav-logo nav-logo-light"/>
+  </a>
+  <span class="nav-mid">From Idea to Operating Business</span>
+  <nav class="nav-r">
+    <a href="../../index.html#structure">Structure</a>
+    <a href="../../resources.html">Resources</a>
+    <a href="../../index.html#begin" class="nav-cta">Begin &rarr;</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+  </nav>
+</header>
+
+<nav class="mnav" id="mnav" aria-label="Mobile navigation">
+  <a href="../../index.html#structure">Structure</a>
+  <a href="../../index.html#model">How we work</a>
+  <a href="../../resources.html">Resources</a>
+  <a href="../../index.html#begin">Begin</a>
+  <span class="mnav-tag">From Idea to Operating Business</span>
+</nav>
+
+<header id="doc-head">
+ <div class="dh-wrap">
+  <p class="dh-crumb"><a href="../../resources.html">Resources</a><span aria-hidden="true">/</span><a href="../law-plainly.html">The Law, Plainly</a><span aria-hidden="true">/</span><span>DIFC Data Protection Law</span></p>
+  <p class="dh-eyebrow">DIFC · LAW NO. 5 OF 2020 · REFERENCE SERIES</p>
+  <h1 class="dh-title">The DIFC Data <em>Protection Law,</em> Plainly.</h1>
+  <p class="dh-stand">The DIFC Data Protection Law No. 5 of 2020, as amended — article by article, in plain English. No jargon, no legalese, no filler.</p>
+  <p class="dh-companion">A reading companion, not a substitute for the official text.</p>
+  <div class="dh-meta">
+    <div class="dh-meta-item"><span class="dh-meta-k">Articles</span><span class="dh-meta-v">1–44</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-k">Parts</span><span class="dh-meta-v">9</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-k">Enacted</span><span class="dh-meta-v">21 May 2020</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-k">Last amended</span><span class="dh-meta-v">Law No. 4 of 2024</span></div>
+  </div>
+ </div>
+</header>
+<main id="doc-body">
+<aside class="idx">
+ <div class="idx-label"><span>Contents</span><span class="idx-label-count">35 article groups</span></div>
+<div class="idx-chgroup" data-chgroup="p1">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Part 1</span><span class="idx-chname-row"><span class="idx-chname">General</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#p1-s1"><span class="n">01</span><span>Title and Application Date</span></a>
+<a href="#p1-s2"><span class="n">02</span><span>Scope</span></a>
+<a href="#p1-s3"><span class="n">03</span><span>Interpretation</span></a>
+<a href="#p1-s4"><span class="n">04</span><span>Application</span></a>
+<a href="#p1-s5"><span class="n">05</span><span>Definitions — selected key terms</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="p2">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Part 2</span><span class="idx-chname-row"><span class="idx-chname">Obligations of Controllers</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#p2-s1"><span class="n">01</span><span>Principles of Processing</span></a>
+<a href="#p2-s2"><span class="n">02</span><span>Data Protection by Design and Default</span></a>
+<a href="#p2-s3"><span class="n">03</span><span>Processor</span></a>
+<a href="#p2-s4"><span class="n">04</span><span>Joint Controllers</span></a>
+<a href="#p2-s5"><span class="n">05</span><span>Records of Processing</span></a>
+<a href="#p2-s6"><span class="n">06</span><span>Data Protection Impact Assessment</span></a>
+<a href="#p2-s7"><span class="n">07</span><span>Prior Consultation</span></a>
+<a href="#p2-s8"><span class="n">08</span><span>Data Protection Officer</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="p3">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Part 3</span><span class="idx-chname-row"><span class="idx-chname">Basis of Processing</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#p3-s1"><span class="n">01</span><span>Lawfulness of Processing</span></a>
+<a href="#p3-s2"><span class="n">02</span><span>Consent</span></a>
+<a href="#p3-s3"><span class="n">03</span><span>Processing of Special Category Data</span></a>
+<a href="#p3-s4"><span class="n">04</span><span>Criminal Offence Data</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="p4">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Part 4</span><span class="idx-chname-row"><span class="idx-chname">Rights of Data Subjects</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#p4-s1"><span class="n">01</span><span>Right of Access</span></a>
+<a href="#p4-s2"><span class="n">02</span><span>Correction and Erasure</span></a>
+<a href="#p4-s3"><span class="n">03</span><span>Right to Restriction</span></a>
+<a href="#p4-s4"><span class="n">04</span><span>Data Portability</span></a>
+<a href="#p4-s5"><span class="n">05</span><span>Right to Object</span></a>
+<a href="#p4-s6"><span class="n">06</span><span>Autonomous Processing</span></a>
+<a href="#p4-s7"><span class="n">07</span><span>Transparency</span></a>
+<a href="#p4-s8"><span class="n">08</span><span>Notification of Correction, Erasure, or Restriction</span></a>
+<a href="#p4-s9"><span class="n">09</span><span>Restrictions on Rights</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="p5">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Part 5</span><span class="idx-chname-row"><span class="idx-chname">Data Security</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#p5-s1"><span class="n">01</span><span>Security of Processing</span></a>
+<a href="#p5-s2"><span class="n">02</span><span>Personal Data Breach Notification</span></a>
+<a href="#p5-s3"><span class="n">03</span><span>Communication of Breach to Data Subject</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="p6">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Part 6</span><span class="idx-chname-row"><span class="idx-chname">Transfers</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#p6-s1"><span class="n">01</span><span>Transfers of Personal Data</span></a>
+<a href="#p6-s2"><span class="n">02</span><span>Binding Corporate Rules</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="p7">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Part 7</span><span class="idx-chname-row"><span class="idx-chname">Commissioner of Data Protection</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#p7-s1"><span class="n">01</span><span>Commissioner</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="p8">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Part 8</span><span class="idx-chname-row"><span class="idx-chname">Enforcement</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#p8-s1"><span class="n">01</span><span>Complaints, Investigations, and Directions</span></a>
+<a href="#p8-s2"><span class="n">02</span><span>Administrative Fines</span></a>
+<a href="#p8-s3"><span class="n">03</span><span>Appeals</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="p9">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Part 9</span><span class="idx-chname-row"><span class="idx-chname">Miscellaneous</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#p9-s1"><span class="n">01</span><span>Consistency with Other DIFC Laws</span></a>
+<a href="#p9-s2"><span class="n">02</span><span>Right to Compensation</span></a>
+<a href="#p9-s3"><span class="n">03</span><span>Limitation Period</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="schedule">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Reference</span><span class="idx-chname-row"><span class="idx-chname">Schedules 1–3</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#schedule"><span class="n">—</span><span>Schedule summary</span></a></div></div>
+</div>
+ <div class="idx-foot">Read in full.<br>Reading companion, not the official text.</div>
+</aside>
+<div class="idx-mobile"><button class="idx-toggle" type="button">Contents <span class="chev">+</span></button><div class="idx-panel"><div class="idx-panel-in"><div class="idxm-chap">Part 1 — General</div>
+<a href="#p1-s1"><span class="n">Art. 1–2</span><span>Title and Application Date</span></a>
+<a href="#p1-s2"><span class="n">Art. 3</span><span>Scope</span></a>
+<a href="#p1-s3"><span class="n">Art. 4</span><span>Interpretation</span></a>
+<a href="#p1-s4"><span class="n">Art. 5</span><span>Application</span></a>
+<a href="#p1-s5"><span class="n">Art. 6</span><span>Definitions — selected key terms</span></a>
+<div class="idxm-chap">Part 2 — Obligations of Controllers</div>
+<a href="#p2-s1"><span class="n">Art. 7</span><span>Principles of Processing</span></a>
+<a href="#p2-s2"><span class="n">Art. 8</span><span>Data Protection by Design and Default</span></a>
+<a href="#p2-s3"><span class="n">Art. 9</span><span>Processor</span></a>
+<a href="#p2-s4"><span class="n">Art. 10</span><span>Joint Controllers</span></a>
+<a href="#p2-s5"><span class="n">Art. 11</span><span>Records of Processing</span></a>
+<a href="#p2-s6"><span class="n">Art. 12</span><span>Data Protection Impact Assessment</span></a>
+<a href="#p2-s7"><span class="n">Art. 13</span><span>Prior Consultation</span></a>
+<a href="#p2-s8"><span class="n">Art. 14</span><span>Data Protection Officer</span></a>
+<div class="idxm-chap">Part 3 — Basis of Processing</div>
+<a href="#p3-s1"><span class="n">Art. 10A</span><span>Lawfulness of Processing</span></a>
+<a href="#p3-s2"><span class="n">Art. 10B</span><span>Consent</span></a>
+<a href="#p3-s3"><span class="n">Art. 11A</span><span>Processing of Special Category Data</span></a>
+<a href="#p3-s4"><span class="n">Art. 11B</span><span>Criminal Offence Data</span></a>
+<div class="idxm-chap">Part 4 — Rights of Data Subjects</div>
+<a href="#p4-s1"><span class="n">Art. 15</span><span>Right of Access</span></a>
+<a href="#p4-s2"><span class="n">Art. 16</span><span>Correction and Erasure</span></a>
+<a href="#p4-s3"><span class="n">Art. 17</span><span>Right to Restriction</span></a>
+<a href="#p4-s4"><span class="n">Art. 18</span><span>Data Portability</span></a>
+<a href="#p4-s5"><span class="n">Art. 19</span><span>Right to Object</span></a>
+<a href="#p4-s6"><span class="n">Art. 20</span><span>Autonomous Processing</span></a>
+<a href="#p4-s7"><span class="n">Art. 21</span><span>Transparency</span></a>
+<a href="#p4-s8"><span class="n">Art. 22</span><span>Notification of Correction, Erasure, or Restriction</span></a>
+<a href="#p4-s9"><span class="n">Art. 23</span><span>Restrictions on Rights</span></a>
+<div class="idxm-chap">Part 5 — Data Security</div>
+<a href="#p5-s1"><span class="n">Art. 28</span><span>Security of Processing</span></a>
+<a href="#p5-s2"><span class="n">Art. 29</span><span>Personal Data Breach Notification</span></a>
+<a href="#p5-s3"><span class="n">Art. 30</span><span>Communication of Breach to Data Subject</span></a>
+<div class="idxm-chap">Part 6 — Transfers</div>
+<a href="#p6-s1"><span class="n">Art. 26</span><span>Transfers of Personal Data</span></a>
+<a href="#p6-s2"><span class="n">Art. 27</span><span>Binding Corporate Rules</span></a>
+<div class="idxm-chap">Part 7 — Commissioner of Data Protection</div>
+<a href="#p7-s1"><span class="n">Art. 31–34</span><span>Commissioner</span></a>
+<div class="idxm-chap">Part 8 — Enforcement</div>
+<a href="#p8-s1"><span class="n">Art. 35–40</span><span>Complaints, Investigations, and Directions</span></a>
+<a href="#p8-s2"><span class="n">Art. 40</span><span>Administrative Fines</span></a>
+<a href="#p8-s3"><span class="n">Art. 41</span><span>Appeals</span></a>
+<div class="idxm-chap">Part 9 — Miscellaneous</div>
+<a href="#p9-s1"><span class="n">Art. 42</span><span>Consistency with Other DIFC Laws</span></a>
+<a href="#p9-s2"><span class="n">Art. 43</span><span>Right to Compensation</span></a>
+<a href="#p9-s3"><span class="n">Art. 44</span><span>Limitation Period</span></a>
+<div class="idxm-chap">Schedules 1–3</div>
+<a href="#schedule"><span class="n"></span><span>Schedule summary</span></a>
+</div></div></div>
+<div class="content">
+<div class="lead-note">
+  <span class="ln-label">Notice</span>
+  <p>This restatement is provided for <strong>general informational and educational purposes only</strong>. It is a plain-language reading companion prepared by ORR and does not constitute legal advice, and does not create an advisor-client or any other professional relationship between ORR and any reader.</p>
+  <p>Every effort has been made to accurately reflect the source law as enacted, but <strong>this page is not the official text of the law</strong> and may not reflect subsequent amendments, rules, notifications, or judicial interpretation. Where this restatement and the official text differ, the official text governs.</p>
+  <p>ORR, its principals, and its affiliates accept <strong>no responsibility or liability</strong> for any loss, damage, or legal consequence arising from reliance on this page. Nothing here should be treated as a substitute for advice from a qualified legal professional licensed in the relevant jurisdiction. <strong>Consult a lawyer</strong> before making any decision based on this content.</p>
+</div>
+<div class="chap-divider" id="p1"><span class="chap-divider-label">Part 1</span><span class="chap-divider-name">General</span></div>
+<section class="clause" id="p1-s1">
+ <div class="cl-head"><span class="cl-num">Art. 1–2</span><h2 class="cl-title">Title and Application Date</h2></div>
+ <p>This is the DIFC Data Protection Law, 2020. It was originally enacted on 21 May 2020 and has been amended through Law No. 4 of 2024.</p>
+</section>
+
+<section class="clause" id="p1-s2">
+ <div class="cl-head"><span class="cl-num">Art. 3</span><h2 class="cl-title">Scope</h2></div>
+ <p>This Law applies to the Processing of Personal Data by a Controller or Processor that is: established in the DIFC; not established in the DIFC but processes Personal Data of Data Subjects who are in the DIFC, where the processing relates to offering them goods or services (paid or free) or monitoring their behaviour in the DIFC; or not established in the DIFC but established in a place where the law of the DIFC applies.</p>
+<p>A Controller not established in the DIFC but caught by this Law must designate a representative in the DIFC.</p>
+</section>
+
+<section class="clause" id="p1-s3">
+ <div class="cl-head"><span class="cl-num">Art. 4</span><h2 class="cl-title">Interpretation</h2></div>
+ <p>Any ambiguity in this Law is to be resolved in the way that best promotes its purpose and gives effect to its provisions. Headings are for convenience only and do not affect interpretation.</p>
+</section>
+
+<section class="clause" id="p1-s4">
+ <div class="cl-head"><span class="cl-num">Art. 5</span><h2 class="cl-title">Application</h2></div>
+ <p>This Law does not apply to: processing by an individual for purely personal or household purposes; processing solely for journalistic, academic, artistic, or literary purposes where the processing is consistent with internationally accepted principles of journalism, academic freedom, or creative expression; or processing by relevant DIFC Bodies exercising judicial, tribunal, arbitral, or quasi-judicial functions.</p>
+</section>
+
+<section class="clause" id="p1-s5">
+ <div class="cl-head"><span class="cl-num">Art. 6</span><h2 class="cl-title">Definitions — selected key terms</h2></div>
+ <p>Personal Data — any information referring to an identified or identifiable natural person. A person is identifiable if they can be identified, directly or indirectly, by reference to an identifier such as name, identification number, location data, online identifier, or factors specific to their physical, physiological, genetic, mental, economic, cultural, or social identity.</p>
+<p>Processing — any operation on Personal Data, whether automated or not: collecting, recording, organising, structuring, storing, adapting, altering, retrieving, consulting, using, disclosing, disseminating, aligning, combining, restricting, erasing, destroying, or profiling.</p>
+<p>Controller — any natural or legal person, or any DIFC Body, that alone or jointly with others determines the purposes and means of Processing.</p>
+<p>Processor — any natural or legal person, or any DIFC Body, that Processes Personal Data on behalf of a Controller.</p>
+<p>Data Subject — an identified or identifiable natural person to whom Personal Data relates.</p>
+<p>Consent — any freely given, specific, informed, and unambiguous indication of a Data Subject's wishes, through a statement or clear affirmative action, signifying agreement to Processing.</p>
+<p>Personal Data Breach — a breach of security leading to accidental or unlawful destruction, loss, alteration, unauthorised disclosure of, or access to, Personal Data.</p>
+<p>Special Category Data — Personal Data revealing or concerning racial or ethnic origin, communal origin, political opinions, religious or philosophical beliefs, criminal record, trade union membership, or health, sex life, or biometric or genetic data. Also includes Personal Data of a child (under 18 in the DIFC).</p>
+<p>Commissioner — the Commissioner of Data Protection, appointed under Part 7 of this Law.</p>
+<p>Profiling — automated Processing to evaluate personal aspects of a natural person, particularly to analyse or predict work performance, economic situation, health, preferences, interests, reliability, behaviour, location, or movements.</p>
+<p>Autonomous Processing — Processing carried out solely by automated means without meaningful human involvement. This is distinct from Profiling — Profiling evaluates personal aspects; Autonomous Processing makes decisions without a human in the loop.</p>
+<p>Third Country — any jurisdiction outside the DIFC.</p>
+</section>
+
+<div class="chap-divider" id="p2"><span class="chap-divider-label">Part 2</span><span class="chap-divider-name">Obligations of Controllers</span></div>
+<section class="clause" id="p2-s1">
+ <div class="cl-head"><span class="cl-num">Art. 7</span><h2 class="cl-title">Principles of Processing</h2></div>
+ <p>Personal Data must be: processed lawfully, fairly, and transparently; collected for specified, explicit, and legitimate purposes and not processed in an incompatible way; adequate, relevant, and limited to what is necessary (data minimisation); accurate and kept up to date, with every reasonable step taken to erase or correct inaccurate data without delay; kept in identifiable form no longer than necessary for the stated purposes; and processed with appropriate security, including protection against unauthorised or unlawful processing and accidental loss, destruction, or damage.</p>
+<p>The Controller is responsible for — and must be able to demonstrate — compliance with all of these principles. This is the accountability principle.</p>
+</section>
+
+<section class="clause" id="p2-s2">
+ <div class="cl-head"><span class="cl-num">Art. 8</span><h2 class="cl-title">Data Protection by Design and Default</h2></div>
+ <p>Controllers must implement appropriate technical and organisational measures at the time of determining the means of processing and at the time of processing itself, designed to embed data protection principles (like minimisation and pseudonymisation) into the processing. By default, only Personal Data necessary for each specific purpose is processed — covering amount collected, extent of processing, storage period, and accessibility.</p>
+</section>
+
+<section class="clause" id="p2-s3">
+ <div class="cl-head"><span class="cl-num">Art. 9</span><h2 class="cl-title">Processor</h2></div>
+ <p>A Controller may only engage a Processor that provides sufficient guarantees of appropriate technical and organisational measures. The Processor must not engage a sub-processor without the Controller's prior written authorisation (specific or general). The relationship must be governed by a binding contract specifying: subject-matter, duration, nature, purpose, data types, Data Subject categories, and Controller obligations and rights.</p>
+<p>The contract must require the Processor to: process only on the Controller's documented instructions; ensure confidentiality; implement security measures; respect sub-processing conditions; assist with Data Subject rights; assist with breach notification, impact assessments, and prior consultation; return or delete all data after the service ends; and make all compliance information available for audits.</p>
+<p>If a Processor determines purposes and means itself, it becomes a Controller for that processing.</p>
+</section>
+
+<section class="clause" id="p2-s4">
+ <div class="cl-head"><span class="cl-num">Art. 10</span><h2 class="cl-title">Joint Controllers</h2></div>
+ <p>Where two or more Controllers jointly determine purposes and means, they must arrange their respective responsibilities transparently, particularly for Data Subject rights. The essence of the arrangement must be available to Data Subjects. Regardless of the arrangement, a Data Subject can exercise rights against any of the Controllers.</p>
+</section>
+
+<section class="clause" id="p2-s5">
+ <div class="cl-head"><span class="cl-num">Art. 11</span><h2 class="cl-title">Records of Processing</h2></div>
+ <p>Controllers and Processors must maintain written records of their processing activities, available to the Commissioner on request. Controller records must include: name and contact details, purposes, Data Subject and data categories, recipient categories, transfers to Third Countries and their safeguards, retention periods, and a description of security measures. Processor records: name and contact details of each Controller it acts for, categories of processing, Third Country transfers, and security measures.</p>
+</section>
+
+<section class="clause" id="p2-s6">
+ <div class="cl-head"><span class="cl-num">Art. 12</span><h2 class="cl-title">Data Protection Impact Assessment</h2></div>
+ <p>Where processing is likely to result in high risk to Data Subjects — especially using new technologies, considering nature, scope, context, and purposes — the Controller must carry out a Data Protection Impact Assessment before processing. A DPIA is specifically required for: systematic, extensive automated evaluation of personal aspects (including Profiling) on which significant decisions are based; large-scale processing of Special Category Data; and systematic large-scale monitoring of publicly accessible areas.</p>
+<p>The assessment must contain: a systematic description of the processing and its purposes including legitimate interest where relied upon; an assessment of necessity and proportionality; an assessment of risks to Data Subjects' rights and freedoms; and the measures to address those risks.</p>
+</section>
+
+<section class="clause" id="p2-s7">
+ <div class="cl-head"><span class="cl-num">Art. 13</span><h2 class="cl-title">Prior Consultation</h2></div>
+ <p>If the DPIA indicates high risk that the Controller cannot mitigate, the Controller must consult the Commissioner before processing. The Commissioner may provide written advice within eight weeks (extendable by six weeks for complex cases). The Commissioner can exercise any enforcement power during this period.</p>
+</section>
+
+<section class="clause" id="p2-s8">
+ <div class="cl-head"><span class="cl-num">Art. 14</span><h2 class="cl-title">Data Protection Officer</h2></div>
+ <p>A DPO must be appointed where: the Controller or Processor's core activities require regular and systematic large-scale monitoring of Data Subjects; or core activities involve large-scale processing of Special Category Data. All DIFC Bodies that process Personal Data must also appoint a DPO.</p>
+<p>The DPO is selected for professional qualities and expert knowledge of data protection. They can be a staff member or external. The DPO must be involved properly and in a timely manner, given necessary resources, cannot receive instructions regarding their tasks, cannot be penalised for performing them, and reports to the highest management level. Data Subjects and the Commissioner can contact the DPO directly.</p>
+<p>The DPO's minimum tasks: inform and advise the Controller/Processor and staff; monitor compliance; advise on DPIAs; cooperate with the Commissioner; and act as the contact point for the Commissioner and Data Subjects.</p>
+</section>
+
+<div class="chap-divider" id="p3"><span class="chap-divider-label">Part 3</span><span class="chap-divider-name">Basis of Processing</span></div>
+<section class="clause" id="p3-s1">
+ <div class="cl-head"><span class="cl-num">Art. 10A</span><h2 class="cl-title">Lawfulness of Processing</h2></div>
+ <p>Processing is lawful only if at least one of the following applies: the Data Subject consented; processing is necessary for performing a contract with the Data Subject or pre-contractual steps at their request; processing is necessary to comply with a legal obligation the Controller is subject to under DIFC law or applicable UAE federal or Dubai law; processing is necessary to protect vital interests of the Data Subject or another person; processing is necessary for a task carried out in the public interest or in exercise of official authority vested in the Controller; or processing is necessary for legitimate interests of the Controller or a third party, unless overridden by the Data Subject's interests, rights, or fundamental freedoms — particularly where the Data Subject is a child.</p>
+</section>
+
+<section class="clause" id="p3-s2">
+ <div class="cl-head"><span class="cl-num">Art. 10B</span><h2 class="cl-title">Consent</h2></div>
+ <p>Where processing is based on Consent, the Controller must be able to demonstrate it. If Consent is given in a written declaration covering other matters, the Consent request must be clearly distinguishable, intelligible, easily accessible, and in clear, plain language.</p>
+<p>The Data Subject can withdraw Consent at any time. Withdrawal must be as easy as giving it. The Data Subject must be told this before giving Consent. Withdrawal does not affect the lawfulness of processing done before it.</p>
+<p>When assessing whether Consent is freely given, utmost account must be taken of whether performing a contract is conditional on Consent to processing that is not necessary for that contract.</p>
+</section>
+
+<section class="clause" id="p3-s3">
+ <div class="cl-head"><span class="cl-num">Art. 11A</span><h2 class="cl-title">Processing of Special Category Data</h2></div>
+ <p>Processing of Special Category Data is prohibited unless: the Data Subject gave explicit Consent (unless DIFC law provides that the prohibition cannot be lifted by Consent); processing is necessary for employment, social security, or social protection obligations under applicable law; processing is necessary to protect vital interests where the Data Subject cannot Consent; a not-for-profit body with legitimate purposes processes data of its members or regular contacts with appropriate safeguards; the Data Subject has manifestly made the data public; processing is necessary for legal claims or court functions; processing is necessary for reasons of substantial public interest under applicable law; processing is necessary for preventive or occupational medicine, employee capacity assessment, medical diagnosis, health or social care, or management of health or social care systems; processing is necessary for public health purposes; or processing is necessary for archiving, research, or statistical purposes with appropriate safeguards.</p>
+</section>
+
+<section class="clause" id="p3-s4">
+ <div class="cl-head"><span class="cl-num">Art. 11B</span><h2 class="cl-title">Criminal Offence Data</h2></div>
+ <p>Personal Data relating to criminal convictions and offences may only be processed under the control of an official authority, or where authorised by applicable law with appropriate safeguards. No comprehensive criminal-offence register may be kept outside official authority control.</p>
+</section>
+
+<div class="chap-divider" id="p4"><span class="chap-divider-label">Part 4</span><span class="chap-divider-name">Rights of Data Subjects</span></div>
+<section class="clause" id="p4-s1">
+ <div class="cl-head"><span class="cl-num">Art. 15</span><h2 class="cl-title">Right of Access</h2></div>
+ <p>A Data Subject can ask the Controller to confirm whether their Personal Data is being processed and, if so, get access to the data along with: the purposes; categories of data; recipients or categories of recipients (including in Third Countries); the retention period or criteria; the right to request correction, erasure, or restriction; the right to object; the right to complain to the Commissioner; the source of data not collected from the Data Subject; the existence of Autonomous Processing and Profiling with information about the logic involved, significance, and envisaged consequences; and whether data is transferred to a Third Country and the safeguards involved.</p>
+<p>The Controller must provide a copy of the data free of charge. Reasonable fees may be charged for further copies. Information must be provided within one month (extendable by two months for complex or numerous requests, with notification within the first month).</p>
+</section>
+
+<section class="clause" id="p4-s2">
+ <div class="cl-head"><span class="cl-num">Art. 16</span><h2 class="cl-title">Correction and Erasure</h2></div>
+ <p>A Data Subject has the right to have inaccurate Personal Data corrected without undue delay, and to have incomplete data completed.</p>
+<p>A Data Subject has the right to erasure where: the data is no longer necessary for its original purpose; Consent is withdrawn and no other legal basis exists; the Data Subject objects and there are no overriding legitimate grounds; the data was unlawfully processed; or erasure is required by applicable law. Where the Controller has made the data public, it must take reasonable steps to inform other Controllers that erasure has been requested.</p>
+<p>Erasure does not apply where processing is necessary for: freedom of expression and information; legal obligation compliance; public interest in public health; archiving, research, or statistical purposes; or establishing, exercising, or defending legal claims.</p>
+</section>
+
+<section class="clause" id="p4-s3">
+ <div class="cl-head"><span class="cl-num">Art. 17</span><h2 class="cl-title">Right to Restriction</h2></div>
+ <p>A Data Subject can require the Controller to restrict processing where: accuracy is contested (while verifying); processing is unlawful but the Data Subject prefers restriction over erasure; the Controller no longer needs the data but the Data Subject needs it for legal claims; or the Data Subject has objected (pending verification of the Controller's grounds). Restricted data may only be stored, or processed with the Data Subject's Consent, for legal claims, to protect another's rights, or for important public interest.</p>
+</section>
+
+<section class="clause" id="p4-s4">
+ <div class="cl-head"><span class="cl-num">Art. 18</span><h2 class="cl-title">Data Portability</h2></div>
+ <p>Where processing is based on Consent or a contract and carried out by automated means, the Data Subject has the right to receive their Personal Data in a structured, commonly used, machine-readable format and transmit it to another Controller without hindrance. Where technically feasible, the Data Subject can require direct Controller-to-Controller transmission.</p>
+</section>
+
+<section class="clause" id="p4-s5">
+ <div class="cl-head"><span class="cl-num">Art. 19</span><h2 class="cl-title">Right to Object</h2></div>
+ <p>A Data Subject can object at any time to processing based on public interest, official authority, or legitimate interests (including Profiling based on those grounds). The Controller must stop unless it demonstrates compelling legitimate grounds that override the Data Subject's interests, or the processing is for legal claims. For direct marketing, the right to object is absolute — no balancing test. This right must be brought to the Data Subject's attention clearly at first communication.</p>
+</section>
+
+<section class="clause" id="p4-s6">
+ <div class="cl-head"><span class="cl-num">Art. 20</span><h2 class="cl-title">Autonomous Processing</h2></div>
+ <p>A Data Subject has the right not to be subject to a decision based solely on Autonomous Processing (including Profiling) that produces legal effects or similarly significantly affects them — unless the decision is necessary for a contract, authorised by applicable law with safeguards, or based on explicit Consent. In the contract and consent cases, the Controller must implement suitable safeguards including the right to obtain human intervention, express a point of view, and contest the decision.</p>
+</section>
+
+<section class="clause" id="p4-s7">
+ <div class="cl-head"><span class="cl-num">Art. 21</span><h2 class="cl-title">Transparency</h2></div>
+ <p>All information and communication about processing must be concise, transparent, intelligible, and easily accessible, in clear and plain language. The Controller must provide detailed information at the time of collection (or within a reasonable period for data not obtained directly), including: identity and contact details; DPO contact details; purposes and legal basis; legitimate interests relied upon; recipients; Third Country transfer details; retention periods; all Data Subject rights; the right to complain; whether providing data is a legal or contractual requirement; and the existence of Autonomous Processing and Profiling.</p>
+</section>
+
+<section class="clause" id="p4-s8">
+ <div class="cl-head"><span class="cl-num">Art. 22</span><h2 class="cl-title">Notification of Correction, Erasure, or Restriction</h2></div>
+ <p>The Controller must inform each recipient of any correction, erasure, or restriction — unless impossible or disproportionate — and must tell the Data Subject who the recipients are, if asked.</p>
+</section>
+
+<section class="clause" id="p4-s9">
+ <div class="cl-head"><span class="cl-num">Art. 23</span><h2 class="cl-title">Restrictions on Rights</h2></div>
+ <p>Rights may be restricted by applicable law where necessary and proportionate to safeguard: the DIFC's public interest; the prevention, detection, investigation, or prosecution of breaches of legal or ethical standards; the protection of the Data Subject or others' rights; the enforcement of civil claims; or the functions of any DIFC Body exercising official authority. Any restriction must respect the essence of fundamental rights and contain specific provisions on scope, safeguards, risks, and the Data Subject's right to be informed.</p>
+</section>
+
+<div class="chap-divider" id="p5"><span class="chap-divider-label">Part 5</span><span class="chap-divider-name">Data Security</span></div>
+<section class="clause" id="p5-s1">
+ <div class="cl-head"><span class="cl-num">Art. 28</span><h2 class="cl-title">Security of Processing</h2></div>
+ <p>Controllers and Processors must implement technical and organisational measures appropriate to the risk, including: pseudonymisation and encryption; ensuring ongoing confidentiality, integrity, availability, and resilience; the ability to restore access after an incident; and regular testing of security measures.</p>
+</section>
+
+<section class="clause" id="p5-s2">
+ <div class="cl-head"><span class="cl-num">Art. 29</span><h2 class="cl-title">Personal Data Breach Notification</h2></div>
+ <p>The Controller must notify the Commissioner of a Personal Data Breach without undue delay — within 72 hours where feasible — unless the breach is unlikely to result in a risk to anyone's rights and freedoms. Late notifications must include reasons for the delay. Processors must notify their Controller without undue delay. The notification must describe: the nature of the breach (categories and approximate numbers of Data Subjects and records); the DPO or contact point; likely consequences; and measures taken or proposed.</p>
+</section>
+
+<section class="clause" id="p5-s3">
+ <div class="cl-head"><span class="cl-num">Art. 30</span><h2 class="cl-title">Communication of Breach to Data Subject</h2></div>
+ <p>Where the breach is likely to result in high risk to a person's rights and freedoms, the Controller must communicate it to the affected Data Subject without undue delay, in clear, plain language. This is not required where: the data was encrypted or rendered unintelligible; subsequent measures eliminated the high risk; or it would involve disproportionate effort (in which case a public communication suffices).</p>
+</section>
+
+<div class="chap-divider" id="p6"><span class="chap-divider-label">Part 6</span><span class="chap-divider-name">Transfers</span></div>
+<section class="clause" id="p6-s1">
+ <div class="cl-head"><span class="cl-num">Art. 26</span><h2 class="cl-title">Transfers of Personal Data</h2></div>
+ <p>Personal Data may be transferred to a Third Country only if: the Commissioner has confirmed an adequate level of protection in that jurisdiction (the Commissioner maintains a published list); or appropriate safeguards exist with enforceable rights and effective remedies — including binding corporate rules, standard contractual clauses, an approved code of conduct with binding commitments, or an approved certification mechanism with binding commitments.</p>
+<p>Without adequacy or safeguards, a transfer may still happen if: the Data Subject explicitly consented after being informed of the risks and the absence of adequacy or safeguards; the transfer is necessary for a contract with the Data Subject; it is necessary for a contract in the Data Subject's interest; it is necessary for important public interest under applicable law; it is necessary for legal claims; it is necessary to protect vital interests where the Data Subject cannot consent; or the transfer is from a legally required public register.</p>
+</section>
+
+<section class="clause" id="p6-s2">
+ <div class="cl-head"><span class="cl-num">Art. 27</span><h2 class="cl-title">Binding Corporate Rules</h2></div>
+ <p>Binding corporate rules for intra-group transfers must be legally binding, confer enforceable rights on Data Subjects, and meet detailed requirements: data protection principles, Data Subject rights, liability acceptance, compliance training, auditing, change management, supervisory cooperation, and mechanisms for reporting legal requirements in the receiving country that may prevent compliance.</p>
+</section>
+
+<div class="chap-divider" id="p7"><span class="chap-divider-label">Part 7</span><span class="chap-divider-name">Commissioner of Data Protection</span></div>
+<section class="clause" id="p7-s1">
+ <div class="cl-head"><span class="cl-num">Art. 31–34</span><h2 class="cl-title">Commissioner</h2></div>
+ <p>The President of the DIFC appoints the Commissioner of Data Protection to administer and enforce this Law. The Commissioner must have suitable qualifications, knowledge, and experience in data protection, is appointed for a renewable term of no more than three years, and is funded by the DIFC Authority. The Commissioner acts independently and may issue regulations, instruments, and directions consistent with this Law.</p>
+<p>The Commissioner's functions include: monitoring and enforcing the Law; promoting public awareness; advising the DIFC Authority; handling complaints; approving codes of conduct and certification mechanisms; maintaining a public register of codes, certifications, and adequacy determinations; cooperating with data protection authorities of other jurisdictions; and publishing annual reports.</p>
+<p>The Commissioner, staff, consultants, and contractors are not liable for actions taken or omissions made in good faith in performing their functions.</p>
+</section>
+
+<div class="chap-divider" id="p8"><span class="chap-divider-label">Part 8</span><span class="chap-divider-name">Enforcement</span></div>
+<section class="clause" id="p8-s1">
+ <div class="cl-head"><span class="cl-num">Art. 35–40</span><h2 class="cl-title">Complaints, Investigations, and Directions</h2></div>
+ <p>Any Data Subject can lodge a complaint with the Commissioner. The Commissioner may investigate any complaint or any suspected breach on own initiative. Investigations can include requiring information, documents, and explanations; entering premises with reasonable notice; and inspecting, examining, and copying documents.</p>
+<p>On completing an investigation, if the Commissioner finds a breach, the Commissioner may issue directions to: take or refrain from specified actions within a specified time; cease Processing; erase or correct data; notify Data Subjects of the breach; restrict Processing; ban Processing entirely; suspend data flows to a Third Country; or impose an administrative fine. Directions must be in writing, state reasons, and specify the right of appeal.</p>
+</section>
+
+<section class="clause" id="p8-s2">
+ <div class="cl-head"><span class="cl-num">Art. 40</span><h2 class="cl-title">Administrative Fines</h2></div>
+ <p>Fines must be effective, proportionate, and dissuasive. When setting the amount, the Commissioner considers: nature, gravity, and duration of the breach; whether it was intentional or negligent; mitigation actions; previous breaches; categories of data affected; how the breach was notified to the Commissioner; compliance with prior directions; adherence to codes of conduct or certification; and any aggravating or mitigating factors.</p>
+<p>Maximum fine: $100,000 per breach. Multiple separate breaches may each attract a separate fine.</p>
+</section>
+
+<section class="clause" id="p8-s3">
+ <div class="cl-head"><span class="cl-num">Art. 41</span><h2 class="cl-title">Appeals</h2></div>
+ <p>A person may appeal any direction to the relevant DIFC Court within 30 days. During appeal, the direction may be stayed by the Court. The Court may set aside, modify, or replace the direction.</p>
+</section>
+
+<div class="chap-divider" id="p9"><span class="chap-divider-label">Part 9</span><span class="chap-divider-name">Miscellaneous</span></div>
+<section class="clause" id="p9-s1">
+ <div class="cl-head"><span class="cl-num">Art. 42</span><h2 class="cl-title">Consistency with Other DIFC Laws</h2></div>
+ <p>This Law supplements and does not replace other DIFC laws. Where this Law conflicts with another DIFC law on personal data, this Law prevails to the extent of the conflict — unless the other law specifically states otherwise.</p>
+</section>
+
+<section class="clause" id="p9-s2">
+ <div class="cl-head"><span class="cl-num">Art. 43</span><h2 class="cl-title">Right to Compensation</h2></div>
+ <p>Any person who suffers material or non-material damage from a breach of this Law has the right to claim compensation from the Controller or Processor. A Controller is liable for damage caused by any processing that breaches this Law. A Processor is liable only for breaching Processor-specific obligations or acting outside the Controller's lawful instructions. A Controller or Processor is exempt only if it proves it is in no way responsible. Where multiple parties are involved, each is liable for the entire damage, with a right of contribution from the others.</p>
+</section>
+
+<section class="clause" id="p9-s3">
+ <div class="cl-head"><span class="cl-num">Art. 44</span><h2 class="cl-title">Limitation Period</h2></div>
+ <p>Claims for compensation must be brought within six years of the date the Data Subject knew or ought to have known about the breach.</p>
+</section>
+
+<div class="chap-divider" id="schedule"><span class="chap-divider-label">Reference</span><span class="chap-divider-name">Schedules 1–3</span></div>
+<section class="clause" id="schedule-summary" style="border-top:none;padding-top:0;margin-top:0">
+ <div class="cl-head"><span class="cl-num">Summary</span><h2 class="cl-title">What each Schedule covers</h2></div>
+ <p><strong>Schedule 1 — Conditions for Consent</strong> — Consent must be verifiable. The Controller must be able to demonstrate that the Data Subject consented. Consent given in a broader written declaration must be clearly distinguishable. Consent is not freely given where the Data Subject has no genuine or free choice, or cannot refuse or withdraw without detriment. Where processing has multiple purposes, Consent must be given for each. A written declaration of Consent must be in clear, plain language, and any part that infringes this Law is not binding.</p>
+<p><strong>Schedule 2 — Data Protection Impact Assessment</strong> — A DPIA must include: a systematic description of the processing, its purposes, and any legitimate interest relied upon; an assessment of necessity and proportionality; an assessment of risks to Data Subjects' rights and freedoms; and the measures envisaged to address those risks, including safeguards, security measures, and mechanisms for ensuring compliance.</p>
+<p><strong>Schedule 3 — Binding Corporate Rules</strong> — Binding corporate rules must be legally binding, expressly confer enforceable rights on Data Subjects, and contain: group structure and contacts; data transfers (type, purposes, categories of data and Data Subjects, receiving country); application of data protection principles; Data Subject rights; liability acceptance by the DIFC-established member; information duties; DPO tasks; complaint and dispute procedures; compliance-verification mechanisms; change-management reporting; Commissioner-cooperation mechanisms; reporting on legal requirements in the receiving country that may affect guarantees; and appropriate staff training.</p>
+</section>
+
+<div class="map-clear"><p>This reference covers what the Law says. Working out how it applies to your specific product, data flows, and role — is a different exercise.</p></div>
+<div class="sources-block"><div class="sources-label">Source</div><p>DIFC Data Protection Law, DIFC Law No. 5 of 2020, as amended by DIFC Law No. 4 of 2024. Originally enacted 21 May 2020. Issued by His Highness The Ruler of Dubai.</p></div>
+<div class="doc-close">
+ <p>Need to work out how this actually applies to your product, data flows, or role? <em>That's a different exercise.</em></p>
+ <a href="../../index.html#begin" class="btn-outline">Start a conversation <span aria-hidden="true">→</span></a>
+</div>
+</div>
+</main>
+
+<footer>
+  <div class="ft-brand">
+    <div class="ft-bw"><img src="../../assets/crm.svg" alt="ORR Logo" class="begin-logo"/></div>
+    <span>From idea to operating business.</span>
+  </div>
+  <div class="ft-div"></div>
+  <nav class="ft-nav">
+    <span class="ft-l">Navigate</span>
+    <a href="../../resources.html">Resources</a>
+    <a href="../../index.html#assess">Diagnose</a>
+    <a href="../../index.html#structure">Structure</a>
+    <a href="../../founder.html">Founder</a>
+    <a href="../../index.html#begin">Begin</a>
+  </nav>
+  <div class="ft-div"></div>
+  <div class="ft-close">
+    <p class="ft-stmt">The businesses that run without their founders weren't built by accident. They were engineered.</p>
+    <div class="ft-legal">
+      <span class="ft-copy">© <span id="yr"></span> ORR — All rights reserved</span>
+      <div class="ft-ll">
+        <a href="../../legal/privacy.html">Privacy</a>
+        <a href="../../legal/terms.html">Terms</a>
+        <a href="../../legal/disclaimer.html">Disclaimer</a>
+      </div>
+      <p class="ft-disc">ORR is a business-structuring consultancy, not a law firm, accountancy, or financial adviser. Nothing on this site is professional advice.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+(function(){
+  var vrailFill=document.getElementById('vrail-fill');
+  var vrailRFill=document.getElementById('vrail-r-fill');
+  var nav=document.getElementById('nav');
+  var head=document.getElementById('doc-head');
+  var clauses=[].slice.call(document.querySelectorAll('.clause'));
+  var chgroups=[].slice.call(document.querySelectorAll('.idx-chgroup'));
+  var links=[].slice.call(document.querySelectorAll('.idx-chbody-in a,.idx-panel a'));
+  var map={}; links.forEach(function(a){var h=a.getAttribute('href').slice(1);(map[h]=map[h]||[]).push(a);});
+  var ticking=false;
+  function frame(){
+    ticking=false;
+    var y=scrollY, vh=innerHeight, total=document.body.scrollHeight-vh;
+    var pct=(total>0?Math.min(y/total,1)*100:0)+'%';
+    if(vrailFill) vrailFill.style.height=pct;
+    if(vrailRFill) vrailRFill.style.height=pct;
+    if(nav&&head) nav.classList.toggle('dark-mode', head.getBoundingClientRect().bottom>80);
+    var lineY=vh*0.3, cur=null;
+    clauses.forEach(function(c){ if(c.getBoundingClientRect().top<=lineY) cur=c.id; });
+    links.forEach(function(a){a.classList.remove('on');});
+    if(cur&&map[cur]) map[cur].forEach(function(a){a.classList.add('on');});
+    if(cur){
+      var chId = cur.split('-s')[0];
+      chgroups.forEach(function(g){
+        var isCurrent = g.dataset.chgroup === chId;
+        g.classList.toggle('current', isCurrent);
+      });
+    }
+  }
+  function onScroll(){ if(!ticking){ticking=true;requestAnimationFrame(frame);} }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll,{passive:true});
+  frame();
+})();
+
+(function(){
+  var groups = [].slice.call(document.querySelectorAll('.idx-chgroup'));
+  function measure(g){
+    var body = g.querySelector('.idx-chbody');
+    var inner = g.querySelector('.idx-chbody-in');
+    body.style.maxHeight = g.classList.contains('open') ? inner.scrollHeight + 'px' : '0';
+  }
+  groups.forEach(function(g){
+    var head = g.querySelector('.idx-chhead');
+    head.addEventListener('click', function(){
+      var open = g.classList.toggle('open');
+      head.setAttribute('aria-expanded', open);
+      measure(g);
+    });
+  });
+  if(groups[0]){ groups[0].classList.add('open'); measure(groups[0]); }
+  var mo = new MutationObserver(function(){
+    groups.forEach(function(g){
+      if(g.classList.contains('current') && !g.classList.contains('open')){
+        g.classList.add('open'); measure(g);
+      }
+    });
+  });
+  groups.forEach(function(g){ mo.observe(g, {attributes:true, attributeFilter:['class']}); });
+})();
+
+(function(){var m=document.querySelector('.idx-mobile');if(!m)return;
+ var b=m.querySelector('.idx-toggle'),p=m.querySelector('.idx-panel');
+ b.addEventListener('click',function(){var o=m.classList.toggle('open');
+  p.style.maxHeight=o?p.querySelector('.idx-panel-in').scrollHeight+'px':'0';});
+ m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');p.style.maxHeight='0';});});
+})();
+
+(function(){
+  var mBtn=document.getElementById('menuBtn'),mNav=document.getElementById('mnav');
+  if(!mBtn||!mNav)return;
+  mBtn.addEventListener('click',function(){
+    var o=!mNav.classList.contains('open');
+    mNav.classList.toggle('open',o);mBtn.classList.toggle('x',o);
+    mBtn.setAttribute('aria-expanded',o);
+    document.documentElement.classList.toggle('m-lock',o);
+  });
+  mNav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){
+    mNav.classList.remove('open');mBtn.classList.remove('x');
+    mBtn.setAttribute('aria-expanded','false');
+    document.documentElement.classList.remove('m-lock');
+  });});
+})();
+
+var REDUCED = matchMedia('(prefers-reduced-motion:reduce)').matches;
+function easeScrollTo(el){
+  if(!el) return;
+  var start=scrollY, end=el.getBoundingClientRect().top+scrollY, dist=end-start;
+  if(REDUCED){scrollTo(0,end);return;}
+  var t0=null; var ease=function(t){return 1-Math.pow(1-t,4);};
+  requestAnimationFrame(function step(ts){
+    if(!t0)t0=ts;
+    var p=Math.min((ts-t0)/650,1);
+    scrollTo(0,start+dist*ease(p));
+    if(p<1)requestAnimationFrame(step);
+  });
+}
+document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){
+  var t=document.querySelector(a.getAttribute('href'));
+  if(!t)return; e.preventDefault(); easeScrollTo(t);
+});});
+
+var HOVERS=matchMedia('(hover:hover)').matches;
+if(HOVERS){
+  var dot=document.getElementById('cursorDot');
+  var mx=0,my=0,cx=0,cy=0;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.classList.add('active');});
+  document.addEventListener('mouseleave',function(){dot.classList.remove('active');});
+  var sel='a,button';
+  document.addEventListener('mouseover',function(e){if(e.target.closest(sel))dot.classList.add('grow');});
+  document.addEventListener('mouseout',function(e){if(e.target.closest(sel))dot.classList.remove('grow');});
+  (function loop(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;dot.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(loop);})();
+  document.querySelectorAll('.nav-cta,.btn,.btn-outline').forEach(function(btn){
+    btn.addEventListener('mousemove',function(e){var r=btn.getBoundingClientRect();btn.style.transform='translate('+((e.clientX-r.left-r.width/2)*.15)+'px,'+((e.clientY-r.top-r.height/2)*.15)+'px)';});
+    btn.addEventListener('mouseleave',function(){btn.style.transform='';});
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#F1ECE1">
+<title>The Law, Plainly | Resources | ORR</title>
+<meta name="description" content="Entire pieces of legislation restated section by section, in language a founder can actually use — DPDP, GDPR, CCPA/CPRA, and more.">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="../assets/ngb.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400&family=Anton&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --vellum: #F1ECE1;
+  --ink:    #1A1812;
+  --ink72:  rgba(26,24,18,.84);
+  --ink54:  rgba(26,24,18,.68);
+  --ink38:  rgba(26,24,18,.54);
+  --ink18:  rgba(26,24,18,.16);
+  --ink10:  rgba(26,24,18,.10);
+  --pine:   #1A4D40;
+  --pine-b: #246B59;
+  --pine12: rgba(26,77,64,.12);
+  --pine06: rgba(26,77,64,.06);
+  --dark:   #0E2A24;
+  --crm:    #F1ECE1;
+  --crm72:  rgba(241,236,225,.86);
+  --crm54:  rgba(241,236,225,.72);
+  --crm38:  rgba(241,236,225,.56);
+  --crm18:  rgba(241,236,225,.18);
+  --mint:   #8FC9B7;
+  --bronze: #9C7C49;
+  --line:   rgba(26,24,18,.12);
+  --lineL:  rgba(26,24,18,.07);
+  --disp:'Newsreader', Georgia, serif;
+  --body:'Hanken Grotesk', system-ui, sans-serif;
+  --mono:'IBM Plex Mono', monospace;
+  --e1:cubic-bezier(.22,1,.36,1);
+  --e2:cubic-bezier(.16,1,.3,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --pad:clamp(20px,4.4vw,42px);
+}
+html{background:var(--vellum);color:var(--ink);-webkit-text-size-adjust:100%;scrollbar-width:none;overflow-x:hidden;overflow-x:clip}
+html::-webkit-scrollbar{display:none}
+body{font-family:var(--body);font-weight:400;line-height:1.75;font-size:16.5px;background:var(--vellum);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;overflow-x:clip;cursor:default;letter-spacing:.005em}
+::selection{background:var(--pine);color:var(--crm)}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.28;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E")}
+@media(hover:hover){
+  .cursor-dot{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--pine);pointer-events:none;z-index:9990;
+    mix-blend-mode:exclusion;transition:width .3s var(--spring),height .3s var(--spring),margin .3s var(--spring),opacity .3s;margin:-4px 0 0 -4px;opacity:0}
+  .cursor-dot.active{opacity:1}
+  .cursor-dot.grow{width:40px;height:40px;margin:-20px 0 0 -20px;background:var(--mint);mix-blend-mode:difference}
+}
+#vrail{position:fixed;left:0;top:0;bottom:0;width:2px;z-index:7000;pointer-events:none;background:var(--ink10)}
+#vrail-fill{position:absolute;top:0;left:0;width:100%;height:0;background:linear-gradient(to bottom,var(--pine),var(--mint));transition:height .15s linear}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;height:62px;display:flex;align-items:center;padding:0 42px;
+  opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .5s var(--e2),transform .5s var(--e2),background .4s,border-color .4s,backdrop-filter .4s;border-bottom:1px solid transparent}
+#nav.visible{opacity:1;transform:none;pointer-events:auto}
+#nav.solid{background:rgba(241,236,225,.85);backdrop-filter:blur(18px) saturate(1.3);border-color:var(--line)}
+#nav.dark-mode{background:rgba(14,42,36,.85);border-color:var(--crm18)}
+#nav.dark-mode .nav-mid{color:var(--crm38)}
+#nav.dark-mode .nav-r a{color:var(--mint)}
+#nav.dark-mode .nav-cta{border-color:var(--crm);color:var(--crm)!important}
+#nav.dark-mode .nav-cta:hover{background:var(--mint);border-color:var(--mint);color:var(--dark)!important}
+.brand{display:flex;align-items:center;gap:11px;position:relative}
+.nav-logo{width:55px;height:55px;display:block;transition:opacity .5s var(--e2)}
+.nav-logo-dark{opacity:1}
+.nav-logo-light{position:absolute;top:0;left:0;opacity:0}
+#nav.dark-mode .nav-logo-dark{opacity:0}
+#nav.dark-mode .nav-logo-light{opacity:1}
+.nav-mid{font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--ink54);position:absolute;left:50%;transform:translateX(-50%)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:30px}
+.nav-r a{font-family:var(--body);font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--pine-b);transition:color .25s}
+.nav-r a:hover{color:var(--pine)}
+.nav-cta{border:1px solid var(--ink);padding:8px 18px;color:var(--ink)!important;letter-spacing:.12em;transition:background .25s,color .25s,border-color .25s}
+.nav-cta:hover{background:var(--pine);border-color:var(--pine);color:var(--crm)!important}
+.menu-btn{display:none;position:relative;width:44px;height:44px;margin-right:-10px;background:none;border:0;cursor:pointer}
+.menu-btn i{position:absolute;left:11px;right:11px;height:1.5px;background:var(--ink);transition:top .34s var(--e1),transform .34s var(--e1)}
+.menu-btn i:first-child{top:18px}.menu-btn i:last-child{top:26px}
+.menu-btn.x i:first-child{top:22px;transform:rotate(45deg)}.menu-btn.x i:last-child{top:22px;transform:rotate(-45deg)}
+#nav.dark-mode .menu-btn i{background:var(--crm)}
+.mnav{display:none;position:fixed;top:62px;left:0;right:0;bottom:0;z-index:899;background:rgba(241,236,225,.97);backdrop-filter:blur(20px) saturate(1.3);
+  flex-direction:column;padding:22px 22px calc(30px + env(safe-area-inset-bottom));opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .4s var(--e2),transform .4s var(--e2)}
+.mnav.open{opacity:1;transform:none;pointer-events:auto}
+.mnav a{font-family:var(--disp);font-weight:300;font-size:clamp(28px,8.5vw,38px);letter-spacing:-.015em;color:var(--ink);padding:20px 2px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(10px);transition:opacity .5s var(--e2),transform .5s var(--e2)}
+.mnav a::after{content:'→';font-family:var(--body);font-size:17px;color:var(--pine);opacity:.7}
+.mnav.open a{opacity:1;transform:none}
+.mnav.open a:nth-child(1){transition-delay:.05s}
+.mnav.open a:nth-child(2){transition-delay:.1s}
+.mnav.open a:nth-child(3){transition-delay:.15s}
+.mnav-tag{margin-top:auto;font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--ink38);opacity:0;transition:opacity .6s var(--e2) .3s}
+.mnav.open .mnav-tag{opacity:1}
+html.m-lock,html.m-lock body{overflow:hidden}
+@media(max-width:820px){
+  #nav{padding:0 max(18px,env(safe-area-inset-right)) 0 max(18px,env(safe-area-inset-left))}
+  .nav-mid{display:none}.nav-r a:not(.nav-cta){display:none}.nav-cta{padding:10px 16px}.menu-btn{display:block}.mnav{display:flex}
+}
+@media(max-width:1080px){.nav-mid{display:none}}
+#nav{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+
+/* FOOTER */
+footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);border-top:1px solid var(--crm18);padding:68px 42px 44px;display:grid;grid-template-columns:1.3fr 1px 1fr 1px 1.3fr;gap:0 56px}
+.ft-div{background:linear-gradient(to bottom,var(--crm18),transparent);align-self:stretch}
+.ft-brand span{font-family:var(--disp);font-size:14px;color:var(--crm54);line-height:1.55;display:block;margin-top:12px}
+.ft-bw{font-family:var(--disp);font-weight:300;font-size:28px;letter-spacing:.08em;color:var(--crm)}
+.begin-logo{height:160px;width:auto;display:block}
+.ft-nav{display:flex;flex-direction:column;gap:13px}
+.ft-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--crm38);margin-bottom:2px}
+.ft-nav a{font-size:13px;color:var(--crm54);transition:color .25s}
+.ft-nav a:hover{color:var(--mint)}
+.ft-close{display:flex;flex-direction:column;text-align:right}
+.ft-stmt{font-family:var(--disp);font-style:italic;font-weight:300;font-size:16px;line-height:1.45;color:var(--crm54);margin-bottom:22px}
+.ft-legal{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.ft-copy{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--crm38)}
+.ft-ll{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.ft-ll a{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--crm38);transition:color .25s}
+.ft-ll a:hover{color:var(--mint)}
+.ft-disc{font-size:11px;line-height:1.68;color:var(--crm54);text-align:right;max-width:52ch;margin-top:8px}
+footer{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+@media(max-width:1080px){
+  footer{grid-template-columns:1fr 1fr;gap:36px 44px}.ft-div{display:none}.ft-close{grid-column:1/-1;text-align:left}
+  .ft-legal,.ft-ll{align-items:flex-start;justify-content:flex-start}.ft-disc{text-align:left;max-width:60ch}.begin-logo{height:clamp(96px,12vw,140px)}
+}
+@media(max-width:880px){
+  footer{grid-template-columns:1fr;padding:52px 22px calc(38px + env(safe-area-inset-bottom));gap:34px}.ft-div{display:none}
+  .ft-close{grid-column:auto;text-align:left}.ft-legal,.ft-ll{align-items:flex-start;justify-content:flex-start}
+  .begin-logo{height:clamp(72px,20vw,96px)}.ft-stmt{font-size:15px}.ft-disc{font-size:12px;line-height:1.6;color:var(--crm72);max-width:100%}
+}
+@media(max-width:400px){#vrail{width:1px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ══════════════════════════════════════════════════════════════
+   CATEGORY PAGE — shared template pattern
+   ══════════════════════════════════════════════════════════════ */
+.r{opacity:0;transform:translateY(18px);transition:opacity .8s var(--e2),transform .8s var(--e2)}
+.r.in{opacity:1;transform:none}
+
+/* header — same dark-band DNA, smaller than the resources index */
+#cat-head{position:relative;padding:calc(62px + clamp(40px,5.6vw,64px)) var(--pad) clamp(38px,5vw,58px);
+  background:var(--dark);color:var(--crm);border-bottom:1px solid var(--crm18);overflow:hidden}
+#cat-head::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(241,236,225,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(241,236,225,.03) 1px,transparent 1px);background-size:60px 60px}
+.ch-wrap{max-width:1180px;margin:0 auto;position:relative}
+.ch-crumb{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--crm38);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.ch-crumb a{color:var(--crm54);transition:color .2s}
+.ch-crumb a:hover{color:var(--mint)}
+.ch-title{font-family:var(--disp);font-weight:300;font-size:clamp(36px,5.4vw,64px);line-height:1.02;letter-spacing:-.025em;margin-bottom:16px;color:var(--crm);max-width:20ch}
+.ch-title em{font-style:italic;color:var(--mint)}
+.ch-sub{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(15px,1.5vw,18px);line-height:1.55;color:var(--crm72);max-width:58ch}
+
+/* body — sidebar filters + grid, same spatial logic as the legal doc's TOC + content */
+#cat-body{max-width:1180px;margin:0 auto;padding:clamp(48px,5.6vw,72px) var(--pad) clamp(70px,8vw,100px);
+  display:grid;grid-template-columns:200px 1fr;gap:0 clamp(36px,4.6vw,64px);align-items:start}
+
+.filters{position:sticky;top:86px;align-self:start}
+.f-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink38);
+  padding-bottom:12px;margin-bottom:10px;border-bottom:1px solid var(--line)}
+.f-group{margin-bottom:26px}
+.f-group:last-child{margin-bottom:0}
+.f-opt{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;background:none;border:none;
+  text-align:left;font-family:var(--body);font-size:13px;color:var(--ink54);padding:7px 0;cursor:pointer;transition:color .2s,padding .2s var(--e1)}
+.f-opt:hover{color:var(--ink);padding-left:3px}
+.f-opt.on{color:var(--pine);font-weight:500}
+.f-opt .cnt{font-family:var(--mono);font-size:10px;color:var(--ink38)}
+.f-opt.on .cnt{color:var(--pine)}
+.filters-mobile{display:none}
+
+.item-count{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink38);margin-bottom:22px}
+.item-count b{color:var(--pine);font-weight:400}
+
+.item-grid{display:flex;flex-direction:column}
+.item-card{display:grid;grid-template-columns:1fr auto;gap:16px 24px;align-items:start;
+  padding:26px 0;border-top:1px solid var(--line);transition:padding-left .35s var(--e1)}
+.item-grid .item-card:last-child{border-bottom:1px solid var(--line)}
+@media(hover:hover){
+  .item-card:hover{padding-left:10px}
+  .item-card:hover .item-name{color:var(--pine)}
+}
+.item-main{min-width:0}
+.item-tophead{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.item-tag{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--pine);
+  border:1px solid var(--pine12);background:var(--pine06);padding:3px 8px}
+.item-tag.paid{color:var(--bronze);border-color:rgba(156,124,73,.22);background:rgba(156,124,73,.06)}
+.item-name{font-family:var(--disp);font-weight:400;font-size:clamp(18px,1.9vw,21px);line-height:1.28;color:var(--ink);transition:color .3s;margin-bottom:6px}
+.item-desc{font-size:13.5px;line-height:1.68;color:var(--ink72);max-width:62ch}
+.item-go{display:flex;align-items:center;gap:9px;font-family:var(--body);font-size:11px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink38);white-space:nowrap;padding-top:4px;transition:color .3s,gap .3s}
+.item-card:hover .item-go{color:var(--pine);gap:13px}
+
+.item-card.hidden{display:none}
+.empty-state{display:none;padding:40px 0;text-align:center}
+.empty-state.show{display:block}
+.empty-state p{font-family:var(--disp);font-style:italic;color:var(--ink38);font-size:15px}
+
+@media(max-width:880px){
+  #cat-body{grid-template-columns:1fr;gap:0}
+  .filters{display:none}
+  .filters-mobile{display:block;position:sticky;top:62px;z-index:80;margin:0 calc(-1*var(--pad)) 28px;
+    background:rgba(241,236,225,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .fm-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px var(--pad);
+    background:none;border:none;cursor:pointer;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--pine)}
+  .fm-toggle .chev{transition:transform .35s var(--e1)}
+  .filters-mobile.open .fm-toggle .chev{transform:rotate(45deg)}
+  .fm-panel{max-height:0;overflow:hidden;transition:max-height .45s var(--e2)}
+  .fm-panel-in{padding:6px var(--pad) 18px;display:flex;flex-wrap:wrap;gap:8px}
+  .fm-panel .f-opt{width:auto;padding:8px 13px;border:1px solid var(--line);font-size:12px}
+  .fm-panel .f-opt.on{border-color:var(--pine);background:var(--pine06)}
+  .fm-panel .cnt{display:none}
+  .item-card{grid-template-columns:1fr;gap:10px}
+  .item-go{padding-top:0}
+}
+</style>
+</head>
+<body>
+
+<div id="vrail" aria-hidden="true"><div id="vrail-fill"></div></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<header id="nav">
+  <a class="brand" href="../index.html" aria-label="ORR home">
+    <img src="../assets/drk.svg" alt="ORR" class="nav-logo nav-logo-dark"/>
+    <img src="../assets/crm.svg" alt="ORR" class="nav-logo nav-logo-light"/>
+  </a>
+  <span class="nav-mid">From Idea to Operating Business</span>
+  <nav class="nav-r">
+    <a href="../index.html#structure">Structure</a>
+    <a href="../resources.html">Resources</a>
+    <a href="../index.html#begin" class="nav-cta">Begin →</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+  </nav>
+</header>
+
+<nav class="mnav" id="mnav" aria-label="Mobile navigation">
+  <a href="../index.html#structure">Structure</a>
+  <a href="../index.html#model">How we work</a>
+  <a href="../resources.html">Resources</a>
+  <a href="../index.html#begin">Begin</a>
+  <span class="mnav-tag">From Idea to Operating Business</span>
+</nav>
+
+<header id="cat-head">
+  <div class="ch-wrap">
+    <p class="ch-crumb r"><a href="../resources.html">Resources</a><span aria-hidden="true">/</span><span>The Law, Plainly</span></p>
+    <h1 class="ch-title r">The Law, <em>Plainly.</em></h1>
+    <p class="ch-sub r">Entire pieces of legislation restated section by section — no legal background required to follow them. Read what applies to your business before you need a lawyer to tell you.</p>
+  </div>
+</header>
+
+<main id="cat-body">
+  <aside class="filters">
+    <div class="f-label">Jurisdiction</div>
+    <div class="f-group" id="fJurisdiction">
+      <button class="f-opt on" data-filter-group="jurisdiction" data-filter-value="all">All <span class="cnt">7</span></button>
+      <button class="f-opt" data-filter-group="jurisdiction" data-filter-value="eu">EU <span class="cnt">2</span></button>
+      <button class="f-opt" data-filter-group="jurisdiction" data-filter-value="us">US <span class="cnt">2</span></button>
+      <button class="f-opt" data-filter-group="jurisdiction" data-filter-value="india">India <span class="cnt">1</span></button>
+      <button class="f-opt" data-filter-group="jurisdiction" data-filter-value="uae">UAE <span class="cnt">1</span></button>
+      <button class="f-opt" data-filter-group="jurisdiction" data-filter-value="global">Global <span class="cnt">1</span></button>
+    </div>
+    <div class="f-label">Topic</div>
+    <div class="f-group" id="fTopic">
+      <button class="f-opt on" data-filter-group="topic" data-filter-value="all">All <span class="cnt">7</span></button>
+      <button class="f-opt" data-filter-group="topic" data-filter-value="privacy">Data Privacy <span class="cnt">4</span></button>
+      <button class="f-opt" data-filter-group="topic" data-filter-value="ai">AI Governance <span class="cnt">1</span></button>
+      <button class="f-opt" data-filter-group="topic" data-filter-value="cyber">Cybersecurity <span class="cnt">2</span></button>
+    </div>
+  </aside>
+
+  <div class="filters-mobile" id="filtersMobile">
+    <button class="fm-toggle" type="button">Filter <span class="chev">+</span></button>
+    <div class="fm-panel"><div class="fm-panel-in" id="fmPanelIn"></div></div>
+  </div>
+
+  <div>
+    <p class="item-count r">Showing <b id="itemCount">7</b> of 7</p>
+
+    <div class="item-grid" id="itemGrid">
+
+      <a class="item-card r" href="#" data-jurisdiction="india" data-topic="privacy">
+        <div class="item-main">
+          <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">India</span></div>
+          <h3 class="item-name">DPDP Act, 2023 — Plain Language Interpretation</h3>
+          <p class="item-desc">India's Digital Personal Data Protection Act, restated section by section for founders building or selling into India.</p>
+        </div>
+        <span class="item-go">Read <span aria-hidden="true">→</span></span>
+      </a>
+
+      <a class="item-card r" href="#" data-jurisdiction="eu" data-topic="privacy">
+        <div class="item-main">
+          <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">EU</span></div>
+          <h3 class="item-name">GDPR — Plain Language Interpretation</h3>
+          <p class="item-desc">The regulation that shaped modern data protection law worldwide, restated without the legal density that usually surrounds it.</p>
+        </div>
+        <span class="item-go">Read <span aria-hidden="true">→</span></span>
+      </a>
+
+      <a class="item-card r" href="#" data-jurisdiction="us" data-topic="privacy">
+        <div class="item-main">
+          <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">US</span></div>
+          <h3 class="item-name">CCPA / CPRA — Plain Language Interpretation</h3>
+          <p class="item-desc">California's consumer privacy law, and what it actually asks of a business that touches California residents' data.</p>
+        </div>
+        <span class="item-go">Read <span aria-hidden="true">→</span></span>
+      </a>
+
+      <a class="item-card r" href="#" data-jurisdiction="uae" data-topic="privacy">
+        <div class="item-main">
+          <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">UAE</span></div>
+          <h3 class="item-name">DIFC Data Protection Law — Plain Language Interpretation</h3>
+          <p class="item-desc">The data protection regime governing the Dubai International Financial Centre, for founders operating in or through the DIFC.</p>
+        </div>
+        <span class="item-go">Read <span aria-hidden="true">→</span></span>
+      </a>
+
+      <a class="item-card r" href="#" data-jurisdiction="global" data-topic="ai">
+        <div class="item-main">
+          <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">EU</span></div>
+          <h3 class="item-name">EU AI Act — Plain Language Interpretation</h3>
+          <p class="item-desc">The world's first comprehensive AI regulation, restated for founders building AI-driven products regardless of where they're based.</p>
+        </div>
+        <span class="item-go">Read <span aria-hidden="true">→</span></span>
+      </a>
+
+      <a class="item-card r" href="#" data-jurisdiction="eu" data-topic="cyber">
+        <div class="item-main">
+          <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">EU</span></div>
+          <h3 class="item-name">EU Cyber Resilience Act — Plain Language Interpretation</h3>
+          <p class="item-desc">New cybersecurity obligations for products with digital elements sold into the EU — what counts, and what's required.</p>
+        </div>
+        <span class="item-go">Read <span aria-hidden="true">→</span></span>
+      </a>
+
+      <a class="item-card r" href="#" data-jurisdiction="us" data-topic="cyber">
+        <div class="item-main">
+          <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">US</span></div>
+          <h3 class="item-name">US IoT Cybersecurity Improvement Act — Plain Language Interpretation</h3>
+          <p class="item-desc">Federal security requirements for connected devices — relevant well beyond companies selling directly to the US government.</p>
+        </div>
+        <span class="item-go">Read <span aria-hidden="true">→</span></span>
+      </a>
+
+    </div>
+
+    <div class="empty-state" id="emptyState"><p>Nothing matches that combination yet — more jurisdictions are being added.</p></div>
+  </div>
+</main>
+
+<footer>
+  <div class="ft-brand">
+    <div class="ft-bw"><img src="../assets/crm.svg" alt="ORR Logo" class="begin-logo"/></div>
+    <span>From idea to operating business.</span>
+  </div>
+  <div class="ft-div"></div>
+  <nav class="ft-nav">
+    <span class="ft-l">Navigate</span>
+    <a href="../resources.html">Resources</a>
+    <a href="../index.html#assess">Diagnose</a>
+    <a href="../index.html#structure">Structure</a>
+    <a href="../founder.html">Founder</a>
+    <a href="../index.html#begin">Begin</a>
+  </nav>
+  <div class="ft-div"></div>
+  <div class="ft-close">
+    <p class="ft-stmt">The businesses that run without their founders weren't built by accident. They were engineered.</p>
+    <div class="ft-legal">
+      <span class="ft-copy">© <span id="yr"></span> ORR — All rights reserved</span>
+      <div class="ft-ll">
+        <a href="../legal/privacy.html">Privacy</a>
+        <a href="../legal/terms.html">Terms</a>
+        <a href="../legal/disclaimer.html">Disclaimer</a>
+      </div>
+      <p class="ft-disc">ORR is a business-structuring consultancy, not a law firm, accountancy, or financial adviser. Nothing on this site is professional advice.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+var nav = document.getElementById('nav');
+var vrailFill = document.getElementById('vrail-fill');
+var ticking = false;
+function frame(){
+  ticking = false;
+  var y = scrollY, total = document.body.scrollHeight - innerHeight;
+  nav.classList.add('visible');
+  nav.classList.toggle('solid', y > 40);
+  if(vrailFill) vrailFill.style.height = (total > 0 ? Math.min(y/total,1)*100 : 0) + '%';
+}
+addEventListener('scroll', function(){ if(!ticking){ticking=true;requestAnimationFrame(frame);} }, {passive:true});
+addEventListener('resize', frame, {passive:true});
+frame();
+
+var ro = new IntersectionObserver(function(es){ es.forEach(function(e){
+  if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+}); }, {threshold:.08, rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.r').forEach(function(el){ ro.observe(el); });
+
+(function(){
+  var mBtn = document.getElementById('menuBtn'), mNav = document.getElementById('mnav');
+  if(!mBtn || !mNav) return;
+  mBtn.addEventListener('click', function(){
+    var o = !mNav.classList.contains('open');
+    mNav.classList.toggle('open', o); mBtn.classList.toggle('x', o);
+    mBtn.setAttribute('aria-expanded', o);
+    document.documentElement.classList.toggle('m-lock', o);
+  });
+  mNav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){
+    mNav.classList.remove('open'); mBtn.classList.remove('x');
+    mBtn.setAttribute('aria-expanded','false');
+    document.documentElement.classList.remove('m-lock');
+  }); });
+})();
+
+var HOVERS = matchMedia('(hover:hover)').matches;
+if(HOVERS){
+  var dot = document.getElementById('cursorDot');
+  var mx=0,my=0,cx=0,cy=0;
+  document.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; dot.classList.add('active'); });
+  document.addEventListener('mouseleave', function(){ dot.classList.remove('active'); });
+  var sel = 'a,button,.item-card';
+  document.addEventListener('mouseover', function(e){ if(e.target.closest(sel)) dot.classList.add('grow'); });
+  document.addEventListener('mouseout', function(e){ if(e.target.closest(sel)) dot.classList.remove('grow'); });
+  (function loop(){ cx+=(mx-cx)*.12; cy+=(my-cy)*.12; dot.style.transform='translate('+cx+'px,'+cy+'px)'; requestAnimationFrame(loop); })();
+}
+
+/* ══ FILTERING — two independent facets (jurisdiction, topic), AND'd together ══ */
+(function(){
+  var cards = [].slice.call(document.querySelectorAll('.item-card'));
+  var groups = { jurisdiction: 'all', topic: 'all' };
+  var itemCountEl = document.getElementById('itemCount');
+  var emptyState = document.getElementById('emptyState');
+
+  function apply(){
+    var visible = 0;
+    cards.forEach(function(c){
+      var okJ = groups.jurisdiction === 'all' || c.dataset.jurisdiction === groups.jurisdiction;
+      var okT = groups.topic === 'all' || c.dataset.topic === groups.topic;
+      var show = okJ && okT;
+      c.classList.toggle('hidden', !show);
+      if(show) visible++;
+    });
+    itemCountEl.textContent = visible;
+    emptyState.classList.toggle('show', visible === 0);
+  }
+
+  function wireGroup(container){
+    if(!container) return;
+    container.querySelectorAll('.f-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var g = btn.dataset.filterGroup, v = btn.dataset.filterValue;
+        groups[g] = v;
+        // sync all buttons for this group (desktop sidebar + mobile panel, if both exist)
+        document.querySelectorAll('.f-opt[data-filter-group="' + g + '"]').forEach(function(b){
+          b.classList.toggle('on', b.dataset.filterValue === v);
+        });
+        apply();
+      });
+    });
+  }
+  wireGroup(document.getElementById('fJurisdiction'));
+  wireGroup(document.getElementById('fTopic'));
+
+  /* build the mobile filter panel by cloning desktop buttons, so there's one source of truth */
+  var fmPanelIn = document.getElementById('fmPanelIn');
+  if(fmPanelIn){
+    [document.getElementById('fJurisdiction'), document.getElementById('fTopic')].forEach(function(grp){
+      if(!grp) return;
+      grp.querySelectorAll('.f-opt').forEach(function(btn){
+        var clone = btn.cloneNode(true);
+        fmPanelIn.appendChild(clone);
+      });
+    });
+    wireGroup(fmPanelIn);
+  }
+
+  apply();
+})();
+
+/* mobile filter toggle */
+(function(){
+  var m = document.getElementById('filtersMobile');
+  if(!m) return;
+  var b = m.querySelector('.fm-toggle'), p = m.querySelector('.fm-panel');
+  b.addEventListener('click', function(){
+    var o = m.classList.toggle('open');
+    p.style.maxHeight = o ? p.querySelector('.fm-panel-in').scrollHeight + 'px' : '0';
+  });
+})();
+</script>
+</body>
+</html>

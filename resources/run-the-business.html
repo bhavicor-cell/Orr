@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#F1ECE1">
+<title>Run the Business | Resources | ORR</title>
+<meta name="description" content="Frameworks, templates, and founder insight for the operational work that keeps a business moving — offer design, pricing, delivery, roles, and the systems most founders build too late.">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="../assets/ngb.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400&family=Anton&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --vellum: #F1ECE1;
+  --ink:    #1A1812;
+  --ink72:  rgba(26,24,18,.84);
+  --ink54:  rgba(26,24,18,.68);
+  --ink38:  rgba(26,24,18,.54);
+  --ink18:  rgba(26,24,18,.16);
+  --ink10:  rgba(26,24,18,.10);
+  --pine:   #1A4D40;
+  --pine-b: #246B59;
+  --pine12: rgba(26,77,64,.12);
+  --pine06: rgba(26,77,64,.06);
+  --dark:   #0E2A24;
+  --crm:    #F1ECE1;
+  --crm72:  rgba(241,236,225,.86);
+  --crm54:  rgba(241,236,225,.72);
+  --crm38:  rgba(241,236,225,.56);
+  --crm18:  rgba(241,236,225,.18);
+  --mint:   #8FC9B7;
+  --bronze: #9C7C49;
+  --line:   rgba(26,24,18,.12);
+  --lineL:  rgba(26,24,18,.07);
+  --disp:'Newsreader', Georgia, serif;
+  --body:'Hanken Grotesk', system-ui, sans-serif;
+  --mono:'IBM Plex Mono', monospace;
+  --e1:cubic-bezier(.22,1,.36,1);
+  --e2:cubic-bezier(.16,1,.3,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --pad:clamp(20px,4.4vw,42px);
+}
+html{background:var(--vellum);color:var(--ink);-webkit-text-size-adjust:100%;scrollbar-width:none;overflow-x:hidden;overflow-x:clip}
+html::-webkit-scrollbar{display:none}
+body{font-family:var(--body);font-weight:400;line-height:1.75;font-size:16.5px;background:var(--vellum);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;overflow-x:clip;cursor:default;letter-spacing:.005em}
+::selection{background:var(--pine);color:var(--crm)}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.28;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E")}
+@media(hover:hover){
+  .cursor-dot{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--pine);pointer-events:none;z-index:9990;
+    mix-blend-mode:exclusion;transition:width .3s var(--spring),height .3s var(--spring),margin .3s var(--spring),opacity .3s;margin:-4px 0 0 -4px;opacity:0}
+  .cursor-dot.active{opacity:1}
+  .cursor-dot.grow{width:40px;height:40px;margin:-20px 0 0 -20px;background:var(--mint);mix-blend-mode:difference}
+}
+#vrail{position:fixed;left:0;top:0;bottom:0;width:2px;z-index:7000;pointer-events:none;background:var(--ink10)}
+#vrail-fill{position:absolute;top:0;left:0;width:100%;height:0;background:linear-gradient(to bottom,var(--pine),var(--mint));transition:height .15s linear}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;height:62px;display:flex;align-items:center;padding:0 42px;
+  opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .5s var(--e2),transform .5s var(--e2),background .4s,border-color .4s,backdrop-filter .4s;border-bottom:1px solid transparent}
+#nav.visible{opacity:1;transform:none;pointer-events:auto}
+#nav.solid{background:rgba(241,236,225,.85);backdrop-filter:blur(18px) saturate(1.3);border-color:var(--line)}
+#nav.dark-mode{background:rgba(14,42,36,.85);border-color:var(--crm18)}
+#nav.dark-mode .nav-mid{color:var(--crm38)}
+#nav.dark-mode .nav-r a{color:var(--mint)}
+#nav.dark-mode .nav-cta{border-color:var(--crm);color:var(--crm)!important}
+#nav.dark-mode .nav-cta:hover{background:var(--mint);border-color:var(--mint);color:var(--dark)!important}
+.brand{display:flex;align-items:center;gap:11px;position:relative}
+.nav-logo{width:55px;height:55px;display:block;transition:opacity .5s var(--e2)}
+.nav-logo-dark{opacity:1}
+.nav-logo-light{position:absolute;top:0;left:0;opacity:0}
+#nav.dark-mode .nav-logo-dark{opacity:0}
+#nav.dark-mode .nav-logo-light{opacity:1}
+.nav-mid{font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--ink54);position:absolute;left:50%;transform:translateX(-50%)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:30px}
+.nav-r a{font-family:var(--body);font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--pine-b);transition:color .25s}
+.nav-r a:hover{color:var(--pine)}
+.nav-cta{border:1px solid var(--ink);padding:8px 18px;color:var(--ink)!important;letter-spacing:.12em;transition:background .25s,color .25s,border-color .25s}
+.nav-cta:hover{background:var(--pine);border-color:var(--pine);color:var(--crm)!important}
+.menu-btn{display:none;position:relative;width:44px;height:44px;margin-right:-10px;background:none;border:0;cursor:pointer}
+.menu-btn i{position:absolute;left:11px;right:11px;height:1.5px;background:var(--ink);transition:top .34s var(--e1),transform .34s var(--e1)}
+.menu-btn i:first-child{top:18px}.menu-btn i:last-child{top:26px}
+.menu-btn.x i:first-child{top:22px;transform:rotate(45deg)}.menu-btn.x i:last-child{top:22px;transform:rotate(-45deg)}
+#nav.dark-mode .menu-btn i{background:var(--crm)}
+.mnav{display:none;position:fixed;top:62px;left:0;right:0;bottom:0;z-index:899;background:rgba(241,236,225,.97);backdrop-filter:blur(20px) saturate(1.3);
+  flex-direction:column;padding:22px 22px calc(30px + env(safe-area-inset-bottom));opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .4s var(--e2),transform .4s var(--e2)}
+.mnav.open{opacity:1;transform:none;pointer-events:auto}
+.mnav a{font-family:var(--disp);font-weight:300;font-size:clamp(28px,8.5vw,38px);letter-spacing:-.015em;color:var(--ink);padding:20px 2px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(10px);transition:opacity .5s var(--e2),transform .5s var(--e2)}
+.mnav a::after{content:'→';font-family:var(--body);font-size:17px;color:var(--pine);opacity:.7}
+.mnav.open a{opacity:1;transform:none}
+.mnav.open a:nth-child(1){transition-delay:.05s}
+.mnav.open a:nth-child(2){transition-delay:.1s}
+.mnav.open a:nth-child(3){transition-delay:.15s}
+.mnav-tag{margin-top:auto;font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--ink38);opacity:0;transition:opacity .6s var(--e2) .3s}
+.mnav.open .mnav-tag{opacity:1}
+html.m-lock,html.m-lock body{overflow:hidden}
+@media(max-width:820px){
+  #nav{padding:0 max(18px,env(safe-area-inset-right)) 0 max(18px,env(safe-area-inset-left))}
+  .nav-mid{display:none}.nav-r a:not(.nav-cta){display:none}.nav-cta{padding:10px 16px}.menu-btn{display:block}.mnav{display:flex}
+}
+@media(max-width:1080px){.nav-mid{display:none}}
+#nav{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+
+/* FOOTER */
+footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);border-top:1px solid var(--crm18);padding:68px 42px 44px;display:grid;grid-template-columns:1.3fr 1px 1fr 1px 1.3fr;gap:0 56px}
+.ft-div{background:linear-gradient(to bottom,var(--crm18),transparent);align-self:stretch}
+.ft-brand span{font-family:var(--disp);font-size:14px;color:var(--crm54);line-height:1.55;display:block;margin-top:12px}
+.ft-bw{font-family:var(--disp);font-weight:300;font-size:28px;letter-spacing:.08em;color:var(--crm)}
+.begin-logo{height:160px;width:auto;display:block}
+.ft-nav{display:flex;flex-direction:column;gap:13px}
+.ft-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--crm38);margin-bottom:2px}
+.ft-nav a{font-size:13px;color:var(--crm54);transition:color .25s}
+.ft-nav a:hover{color:var(--mint)}
+.ft-close{display:flex;flex-direction:column;text-align:right}
+.ft-stmt{font-family:var(--disp);font-style:italic;font-weight:300;font-size:16px;line-height:1.45;color:var(--crm54);margin-bottom:22px}
+.ft-legal{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.ft-copy{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--crm38)}
+.ft-ll{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.ft-ll a{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--crm38);transition:color .25s}
+.ft-ll a:hover{color:var(--mint)}
+.ft-disc{font-size:11px;line-height:1.68;color:var(--crm54);text-align:right;max-width:52ch;margin-top:8px}
+footer{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+@media(max-width:1080px){
+  footer{grid-template-columns:1fr 1fr;gap:36px 44px}.ft-div{display:none}.ft-close{grid-column:1/-1;text-align:left}
+  .ft-legal,.ft-ll{align-items:flex-start;justify-content:flex-start}.ft-disc{text-align:left;max-width:60ch}.begin-logo{height:clamp(96px,12vw,140px)}
+}
+@media(max-width:880px){
+  footer{grid-template-columns:1fr;padding:52px 22px calc(38px + env(safe-area-inset-bottom));gap:34px}.ft-div{display:none}
+  .ft-close{grid-column:auto;text-align:left}.ft-legal,.ft-ll{align-items:flex-start;justify-content:flex-start}
+  .begin-logo{height:clamp(72px,20vw,96px)}.ft-stmt{font-size:15px}.ft-disc{font-size:12px;line-height:1.6;color:var(--crm72);max-width:100%}
+}
+@media(max-width:400px){#vrail{width:1px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ══════════════════════════════════════════════════════════════
+   CATEGORY PAGE — shared template pattern
+   ══════════════════════════════════════════════════════════════ */
+.r{opacity:0;transform:translateY(18px);transition:opacity .8s var(--e2),transform .8s var(--e2)}
+.r.in{opacity:1;transform:none}
+
+/* header — same dark-band DNA, smaller than the resources index */
+#cat-head{position:relative;padding:calc(62px + clamp(40px,5.6vw,64px)) var(--pad) clamp(38px,5vw,58px);
+  background:var(--dark);color:var(--crm);border-bottom:1px solid var(--crm18);overflow:hidden}
+#cat-head::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(241,236,225,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(241,236,225,.03) 1px,transparent 1px);background-size:60px 60px}
+.ch-wrap{max-width:1180px;margin:0 auto;position:relative}
+.ch-crumb{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--crm38);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.ch-crumb a{color:var(--crm54);transition:color .2s}
+.ch-crumb a:hover{color:var(--mint)}
+.ch-title{font-family:var(--disp);font-weight:300;font-size:clamp(36px,5.4vw,64px);line-height:1.02;letter-spacing:-.025em;margin-bottom:16px;color:var(--crm);max-width:20ch}
+.ch-title em{font-style:italic;color:var(--mint)}
+.ch-sub{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(15px,1.5vw,18px);line-height:1.55;color:var(--crm72);max-width:58ch}
+
+/* body — sidebar filters + grid, same spatial logic as the legal doc's TOC + content */
+#cat-body{max-width:1180px;margin:0 auto;padding:clamp(48px,5.6vw,72px) var(--pad) clamp(70px,8vw,100px);
+  display:grid;grid-template-columns:200px 1fr;gap:0 clamp(36px,4.6vw,64px);align-items:start}
+
+.filters{position:sticky;top:86px;align-self:start}
+.f-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink38);
+  padding-bottom:12px;margin-bottom:10px;border-bottom:1px solid var(--line)}
+.f-group{margin-bottom:26px}
+.f-group:last-child{margin-bottom:0}
+.f-opt{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;background:none;border:none;
+  text-align:left;font-family:var(--body);font-size:13px;color:var(--ink54);padding:7px 0;cursor:pointer;transition:color .2s,padding .2s var(--e1)}
+.f-opt:hover{color:var(--ink);padding-left:3px}
+.f-opt.on{color:var(--pine);font-weight:500}
+.f-opt .cnt{font-family:var(--mono);font-size:10px;color:var(--ink38)}
+.f-opt.on .cnt{color:var(--pine)}
+.filters-mobile{display:none}
+
+.item-count{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink38);margin-bottom:22px}
+.item-count b{color:var(--pine);font-weight:400}
+
+.item-grid{display:flex;flex-direction:column}
+.item-card{display:grid;grid-template-columns:1fr auto;gap:16px 24px;align-items:start;
+  padding:26px 0;border-top:1px solid var(--line);transition:padding-left .35s var(--e1)}
+.item-grid .item-card:last-child{border-bottom:1px solid var(--line)}
+@media(hover:hover){
+  .item-card:hover{padding-left:10px}
+  .item-card:hover .item-name{color:var(--pine)}
+}
+.item-main{min-width:0}
+.item-tophead{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.item-tag{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--pine);
+  border:1px solid var(--pine12);background:var(--pine06);padding:3px 8px}
+.item-tag.paid{color:var(--bronze);border-color:rgba(156,124,73,.22);background:rgba(156,124,73,.06)}
+.item-name{font-family:var(--disp);font-weight:400;font-size:clamp(18px,1.9vw,21px);line-height:1.28;color:var(--ink);transition:color .3s;margin-bottom:6px}
+.item-desc{font-size:13.5px;line-height:1.68;color:var(--ink72);max-width:62ch}
+.item-go{display:flex;align-items:center;gap:9px;font-family:var(--body);font-size:11px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink38);white-space:nowrap;padding-top:4px;transition:color .3s,gap .3s}
+.item-card:hover .item-go{color:var(--pine);gap:13px}
+
+.item-card.hidden,.insight-card.hidden{display:none}
+.empty-state{display:none;padding:40px 0;text-align:center}
+.empty-state.show{display:block}
+.empty-state p{font-family:var(--disp);font-style:italic;color:var(--ink38);font-size:15px}
+
+/* ══ INSIGHT CARDS ══
+   Not navigation — expansion. A founder scans four hooks, opens the one
+   that lands, reads it in place. The card is a <button>, not an <a>. */
+.insight-card{border-top:1px solid var(--line)}
+.item-grid .insight-card:last-child{border-bottom:1px solid var(--line)}
+
+.insight-head{display:grid;grid-template-columns:1fr auto;gap:16px 20px;align-items:start;
+  width:100%;background:none;border:none;text-align:left;cursor:pointer;
+  padding:22px 0;transition:padding-left .3s var(--e1)}
+@media(hover:hover){
+  .insight-head:hover{padding-left:10px}
+  .insight-head:hover .item-name{color:var(--pine)}
+}
+.insight-toggle{display:flex;align-items:flex-start;padding-top:2px}
+.insight-toggle-ring{width:30px;height:30px;border:1px solid var(--ink18);border-radius:50%;
+  display:grid;place-items:center;flex-shrink:0;transition:border-color .35s,background .35s}
+.insight-toggle-ring svg{width:11px;height:11px;transition:transform .4s var(--e1)}
+.insight-card.open .insight-toggle-ring{border-color:var(--pine);background:var(--pine06)}
+.insight-card.open .insight-toggle-ring svg{transform:rotate(45deg)}
+@media(hover:hover){.insight-head:hover .insight-toggle-ring{border-color:var(--pine)}}
+
+.insight-panel{max-height:0;overflow:hidden;transition:max-height .55s var(--e2)}
+.insight-panel-in{padding:0 0 clamp(28px,3.4vw,38px) 0;max-width:68ch}
+.insight-body p{font-size:14.5px;line-height:1.85;color:var(--ink72);margin-bottom:16px}
+.insight-body p:last-of-type{margin-bottom:0}
+
+.howto{margin-top:20px;padding:20px 24px;background:var(--pine06);border-left:3px solid var(--pine)}
+.howto-label{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--pine);margin-bottom:8px}
+.howto p{font-family:var(--disp);font-style:italic;font-weight:300;font-size:14.5px;line-height:1.72;color:var(--ink72);margin:0}
+
+@media(max-width:880px){
+  #cat-body{grid-template-columns:1fr;gap:0}
+  .filters{display:none}
+  .filters-mobile{display:block;position:sticky;top:62px;z-index:80;margin:0 calc(-1*var(--pad)) 28px;
+    background:rgba(241,236,225,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .fm-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px var(--pad);
+    background:none;border:none;cursor:pointer;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--pine)}
+  .fm-toggle .chev{transition:transform .35s var(--e1)}
+  .filters-mobile.open .fm-toggle .chev{transform:rotate(45deg)}
+  .fm-panel{max-height:0;overflow:hidden;transition:max-height .45s var(--e2)}
+  .fm-panel-in{padding:6px var(--pad) 18px;display:flex;flex-wrap:wrap;gap:8px}
+  .fm-panel .f-opt{width:auto;padding:8px 13px;border:1px solid var(--line);font-size:12px}
+  .fm-panel .f-opt.on{border-color:var(--pine);background:var(--pine06)}
+  .fm-panel .cnt{display:none}
+  .item-card{grid-template-columns:1fr;gap:10px}
+  .item-go{padding-top:0}
+  @media(hover:hover){.insight-head:hover{padding-left:0}}
+}
+</style>
+</head>
+<body>
+
+<div id="vrail" aria-hidden="true"><div id="vrail-fill"></div></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<header id="nav">
+  <a class="brand" href="../index.html" aria-label="ORR home">
+    <img src="../assets/drk.svg" alt="ORR" class="nav-logo nav-logo-dark"/>
+    <img src="../assets/crm.svg" alt="ORR" class="nav-logo nav-logo-light"/>
+  </a>
+  <span class="nav-mid">From Idea to Operating Business</span>
+  <nav class="nav-r">
+    <a href="../index.html#structure">Structure</a>
+    <a href="../resources.html">Resources</a>
+    <a href="../index.html#begin" class="nav-cta">Begin →</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+  </nav>
+</header>
+
+<nav class="mnav" id="mnav" aria-label="Mobile navigation">
+  <a href="../index.html#structure">Structure</a>
+  <a href="../index.html#model">How we work</a>
+  <a href="../resources.html">Resources</a>
+  <a href="../index.html#begin">Begin</a>
+  <span class="mnav-tag">From Idea to Operating Business</span>
+</nav>
+
+<header id="cat-head">
+  <div class="ch-wrap">
+    <p class="ch-crumb r"><a href="../resources.html">Resources</a><span aria-hidden="true">/</span><span>Run the Business</span></p>
+    <h1 class="ch-title r">Run the <em>Business.</em></h1>
+    <p class="ch-sub r">Frameworks and templates for the operational work that keeps a business moving — plus short, direct insight on the mistakes founders make before they know to look for them.</p>
+  </div>
+</header>
+
+<main id="cat-body">
+  <aside class="filters">
+    <div class="f-label">Format</div>
+    <div class="f-group" id="fFormat">
+      <button class="f-opt on" data-filter-group="format" data-filter-value="all">All <span class="cnt">4</span></button>
+      <button class="f-opt" data-filter-group="format" data-filter-value="insight">Insight <span class="cnt">4</span></button>
+    </div>
+    <div class="f-label">Price</div>
+    <div class="f-group" id="fPrice">
+      <button class="f-opt on" data-filter-group="price" data-filter-value="all">All <span class="cnt">4</span></button>
+      <button class="f-opt" data-filter-group="price" data-filter-value="free">Free <span class="cnt">4</span></button>
+    </div>
+  </aside>
+
+  <div class="filters-mobile" id="filtersMobile">
+    <button class="fm-toggle" type="button">Filter <span class="chev">+</span></button>
+    <div class="fm-panel"><div class="fm-panel-in" id="fmPanelIn"></div></div>
+  </div>
+
+  <div>
+    <p class="item-count r">Showing <b id="itemCount">4</b> of 4</p>
+
+    <div class="item-grid" id="itemGrid">
+
+      <div class="insight-card r" data-format="insight" data-price="free">
+        <button class="insight-head" type="button" aria-expanded="false" aria-controls="panel-outsider">
+          <div class="item-main">
+            <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">Insight</span></div>
+            <h3 class="item-name">The Outsider Test</h3>
+            <p class="item-desc">Why the questions an outsider asks about your business are usually the ones you've stopped asking yourself.</p>
+          </div>
+          <span class="insight-toggle"><span class="insight-toggle-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+        </button>
+        <div class="insight-panel" id="panel-outsider">
+          <div class="insight-panel-in">
+            <div class="insight-body">
+              <p>One of the biggest problems businesses have is making basic mistakes which, to an outsider, will appear so devastatingly wrong — but from inside it simply feels like the next extension of progress. That lack of a neutral view has made many businesses go under and pay dearly.</p>
+              <p>When an outsider hears of it, it feels like a stupid mistake no one would make. But it happens more often than people like to admit.</p>
+              <p>So when making a business decision, stay neutral if possible. Not too positive, not too negative.</p>
+            </div>
+            <div class="howto">
+              <div class="howto-label">How To</div>
+              <p>Each situation is different, but one way that could be useful — before locking in a decision, deliberately argue the other side of it. Write down why a neutral outsider, with no stake in the outcome, might call this a mistake. If you can't generate a real counter-argument, that's often the sign you're too close to it to see clearly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-card r" data-format="insight" data-price="free">
+        <button class="insight-head" type="button" aria-expanded="false" aria-controls="panel-health">
+          <div class="item-main">
+            <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">Insight</span></div>
+            <h3 class="item-name">Structure Is Like Health — You Don't Notice It's Missing Until It's Expensive</h3>
+            <p class="item-desc">You don't notice it until it's missing — and by then it's already expensive to fix.</p>
+          </div>
+          <span class="insight-toggle"><span class="insight-toggle-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+        </button>
+        <div class="insight-panel" id="panel-health">
+          <div class="insight-panel-in">
+            <div class="insight-body">
+              <p>One of the biggest problems businesses have is they do not have proper structure for their execution, governance, or even basic tasks. Things are working, so founders do not wish to touch it.</p>
+              <p>The problem with this is it's quite similar to cancer — it does not show symptoms early, and when it does, it's often too late and quite expensive.</p>
+              <p>One of the biggest evidence of this is felt when operations take on some level of scale — customers increase, employees increase, vendors increase, exposure increases — now things fall apart because there was no structure to hold all this. It worked earlier because it was for a few people, and even that can break.</p>
+              <p>So the earlier you introduce the structure and organize your business, the better it is for it.</p>
+            </div>
+            <div class="howto">
+              <div class="howto-label">How To</div>
+              <p>Each situation is different, but one way that could be useful — pick the one process that would break first if you doubled your customers or team overnight, and write it down on paper before it happens. You don't need to fix everything at once. You just need to know where the first crack will show.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-card r" data-format="insight" data-price="free">
+        <button class="insight-head" type="button" aria-expanded="false" aria-controls="panel-freedom">
+          <div class="item-main">
+            <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">Insight</span></div>
+            <h3 class="item-name">The Freedom Trap</h3>
+            <p class="item-desc">Why the independence that got you started is often the exact thing keeping the business small.</p>
+          </div>
+          <span class="insight-toggle"><span class="insight-toggle-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+        </button>
+        <div class="insight-panel" id="panel-freedom">
+          <div class="insight-panel-in">
+            <div class="insight-body">
+              <p>In small teams, work is often done with understanding and mutual sharing — and in certain ways that's good. But the problem happens when there's actually nothing else underneath it — no policy structure, no review mapping, no accountability, no decisional authority. It leads to confusion, displeasure, and imbalance in the workplace.</p>
+              <p>So working together on trust should be fine — until it becomes a means of exploitation. That's where having structure plays a crucial part.</p>
+              <p>Founders often face this at some point, but admitting it is quite hard — most things are. In small teams, when structured work is not defined, the founder becomes the direct contact for such trivial tasks. This not only takes away the founder's time but also reduces their authority. And this becomes an issue at later stages — because when the business finally introduces structure, the old freedom-based work culture has to give way, and things start happening in a more organized way. People will normally take it hard when changes are abrupt and the opposite of comfort.</p>
+              <p>So have your early team work in balance of freedom, structure, and authority to answer to.</p>
+            </div>
+            <div class="howto">
+              <div class="howto-label">How To</div>
+              <p>Each situation is different, but one way that could be useful — start with just one thing: who has final say on what. Not a full policy manual, just decisional authority written down for the two or three most common points of friction. That alone removes most of the confusion before it turns into resentment.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-card r" data-format="insight" data-price="free">
+        <button class="insight-head" type="button" aria-expanded="false" aria-controls="panel-testing">
+          <div class="item-main">
+            <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">Insight</span></div>
+            <h3 class="item-name">The Idea-Testing Trap</h3>
+            <p class="item-desc">No idea is wrong — but assuming it will sell once it exists is the single most common early mistake.</p>
+          </div>
+          <span class="insight-toggle"><span class="insight-toggle-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+        </button>
+        <div class="insight-panel" id="panel-testing">
+          <div class="insight-panel-in">
+            <div class="insight-body">
+              <p>Early-stage business ideas need to be weighed on more than one scale — not judged as simply good or bad.</p>
+              <p>Passion for the subject versus the actual likelihood of it selling. The resources spent on quality versus the market's actual readiness to pay a marginalized price. The idea's feasibility versus how much its success relies on conditions outside your control. Not wanting to see the market struggle in the space, or being too optimistic about its success.</p>
+              <p>Many founders assume their product or service will sell once it exists. But actual testing is a must — it's not a matter of skill, it's a matter of market testing, and how much friction it actually takes to sell it.</p>
+              <p>That said, no idea is wrong. You just need to be aware of the challenges it poses, and have a plan to overcome them or be ready to face them.</p>
+            </div>
+            <div class="howto">
+              <div class="howto-label">How To</div>
+              <p>Each situation is different, but one way that could be useful — before building anything further, try to get one real person outside your circle to actually pay you, even a small amount, for the idea as it stands today. Not a compliment, not interest — an actual payment. That's the fastest signal for how much friction the market will really put up.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="empty-state" id="emptyState"><p>Nothing matches that combination yet — more resources are being added.</p></div>
+  </div>
+</main>
+
+<footer>
+  <div class="ft-brand">
+    <div class="ft-bw"><img src="../assets/crm.svg" alt="ORR Logo" class="begin-logo"/></div>
+    <span>From idea to operating business.</span>
+  </div>
+  <div class="ft-div"></div>
+  <nav class="ft-nav">
+    <span class="ft-l">Navigate</span>
+    <a href="../resources.html">Resources</a>
+    <a href="../index.html#assess">Diagnose</a>
+    <a href="../index.html#structure">Structure</a>
+    <a href="../founder.html">Founder</a>
+    <a href="../index.html#begin">Begin</a>
+  </nav>
+  <div class="ft-div"></div>
+  <div class="ft-close">
+    <p class="ft-stmt">The businesses that run without their founders weren't built by accident. They were engineered.</p>
+    <div class="ft-legal">
+      <span class="ft-copy">© <span id="yr"></span> ORR — All rights reserved</span>
+      <div class="ft-ll">
+        <a href="../legal/privacy.html">Privacy</a>
+        <a href="../legal/terms.html">Terms</a>
+        <a href="../legal/disclaimer.html">Disclaimer</a>
+      </div>
+      <p class="ft-disc">ORR is a business-structuring consultancy, not a law firm, accountancy, or financial adviser. Nothing on this site is professional advice.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+var nav = document.getElementById('nav');
+var vrailFill = document.getElementById('vrail-fill');
+var ticking = false;
+function frame(){
+  ticking = false;
+  var y = scrollY, total = document.body.scrollHeight - innerHeight;
+  nav.classList.add('visible');
+  nav.classList.toggle('solid', y > 40);
+  if(vrailFill) vrailFill.style.height = (total > 0 ? Math.min(y/total,1)*100 : 0) + '%';
+}
+addEventListener('scroll', function(){ if(!ticking){ticking=true;requestAnimationFrame(frame);} }, {passive:true});
+addEventListener('resize', frame, {passive:true});
+frame();
+
+var ro = new IntersectionObserver(function(es){ es.forEach(function(e){
+  if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+}); }, {threshold:.08, rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.r').forEach(function(el){ ro.observe(el); });
+
+(function(){
+  var mBtn = document.getElementById('menuBtn'), mNav = document.getElementById('mnav');
+  if(!mBtn || !mNav) return;
+  mBtn.addEventListener('click', function(){
+    var o = !mNav.classList.contains('open');
+    mNav.classList.toggle('open', o); mBtn.classList.toggle('x', o);
+    mBtn.setAttribute('aria-expanded', o);
+    document.documentElement.classList.toggle('m-lock', o);
+  });
+  mNav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){
+    mNav.classList.remove('open'); mBtn.classList.remove('x');
+    mBtn.setAttribute('aria-expanded','false');
+    document.documentElement.classList.remove('m-lock');
+  }); });
+})();
+
+var HOVERS = matchMedia('(hover:hover)').matches;
+if(HOVERS){
+  var dot = document.getElementById('cursorDot');
+  var mx=0,my=0,cx=0,cy=0;
+  document.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; dot.classList.add('active'); });
+  document.addEventListener('mouseleave', function(){ dot.classList.remove('active'); });
+  var sel = 'a,button,.item-card,.insight-head';
+  document.addEventListener('mouseover', function(e){ if(e.target.closest(sel)) dot.classList.add('grow'); });
+  document.addEventListener('mouseout', function(e){ if(e.target.closest(sel)) dot.classList.remove('grow'); });
+  (function loop(){ cx+=(mx-cx)*.12; cy+=(my-cy)*.12; dot.style.transform='translate('+cx+'px,'+cy+'px)'; requestAnimationFrame(loop); })();
+}
+
+/* ══ FILTERING — two independent facets (jurisdiction, topic), AND'd together ══ */
+(function(){
+  var cards = [].slice.call(document.querySelectorAll('.insight-card'));
+  var groups = { jurisdiction: 'all', topic: 'all' };
+  var itemCountEl = document.getElementById('itemCount');
+  var emptyState = document.getElementById('emptyState');
+
+  function apply(){
+    var visible = 0;
+    cards.forEach(function(c){
+      var okJ = groups.jurisdiction === 'all' || c.dataset.jurisdiction === groups.jurisdiction;
+      var okT = groups.topic === 'all' || c.dataset.topic === groups.topic;
+      var show = okJ && okT;
+      c.classList.toggle('hidden', !show);
+      if(show) visible++;
+    });
+    itemCountEl.textContent = visible;
+    emptyState.classList.toggle('show', visible === 0);
+  }
+
+  function wireGroup(container){
+    if(!container) return;
+    container.querySelectorAll('.f-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var g = btn.dataset.filterGroup, v = btn.dataset.filterValue;
+        groups[g] = v;
+        // sync all buttons for this group (desktop sidebar + mobile panel, if both exist)
+        document.querySelectorAll('.f-opt[data-filter-group="' + g + '"]').forEach(function(b){
+          b.classList.toggle('on', b.dataset.filterValue === v);
+        });
+        apply();
+      });
+    });
+  }
+  wireGroup(document.getElementById('fJurisdiction'));
+  wireGroup(document.getElementById('fTopic'));
+
+  /* build the mobile filter panel by cloning desktop buttons, so there's one source of truth */
+  var fmPanelIn = document.getElementById('fmPanelIn');
+  if(fmPanelIn){
+    [document.getElementById('fJurisdiction'), document.getElementById('fTopic')].forEach(function(grp){
+      if(!grp) return;
+      grp.querySelectorAll('.f-opt').forEach(function(btn){
+        var clone = btn.cloneNode(true);
+        fmPanelIn.appendChild(clone);
+      });
+    });
+    wireGroup(fmPanelIn);
+  }
+
+  apply();
+})();
+
+/* ══ INSIGHT ACCORDION ══
+   Independent per-card, so a founder can open two essays to compare
+   without one closing the other. Re-measures on resize/font-load so
+   an open panel never clips mid-sentence. */
+(function(){
+  var cards = [].slice.call(document.querySelectorAll('.insight-card'));
+  function measure(card){
+    var panel = card.querySelector('.insight-panel');
+    var inner = card.querySelector('.insight-panel-in');
+    panel.style.maxHeight = card.classList.contains('open') ? inner.scrollHeight + 'px' : '0';
+  }
+  cards.forEach(function(card){
+    var head = card.querySelector('.insight-head');
+    head.addEventListener('click', function(){
+      var open = card.classList.toggle('open');
+      head.setAttribute('aria-expanded', open);
+      measure(card);
+    });
+  });
+  addEventListener('resize', function(){ cards.forEach(function(c){ if(c.classList.contains('open')) measure(c); }); }, {passive:true});
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ cards.forEach(function(c){ if(c.classList.contains('open')) measure(c); }); });
+})();
+
+/* mobile filter toggle */
+(function(){
+  var m = document.getElementById('filtersMobile');
+  if(!m) return;
+  var b = m.querySelector('.fm-toggle'), p = m.querySelector('.fm-panel');
+  b.addEventListener('click', function(){
+    var o = m.classList.toggle('open');
+    p.style.maxHeight = o ? p.querySelector('.fm-panel-in').scrollHeight + 'px' : '0';
+  });
+})();
+</script>
+</body>
+</html>

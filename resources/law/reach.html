@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FAF7F0">
+<title>REACH | The Law, Plainly | ORR</title>
+<meta name="description" content="REACH — the EU's Registration, Evaluation, Authorisation and Restriction of Chemicals Regulation (EC) No 1907/2006 — restated article by article, in plain English. A reading companion for founders, not a substitute for the official text.">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="../../assets/ngb.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ══════════════════════════════════════════════════════════════
+   PALETTE — lighter, warmer, index-matched. Dark reserved for the
+   masthead only; the reading surface stays paper-bright throughout.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --vellum: #FAF7F0;
+  --paper:  #FFFFFF;
+  --paper2: #F5F1E8;
+  --ink:    #211E17;
+  --ink80:  rgba(33,30,23,.90);
+  --ink65:  rgba(33,30,23,.72);
+  --ink48:  rgba(33,30,23,.56);
+  --ink32:  rgba(33,30,23,.38);
+  --ink14:  rgba(33,30,23,.13);
+  --ink08:  rgba(33,30,23,.075);
+  --pine:   #1A4D40;
+  --pine-b: #246B59;
+  --pine-l: #3D8570;
+  --pine08: rgba(26,77,64,.07);
+  --pine14: rgba(26,77,64,.13);
+  --dark:   #0E2A24;
+  --crm:    #FAF7F0;
+  --crm80:  rgba(250,247,240,.90);
+  --crm60:  rgba(250,247,240,.68);
+  --crm40:  rgba(250,247,240,.46);
+  --crm16:  rgba(250,247,240,.16);
+  --mint:   #93CDBB;
+  --bronze: #A9895A;
+  --gold:   #C9A15F;
+  --line:   rgba(33,30,23,.11);
+  --lineL:  rgba(33,30,23,.06);
+  --disp:'Newsreader', Georgia, serif;
+  --body:'Hanken Grotesk', system-ui, sans-serif;
+  --mono:'IBM Plex Mono', monospace;
+  --e1:cubic-bezier(.22,1,.36,1);
+  --e2:cubic-bezier(.16,1,.3,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --pad:clamp(22px,4.6vw,56px);
+  --shell:1560px;
+}
+html{background:var(--vellum);color:var(--ink);-webkit-text-size-adjust:100%;scrollbar-width:none;overflow-x:hidden;overflow-x:clip}
+html::-webkit-scrollbar{display:none}
+body{font-family:var(--body);font-weight:400;line-height:1.75;font-size:16.5px;background:var(--vellum);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;overflow-x:clip;cursor:default;letter-spacing:.005em}
+::selection{background:var(--pine);color:var(--crm)}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.2;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E")}
+@media(hover:hover){
+  .cursor-dot{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--pine);pointer-events:none;z-index:9990;
+    mix-blend-mode:exclusion;transition:width .3s var(--spring),height .3s var(--spring),margin .3s var(--spring),opacity .3s;margin:-4px 0 0 -4px;opacity:0}
+  .cursor-dot.active{opacity:1}
+  .cursor-dot.grow{width:40px;height:40px;margin:-20px 0 0 -20px;background:var(--mint);mix-blend-mode:difference}
+}
+#vrail{position:fixed;left:0;top:0;bottom:0;width:2px;z-index:7000;pointer-events:none;background:var(--ink08)}
+#vrail-fill{position:absolute;top:0;left:0;width:100%;height:0;background:linear-gradient(to bottom,var(--pine),var(--mint));transition:height .15s linear}
+#vrail-r{position:fixed;right:0;top:0;bottom:0;width:2px;z-index:7000;pointer-events:none;background:var(--ink08)}
+#vrail-r-fill{position:absolute;top:0;left:0;width:100%;height:0;background:linear-gradient(to bottom,var(--pine),var(--mint));transition:height .15s linear}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;height:64px;display:flex;align-items:center;padding:0 42px;
+  opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .5s var(--e2),transform .5s var(--e2),background .4s,border-color .4s,backdrop-filter .4s;border-bottom:1px solid transparent}
+#nav.visible{opacity:1;transform:none;pointer-events:auto}
+#nav.solid{background:rgba(250,247,240,.86);backdrop-filter:blur(18px) saturate(1.3);border-color:var(--line)}
+#nav.dark-mode{background:rgba(14,42,36,.88);border-color:var(--crm16)}
+#nav.dark-mode .nav-mid{color:var(--crm40)}
+#nav.dark-mode .nav-r a{color:var(--mint)}
+#nav.dark-mode .nav-cta{border-color:var(--crm);color:var(--crm)!important}
+#nav.dark-mode .nav-cta:hover{background:var(--mint);border-color:var(--mint);color:var(--dark)!important}
+.brand{display:flex;align-items:center;gap:11px;position:relative}
+.nav-logo{width:55px;height:55px;display:block;transition:opacity .5s var(--e2)}
+.nav-logo-dark{opacity:1}
+.nav-logo-light{position:absolute;top:0;left:0;opacity:0}
+#nav.dark-mode .nav-logo-dark{opacity:0}
+#nav.dark-mode .nav-logo-light{opacity:1}
+.nav-mid{font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--ink48);position:absolute;left:50%;transform:translateX(-50%)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:30px}
+.nav-r a{font-family:var(--body);font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--pine-b);transition:color .25s}
+.nav-r a:hover{color:var(--pine)}
+.nav-cta{border:1px solid var(--ink);padding:8px 18px;color:var(--ink)!important;letter-spacing:.12em;transition:background .25s,color .25s,border-color .25s}
+.nav-cta:hover{background:var(--pine);border-color:var(--pine);color:var(--crm)!important}
+.menu-btn{display:none;position:relative;width:44px;height:44px;margin-right:-10px;background:none;border:0;cursor:pointer}
+.menu-btn i{position:absolute;left:11px;right:11px;height:1.5px;background:var(--ink);transition:top .34s var(--e1),transform .34s var(--e1)}
+.menu-btn i:first-child{top:18px}.menu-btn i:last-child{top:26px}
+.menu-btn.x i:first-child{top:22px;transform:rotate(45deg)}.menu-btn.x i:last-child{top:22px;transform:rotate(-45deg)}
+#nav.dark-mode .menu-btn i{background:var(--crm)}
+.mnav{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;z-index:899;background:rgba(250,247,240,.98);backdrop-filter:blur(20px) saturate(1.3);
+  flex-direction:column;padding:22px 22px calc(30px + env(safe-area-inset-bottom));opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .4s var(--e2),transform .4s var(--e2)}
+.mnav.open{opacity:1;transform:none;pointer-events:auto}
+.mnav a{font-family:var(--disp);font-weight:300;font-size:clamp(28px,8.5vw,38px);letter-spacing:-.015em;color:var(--ink);padding:20px 2px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(10px);transition:opacity .5s var(--e2),transform .5s var(--e2)}
+.mnav a::after{content:'→';font-family:var(--body);font-size:17px;color:var(--pine);opacity:.7}
+.mnav.open a{opacity:1;transform:none}
+.mnav.open a:nth-child(1){transition-delay:.05s}
+.mnav.open a:nth-child(2){transition-delay:.1s}
+.mnav.open a:nth-child(3){transition-delay:.15s}
+.mnav-tag{margin-top:auto;font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--ink32);opacity:0;transition:opacity .6s var(--e2) .3s}
+.mnav.open .mnav-tag{opacity:1}
+html.m-lock,html.m-lock body{overflow:hidden}
+@media(max-width:820px){
+  #nav{padding:0 max(18px,env(safe-area-inset-right)) 0 max(18px,env(safe-area-inset-left))}
+  .nav-mid{display:none}.nav-r a:not(.nav-cta){display:none}.nav-cta{padding:10px 16px}.menu-btn{display:block}.mnav{display:flex}
+}
+@media(max-width:1080px){.nav-mid{display:none}}
+#nav{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+
+/* FOOTER */
+footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);border-top:1px solid var(--crm16);padding:68px 42px 44px;display:grid;grid-template-columns:1.3fr 1px 1fr 1px 1.3fr;gap:0 56px}
+.ft-div{background:linear-gradient(to bottom,var(--crm16),transparent);align-self:stretch}
+.ft-brand span{font-family:var(--disp);font-size:14px;color:var(--crm60);line-height:1.55;display:block;margin-top:12px}
+.ft-bw{font-family:var(--disp);font-weight:300;font-size:28px;letter-spacing:.08em;color:var(--crm)}
+.begin-logo{height:160px;width:auto;display:block}
+.ft-nav{display:flex;flex-direction:column;gap:13px}
+.ft-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--crm40);margin-bottom:2px}
+.ft-nav a{font-size:13px;color:var(--crm60);transition:color .25s}
+.ft-nav a:hover{color:var(--mint)}
+.ft-close{display:flex;flex-direction:column;text-align:right}
+.ft-stmt{font-family:var(--disp);font-style:italic;font-weight:300;font-size:16px;line-height:1.45;color:var(--crm60);margin-bottom:22px}
+.ft-legal{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.ft-copy{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--crm40)}
+.ft-ll{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.ft-ll a{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--crm40);transition:color .25s}
+.ft-ll a:hover{color:var(--mint)}
+.ft-disc{font-size:11px;line-height:1.68;color:var(--crm60);text-align:right;max-width:52ch;margin-top:8px}
+footer{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+@media(max-width:1080px){
+  footer{grid-template-columns:1fr 1fr;gap:36px 44px}.ft-div{display:none}.ft-close{grid-column:1/-1;text-align:left}
+  .ft-legal,.ft-ll{align-items:flex-start;justify-content:flex-start}.ft-disc{text-align:left;max-width:60ch}.begin-logo{height:clamp(96px,12vw,140px)}
+}
+@media(max-width:880px){
+  footer{grid-template-columns:1fr;padding:52px 22px calc(38px + env(safe-area-inset-bottom));gap:34px}.ft-div{display:none}
+  .ft-close{grid-column:auto;text-align:left}.ft-legal,.ft-ll{align-items:flex-start;justify-content:flex-start}
+  .begin-logo{height:clamp(72px,20vw,96px)}.ft-stmt{font-size:15px}.ft-disc{font-size:12px;line-height:1.6;color:var(--crm80);max-width:100%}
+}
+@media(max-width:400px){#vrail,#vrail-r{width:1px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ══════════════════════════════════════════════════════════════
+   DOCUMENT HEADER — restrained dark band, generous vertical rhythm
+   ══════════════════════════════════════════════════════════════ */
+#doc-head{position:relative;padding:calc(64px + clamp(52px,7vw,92px)) var(--pad) clamp(46px,5.6vw,68px);
+ background:var(--dark);color:var(--crm);border-bottom:1px solid var(--crm16);overflow:hidden}
+#doc-head::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.45;
+ background-image:linear-gradient(rgba(250,247,240,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(250,247,240,.025) 1px,transparent 1px);background-size:64px 64px}
+#doc-head::after{content:'';position:absolute;top:-30%;right:-6%;width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(circle,rgba(147,205,187,.10),transparent 68%);pointer-events:none}
+.dh-wrap{max-width:var(--shell);margin:0 auto;position:relative;padding-left:clamp(0px,4vw,64px)}
+.dh-crumb{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--crm40);margin-bottom:22px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.dh-crumb a{color:var(--crm60);transition:color .2s}
+.dh-crumb a:hover{color:var(--mint)}
+.dh-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--mint);margin-bottom:24px}
+.dh-title{font-family:var(--disp);font-weight:300;font-size:clamp(42px,6.4vw,84px);line-height:1.0;
+ letter-spacing:-.03em;margin-bottom:24px;max-width:19ch;color:var(--crm)}
+.dh-title em{font-style:italic;color:var(--mint)}
+.dh-stand{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(17px,1.9vw,21px);
+ line-height:1.55;color:var(--crm60);max-width:66ch}
+.dh-note{font-family:var(--body);font-size:14px;line-height:1.72;color:var(--crm80);max-width:64ch;margin-top:16px}
+.dh-companion{font-family:var(--body);font-size:13px;color:var(--crm40);margin-top:18px;max-width:64ch;
+  display:flex;align-items:center;gap:9px}
+.dh-companion::before{content:'';width:14px;height:1px;background:var(--crm40)}
+.dh-meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:32px;padding-top:26px;border-top:1px solid var(--crm16)}
+.dh-meta-item{display:flex;flex-direction:column;gap:5px}
+.dh-meta-k{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--crm40)}
+.dh-meta-v{font-family:var(--body);font-size:13px;color:var(--crm80)}
+
+/* ══════════════════════════════════════════════════════════════
+   BODY — wider shell, much more generous index, wider reading column
+   ══════════════════════════════════════════════════════════════ */
+#doc-body{max-width:var(--shell);margin:0 auto;padding:clamp(52px,6vw,80px) var(--pad) clamp(64px,8vw,110px);
+ display:grid;grid-template-columns:224px 1fr;gap:0 clamp(96px,10vw,160px);align-items:start}
+
+/* ── the index — a real index: leaders, quiet type, no chrome ── */
+.idx{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 128px);overflow-y:auto;scrollbar-width:none;
+  padding-right:4px}
+.idx::-webkit-scrollbar{display:none}
+.idx-label{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink32);
+ padding-bottom:16px;margin-bottom:4px;border-bottom:1.5px solid var(--ink);display:flex;align-items:baseline;justify-content:space-between}
+.idx-label span:first-child{color:var(--ink);font-weight:500}
+.idx-label-count{font-family:var(--mono);font-size:9px;color:var(--ink32);letter-spacing:.06em}
+
+.idx-chgroup{border-bottom:1px solid var(--lineL)}
+.idx-chgroup:last-child{border-bottom:none}
+.idx-chhead{display:block;width:100%;background:none;border:none;
+ text-align:left;cursor:pointer;padding:15px 2px 15px 0;position:relative;transition:opacity .2s}
+.idx-chhead:hover{opacity:.7}
+.idx-chlabel{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink32);display:block;margin-bottom:3px}
+.idx-chname-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.idx-chname{font-family:var(--disp);font-weight:400;font-size:14px;color:var(--ink);line-height:1.35;letter-spacing:-.005em;max-width:100%}
+.idx-chleader{flex:1;border-bottom:1px dotted var(--ink14);margin-bottom:4px;min-width:8px;align-self:flex-end}
+.idx-chchev{font-family:var(--body);font-weight:300;font-size:14px;color:var(--ink32);
+ transition:transform .35s var(--e1);flex-shrink:0}
+.idx-chgroup.open .idx-chchev{transform:rotate(45deg)}
+.idx-chgroup.current .idx-chlabel{color:var(--pine-b)}
+.idx-chgroup.current .idx-chname{color:var(--pine);font-style:italic}
+.idx-chbody{max-height:0;overflow:hidden;transition:max-height .45s var(--e2)}
+.idx-chbody-in{padding:0 0 14px 2px}
+.idx-chbody-in a{display:flex;gap:10px;align-items:baseline;padding:6px 0;font-size:12.5px;line-height:1.5;color:var(--ink48);
+ transition:color .2s}
+.idx-chbody-in a .n{font-family:var(--mono);font-size:9px;color:var(--ink32);flex-shrink:0;min-width:14px;transition:color .2s}
+.idx-chbody-in a:hover{color:var(--ink)}
+.idx-chbody-in a.on{color:var(--pine);font-weight:500}
+.idx-chbody-in a.on .n{color:var(--pine)}
+.idx-foot{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);
+ font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--ink32);line-height:1.85}
+.idx-mobile{display:none}
+
+/* ── the reading column — wider still ── */
+.content{min-width:0;max-width:1020px}
+.lead-note{margin-bottom:clamp(40px,4.6vw,58px);padding:22px 26px;background:transparent;border:1px solid var(--ink14);
+  border-left:3px solid var(--ink32);border-radius:0 10px 10px 0}
+.lead-note p{font-size:12.5px;line-height:1.75;color:var(--ink48);font-family:var(--body)}
+.lead-note p + p{margin-top:10px}
+.lead-note strong{color:var(--ink65);font-weight:600}
+.lead-note .ln-label{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink32);margin-bottom:10px;display:block}
+
+.chap-divider{display:flex;align-items:baseline;gap:16px;margin:clamp(52px,6vw,76px) 0 clamp(26px,3vw,34px);
+ padding-bottom:16px;border-bottom:2px solid var(--pine14)}
+.content .clause:first-of-type ~ .chap-divider:first-of-type,
+.content > .chap-divider:first-child{margin-top:0}
+.chap-divider-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--pine);flex-shrink:0}
+.chap-divider-name{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(21px,2.3vw,29px);color:var(--ink);line-height:1.2}
+
+.clause{padding-top:clamp(28px,3.4vw,38px);margin-top:clamp(28px,3.4vw,38px);border-top:1px solid var(--line);scroll-margin-top:96px}
+.chap-divider + .clause{border-top:none;margin-top:0;padding-top:0}
+.cl-head{display:flex;align-items:baseline;gap:18px;margin-bottom:16px}
+.cl-num{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--pine);padding-top:6px;flex-shrink:0;white-space:nowrap;
+  background:var(--pine08);padding:4px 9px;border-radius:5px;margin-top:2px}
+.cl-title{font-family:var(--disp);font-weight:300;font-size:clamp(22px,2.6vw,31px);line-height:1.16;letter-spacing:-.02em;color:var(--ink)}
+.clause p{font-size:15.5px;line-height:1.85;color:var(--ink65);margin-bottom:14px;max-width:88ch}
+.clause p:last-child{margin-bottom:0}
+.clause strong{font-weight:600;color:var(--ink)}
+.pen-list{list-style:none;counter-reset:pen;margin:6px 0 0;padding:0;max-width:88ch}
+.pen-list li{counter-increment:pen;position:relative;padding:13px 0 13px 38px;font-size:15px;line-height:1.75;
+  color:var(--ink65);border-bottom:1px solid var(--lineL)}
+.pen-list li:first-child{border-top:1px solid var(--lineL)}
+.pen-list li::before{content:counter(pen,decimal-leading-zero);position:absolute;left:0;top:13px;
+  font-family:var(--mono);font-size:11px;color:var(--pine)}
+
+.map-clear{margin-top:clamp(52px,5.8vw,76px);padding:28px 30px;background:var(--pine08);border-left:3px solid var(--pine);
+  max-width:none;border-radius:0 12px 12px 0}
+.map-clear p{font-family:var(--disp);font-style:italic;font-weight:300;font-size:15px;line-height:1.72;color:var(--ink65)}
+
+.sources-block{margin-top:clamp(32px,3.8vw,44px);padding-top:22px;border-top:1px solid var(--line);max-width:none}
+.sources-label{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink32);margin-bottom:9px}
+.sources-block p{font-size:12.5px;line-height:1.7;color:var(--ink48)}
+
+.doc-close{margin-top:clamp(52px,6vw,78px);padding-top:clamp(30px,3.6vw,40px);border-top:1px solid var(--line);
+ display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
+.doc-close p{font-family:var(--disp);font-style:italic;font-weight:300;font-size:14.5px;color:var(--ink48);max-width:44ch;line-height:1.58}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-size:11.5px;font-weight:500;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--ink);border:1px solid var(--ink);padding:14px 24px;background:none;
+  cursor:pointer;transition:background .3s,color .3s,border-color .3s,gap .3s;white-space:nowrap;border-radius:2px}
+.btn-outline:hover{background:var(--pine);border-color:var(--pine);color:var(--crm);gap:15px}
+
+@media(max-width:1360px){
+  #doc-body{grid-template-columns:214px 1fr;gap:0 56px}
+  .content{max-width:none}
+}
+
+@media(max-width:960px){
+ #doc-body{grid-template-columns:1fr;gap:0}
+ .idx{display:none}
+ .idx-mobile{display:block;position:sticky;top:64px;z-index:80;margin:0 calc(-1*var(--pad)) clamp(30px,5vw,42px);
+  background:rgba(250,247,240,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+ .idx-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px var(--pad);
+  background:none;border:none;cursor:pointer;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--pine)}
+ .idx-toggle .chev{transition:transform .35s var(--e1)}
+ .idx-mobile.open .idx-toggle .chev{transform:rotate(45deg)}
+ .idx-panel{max-height:0;overflow:hidden;transition:max-height .45s var(--e2)}
+ .idx-panel-in{padding:4px var(--pad) 20px;max-height:62vh;overflow-y:auto}
+ .idxm-chap{font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--pine);
+   padding:16px 0 8px;opacity:.9}
+ .idx-panel a{display:flex;gap:12px;padding:10px 0;font-size:13.5px;color:var(--ink65);border-bottom:1px solid var(--lineL)}
+ .idx-panel a .n{font-family:var(--mono);font-size:10.5px;color:var(--pine);min-width:38px}
+ .content{max-width:none}
+ .doc-close{flex-direction:column;align-items:stretch;text-align:left}
+ .btn-outline{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div id="vrail" aria-hidden="true"><div id="vrail-fill"></div></div>
+<div id="vrail-r" aria-hidden="true"><div id="vrail-r-fill"></div></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<header id="nav" class="visible solid dark-mode">
+  <a class="brand" href="../../index.html" aria-label="ORR home">
+    <img src="../../assets/drk.svg" alt="ORR" class="nav-logo nav-logo-dark"/>
+    <img src="../../assets/crm.svg" alt="ORR" class="nav-logo nav-logo-light"/>
+  </a>
+  <span class="nav-mid">From Idea to Operating Business</span>
+  <nav class="nav-r">
+    <a href="../../index.html#structure">Structure</a>
+    <a href="../../resources.html">Resources</a>
+    <a href="../../index.html#begin" class="nav-cta">Begin &rarr;</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+  </nav>
+</header>
+
+<nav class="mnav" id="mnav" aria-label="Mobile navigation">
+  <a href="../../index.html#structure">Structure</a>
+  <a href="../../index.html#model">How we work</a>
+  <a href="../../resources.html">Resources</a>
+  <a href="../../index.html#begin">Begin</a>
+  <span class="mnav-tag">From Idea to Operating Business</span>
+</nav>
+
+<header id="doc-head">
+ <div class="dh-wrap">
+  <p class="dh-crumb"><a href="../../resources.html">Resources</a><span aria-hidden="true">/</span><a href="../law-plainly.html">The Law, Plainly</a><span aria-hidden="true">/</span><span>REACH</span></p>
+  <p class="dh-eyebrow">EU · REGULATION (EC) 1907/2006 · REFERENCE SERIES</p>
+  <h1 class="dh-title">REACH, <em>Plainly.</em></h1>
+  <p class="dh-stand">Registration, Evaluation, Authorisation and Restriction of Chemicals — article by article, in plain English. No jargon, no legalese, no filler.</p>
+  <p class="dh-companion">A reading companion, not a substitute for the official text.</p>
+  <div class="dh-meta">
+    <div class="dh-meta-item"><span class="dh-meta-k">Articles</span><span class="dh-meta-v">1–141</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-k">Titles</span><span class="dh-meta-v">XV</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-k">Annexes</span><span class="dh-meta-v">I–XVII</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-k">In force</span><span class="dh-meta-v">1 June 2007</span></div>
+  </div>
+ </div>
+</header>
+<main id="doc-body">
+<aside class="idx">
+ <div class="idx-label"><span>Contents</span><span class="idx-label-count">42 article groups</span></div>
+<div class="idx-chgroup" data-chgroup="t1">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Title I</span><span class="idx-chname-row"><span class="idx-chname">General Issues</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#t1-s1"><span class="n">01</span><span>Aim and Scope</span></a>
+<a href="#t1-s2"><span class="n">02</span><span>Application</span></a>
+<a href="#t1-s3"><span class="n">03</span><span>Definitions — selected key terms</span></a>
+<a href="#t1-s4"><span class="n">04</span><span>General Provision</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="t2">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Title II</span><span class="idx-chname-row"><span class="idx-chname">Registration of Substances</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#t2-s1"><span class="n">01</span><span>No Data, No Market</span></a>
+<a href="#t2-s2"><span class="n">02</span><span>General Obligation to Register</span></a>
+<a href="#t2-s3"><span class="n">03</span><span>Registration and Notification of Substances in Articles</span></a>
+<a href="#t2-s4"><span class="n">04</span><span>Only Representatives and Exemptions for Certain Intermediates</span></a>
+<a href="#t2-s5"><span class="n">05</span><span>Information Required for Registration</span></a>
+<a href="#t2-s6"><span class="n">06</span><span>Registration of Isolated Intermediates</span></a>
+<a href="#t2-s7"><span class="n">07</span><span>ECHA Duties on Registration</span></a>
+<a href="#t2-s8"><span class="n">08</span><span>Updates, Transition, and SME Support</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="t3">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Title III</span><span class="idx-chname-row"><span class="idx-chname">Data Sharing and Avoidance of Unnecessary Testing</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#t3-s1"><span class="n">01</span><span>Data Sharing</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="t4">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Title IV</span><span class="idx-chname-row"><span class="idx-chname">Information in the Supply Chain</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#t4-s1"><span class="n">01</span><span>Safety Data Sheets</span></a>
+<a href="#t4-s2"><span class="n">02</span><span>Duty to Communicate Down and Up the Supply Chain</span></a>
+<a href="#t4-s3"><span class="n">03</span><span>Duty to Communicate Up the Supply Chain</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="t5">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Title V</span><span class="idx-chname-row"><span class="idx-chname">Downstream Users</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#t5-s1"><span class="n">01</span><span>Downstream User Obligations</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="t6">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Title VI</span><span class="idx-chname-row"><span class="idx-chname">Evaluation</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#t6-s1"><span class="n">01</span><span>Dossier Evaluation</span></a>
+<a href="#t6-s2"><span class="n">02</span><span>Substance Evaluation</span></a>
+<a href="#t6-s3"><span class="n">03</span><span>Decision-Making and Cost Sharing</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="t7">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Title VII</span><span class="idx-chname-row"><span class="idx-chname">Authorisation</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#t7-s1"><span class="n">01</span><span>Aim</span></a>
+<a href="#t7-s2"><span class="n">02</span><span>General Rule</span></a>
+<a href="#t7-s3"><span class="n">03</span><span>Substances of Very High Concern</span></a>
+<a href="#t7-s4"><span class="n">04</span><span>Inclusion in Annex XIV and Candidate List</span></a>
+<a href="#t7-s5"><span class="n">05</span><span>Granting of Authorisations</span></a>
+<a href="#t7-s6"><span class="n">06</span><span>Holders and Downstream Users</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="t8">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Title VIII</span><span class="idx-chname-row"><span class="idx-chname">Restrictions</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#t8-s1"><span class="n">01</span><span>General Provisions</span></a>
+<a href="#t8-s2"><span class="n">02</span><span>Restrictions Process</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="t9">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Title IX</span><span class="idx-chname-row"><span class="idx-chname">Fees and Charges</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#t9-s1"><span class="n">01</span><span>Fees and Charges</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="t10">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Title X</span><span class="idx-chname-row"><span class="idx-chname">The European Chemicals Agency (ECHA)</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#t10-s1"><span class="n">01</span><span>Establishment and Tasks</span></a>
+<a href="#t10-s2"><span class="n">02</span><span>Committees and Bodies</span></a>
+<a href="#t10-s3"><span class="n">03</span><span>Operations, Budget, and Appeals</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="t11">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Title XI</span><span class="idx-chname-row"><span class="idx-chname">Classification and Labelling Inventory</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#t11-s1"><span class="n">01</span><span>Notification and Inventory</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="t12">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Title XII</span><span class="idx-chname-row"><span class="idx-chname">Information</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#t12-s1"><span class="n">01</span><span>Reporting, Access, and Confidentiality</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="t13">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Title XIII</span><span class="idx-chname-row"><span class="idx-chname">Competent Authorities</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#t13-s1"><span class="n">01</span><span>Competent Authorities and Helpdesks</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="t14">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Title XIV</span><span class="idx-chname-row"><span class="idx-chname">Enforcement</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#t14-s1"><span class="n">01</span><span>Enforcement and Penalties</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="t15">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Title XV</span><span class="idx-chname-row"><span class="idx-chname">Transitional and Final Provisions</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#t15-s1"><span class="n">01</span><span>Free Movement</span></a>
+<a href="#t15-s2"><span class="n">02</span><span>Safeguard Clause</span></a>
+<a href="#t15-s3"><span class="n">03</span><span>Transitional Measures</span></a>
+<a href="#t15-s4"><span class="n">04</span><span>Review</span></a>
+<a href="#t15-s5"><span class="n">05</span><span>Entry into Force</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="annex">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Reference</span><span class="idx-chname-row"><span class="idx-chname">Annexes I–XVII</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#annex"><span class="n">—</span><span>Annex summary</span></a></div></div>
+</div>
+ <div class="idx-foot">Read in full.<br>Reading companion, not the official text.</div>
+</aside>
+<div class="idx-mobile"><button class="idx-toggle" type="button">Contents <span class="chev">+</span></button><div class="idx-panel"><div class="idx-panel-in"><div class="idxm-chap">Title I — General Issues</div>
+<a href="#t1-s1"><span class="n">Art. 1</span><span>Aim and Scope</span></a>
+<a href="#t1-s2"><span class="n">Art. 2</span><span>Application</span></a>
+<a href="#t1-s3"><span class="n">Art. 3</span><span>Definitions — selected key terms</span></a>
+<a href="#t1-s4"><span class="n">Art. 4</span><span>General Provision</span></a>
+<div class="idxm-chap">Title II — Registration of Substances</div>
+<a href="#t2-s1"><span class="n">Art. 5</span><span>No Data, No Market</span></a>
+<a href="#t2-s2"><span class="n">Art. 6</span><span>General Obligation to Register</span></a>
+<a href="#t2-s3"><span class="n">Art. 7</span><span>Registration and Notification of Substances in Articles</span></a>
+<a href="#t2-s4"><span class="n">Art. 8–9</span><span>Only Representatives and Exemptions for Certain Intermediates</span></a>
+<a href="#t2-s5"><span class="n">Art. 10–14</span><span>Information Required for Registration</span></a>
+<a href="#t2-s6"><span class="n">Art. 17–18</span><span>Registration of Isolated Intermediates</span></a>
+<a href="#t2-s7"><span class="n">Art. 20–21</span><span>ECHA Duties on Registration</span></a>
+<a href="#t2-s8"><span class="n">Art. 22–24</span><span>Updates, Transition, and SME Support</span></a>
+<div class="idxm-chap">Title III — Data Sharing and Avoidance of Unnecessary Testing</div>
+<a href="#t3-s1"><span class="n">Art. 25–30</span><span>Data Sharing</span></a>
+<div class="idxm-chap">Title IV — Information in the Supply Chain</div>
+<a href="#t4-s1"><span class="n">Art. 31</span><span>Safety Data Sheets</span></a>
+<a href="#t4-s2"><span class="n">Art. 32–33</span><span>Duty to Communicate Down and Up the Supply Chain</span></a>
+<a href="#t4-s3"><span class="n">Art. 34–36</span><span>Duty to Communicate Up the Supply Chain</span></a>
+<div class="idxm-chap">Title V — Downstream Users</div>
+<a href="#t5-s1"><span class="n">Art. 37–39</span><span>Downstream User Obligations</span></a>
+<div class="idxm-chap">Title VI — Evaluation</div>
+<a href="#t6-s1"><span class="n">Art. 40–43</span><span>Dossier Evaluation</span></a>
+<a href="#t6-s2"><span class="n">Art. 44–48</span><span>Substance Evaluation</span></a>
+<a href="#t6-s3"><span class="n">Art. 50–54</span><span>Decision-Making and Cost Sharing</span></a>
+<div class="idxm-chap">Title VII — Authorisation</div>
+<a href="#t7-s1"><span class="n">Art. 55</span><span>Aim</span></a>
+<a href="#t7-s2"><span class="n">Art. 56</span><span>General Rule</span></a>
+<a href="#t7-s3"><span class="n">Art. 57</span><span>Substances of Very High Concern</span></a>
+<a href="#t7-s4"><span class="n">Art. 58–59</span><span>Inclusion in Annex XIV and Candidate List</span></a>
+<a href="#t7-s5"><span class="n">Art. 60–64</span><span>Granting of Authorisations</span></a>
+<a href="#t7-s6"><span class="n">Art. 65–66</span><span>Holders and Downstream Users</span></a>
+<div class="idxm-chap">Title VIII — Restrictions</div>
+<a href="#t8-s1"><span class="n">Art. 67</span><span>General Provisions</span></a>
+<a href="#t8-s2"><span class="n">Art. 68–73</span><span>Restrictions Process</span></a>
+<div class="idxm-chap">Title IX — Fees and Charges</div>
+<a href="#t9-s1"><span class="n">Art. 74</span><span>Fees and Charges</span></a>
+<div class="idxm-chap">Title X — The European Chemicals Agency (ECHA)</div>
+<a href="#t10-s1"><span class="n">Art. 75–77</span><span>Establishment and Tasks</span></a>
+<a href="#t10-s2"><span class="n">Art. 78–84</span><span>Committees and Bodies</span></a>
+<a href="#t10-s3"><span class="n">Art. 85–111</span><span>Operations, Budget, and Appeals</span></a>
+<div class="idxm-chap">Title XI — Classification and Labelling Inventory</div>
+<a href="#t11-s1"><span class="n">Art. 112–116</span><span>Notification and Inventory</span></a>
+<div class="idxm-chap">Title XII — Information</div>
+<a href="#t12-s1"><span class="n">Art. 117–120</span><span>Reporting, Access, and Confidentiality</span></a>
+<div class="idxm-chap">Title XIII — Competent Authorities</div>
+<a href="#t13-s1"><span class="n">Art. 121–124</span><span>Competent Authorities and Helpdesks</span></a>
+<div class="idxm-chap">Title XIV — Enforcement</div>
+<a href="#t14-s1"><span class="n">Art. 125–127</span><span>Enforcement and Penalties</span></a>
+<div class="idxm-chap">Title XV — Transitional and Final Provisions</div>
+<a href="#t15-s1"><span class="n">Art. 128</span><span>Free Movement</span></a>
+<a href="#t15-s2"><span class="n">Art. 129</span><span>Safeguard Clause</span></a>
+<a href="#t15-s3"><span class="n">Art. 135–136</span><span>Transitional Measures</span></a>
+<a href="#t15-s4"><span class="n">Art. 138</span><span>Review</span></a>
+<a href="#t15-s5"><span class="n">Art. 141</span><span>Entry into Force</span></a>
+<div class="idxm-chap">Annexes I–XVII</div>
+<a href="#annex"><span class="n"></span><span>Annex summary</span></a>
+</div></div></div>
+<div class="content">
+<div class="lead-note">
+  <span class="ln-label">Notice</span>
+  <p>This restatement is provided for <strong>general informational and educational purposes only</strong>. It is a plain-language reading companion prepared by ORR and does not constitute legal advice, and does not create an advisor-client or any other professional relationship between ORR and any reader.</p>
+  <p>Every effort has been made to accurately reflect the source law as enacted, but <strong>this page is not the official text of the law</strong> and may not reflect subsequent amendments, rules, notifications, or judicial interpretation. Where this restatement and the official text differ, the official text governs.</p>
+  <p>ORR, its principals, and its affiliates accept <strong>no responsibility or liability</strong> for any loss, damage, or legal consequence arising from reliance on this page. Nothing here should be treated as a substitute for advice from a qualified legal professional licensed in the relevant jurisdiction. <strong>Consult a lawyer</strong> before making any decision based on this content.</p>
+</div>
+<div class="chap-divider" id="t1"><span class="chap-divider-label">Title I</span><span class="chap-divider-name">General Issues</span></div>
+<section class="clause" id="t1-s1">
+ <div class="cl-head"><span class="cl-num">Art. 1</span><h2 class="cl-title">Aim and Scope</h2></div>
+ <p>REACH exists to ensure a high level of protection of human health and the environment from the risks posed by chemicals, while promoting the free circulation of substances on the EU internal market and enhancing competitiveness and innovation. It also promotes the development of alternative methods to reduce animal testing.</p>
+<p>The Regulation covers the manufacture, placing on the market, and use of substances on their own, in mixtures (preparations), or in articles. It is built on the principle that manufacturers, importers, and downstream users bear the responsibility for ensuring their substances do not adversely affect human health or the environment. The precautionary principle underpins the entire framework.</p>
+</section>
+
+<section class="clause" id="t1-s2">
+ <div class="cl-head"><span class="cl-num">Art. 2</span><h2 class="cl-title">Application</h2></div>
+ <p>REACH does not apply to: radioactive substances; substances under customs supervision in transit or temporary storage; non-isolated intermediates; or the carriage of dangerous substances by rail, road, water, sea, or air. Waste is not a substance, preparation, or article under REACH.</p>
+<p>It applies without prejudice to EU workplace and environmental legislation. The registration, evaluation, downstream-user, and authorisation provisions (Titles II, V, VI, VII) do not apply to substances used in medicinal products, food, feedingstuffs, or plant protection products where those are already regulated by sector-specific EU legislation.</p>
+<p>Supply-chain information provisions (Title IV) do not apply to finished medicinal products, cosmetic products, invasive medical devices, or food and feedingstuffs in their finished state. Substances listed in Annex IV (considered minimum risk) and covered by Annex V (inappropriate or unnecessary to register) are exempt from Titles II, V, and VI. Polymers are exempt from Titles II and VI. On-site isolated intermediates and transported isolated intermediates have reduced obligations.</p>
+</section>
+
+<section class="clause" id="t1-s3">
+ <div class="cl-head"><span class="cl-num">Art. 3</span><h2 class="cl-title">Definitions — selected key terms</h2></div>
+ <p>Substance — a chemical element and its compounds in the natural state or obtained by any manufacturing process, including any additive necessary to preserve its stability and any impurity deriving from the process, but excluding any separable solvent.</p>
+<p>Preparation (mixture) — a mixture or solution composed of two or more substances.</p>
+<p>Article — an object which during production is given a special shape, surface, or design which determines its function to a greater degree than does its chemical composition.</p>
+<p>Manufacturer — any natural or legal person established in the EU who manufactures a substance within the EU.</p>
+<p>Importer — any natural or legal person established in the EU who is responsible for importing a substance into the EU customs territory.</p>
+<p>Downstream user — any natural or legal person established in the EU, other than the manufacturer or importer, who uses a substance on its own or in a preparation in the course of industrial or professional activities. Distributors and consumers are not downstream users.</p>
+<p>Registrant — the manufacturer or importer of a substance, or the producer or importer of an article, submitting a registration to ECHA.</p>
+<p>Placing on the market — supplying or making available to a third party, whether for payment or free. Import counts as placing on the market.</p>
+<p>Intermediate — a substance manufactured for and consumed in chemical processing to be transformed into another substance. Three types: non-isolated (never leaves the reaction vessel), on-site isolated (stays on the same manufacturing site), and transported isolated (moved between sites).</p>
+<p>Phase-in substance — a substance already on the European market before REACH entered into force (listed in EINECS, or manufactured/placed on the market before 1 June 2007). These received staggered registration deadlines.</p>
+<p>Identified use — a use that an actor in the supply chain intends, including their own use, or that a downstream user has made known in writing.</p>
+<p>Substance of Very High Concern (SVHC) — a substance meeting the criteria in Article 57: carcinogenic, mutagenic, or toxic to reproduction (CMR Category 1A or 1B); persistent, bioaccumulative, and toxic (PBT); very persistent and very bioaccumulative (vPvB); or a substance identified on a case-by-case basis as causing an equivalent level of concern (e.g. endocrine disruptors).</p>
+</section>
+
+<section class="clause" id="t1-s4">
+ <div class="cl-head"><span class="cl-num">Art. 4</span><h2 class="cl-title">General Provision</h2></div>
+ <p>Any manufacturer, importer, or downstream user may, while maintaining responsibility for meeting their obligations, appoint a third-party representative for certain procedural obligations under Title II (registration), Title III (data sharing), and Title V (downstream users), subject to confidentiality rules. Only Representatives are disclosed to ECHA.</p>
+</section>
+
+<div class="chap-divider" id="t2"><span class="chap-divider-label">Title II</span><span class="chap-divider-name">Registration of Substances</span></div>
+<section class="clause" id="t2-s1">
+ <div class="cl-head"><span class="cl-num">Art. 5</span><h2 class="cl-title">No Data, No Market</h2></div>
+ <p>No substance may be manufactured in or imported into the EU unless it has been registered with ECHA, subject to the exemptions in this Regulation. This is the foundational principle of REACH: if you do not register the data, you cannot sell the substance.</p>
+</section>
+
+<section class="clause" id="t2-s2">
+ <div class="cl-head"><span class="cl-num">Art. 6</span><h2 class="cl-title">General Obligation to Register</h2></div>
+ <p>Any manufacturer or importer of a substance in quantities of one tonne or more per year must submit a registration to ECHA. Registration covers the substance on its own or in a preparation. The registration must include a technical dossier and, for quantities of 10 tonnes or more per year, a chemical safety report.</p>
+</section>
+
+<section class="clause" id="t2-s3">
+ <div class="cl-head"><span class="cl-num">Art. 7</span><h2 class="cl-title">Registration and Notification of Substances in Articles</h2></div>
+ <p>Any producer or importer of articles must register a substance contained in those articles if: the substance is present in quantities totalling over one tonne per year across all articles, and the substance is intended to be released under normal or reasonably foreseeable conditions of use. Separately, if an article contains a Substance of Very High Concern (on the Candidate List) in a concentration above 0.1% weight by weight, the producer or importer must notify ECHA — unless the substance has already been registered for that use, or exposure can be excluded.</p>
+</section>
+
+<section class="clause" id="t2-s4">
+ <div class="cl-head"><span class="cl-num">Art. 8–9</span><h2 class="cl-title">Only Representatives and Exemptions for Certain Intermediates</h2></div>
+ <p>A non-EU manufacturer may appoint an Only Representative established in the EU to fulfil the registration obligations on the manufacturer's behalf. The Only Representative must have sufficient knowledge of the practical handling of substances and keep available information on import quantities and customers. When an Only Representative is appointed, the importers in the supply chain become downstream users.</p>
+<p>On-site isolated intermediates manufactured and used in quantities of one tonne or more per year must be registered, but with reduced information requirements — only identity, classification, existing available data, and a brief description of use and risk management measures. The same reduced registration applies to transported isolated intermediates, with additional conditions on the manufacturer's confirmation that the substance is used under strictly controlled conditions.</p>
+</section>
+
+<section class="clause" id="t2-s5">
+ <div class="cl-head"><span class="cl-num">Art. 10–14</span><h2 class="cl-title">Information Required for Registration</h2></div>
+ <p>A registration dossier must include: the registrant's identity; the substance's identity; information on manufacture and use; the classification and labelling; guidance on safe use; study summaries (or robust study summaries); proposals for any testing that would require vertebrate animal tests; an indication of which information has been reviewed by an assessor; and, for substances at 10+ tonnes per year, a chemical safety report.</p>
+<p>The amount of information scales with volume: substances at 1–10 tonnes per year require the information in Annex VII; 10–100 tonnes adds Annex VIII; 100–1,000 tonnes adds Annex IX; 1,000+ tonnes adds Annex X. Testing proposals must be submitted to ECHA before vertebrate animal testing is conducted. Non-animal testing methods must be used wherever possible.</p>
+<p>The chemical safety report (Art. 14) must include: a hazard assessment; an assessment of whether the substance is PBT or vPvB; and, if the substance is classified as dangerous or is PBT/vPvB, an exposure assessment and risk characterisation for each identified use. Where the risk characterisation shows that risks are not adequately controlled, the registrant must identify and recommend appropriate risk management measures.</p>
+</section>
+
+<section class="clause" id="t2-s6">
+ <div class="cl-head"><span class="cl-num">Art. 17–18</span><h2 class="cl-title">Registration of Isolated Intermediates</h2></div>
+ <p>On-site isolated intermediates manufactured in quantities of one tonne or more per year must be registered with reduced information. Transported isolated intermediates require registration with additional information including confirmation from the registrant that the substance is manufactured and used under strictly controlled conditions, or (for quantities over 1,000 tonnes) the full information package.</p>
+</section>
+
+<section class="clause" id="t2-s7">
+ <div class="cl-head"><span class="cl-num">Art. 20–21</span><h2 class="cl-title">ECHA Duties on Registration</h2></div>
+ <p>ECHA must assign a registration number, date, and completeness check within three weeks. ECHA checks for administrative completeness but does not assess the quality of the data at this stage. A registration is not to be rejected simply because the chemical safety report's risk characterisation concludes that risk management is inadequate — the registrant must still state the measures recommended, and ECHA can follow up under evaluation.</p>
+</section>
+
+<section class="clause" id="t2-s8">
+ <div class="cl-head"><span class="cl-num">Art. 22–24</span><h2 class="cl-title">Updates, Transition, and SME Support</h2></div>
+ <p>Registrants must update their registrations without undue delay for: changes in status (cessation of manufacture/import), new uses or changes to identified uses, new knowledge of risks, changes to classification and labelling, and changes to annual or total quantity ranges that trigger additional information requirements.</p>
+<p>Phase-in substances had staggered deadlines: 1 December 2010 for CMR substances (any quantity) and substances at 1,000+ tonnes per year; 1 June 2013 for substances at 100+ tonnes per year; 1 June 2018 for substances at 1–100 tonnes per year.</p>
+<p>ECHA and the Commission must provide technical and other guidance to SMEs and may reduce fees for SMEs.</p>
+</section>
+
+<div class="chap-divider" id="t3"><span class="chap-divider-label">Title III</span><span class="chap-divider-name">Data Sharing and Avoidance of Unnecessary Testing</span></div>
+<section class="clause" id="t3-s1">
+ <div class="cl-head"><span class="cl-num">Art. 25–30</span><h2 class="cl-title">Data Sharing</h2></div>
+ <p>REACH imposes a duty to share data and avoid duplicative vertebrate animal testing. Before registering, a potential registrant must inquire with ECHA whether a registration has already been submitted for the same substance. If so, the existing registrant(s) and the potential registrant must make every effort to share data — particularly studies involving vertebrate animals.</p>
+<p>Where data involves vertebrate animal testing, sharing is mandatory and the cost must be shared fairly, transparently, and non-discriminatorily. If an agreement cannot be reached, the potential registrant may refer the matter to ECHA and, as a last resort, may register after 12 months using the disputed study with a right to fair cost-sharing determined by ECHA or an arbitration body.</p>
+<p>Registrants of the same substance must participate in a Substance Information Exchange Forum (SIEF) to share data and agree on classification and labelling. Joint submission of data is required: all registrants of the same substance must submit their information jointly through a lead registrant, unless they have a justified reason for separate submission (disproportionate cost, confidentiality, genuine disagreement on substance identity with the lead registrant).</p>
+<p>Data rights last for 12 years from submission. After 12 years, information may be accessed by other registrants without compensation.</p>
+</section>
+
+<div class="chap-divider" id="t4"><span class="chap-divider-label">Title IV</span><span class="chap-divider-name">Information in the Supply Chain</span></div>
+<section class="clause" id="t4-s1">
+ <div class="cl-head"><span class="cl-num">Art. 31</span><h2 class="cl-title">Safety Data Sheets</h2></div>
+ <p>The supplier of a substance or preparation must provide the recipient with a Safety Data Sheet (SDS) in the language of the member state where it is placed on the market, if: the substance or preparation meets the criteria for classification as dangerous; the substance is persistent, bioaccumulative, and toxic (PBT) or very persistent and very bioaccumulative (vPvB); or the substance is on the Candidate List for authorisation (Substances of Very High Concern).</p>
+<p>The SDS must be compiled by a competent person and include sixteen mandatory sections: identification; hazards identification; composition; first-aid measures; fire-fighting measures; accidental release measures; handling and storage; exposure controls and personal protection; physical and chemical properties; stability and reactivity; toxicological information; ecological information; disposal considerations; transport information; regulatory information; and other information.</p>
+<p>Where a chemical safety assessment has been carried out, the relevant exposure scenarios for identified uses must be annexed to the SDS. The SDS must be updated promptly when new risk management information, new hazard information, or a new authorisation or restriction becomes available.</p>
+</section>
+
+<section class="clause" id="t4-s2">
+ <div class="cl-head"><span class="cl-num">Art. 32–33</span><h2 class="cl-title">Duty to Communicate Down and Up the Supply Chain</h2></div>
+ <p>Where a substance or preparation does not require an SDS, the supplier must still provide the recipient with: the registration number(s) where available; whether the substance is subject to authorisation and details of any granted or denied authorisation; details of any restriction; and any other available and relevant information necessary for appropriate risk management.</p>
+<p>Any supplier of an article containing a Substance of Very High Concern (on the Candidate List) in a concentration above 0.1% weight by weight must provide the recipient with sufficient information to allow safe use of the article — at minimum the name of the substance. The same information must be provided to a consumer on request, free of charge, within 45 days.</p>
+</section>
+
+<section class="clause" id="t4-s3">
+ <div class="cl-head"><span class="cl-num">Art. 34–36</span><h2 class="cl-title">Duty to Communicate Up the Supply Chain</h2></div>
+ <p>Any actor in the supply chain must communicate new information on hazardous properties or risk management measures up the supply chain. Downstream users must report to their supplier if they consider the risk management measures in the SDS are inadequate, or if a use they engage in is not an identified use.</p>
+<p>Downstream users are entitled to make a use known in writing to their manufacturer, importer, or distributor with the aim of making it an identified use. Workers and their representatives must be given access to information under Articles 31 and 32 relating to substances or preparations they use or may be exposed to.</p>
+</section>
+
+<div class="chap-divider" id="t5"><span class="chap-divider-label">Title V</span><span class="chap-divider-name">Downstream Users</span></div>
+<section class="clause" id="t5-s1">
+ <div class="cl-head"><span class="cl-num">Art. 37–39</span><h2 class="cl-title">Downstream User Obligations</h2></div>
+ <p>A downstream user has the right to make a use known in writing to a manufacturer or importer so that it becomes an identified use. If the downstream user's use is not covered by an exposure scenario communicated to them, and they do not wish to make it known, they must either apply the conditions described in a scenario covering their use, prepare their own chemical safety report for their use, or cease that use.</p>
+<p>Downstream users who prepare their own chemical safety report must notify ECHA within six months. Downstream users must also apply appropriate risk management measures identified in the SDS or their own chemical safety report, and must check that their use is consistent with the conditions described.</p>
+<p>Downstream users must report to ECHA if their classification of a substance differs from the classification of their supplier. Downstream users who are formulators must compile new SDSs for their own preparations using information from the registration. They must keep records of their chemical safety report for at least ten years after they last used the substance.</p>
+</section>
+
+<div class="chap-divider" id="t6"><span class="chap-divider-label">Title VI</span><span class="chap-divider-name">Evaluation</span></div>
+<section class="clause" id="t6-s1">
+ <div class="cl-head"><span class="cl-num">Art. 40–43</span><h2 class="cl-title">Dossier Evaluation</h2></div>
+ <p>ECHA evaluates all testing proposals that involve vertebrate animal testing, and may also evaluate any registration dossier to verify that it complies with the requirements. ECHA must examine testing proposals within 180 days (or longer for higher-tier information). ECHA may require additional information, modify proposed tests, or reject testing proposals.</p>
+<p>ECHA must check at least 5% of all registration dossiers in each tonnage band for compliance. Selection is based on risk criteria and random screening. Where ECHA considers a dossier is non-compliant, it can require the registrant to submit further information, with a deadline of no more than 12 months (extendable for new testing).</p>
+</section>
+
+<section class="clause" id="t6-s2">
+ <div class="cl-head"><span class="cl-num">Art. 44–48</span><h2 class="cl-title">Substance Evaluation</h2></div>
+ <p>Where there are grounds for suspecting that a substance presents a risk to human health or the environment, ECHA includes the substance in a Community rolling action plan for further evaluation. The competent authority of a member state evaluates the substance and may require the registrant to submit further information. The evaluation must consider all available registrations and uses.</p>
+<p>If the competent authority concludes that further risk management is needed, it may refer the substance for harmonised classification and labelling, for inclusion in the Authorisation Candidate List, or for restriction.</p>
+</section>
+
+<section class="clause" id="t6-s3">
+ <div class="cl-head"><span class="cl-num">Art. 50–54</span><h2 class="cl-title">Decision-Making and Cost Sharing</h2></div>
+ <p>Draft decisions under evaluation are circulated to the registrant, other member state competent authorities, and ECHA's Member State Committee. The registrant has 30 days to comment. If other member states or ECHA propose amendments, the Committee seeks unanimous agreement. Where unanimity is not reached, the Commission takes the final decision. Registrants and downstream users who are required to perform additional testing share costs fairly when multiple parties have submitted proposals for the same test.</p>
+</section>
+
+<div class="chap-divider" id="t7"><span class="chap-divider-label">Title VII</span><span class="chap-divider-name">Authorisation</span></div>
+<section class="clause" id="t7-s1">
+ <div class="cl-head"><span class="cl-num">Art. 55</span><h2 class="cl-title">Aim</h2></div>
+ <p>Authorisation exists to ensure that Substances of Very High Concern are properly controlled and progressively replaced by suitable alternatives where those are economically and technically viable. Any applicant for authorisation must analyse the availability of alternatives and consider their risks and the technical and economic feasibility of substitution.</p>
+</section>
+
+<section class="clause" id="t7-s2">
+ <div class="cl-head"><span class="cl-num">Art. 56</span><h2 class="cl-title">General Rule</h2></div>
+ <p>A manufacturer, importer, or downstream user must not place on the market or use a substance listed in Annex XIV (the Authorisation List) unless: that use has been authorised; the use is exempted by Annex XIV itself; the sunset date has not yet been reached; or the applicant applied at least 18 months before the sunset date and a decision has not yet been taken. Downstream users may rely on an authorisation granted to an actor upstream in the supply chain.</p>
+<p>Exemptions from the authorisation requirement: scientific research and development; uses in plant protection products, biocidal products, motor fuels, and combustion fuels; and substances in preparations below certain concentration thresholds. Uses of SVHCs in cosmetics and food contact materials are also exempt where the substance meets only the human-health CMR criteria.</p>
+</section>
+
+<section class="clause" id="t7-s3">
+ <div class="cl-head"><span class="cl-num">Art. 57</span><h2 class="cl-title">Substances of Very High Concern</h2></div>
+ <p>The following substances may be included in the Authorisation List (Annex XIV): substances meeting the criteria for classification as CMR Category 1A or 1B; substances identified as PBT under Annex XIII criteria; substances identified as vPvB under Annex XIII criteria; and substances identified on a case-by-case basis from scientific evidence as causing an equivalent level of serious concern to human health or the environment — such as endocrine disruptors or substances with persistent and bioaccumulative properties that do not quite meet the PBT/vPvB thresholds.</p>
+</section>
+
+<section class="clause" id="t7-s4">
+ <div class="cl-head"><span class="cl-num">Art. 58–59</span><h2 class="cl-title">Inclusion in Annex XIV and Candidate List</h2></div>
+ <p>The Commission decides which SVHCs from the Candidate List are included in Annex XIV, with a priority based on PBT/vPvB properties, wide dispersive use, or high volumes. For each substance included, Annex XIV specifies: the inherent property or properties; transitional arrangements; the sunset date after which the substance cannot be used without authorisation; review periods; and any exempted uses.</p>
+<p>Before a substance is placed on the Candidate List, ECHA or a member state prepares an Annex XV dossier identifying the substance as an SVHC. The dossier is published and interested parties may comment within 45 days. If the Member State Committee reaches unanimous agreement that the substance meets the SVHC criteria, it is added to the Candidate List. If not, the Commission decides.</p>
+</section>
+
+<section class="clause" id="t7-s5">
+ <div class="cl-head"><span class="cl-num">Art. 60–64</span><h2 class="cl-title">Granting of Authorisations</h2></div>
+ <p>An authorisation is granted if the applicant demonstrates that risks from the use of the substance are adequately controlled — meaning exposure is below the derived no-effect level (DNEL) or predicted no-effect concentration (PNEC). This "adequate control" route is not available for PBT/vPvB substances or substances for which no safe threshold can be determined.</p>
+<p>Where adequate control cannot be shown, an authorisation may still be granted if the socio-economic benefits outweigh the risk and there are no suitable alternative substances or technologies. The Commission takes the final decision, on the basis of ECHA's Risk Assessment Committee and Socio-Economic Analysis Committee opinions. Authorisations are time-limited and include conditions and monitoring requirements. Authorisations are reviewed and may be amended or revoked.</p>
+</section>
+
+<section class="clause" id="t7-s6">
+ <div class="cl-head"><span class="cl-num">Art. 65–66</span><h2 class="cl-title">Holders and Downstream Users</h2></div>
+ <p>Holders of an authorisation must include the authorisation number on the label. Downstream users using a substance under a supply-chain authorisation must notify ECHA within three months of first supply.</p>
+</section>
+
+<div class="chap-divider" id="t8"><span class="chap-divider-label">Title VIII</span><span class="chap-divider-name">Restrictions</span></div>
+<section class="clause" id="t8-s1">
+ <div class="cl-head"><span class="cl-num">Art. 67</span><h2 class="cl-title">General Provisions</h2></div>
+ <p>A substance on its own, in a preparation, or in an article, for which Annex XVII contains a restriction must not be manufactured, placed on the market, or used unless it complies with the conditions of that restriction. Annex XVII is the single consolidated list of all EU-wide restrictions on chemicals. Scientific research and development is generally exempt.</p>
+</section>
+
+<section class="clause" id="t8-s2">
+ <div class="cl-head"><span class="cl-num">Art. 68–73</span><h2 class="cl-title">Restrictions Process</h2></div>
+ <p>Where there is an unacceptable risk to human health or the environment that needs to be addressed on an EU-wide basis, the Commission amends Annex XVII to introduce new restrictions or modify existing ones. A member state or ECHA (at the Commission's request) prepares a restriction dossier (Annex XV format) demonstrating the risk and proposing restrictions. ECHA's Risk Assessment Committee delivers an opinion on the risk within 9 months. The Socio-Economic Analysis Committee delivers an opinion on the socio-economic impact within 12 months. The Commission then decides within three months of receiving both opinions.</p>
+<p>For CMR Category 1A or 1B substances that could be used by consumers, the Commission may restrict consumer use through a simplified procedure without requiring the full restriction dossier process.</p>
+</section>
+
+<div class="chap-divider" id="t9"><span class="chap-divider-label">Title IX</span><span class="chap-divider-name">Fees and Charges</span></div>
+<section class="clause" id="t9-s1">
+ <div class="cl-head"><span class="cl-num">Art. 74</span><h2 class="cl-title">Fees and Charges</h2></div>
+ <p>ECHA charges fees for registration, updates, applications for authorisation, appeals, and other services. Fee levels are set by Commission regulation. Reduced fees apply to SMEs. ECHA may also charge for other administrative services it provides.</p>
+</section>
+
+<div class="chap-divider" id="t10"><span class="chap-divider-label">Title X</span><span class="chap-divider-name">The European Chemicals Agency (ECHA)</span></div>
+<section class="clause" id="t10-s1">
+ <div class="cl-head"><span class="cl-num">Art. 75–77</span><h2 class="cl-title">Establishment and Tasks</h2></div>
+ <p>ECHA is established as a body of the EU with legal personality, headquartered in Helsinki. Its mission is to manage and carry out the technical, scientific, and administrative aspects of REACH, to ensure consistency at EU level, and to provide technical and scientific guidance and tools.</p>
+<p>ECHA's specific tasks include: receiving and checking registration dossiers; developing methods and tools for evaluation; maintaining databases of registered substances; making non-confidential registration information publicly available; building the Candidate List and the Authorisation List; providing technical and scientific support for the restrictions process; setting up and maintaining the Classification and Labelling Inventory; providing guidance and software tools; and administering the forum for exchange of enforcement information.</p>
+</section>
+
+<section class="clause" id="t10-s2">
+ <div class="cl-head"><span class="cl-num">Art. 78–84</span><h2 class="cl-title">Committees and Bodies</h2></div>
+ <p>ECHA's main scientific bodies are the Risk Assessment Committee (RAC), the Socio-Economic Analysis Committee (SEAC), and the Member State Committee (MSC). RAC provides opinions on evaluations, applications for authorisation, restriction proposals, and harmonised classification. SEAC provides opinions on the socio-economic aspects of authorisation and restriction. MSC resolves divergences among member states on evaluation decisions. Each committee is composed of at least one member appointed by each member state.</p>
+<p>A Forum for Exchange of Information on Enforcement coordinates enforcement activities among member states, proposes enforcement strategies, and identifies best practices. ECHA is governed by a Management Board composed of one representative from each member state, six Commission representatives, two European Parliament nominees, and stakeholder observers. The Executive Director manages ECHA's day-to-day operations.</p>
+</section>
+
+<section class="clause" id="t10-s3">
+ <div class="cl-head"><span class="cl-num">Art. 85–111</span><h2 class="cl-title">Operations, Budget, and Appeals</h2></div>
+ <p>ECHA is funded by fees paid by industry and a Commission subsidy for certain activities. It must maintain transparency and provide public access to information. A Board of Appeal hears appeals against ECHA decisions on registration, evaluation, data sharing, and confidentiality claims. The Board of Appeal decides within 90 days. Its decisions may be challenged before the General Court and then the Court of Justice. ECHA's staff are subject to EU staff regulations. ECHA maintains an internal audit function and is subject to audit by the European Court of Auditors.</p>
+</section>
+
+<div class="chap-divider" id="t11"><span class="chap-divider-label">Title XI</span><span class="chap-divider-name">Classification and Labelling Inventory</span></div>
+<section class="clause" id="t11-s1">
+ <div class="cl-head"><span class="cl-num">Art. 112–116</span><h2 class="cl-title">Notification and Inventory</h2></div>
+ <p>Manufacturers and importers who place a substance on the market must notify ECHA of the substance's classification and labelling (unless already submitted as part of a registration). ECHA maintains the Classification and Labelling Inventory — a publicly accessible database of notified and harmonised classifications. Where different notifiers classify the same substance differently, they must make every effort to reach an agreed entry. Notifications must be updated when the classification changes.</p>
+</section>
+
+<div class="chap-divider" id="t12"><span class="chap-divider-label">Title XII</span><span class="chap-divider-name">Information</span></div>
+<section class="clause" id="t12-s1">
+ <div class="cl-head"><span class="cl-num">Art. 117–120</span><h2 class="cl-title">Reporting, Access, and Confidentiality</h2></div>
+ <p>Every five years, member states must report to the Commission on the operation of REACH in their territories, including enforcement results. The Commission publishes a combined report. ECHA must provide free public access to: substance identity, classification, physicochemical data, results of toxicological and ecotoxicological studies, DNEL/PNEC values, guidance on safe use, and analytical methods for detecting dangerous substances. ECHA must also publish the Authorisation List, the Candidate List, and the Restrictions List.</p>
+<p>Information that is normally considered commercially confidential — full composition, precise use details, precise tonnage, links between manufacturer/importer and downstream users — is protected from disclosure. However, a registrant or applicant may request that certain normally non-confidential information (such as the study summary, trade name, or DNEL/PNEC values) be kept confidential, with a justification that publication would be commercially harmful. ECHA assesses these claims and may reject them.</p>
+</section>
+
+<div class="chap-divider" id="t13"><span class="chap-divider-label">Title XIII</span><span class="chap-divider-name">Competent Authorities</span></div>
+<section class="clause" id="t13-s1">
+ <div class="cl-head"><span class="cl-num">Art. 121–124</span><h2 class="cl-title">Competent Authorities and Helpdesks</h2></div>
+ <p>Each member state must appoint one or more competent authorities responsible for cooperating with ECHA and the Commission on implementation. Member states must place adequate resources at their disposal. Member states must also establish national helpdesks to provide advice to manufacturers, importers, downstream users, and any other interested parties. Competent authorities must submit to ECHA any available information on substances whose dossiers are incomplete, including enforcement or monitoring findings.</p>
+</section>
+
+<div class="chap-divider" id="t14"><span class="chap-divider-label">Title XIV</span><span class="chap-divider-name">Enforcement</span></div>
+<section class="clause" id="t14-s1">
+ <div class="cl-head"><span class="cl-num">Art. 125–127</span><h2 class="cl-title">Enforcement and Penalties</h2></div>
+ <p>Member states must maintain a system of official controls and other activities to ensure compliance. Member states must lay down penalties for infringement and take all measures necessary to ensure they are implemented. Penalties must be effective, proportionate, and dissuasive. Member states must notify the Commission of their enforcement rules.</p>
+<p>The Forum for Exchange of Information on Enforcement coordinates enforcement actions, proposes enforcement strategies, identifies best practice, and organises joint enforcement projects (REF projects). REACH enforcement is carried out at national level by each member state's designated enforcement authorities.</p>
+</section>
+
+<div class="chap-divider" id="t15"><span class="chap-divider-label">Title XV</span><span class="chap-divider-name">Transitional and Final Provisions</span></div>
+<section class="clause" id="t15-s1">
+ <div class="cl-head"><span class="cl-num">Art. 128</span><h2 class="cl-title">Free Movement</h2></div>
+ <p>Member states must not prohibit, restrict, or impede the manufacture, import, placing on the market, or use of a substance complying with REACH. But member states may maintain or introduce national rules to protect workers, human health, and the environment in cases where REACH does not harmonise the requirements.</p>
+</section>
+
+<section class="clause" id="t15-s2">
+ <div class="cl-head"><span class="cl-num">Art. 129</span><h2 class="cl-title">Safeguard Clause</h2></div>
+ <p>Where a member state has justifiable grounds for believing urgent action is essential to protect human health or the environment, it may take appropriate provisional measures. The Commission must decide within 60 days whether to authorise the measure for a defined period or require the member state to revoke it.</p>
+</section>
+
+<section class="clause" id="t15-s3">
+ <div class="cl-head"><span class="cl-num">Art. 135–136</span><h2 class="cl-title">Transitional Measures</h2></div>
+ <p>Notified substances under the previous Directive 67/548/EEC are considered registered under REACH with reduced information requirements. Previous assessments and risk-reduction measures remain in force. Existing restrictions from Directive 76/769/EEC were transferred into Annex XVII of REACH.</p>
+</section>
+
+<section class="clause" id="t15-s4">
+ <div class="cl-head"><span class="cl-num">Art. 138</span><h2 class="cl-title">Review</h2></div>
+ <p>The Commission must carry out a review of REACH every five years (first review was due by 1 June 2012) and propose amendments if necessary, including extending the scope to cover polymers and certain low-tonnage substances, and assessing the functioning of the authorisation and restriction processes.</p>
+</section>
+
+<section class="clause" id="t15-s5">
+ <div class="cl-head"><span class="cl-num">Art. 141</span><h2 class="cl-title">Entry into Force</h2></div>
+ <p>REACH entered into force on 1 June 2007. Different provisions applied on different dates: pre-registration opened 1 June 2008; registration deadlines ran from 1 December 2010 through 1 June 2018; and the authorisation and restriction mechanisms became fully operational by 1 June 2009.</p>
+</section>
+
+<div class="chap-divider" id="annex"><span class="chap-divider-label">Reference</span><span class="chap-divider-name">Annexes I–XVII</span></div>
+<section class="clause" id="annex-summary" style="border-top:none;padding-top:0;margin-top:0">
+ <div class="cl-head"><span class="cl-num">Summary</span><h2 class="cl-title">What each Annex covers</h2></div>
+ <p><strong>Annex I</strong> — General provisions for assessing substances and preparing chemical safety reports. Sets out the methodology for hazard assessment, PBT/vPvB assessment, exposure assessment, and risk characterisation.</p>
+<p><strong>Annex II</strong> — Guide to the compilation of Safety Data Sheets. Specifies the mandatory 16-section format and content requirements.</p>
+<p><strong>Annex III</strong> — Criteria for substances registered at 1–10 tonnes per year for which only limited data is required.</p>
+<p><strong>Annex IV</strong> — Exemptions from registration: list of substances of minimum concern (e.g. noble gases, water, nitrogen, glucose).</p>
+<p><strong>Annex V</strong> — Exemptions from registration: categories of substances for which registration is deemed inappropriate or unnecessary (e.g. substances occurring in nature not chemically modified, substances used in food and feedingstuffs).</p>
+<p><strong>Annex VI</strong> — Information requirements for registration: general rules for all registrations.</p>
+<p><strong>Annex VII</strong> — Standard information requirements for substances at 1+ tonnes per year. Covers basic physicochemical, toxicological, and ecotoxicological data.</p>
+<p><strong>Annex VIII</strong> — Additional information requirements for substances at 10+ tonnes per year.</p>
+<p><strong>Annex IX</strong> — Additional information requirements for substances at 100+ tonnes per year.</p>
+<p><strong>Annex X</strong> — Additional information requirements for substances at 1,000+ tonnes per year.</p>
+<p><strong>Annex XI</strong> — General rules for adaptation of the standard testing regime. Allows waiving of tests where unnecessary (e.g. due to physicochemical properties), permits use of existing data, (Q)SAR models, in vitro methods, grouping, and read-across.</p>
+<p><strong>Annex XII</strong> — General provisions for downstream users to assess substances and prepare chemical safety reports.</p>
+<p><strong>Annex XIII</strong> — Criteria for the identification of PBT and vPvB substances. Sets out the persistence, bioaccumulation, and toxicity thresholds.</p>
+<p><strong>Annex XIV</strong> — The Authorisation List. Lists the Substances of Very High Concern for which authorisation is required before use. Updated periodically as substances are moved from the Candidate List.</p>
+<p><strong>Annex XV</strong> — Dossier format for proposals for harmonised classification and labelling, Candidate List inclusion, and restrictions. Used by member states and ECHA.</p>
+<p><strong>Annex XVI</strong> — Socio-economic analysis methodology. Sets out how applicants and ECHA assess the costs and benefits of authorisation or restriction.</p>
+<p><strong>Annex XVII</strong> — Restrictions. The consolidated list of all EU-wide restrictions on the manufacture, placing on the market, and use of certain dangerous substances, preparations, and articles. This is the single most frequently consulted Annex in day-to-day compliance.</p>
+</section>
+
+<div class="map-clear"><p>This reference covers what the Regulation says. REACH is the EU's most comprehensive chemicals regulation — 141 articles and 17 Annexes governing the entire lifecycle of chemical substances from manufacture through use to disposal. Working out which registration obligations apply to your specific substance, which tonnage band you fall into, whether your substance is on the Candidate List or the Authorisation List, and what your Safety Data Sheet must contain — is a different exercise.</p></div>
+<div class="sources-block"><div class="sources-label">Source</div><p>Regulation (EC) No 1907/2006 of the European Parliament and of the Council of 18 December 2006 (REACH), as corrected (OJ L 136, 29.5.2007). In force since 1 June 2007, with phased registration deadlines through 1 June 2018. Consolidated text from EUR-Lex.</p></div>
+<div class="doc-close">
+ <p>Need to work out how this actually applies to your product, data flows, or role? <em>That's a different exercise.</em></p>
+ <a href="../../index.html#begin" class="btn-outline">Start a conversation <span aria-hidden="true">→</span></a>
+</div>
+</div>
+</main>
+
+<footer>
+  <div class="ft-brand">
+    <div class="ft-bw"><img src="../../assets/crm.svg" alt="ORR Logo" class="begin-logo"/></div>
+    <span>From idea to operating business.</span>
+  </div>
+  <div class="ft-div"></div>
+  <nav class="ft-nav">
+    <span class="ft-l">Navigate</span>
+    <a href="../../resources.html">Resources</a>
+    <a href="../../index.html#assess">Diagnose</a>
+    <a href="../../index.html#structure">Structure</a>
+    <a href="../../founder.html">Founder</a>
+    <a href="../../index.html#begin">Begin</a>
+  </nav>
+  <div class="ft-div"></div>
+  <div class="ft-close">
+    <p class="ft-stmt">The businesses that run without their founders weren't built by accident. They were engineered.</p>
+    <div class="ft-legal">
+      <span class="ft-copy">© <span id="yr"></span> ORR — All rights reserved</span>
+      <div class="ft-ll">
+        <a href="../../legal/privacy.html">Privacy</a>
+        <a href="../../legal/terms.html">Terms</a>
+        <a href="../../legal/disclaimer.html">Disclaimer</a>
+      </div>
+      <p class="ft-disc">ORR is a business-structuring consultancy, not a law firm, accountancy, or financial adviser. Nothing on this site is professional advice.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+(function(){
+  var vrailFill=document.getElementById('vrail-fill');
+  var vrailRFill=document.getElementById('vrail-r-fill');
+  var nav=document.getElementById('nav');
+  var head=document.getElementById('doc-head');
+  var clauses=[].slice.call(document.querySelectorAll('.clause'));
+  var chgroups=[].slice.call(document.querySelectorAll('.idx-chgroup'));
+  var links=[].slice.call(document.querySelectorAll('.idx-chbody-in a,.idx-panel a'));
+  var map={}; links.forEach(function(a){var h=a.getAttribute('href').slice(1);(map[h]=map[h]||[]).push(a);});
+  var ticking=false;
+  function frame(){
+    ticking=false;
+    var y=scrollY, vh=innerHeight, total=document.body.scrollHeight-vh;
+    var pct=(total>0?Math.min(y/total,1)*100:0)+'%';
+    if(vrailFill) vrailFill.style.height=pct;
+    if(vrailRFill) vrailRFill.style.height=pct;
+    if(nav&&head) nav.classList.toggle('dark-mode', head.getBoundingClientRect().bottom>80);
+    var lineY=vh*0.3, cur=null;
+    clauses.forEach(function(c){ if(c.getBoundingClientRect().top<=lineY) cur=c.id; });
+    links.forEach(function(a){a.classList.remove('on');});
+    if(cur&&map[cur]) map[cur].forEach(function(a){a.classList.add('on');});
+    if(cur){
+      var chId = cur.split('-s')[0];
+      chgroups.forEach(function(g){
+        var isCurrent = g.dataset.chgroup === chId;
+        g.classList.toggle('current', isCurrent);
+      });
+    }
+  }
+  function onScroll(){ if(!ticking){ticking=true;requestAnimationFrame(frame);} }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll,{passive:true});
+  frame();
+})();
+
+(function(){
+  var groups = [].slice.call(document.querySelectorAll('.idx-chgroup'));
+  function measure(g){
+    var body = g.querySelector('.idx-chbody');
+    var inner = g.querySelector('.idx-chbody-in');
+    body.style.maxHeight = g.classList.contains('open') ? inner.scrollHeight + 'px' : '0';
+  }
+  groups.forEach(function(g){
+    var head = g.querySelector('.idx-chhead');
+    head.addEventListener('click', function(){
+      var open = g.classList.toggle('open');
+      head.setAttribute('aria-expanded', open);
+      measure(g);
+    });
+  });
+  if(groups[0]){ groups[0].classList.add('open'); measure(groups[0]); }
+  var mo = new MutationObserver(function(){
+    groups.forEach(function(g){
+      if(g.classList.contains('current') && !g.classList.contains('open')){
+        g.classList.add('open'); measure(g);
+      }
+    });
+  });
+  groups.forEach(function(g){ mo.observe(g, {attributes:true, attributeFilter:['class']}); });
+})();
+
+(function(){var m=document.querySelector('.idx-mobile');if(!m)return;
+ var b=m.querySelector('.idx-toggle'),p=m.querySelector('.idx-panel');
+ b.addEventListener('click',function(){var o=m.classList.toggle('open');
+  p.style.maxHeight=o?p.querySelector('.idx-panel-in').scrollHeight+'px':'0';});
+ m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');p.style.maxHeight='0';});});
+})();
+
+(function(){
+  var mBtn=document.getElementById('menuBtn'),mNav=document.getElementById('mnav');
+  if(!mBtn||!mNav)return;
+  mBtn.addEventListener('click',function(){
+    var o=!mNav.classList.contains('open');
+    mNav.classList.toggle('open',o);mBtn.classList.toggle('x',o);
+    mBtn.setAttribute('aria-expanded',o);
+    document.documentElement.classList.toggle('m-lock',o);
+  });
+  mNav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){
+    mNav.classList.remove('open');mBtn.classList.remove('x');
+    mBtn.setAttribute('aria-expanded','false');
+    document.documentElement.classList.remove('m-lock');
+  });});
+})();
+
+var REDUCED = matchMedia('(prefers-reduced-motion:reduce)').matches;
+function easeScrollTo(el){
+  if(!el) return;
+  var start=scrollY, end=el.getBoundingClientRect().top+scrollY, dist=end-start;
+  if(REDUCED){scrollTo(0,end);return;}
+  var t0=null; var ease=function(t){return 1-Math.pow(1-t,4);};
+  requestAnimationFrame(function step(ts){
+    if(!t0)t0=ts;
+    var p=Math.min((ts-t0)/650,1);
+    scrollTo(0,start+dist*ease(p));
+    if(p<1)requestAnimationFrame(step);
+  });
+}
+document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){
+  var t=document.querySelector(a.getAttribute('href'));
+  if(!t)return; e.preventDefault(); easeScrollTo(t);
+});});
+
+var HOVERS=matchMedia('(hover:hover)').matches;
+if(HOVERS){
+  var dot=document.getElementById('cursorDot');
+  var mx=0,my=0,cx=0,cy=0;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.classList.add('active');});
+  document.addEventListener('mouseleave',function(){dot.classList.remove('active');});
+  var sel='a,button';
+  document.addEventListener('mouseover',function(e){if(e.target.closest(sel))dot.classList.add('grow');});
+  document.addEventListener('mouseout',function(e){if(e.target.closest(sel))dot.classList.remove('grow');});
+  (function loop(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;dot.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(loop);})();
+  document.querySelectorAll('.nav-cta,.btn,.btn-outline').forEach(function(btn){
+    btn.addEventListener('mousemove',function(e){var r=btn.getBoundingClientRect();btn.style.transform='translate('+((e.clientX-r.left-r.width/2)*.15)+'px,'+((e.clientY-r.top-r.height/2)*.15)+'px)';});
+    btn.addEventListener('mouseleave',function(){btn.style.transform='';});
+  });
+}
+</script>
+</body>
+</html>

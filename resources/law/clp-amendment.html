@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FAF7F0">
+<title>CLP Amendment | The Law, Plainly | ORR</title>
+<meta name="description" content="Regulation (EU) 2024/2865 amending the CLP Regulation on classification, labelling and packaging of chemicals — restated article by article, in plain English. A reading companion for founders, not a substitute for the official text.">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="../../assets/ngb.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ══════════════════════════════════════════════════════════════
+   PALETTE — lighter, warmer, index-matched. Dark reserved for the
+   masthead only; the reading surface stays paper-bright throughout.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --vellum: #FAF7F0;
+  --paper:  #FFFFFF;
+  --paper2: #F5F1E8;
+  --ink:    #211E17;
+  --ink80:  rgba(33,30,23,.90);
+  --ink65:  rgba(33,30,23,.72);
+  --ink48:  rgba(33,30,23,.56);
+  --ink32:  rgba(33,30,23,.38);
+  --ink14:  rgba(33,30,23,.13);
+  --ink08:  rgba(33,30,23,.075);
+  --pine:   #1A4D40;
+  --pine-b: #246B59;
+  --pine-l: #3D8570;
+  --pine08: rgba(26,77,64,.07);
+  --pine14: rgba(26,77,64,.13);
+  --dark:   #0E2A24;
+  --crm:    #FAF7F0;
+  --crm80:  rgba(250,247,240,.90);
+  --crm60:  rgba(250,247,240,.68);
+  --crm40:  rgba(250,247,240,.46);
+  --crm16:  rgba(250,247,240,.16);
+  --mint:   #93CDBB;
+  --bronze: #A9895A;
+  --gold:   #C9A15F;
+  --line:   rgba(33,30,23,.11);
+  --lineL:  rgba(33,30,23,.06);
+  --disp:'Newsreader', Georgia, serif;
+  --body:'Hanken Grotesk', system-ui, sans-serif;
+  --mono:'IBM Plex Mono', monospace;
+  --e1:cubic-bezier(.22,1,.36,1);
+  --e2:cubic-bezier(.16,1,.3,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --pad:clamp(22px,4.6vw,56px);
+  --shell:1560px;
+}
+html{background:var(--vellum);color:var(--ink);-webkit-text-size-adjust:100%;scrollbar-width:none;overflow-x:hidden;overflow-x:clip}
+html::-webkit-scrollbar{display:none}
+body{font-family:var(--body);font-weight:400;line-height:1.75;font-size:16.5px;background:var(--vellum);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;overflow-x:clip;cursor:default;letter-spacing:.005em}
+::selection{background:var(--pine);color:var(--crm)}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.2;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E")}
+@media(hover:hover){
+  .cursor-dot{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--pine);pointer-events:none;z-index:9990;
+    mix-blend-mode:exclusion;transition:width .3s var(--spring),height .3s var(--spring),margin .3s var(--spring),opacity .3s;margin:-4px 0 0 -4px;opacity:0}
+  .cursor-dot.active{opacity:1}
+  .cursor-dot.grow{width:40px;height:40px;margin:-20px 0 0 -20px;background:var(--mint);mix-blend-mode:difference}
+}
+#vrail{position:fixed;left:0;top:0;bottom:0;width:2px;z-index:7000;pointer-events:none;background:var(--ink08)}
+#vrail-fill{position:absolute;top:0;left:0;width:100%;height:0;background:linear-gradient(to bottom,var(--pine),var(--mint));transition:height .15s linear}
+#vrail-r{position:fixed;right:0;top:0;bottom:0;width:2px;z-index:7000;pointer-events:none;background:var(--ink08)}
+#vrail-r-fill{position:absolute;top:0;left:0;width:100%;height:0;background:linear-gradient(to bottom,var(--pine),var(--mint));transition:height .15s linear}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;height:64px;display:flex;align-items:center;padding:0 42px;
+  opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .5s var(--e2),transform .5s var(--e2),background .4s,border-color .4s,backdrop-filter .4s;border-bottom:1px solid transparent}
+#nav.visible{opacity:1;transform:none;pointer-events:auto}
+#nav.solid{background:rgba(250,247,240,.86);backdrop-filter:blur(18px) saturate(1.3);border-color:var(--line)}
+#nav.dark-mode{background:rgba(14,42,36,.88);border-color:var(--crm16)}
+#nav.dark-mode .nav-mid{color:var(--crm40)}
+#nav.dark-mode .nav-r a{color:var(--mint)}
+#nav.dark-mode .nav-cta{border-color:var(--crm);color:var(--crm)!important}
+#nav.dark-mode .nav-cta:hover{background:var(--mint);border-color:var(--mint);color:var(--dark)!important}
+.brand{display:flex;align-items:center;gap:11px;position:relative}
+.nav-logo{width:55px;height:55px;display:block;transition:opacity .5s var(--e2)}
+.nav-logo-dark{opacity:1}
+.nav-logo-light{position:absolute;top:0;left:0;opacity:0}
+#nav.dark-mode .nav-logo-dark{opacity:0}
+#nav.dark-mode .nav-logo-light{opacity:1}
+.nav-mid{font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--ink48);position:absolute;left:50%;transform:translateX(-50%)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:30px}
+.nav-r a{font-family:var(--body);font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--pine-b);transition:color .25s}
+.nav-r a:hover{color:var(--pine)}
+.nav-cta{border:1px solid var(--ink);padding:8px 18px;color:var(--ink)!important;letter-spacing:.12em;transition:background .25s,color .25s,border-color .25s}
+.nav-cta:hover{background:var(--pine);border-color:var(--pine);color:var(--crm)!important}
+.menu-btn{display:none;position:relative;width:44px;height:44px;margin-right:-10px;background:none;border:0;cursor:pointer}
+.menu-btn i{position:absolute;left:11px;right:11px;height:1.5px;background:var(--ink);transition:top .34s var(--e1),transform .34s var(--e1)}
+.menu-btn i:first-child{top:18px}.menu-btn i:last-child{top:26px}
+.menu-btn.x i:first-child{top:22px;transform:rotate(45deg)}.menu-btn.x i:last-child{top:22px;transform:rotate(-45deg)}
+#nav.dark-mode .menu-btn i{background:var(--crm)}
+.mnav{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;z-index:899;background:rgba(250,247,240,.98);backdrop-filter:blur(20px) saturate(1.3);
+  flex-direction:column;padding:22px 22px calc(30px + env(safe-area-inset-bottom));opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .4s var(--e2),transform .4s var(--e2)}
+.mnav.open{opacity:1;transform:none;pointer-events:auto}
+.mnav a{font-family:var(--disp);font-weight:300;font-size:clamp(28px,8.5vw,38px);letter-spacing:-.015em;color:var(--ink);padding:20px 2px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(10px);transition:opacity .5s var(--e2),transform .5s var(--e2)}
+.mnav a::after{content:'→';font-family:var(--body);font-size:17px;color:var(--pine);opacity:.7}
+.mnav.open a{opacity:1;transform:none}
+.mnav.open a:nth-child(1){transition-delay:.05s}
+.mnav.open a:nth-child(2){transition-delay:.1s}
+.mnav.open a:nth-child(3){transition-delay:.15s}
+.mnav-tag{margin-top:auto;font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--ink32);opacity:0;transition:opacity .6s var(--e2) .3s}
+.mnav.open .mnav-tag{opacity:1}
+html.m-lock,html.m-lock body{overflow:hidden}
+@media(max-width:820px){
+  #nav{padding:0 max(18px,env(safe-area-inset-right)) 0 max(18px,env(safe-area-inset-left))}
+  .nav-mid{display:none}.nav-r a:not(.nav-cta){display:none}.nav-cta{padding:10px 16px}.menu-btn{display:block}.mnav{display:flex}
+}
+@media(max-width:1080px){.nav-mid{display:none}}
+#nav{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+
+/* FOOTER */
+footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);border-top:1px solid var(--crm16);padding:68px 42px 44px;display:grid;grid-template-columns:1.3fr 1px 1fr 1px 1.3fr;gap:0 56px}
+.ft-div{background:linear-gradient(to bottom,var(--crm16),transparent);align-self:stretch}
+.ft-brand span{font-family:var(--disp);font-size:14px;color:var(--crm60);line-height:1.55;display:block;margin-top:12px}
+.ft-bw{font-family:var(--disp);font-weight:300;font-size:28px;letter-spacing:.08em;color:var(--crm)}
+.begin-logo{height:160px;width:auto;display:block}
+.ft-nav{display:flex;flex-direction:column;gap:13px}
+.ft-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--crm40);margin-bottom:2px}
+.ft-nav a{font-size:13px;color:var(--crm60);transition:color .25s}
+.ft-nav a:hover{color:var(--mint)}
+.ft-close{display:flex;flex-direction:column;text-align:right}
+.ft-stmt{font-family:var(--disp);font-style:italic;font-weight:300;font-size:16px;line-height:1.45;color:var(--crm60);margin-bottom:22px}
+.ft-legal{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.ft-copy{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--crm40)}
+.ft-ll{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.ft-ll a{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--crm40);transition:color .25s}
+.ft-ll a:hover{color:var(--mint)}
+.ft-disc{font-size:11px;line-height:1.68;color:var(--crm60);text-align:right;max-width:52ch;margin-top:8px}
+footer{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+@media(max-width:1080px){
+  footer{grid-template-columns:1fr 1fr;gap:36px 44px}.ft-div{display:none}.ft-close{grid-column:1/-1;text-align:left}
+  .ft-legal,.ft-ll{align-items:flex-start;justify-content:flex-start}.ft-disc{text-align:left;max-width:60ch}.begin-logo{height:clamp(96px,12vw,140px)}
+}
+@media(max-width:880px){
+  footer{grid-template-columns:1fr;padding:52px 22px calc(38px + env(safe-area-inset-bottom));gap:34px}.ft-div{display:none}
+  .ft-close{grid-column:auto;text-align:left}.ft-legal,.ft-ll{align-items:flex-start;justify-content:flex-start}
+  .begin-logo{height:clamp(72px,20vw,96px)}.ft-stmt{font-size:15px}.ft-disc{font-size:12px;line-height:1.6;color:var(--crm80);max-width:100%}
+}
+@media(max-width:400px){#vrail,#vrail-r{width:1px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ══════════════════════════════════════════════════════════════
+   DOCUMENT HEADER — restrained dark band, generous vertical rhythm
+   ══════════════════════════════════════════════════════════════ */
+#doc-head{position:relative;padding:calc(64px + clamp(52px,7vw,92px)) var(--pad) clamp(46px,5.6vw,68px);
+ background:var(--dark);color:var(--crm);border-bottom:1px solid var(--crm16);overflow:hidden}
+#doc-head::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.45;
+ background-image:linear-gradient(rgba(250,247,240,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(250,247,240,.025) 1px,transparent 1px);background-size:64px 64px}
+#doc-head::after{content:'';position:absolute;top:-30%;right:-6%;width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(circle,rgba(147,205,187,.10),transparent 68%);pointer-events:none}
+.dh-wrap{max-width:var(--shell);margin:0 auto;position:relative;padding-left:clamp(0px,4vw,64px)}
+.dh-crumb{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--crm40);margin-bottom:22px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.dh-crumb a{color:var(--crm60);transition:color .2s}
+.dh-crumb a:hover{color:var(--mint)}
+.dh-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--mint);margin-bottom:24px}
+.dh-title{font-family:var(--disp);font-weight:300;font-size:clamp(42px,6.4vw,84px);line-height:1.0;
+ letter-spacing:-.03em;margin-bottom:24px;max-width:19ch;color:var(--crm)}
+.dh-title em{font-style:italic;color:var(--mint)}
+.dh-stand{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(17px,1.9vw,21px);
+ line-height:1.55;color:var(--crm60);max-width:66ch}
+.dh-note{font-family:var(--body);font-size:14px;line-height:1.72;color:var(--crm80);max-width:64ch;margin-top:16px}
+.dh-companion{font-family:var(--body);font-size:13px;color:var(--crm40);margin-top:18px;max-width:64ch;
+  display:flex;align-items:center;gap:9px}
+.dh-companion::before{content:'';width:14px;height:1px;background:var(--crm40)}
+.dh-meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:32px;padding-top:26px;border-top:1px solid var(--crm16)}
+.dh-meta-item{display:flex;flex-direction:column;gap:5px}
+.dh-meta-k{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--crm40)}
+.dh-meta-v{font-family:var(--body);font-size:13px;color:var(--crm80)}
+
+/* ══════════════════════════════════════════════════════════════
+   BODY — wider shell, much more generous index, wider reading column
+   ══════════════════════════════════════════════════════════════ */
+#doc-body{max-width:var(--shell);margin:0 auto;padding:clamp(52px,6vw,80px) var(--pad) clamp(64px,8vw,110px);
+ display:grid;grid-template-columns:224px 1fr;gap:0 clamp(96px,10vw,160px);align-items:start}
+
+/* ── the index — a real index: leaders, quiet type, no chrome ── */
+.idx{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 128px);overflow-y:auto;scrollbar-width:none;
+  padding-right:4px}
+.idx::-webkit-scrollbar{display:none}
+.idx-label{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink32);
+ padding-bottom:16px;margin-bottom:4px;border-bottom:1.5px solid var(--ink);display:flex;align-items:baseline;justify-content:space-between}
+.idx-label span:first-child{color:var(--ink);font-weight:500}
+.idx-label-count{font-family:var(--mono);font-size:9px;color:var(--ink32);letter-spacing:.06em}
+
+.idx-chgroup{border-bottom:1px solid var(--lineL)}
+.idx-chgroup:last-child{border-bottom:none}
+.idx-chhead{display:block;width:100%;background:none;border:none;
+ text-align:left;cursor:pointer;padding:15px 2px 15px 0;position:relative;transition:opacity .2s}
+.idx-chhead:hover{opacity:.7}
+.idx-chlabel{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink32);display:block;margin-bottom:3px}
+.idx-chname-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.idx-chname{font-family:var(--disp);font-weight:400;font-size:14px;color:var(--ink);line-height:1.35;letter-spacing:-.005em;max-width:100%}
+.idx-chleader{flex:1;border-bottom:1px dotted var(--ink14);margin-bottom:4px;min-width:8px;align-self:flex-end}
+.idx-chchev{font-family:var(--body);font-weight:300;font-size:14px;color:var(--ink32);
+ transition:transform .35s var(--e1);flex-shrink:0}
+.idx-chgroup.open .idx-chchev{transform:rotate(45deg)}
+.idx-chgroup.current .idx-chlabel{color:var(--pine-b)}
+.idx-chgroup.current .idx-chname{color:var(--pine);font-style:italic}
+.idx-chbody{max-height:0;overflow:hidden;transition:max-height .45s var(--e2)}
+.idx-chbody-in{padding:0 0 14px 2px}
+.idx-chbody-in a{display:flex;gap:10px;align-items:baseline;padding:6px 0;font-size:12.5px;line-height:1.5;color:var(--ink48);
+ transition:color .2s}
+.idx-chbody-in a .n{font-family:var(--mono);font-size:9px;color:var(--ink32);flex-shrink:0;min-width:14px;transition:color .2s}
+.idx-chbody-in a:hover{color:var(--ink)}
+.idx-chbody-in a.on{color:var(--pine);font-weight:500}
+.idx-chbody-in a.on .n{color:var(--pine)}
+.idx-foot{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);
+ font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--ink32);line-height:1.85}
+.idx-mobile{display:none}
+
+/* ── the reading column — wider still ── */
+.content{min-width:0;max-width:1020px}
+.lead-note{margin-bottom:clamp(40px,4.6vw,58px);padding:22px 26px;background:transparent;border:1px solid var(--ink14);
+  border-left:3px solid var(--ink32);border-radius:0 10px 10px 0}
+.lead-note p{font-size:12.5px;line-height:1.75;color:var(--ink48);font-family:var(--body)}
+.lead-note p + p{margin-top:10px}
+.lead-note strong{color:var(--ink65);font-weight:600}
+.lead-note .ln-label{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink32);margin-bottom:10px;display:block}
+
+.chap-divider{display:flex;align-items:baseline;gap:16px;margin:clamp(52px,6vw,76px) 0 clamp(26px,3vw,34px);
+ padding-bottom:16px;border-bottom:2px solid var(--pine14)}
+.content .clause:first-of-type ~ .chap-divider:first-of-type,
+.content > .chap-divider:first-child{margin-top:0}
+.chap-divider-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--pine);flex-shrink:0}
+.chap-divider-name{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(21px,2.3vw,29px);color:var(--ink);line-height:1.2}
+
+.clause{padding-top:clamp(28px,3.4vw,38px);margin-top:clamp(28px,3.4vw,38px);border-top:1px solid var(--line);scroll-margin-top:96px}
+.chap-divider + .clause{border-top:none;margin-top:0;padding-top:0}
+.cl-head{display:flex;align-items:baseline;gap:18px;margin-bottom:16px}
+.cl-num{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--pine);padding-top:6px;flex-shrink:0;white-space:nowrap;
+  background:var(--pine08);padding:4px 9px;border-radius:5px;margin-top:2px}
+.cl-title{font-family:var(--disp);font-weight:300;font-size:clamp(22px,2.6vw,31px);line-height:1.16;letter-spacing:-.02em;color:var(--ink)}
+.cl-subhead{font-family:var(--disp);font-style:italic;font-weight:400;font-size:clamp(17px,1.8vw,20px);
+  letter-spacing:-.005em;color:var(--pine);margin:28px 0 12px;padding-top:20px;border-top:1px solid var(--lineL)}
+.clause .cl-subhead:first-of-type{margin-top:22px}
+.clause p{font-size:15.5px;line-height:1.85;color:var(--ink65);margin-bottom:14px;max-width:88ch}
+.clause p:last-child{margin-bottom:0}
+.clause strong{font-weight:600;color:var(--ink)}
+.pen-list{list-style:none;counter-reset:pen;margin:6px 0 0;padding:0;max-width:88ch}
+.pen-list li{counter-increment:pen;position:relative;padding:13px 0 13px 38px;font-size:15px;line-height:1.75;
+  color:var(--ink65);border-bottom:1px solid var(--lineL)}
+.pen-list li:first-child{border-top:1px solid var(--lineL)}
+.pen-list li::before{content:counter(pen,decimal-leading-zero);position:absolute;left:0;top:13px;
+  font-family:var(--mono);font-size:11px;color:var(--pine)}
+
+.map-clear{margin-top:clamp(52px,5.8vw,76px);padding:28px 30px;background:var(--pine08);border-left:3px solid var(--pine);
+  max-width:none;border-radius:0 12px 12px 0}
+.map-clear p{font-family:var(--disp);font-style:italic;font-weight:300;font-size:15px;line-height:1.72;color:var(--ink65)}
+
+.sources-block{margin-top:clamp(32px,3.8vw,44px);padding-top:22px;border-top:1px solid var(--line);max-width:none}
+.sources-label{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink32);margin-bottom:9px}
+.sources-block p{font-size:12.5px;line-height:1.7;color:var(--ink48)}
+
+.doc-close{margin-top:clamp(52px,6vw,78px);padding-top:clamp(30px,3.6vw,40px);border-top:1px solid var(--line);
+ display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
+.doc-close p{font-family:var(--disp);font-style:italic;font-weight:300;font-size:14.5px;color:var(--ink48);max-width:44ch;line-height:1.58}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-size:11.5px;font-weight:500;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--ink);border:1px solid var(--ink);padding:14px 24px;background:none;
+  cursor:pointer;transition:background .3s,color .3s,border-color .3s,gap .3s;white-space:nowrap;border-radius:2px}
+.btn-outline:hover{background:var(--pine);border-color:var(--pine);color:var(--crm);gap:15px}
+
+@media(max-width:1360px){
+  #doc-body{grid-template-columns:214px 1fr;gap:0 56px}
+  .content{max-width:none}
+}
+
+@media(max-width:960px){
+ #doc-body{grid-template-columns:1fr;gap:0}
+ .idx{display:none}
+ .idx-mobile{display:block;position:sticky;top:64px;z-index:80;margin:0 calc(-1*var(--pad)) clamp(30px,5vw,42px);
+  background:rgba(250,247,240,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+ .idx-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px var(--pad);
+  background:none;border:none;cursor:pointer;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--pine)}
+ .idx-toggle .chev{transition:transform .35s var(--e1)}
+ .idx-mobile.open .idx-toggle .chev{transform:rotate(45deg)}
+ .idx-panel{max-height:0;overflow:hidden;transition:max-height .45s var(--e2)}
+ .idx-panel-in{padding:4px var(--pad) 20px;max-height:62vh;overflow-y:auto}
+ .idxm-chap{font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--pine);
+   padding:16px 0 8px;opacity:.9}
+ .idx-panel a{display:flex;gap:12px;padding:10px 0;font-size:13.5px;color:var(--ink65);border-bottom:1px solid var(--lineL)}
+ .idx-panel a .n{font-family:var(--mono);font-size:10.5px;color:var(--pine);min-width:38px}
+ .content{max-width:none}
+ .doc-close{flex-direction:column;align-items:stretch;text-align:left}
+ .btn-outline{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div id="vrail" aria-hidden="true"><div id="vrail-fill"></div></div>
+<div id="vrail-r" aria-hidden="true"><div id="vrail-r-fill"></div></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<header id="nav" class="visible solid dark-mode">
+  <a class="brand" href="../../index.html" aria-label="ORR home">
+    <img src="../../assets/drk.svg" alt="ORR" class="nav-logo nav-logo-dark"/>
+    <img src="../../assets/crm.svg" alt="ORR" class="nav-logo nav-logo-light"/>
+  </a>
+  <span class="nav-mid">From Idea to Operating Business</span>
+  <nav class="nav-r">
+    <a href="../../index.html#structure">Structure</a>
+    <a href="../../resources.html">Resources</a>
+    <a href="../../index.html#begin" class="nav-cta">Begin &rarr;</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+  </nav>
+</header>
+
+<nav class="mnav" id="mnav" aria-label="Mobile navigation">
+  <a href="../../index.html#structure">Structure</a>
+  <a href="../../index.html#model">How we work</a>
+  <a href="../../resources.html">Resources</a>
+  <a href="../../index.html#begin">Begin</a>
+  <span class="mnav-tag">From Idea to Operating Business</span>
+</nav>
+
+<header id="doc-head">
+ <div class="dh-wrap">
+  <p class="dh-crumb"><a href="../../resources.html">Resources</a><span aria-hidden="true">/</span><a href="../law-plainly.html">The Law, Plainly</a><span aria-hidden="true">/</span><span>CLP Amendment</span></p>
+  <p class="dh-eyebrow">EU · REGULATION 2024/2865 · REFERENCE SERIES</p>
+  <h1 class="dh-title">The CLP <em>Amendment,</em> Plainly.</h1>
+  <p class="dh-stand">Regulation (EU) 2024/2865 amending the CLP Regulation (EC) No 1272/2008 on classification, labelling and packaging of substances and mixtures — article by article, in plain English. No jargon, no legalese, no filler.</p>
+  <p class="dh-note">This amending Regulation restructures and updates how the EU classifies, labels, and packages chemical substances and mixtures. It introduces new hazard classes, digital labelling, refill provisions, and a reformed notification and classification system.</p>
+  <p class="dh-companion">A reading companion, not a substitute for the official text.</p>
+  <div class="dh-meta">
+    <div class="dh-meta-item"><span class="dh-meta-k">Articles</span><span class="dh-meta-v">1–3</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-k">Amends</span><span class="dh-meta-v">Reg. (EC) 1272/2008</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-k">In force</span><span class="dh-meta-v">20 November 2024</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-k">Phased through</span><span class="dh-meta-v">1 January 2028</span></div>
+  </div>
+ </div>
+</header>
+<main id="doc-body">
+<aside class="idx">
+ <div class="idx-label"><span>Contents</span><span class="idx-label-count">3 articles</span></div>
+<div class="idx-chgroup" data-chgroup="g1">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Section</span><span class="idx-chname-row"><span class="idx-chname">Context</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#g1-s1"><span class="n">01</span><span>What the CLP Regulation Does</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="g2">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Section</span><span class="idx-chname-row"><span class="idx-chname">Amendments</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#g2-s1"><span class="n">01</span><span>Key Amendments to the CLP Regulation</span></a>
+<a href="#g2-s2"><span class="n">02</span><span>Transitional Provisions</span></a>
+<a href="#g2-s3"><span class="n">03</span><span>Entry into Force and Application Dates</span></a>
+</div></div>
+</div>
+ <div class="idx-foot">Read in full.<br>Reading companion, not the official text.</div>
+</aside>
+<div class="idx-mobile"><button class="idx-toggle" type="button">Contents <span class="chev">+</span></button><div class="idx-panel"><div class="idx-panel-in"><div class="idxm-chap">Context</div>
+<a href="#g1-s1"><span class="n">Background</span><span>What the CLP Regulation Does</span></a>
+<div class="idxm-chap">Amendments</div>
+<a href="#g2-s1"><span class="n">Art. 1</span><span>Key Amendments to the CLP Regulation</span></a>
+<a href="#g2-s2"><span class="n">Art. 2</span><span>Transitional Provisions</span></a>
+<a href="#g2-s3"><span class="n">Art. 3</span><span>Entry into Force and Application Dates</span></a>
+</div></div></div>
+<div class="content">
+<div class="lead-note">
+  <span class="ln-label">Notice</span>
+  <p>This restatement is provided for <strong>general informational and educational purposes only</strong>. It is a plain-language reading companion prepared by ORR and does not constitute legal advice, and does not create an advisor-client or any other professional relationship between ORR and any reader.</p>
+  <p>Every effort has been made to accurately reflect the source law as enacted, but <strong>this page is not the official text of the law</strong> and may not reflect subsequent amendments, rules, notifications, or judicial interpretation. Where this restatement and the official text differ, the official text governs.</p>
+  <p>ORR, its principals, and its affiliates accept <strong>no responsibility or liability</strong> for any loss, damage, or legal consequence arising from reliance on this page. Nothing here should be treated as a substitute for advice from a qualified legal professional licensed in the relevant jurisdiction. <strong>Consult a lawyer</strong> before making any decision based on this content.</p>
+  <p>This amending Regulation is highly technical — classification criteria involve detailed scientific assessment against specific thresholds and test methods set out in the Annexes. This page summarises the structural and procedural changes; it does not restate the scientific classification criteria themselves.</p>
+</div>
+<div class="chap-divider" id="g1"><span class="chap-divider-label">Context</span></div>
+<section class="clause" id="g1-s1">
+ <div class="cl-head"><span class="cl-num">Background</span><h2 class="cl-title">What the CLP Regulation Does</h2></div>
+ <p>Regulation (EC) No 1272/2008 — the CLP Regulation — is the EU's system for classifying chemical substances and mixtures by their hazards, labelling them so users and handlers know what they are dealing with, and packaging them safely. It implements the United Nations Globally Harmonized System (UN GHS) within EU law.</p>
+<p>This amending Regulation (EU) 2024/2865 makes the most significant set of changes to CLP since its original adoption. It does not replace CLP — it rewrites substantial parts of it.</p>
+</section>
+
+<div class="chap-divider" id="g2"><span class="chap-divider-label">Amendments</span></div>
+<section class="clause" id="g2-s1">
+ <div class="cl-head"><span class="cl-num">Art. 1</span><h2 class="cl-title">Key Amendments to the CLP Regulation</h2></div>
+ <h3 class="cl-subhead">New Hazard Classes</h3>
+<p>The amending Regulation introduces new hazard classes that did not exist in the original CLP framework:</p>
+<p>Endocrine disruptors for human health — substances or mixtures that alter the function of the hormonal system and consequently cause adverse health effects. Two categories: Category 1 (known or presumed) and Category 2 (suspected).</p>
+<p>Endocrine disruptors for the environment — the same concept applied to adverse effects on the environment. Category 1 and Category 2.</p>
+<p>Persistent, bioaccumulative, and toxic (PBT) — substances that do not break down easily in the environment, accumulate in living organisms, and are toxic.</p>
+<p>Very persistent and very bioaccumulative (vPvB) — substances that are even more resistant to degradation and more prone to bioaccumulation than PBT substances.</p>
+<p>Persistent, mobile, and toxic (PMT) — substances that persist in the environment, move readily through water systems, and are toxic.</p>
+<p>Very persistent and very mobile (vPvM) — substances that are even more resistant to degradation and move even more readily through water systems.</p>
+<p>These new hazard classes apply to substances from 1 May 2026 and to mixtures from 1 November 2026.</p>
+<h3 class="cl-subhead">Digital Labelling</h3>
+<p>The amending Regulation allows certain supplemental information to be provided through digital means rather than on the physical label. A digital label is accessed through a data carrier (such as a QR code) placed on the physical label or packaging.</p>
+<p>The physical label must always include: the product identifier; the hazard pictograms; the signal word; the hazard statements for the most severe hazard categories; the relevant precautionary statements; the supplier's name, address, and telephone number; and the nominal quantity (for consumer products). The data carrier must be clearly visible, legible, and indelible, and must not be placed in a way that obscures mandatory physical-label elements.</p>
+<p>The digital label may contain: supplemental precautionary statements; supplemental label elements required under other EU legislation; and the UFI (unique formula identifier) where applicable. The digital label must be accessible free of charge, without requiring registration, downloading an application, or providing personal data. It must remain accessible for at least the expected shelf life of the product plus ten years. It must not contain any commercial content or track users.</p>
+<p>Member states may require that the digital label be available in their official languages. The Commission will adopt implementing acts on the format and presentation of digital labels.</p>
+<h3 class="cl-subhead">Refill Provisions</h3>
+<p>The amending Regulation introduces rules for selling hazardous substances and mixtures in refill form — where a consumer or professional user refills their own container from a supplier's bulk container at the point of sale.</p>
+<p>The supplier providing the refill must ensure that: the substance or mixture is correctly classified, labelled, and packaged in the bulk container from which the refill is dispensed; the consumer or professional user is provided, at the point of sale, with all the label elements required under CLP, in a durable and legible format they can affix to their own container; and the container used by the consumer is suitable for the substance or mixture and will not compromise safety.</p>
+<p>Certain substances and mixtures may not be sold in refill form — the Commission will specify these in delegated acts. The refill provisions apply from 1 January 2028.</p>
+<h3 class="cl-subhead">Notification and Classification</h3>
+<p>The amending Regulation overhauls the notification system for substances placed on the market:</p>
+<p>Manufacturers and importers must submit a notification to ECHA (the European Chemicals Agency) before placing a substance on the market. The notification must include: the identity of the notifier; the identity of the substance (including its molecular and structural formula); the classification of the substance under each applicable hazard class; the concentration limits or M-factors where applicable; and the label elements.</p>
+<p>Where a substance is classified differently by different notifiers, those notifiers must make every effort to reach an agreed entry. If they cannot, the matter may be referred to ECHA for resolution.</p>
+<p>ECHA maintains the Classification and Labelling Inventory (C&L Inventory) — a publicly accessible database of all notified and harmonised classifications of substances. The Inventory now includes the classification's source (harmonised, self-classification, or agreed entry) and references to the supporting scientific studies.</p>
+<h3 class="cl-subhead">Harmonised Classification and Labelling</h3>
+<p>The process for harmonised classification and labelling (CLH) — where the EU adopts an official classification for a substance that all manufacturers and importers must then apply — is restructured:</p>
+<p>Proposals for harmonised classification may be submitted by member state competent authorities or by manufacturers, importers, or downstream users. ECHA's Risk Assessment Committee (RAC) delivers an opinion within 18 months. The Commission adopts harmonised classifications by delegated act (previously by amendment to Annex VI of CLP through comitology).</p>
+<p>A new priority system is introduced: ECHA must prepare and publish a five-year rolling action plan identifying substances for which a harmonised classification proposal should be submitted, based on risk-based criteria. The Commission may request ECHA to prepare a CLH proposal for any substance.</p>
+<h3 class="cl-subhead">Poison Centre Notifications</h3>
+<p>The provisions on Poison Centre notifications (submissions of information on hazardous mixtures to national authorities for emergency health response) are moved from an Annex into the body of the Regulation and updated:</p>
+<p>Importers and downstream users placing hazardous mixtures on the market must submit a notification to the relevant appointed body in each member state before placing the mixture on the market. The notification must include: the trade name and UFI; the chemical composition; toxicological information; and the product category.</p>
+<p>The format follows a harmonised template. ECHA maintains the submission portal. The UFI (unique formula identifier) must appear on the label. Poison Centres must have 24/7 access to the submitted information. Confidential business information is protected from public disclosure.</p>
+<h3 class="cl-subhead">Packaging Requirements</h3>
+<p>The packaging requirements in CLP are updated to align with the EU Packaging and Packaging Waste Regulation:</p>
+<p>Packaging containing hazardous substances or mixtures must be designed and constructed so it prevents leakage of its contents during normal handling; must not be made of materials susceptible to adverse reaction with the contents; and must be fitted with fastenings that can be resealed (where designed for repeated use) and that resist the curiosity of children (child-resistant fastenings) where required.</p>
+<p>Packaging that looks like food, drink, cosmetics, medicines, or products likely to attract children is prohibited. Packaging containing substances or mixtures supplied to the general public must not have a shape or design likely to attract or arouse the curiosity of children or mislead consumers.</p>
+<h3 class="cl-subhead">Advertising</h3>
+<p>Where a substance or mixture classified as hazardous is advertised in a way that allows a consumer to conclude a purchase without first seeing the label, the advertisement must mention the hazard class or classes. This applies to online sales, catalogue sales, and any other distance-selling format.</p>
+<h3 class="cl-subhead">Enforcement and Penalties</h3>
+<p>Member states must lay down rules on penalties for infringements and take all measures necessary to ensure they are implemented. Penalties must be effective, proportionate, and dissuasive. Member states must notify the Commission of those rules.</p>
+</section>
+
+<section class="clause" id="g2-s2">
+ <div class="cl-head"><span class="cl-num">Art. 2</span><h2 class="cl-title">Transitional Provisions</h2></div>
+ <p>Substances and mixtures that are already classified, labelled, and packaged under the existing CLP Regulation and placed on the market before the new requirements apply do not need to be relabelled or repackaged until their existing stocks are exhausted — subject to specific deadlines:</p>
+<p>For substances classified under the new hazard classes (endocrine disruptors, PBT, vPvB, PMT, vPvM): substances placed on the market before 1 May 2026 may continue to be sold in their current form until 1 November 2026. Mixtures placed on the market before 1 November 2026 may continue until 1 May 2028.</p>
+<p>For substances and mixtures affected by other amendments (digital labelling, refill, advertising, packaging): those placed on the market before the relevant application date may continue under the previous rules for a period of two years from that date.</p>
+<p>Notifications already submitted under the existing system are deemed to comply with the new notification requirements until the notifier updates them.</p>
+</section>
+
+<section class="clause" id="g2-s3">
+ <div class="cl-head"><span class="cl-num">Art. 3</span><h2 class="cl-title">Entry into Force and Application Dates</h2></div>
+ <p>This Regulation entered into force on 20 November 2024 (twenty days after publication).</p>
+<p>The main application dates are phased:</p>
+<ol class="pen-list">
+<li>New hazard classes for substances — 1 May 2026.</li>
+<li>New hazard classes for mixtures — 1 November 2026.</li>
+<li>Digital labelling provisions — date to be set by Commission implementing acts, but the framework applies from 20 November 2024.</li>
+<li>Refill provisions — 1 January 2028.</li>
+<li>Revised notification and C&L Inventory provisions — 1 February 2027.</li>
+<li>Harmonised classification delegation to delegated acts — 20 November 2024.</li>
+<li>Advertising requirements — application depends on when the substance or mixture is first placed on the market under the new provisions.</li>
+</ol>
+</section>
+
+<div class="map-clear"><p>This reference covers what the amending Regulation says. The CLP framework is one of the most technical regulatory systems in the EU — classification criteria involve detailed scientific assessment against specific thresholds and test methods set out in the Annexes. This piece tells you what the rules are; working out which hazard classes apply to your specific substance or mixture, how to classify it, what goes on the label, and which transitional provision covers your existing stock — is a different exercise.</p></div>
+<div class="sources-block"><div class="sources-label">Source</div><p>Regulation (EU) 2024/2865 of the European Parliament and of the Council of 23 October 2024 amending Regulation (EC) No 1272/2008 on classification, labelling and packaging of substances and mixtures, Official Journal of the European Union, L 2024/2865, 20 November 2024.</p></div>
+<div class="doc-close">
+ <p>Need to work out how this actually applies to your product, data flows, or role? <em>That's a different exercise.</em></p>
+ <a href="../../index.html#begin" class="btn-outline">Start a conversation <span aria-hidden="true">→</span></a>
+</div>
+</div>
+</main>
+
+<footer>
+  <div class="ft-brand">
+    <div class="ft-bw"><img src="../../assets/crm.svg" alt="ORR Logo" class="begin-logo"/></div>
+    <span>From idea to operating business.</span>
+  </div>
+  <div class="ft-div"></div>
+  <nav class="ft-nav">
+    <span class="ft-l">Navigate</span>
+    <a href="../../resources.html">Resources</a>
+    <a href="../../index.html#assess">Diagnose</a>
+    <a href="../../index.html#structure">Structure</a>
+    <a href="../../founder.html">Founder</a>
+    <a href="../../index.html#begin">Begin</a>
+  </nav>
+  <div class="ft-div"></div>
+  <div class="ft-close">
+    <p class="ft-stmt">The businesses that run without their founders weren't built by accident. They were engineered.</p>
+    <div class="ft-legal">
+      <span class="ft-copy">© <span id="yr"></span> ORR — All rights reserved</span>
+      <div class="ft-ll">
+        <a href="../../legal/privacy.html">Privacy</a>
+        <a href="../../legal/terms.html">Terms</a>
+        <a href="../../legal/disclaimer.html">Disclaimer</a>
+      </div>
+      <p class="ft-disc">ORR is a business-structuring consultancy, not a law firm, accountancy, or financial adviser. Nothing on this site is professional advice.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+(function(){
+  var vrailFill=document.getElementById('vrail-fill');
+  var vrailRFill=document.getElementById('vrail-r-fill');
+  var nav=document.getElementById('nav');
+  var head=document.getElementById('doc-head');
+  var clauses=[].slice.call(document.querySelectorAll('.clause'));
+  var chgroups=[].slice.call(document.querySelectorAll('.idx-chgroup'));
+  var links=[].slice.call(document.querySelectorAll('.idx-chbody-in a,.idx-panel a'));
+  var map={}; links.forEach(function(a){var h=a.getAttribute('href').slice(1);(map[h]=map[h]||[]).push(a);});
+  var ticking=false;
+  function frame(){
+    ticking=false;
+    var y=scrollY, vh=innerHeight, total=document.body.scrollHeight-vh;
+    var pct=(total>0?Math.min(y/total,1)*100:0)+'%';
+    if(vrailFill) vrailFill.style.height=pct;
+    if(vrailRFill) vrailRFill.style.height=pct;
+    if(nav&&head) nav.classList.toggle('dark-mode', head.getBoundingClientRect().bottom>80);
+    var lineY=vh*0.3, cur=null;
+    clauses.forEach(function(c){ if(c.getBoundingClientRect().top<=lineY) cur=c.id; });
+    links.forEach(function(a){a.classList.remove('on');});
+    if(cur&&map[cur]) map[cur].forEach(function(a){a.classList.add('on');});
+    if(cur){
+      var chId = cur.split('-s')[0];
+      chgroups.forEach(function(g){
+        var isCurrent = g.dataset.chgroup === chId;
+        g.classList.toggle('current', isCurrent);
+      });
+    }
+  }
+  function onScroll(){ if(!ticking){ticking=true;requestAnimationFrame(frame);} }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll,{passive:true});
+  frame();
+})();
+
+(function(){
+  var groups = [].slice.call(document.querySelectorAll('.idx-chgroup'));
+  function measure(g){
+    var body = g.querySelector('.idx-chbody');
+    var inner = g.querySelector('.idx-chbody-in');
+    body.style.maxHeight = g.classList.contains('open') ? inner.scrollHeight + 'px' : '0';
+  }
+  groups.forEach(function(g){
+    var head = g.querySelector('.idx-chhead');
+    head.addEventListener('click', function(){
+      var open = g.classList.toggle('open');
+      head.setAttribute('aria-expanded', open);
+      measure(g);
+    });
+  });
+  if(groups[0]){ groups[0].classList.add('open'); measure(groups[0]); }
+  var mo = new MutationObserver(function(){
+    groups.forEach(function(g){
+      if(g.classList.contains('current') && !g.classList.contains('open')){
+        g.classList.add('open'); measure(g);
+      }
+    });
+  });
+  groups.forEach(function(g){ mo.observe(g, {attributes:true, attributeFilter:['class']}); });
+})();
+
+(function(){var m=document.querySelector('.idx-mobile');if(!m)return;
+ var b=m.querySelector('.idx-toggle'),p=m.querySelector('.idx-panel');
+ b.addEventListener('click',function(){var o=m.classList.toggle('open');
+  p.style.maxHeight=o?p.querySelector('.idx-panel-in').scrollHeight+'px':'0';});
+ m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');p.style.maxHeight='0';});});
+})();
+
+(function(){
+  var mBtn=document.getElementById('menuBtn'),mNav=document.getElementById('mnav');
+  if(!mBtn||!mNav)return;
+  mBtn.addEventListener('click',function(){
+    var o=!mNav.classList.contains('open');
+    mNav.classList.toggle('open',o);mBtn.classList.toggle('x',o);
+    mBtn.setAttribute('aria-expanded',o);
+    document.documentElement.classList.toggle('m-lock',o);
+  });
+  mNav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){
+    mNav.classList.remove('open');mBtn.classList.remove('x');
+    mBtn.setAttribute('aria-expanded','false');
+    document.documentElement.classList.remove('m-lock');
+  });});
+})();
+
+var REDUCED = matchMedia('(prefers-reduced-motion:reduce)').matches;
+function easeScrollTo(el){
+  if(!el) return;
+  var start=scrollY, end=el.getBoundingClientRect().top+scrollY, dist=end-start;
+  if(REDUCED){scrollTo(0,end);return;}
+  var t0=null; var ease=function(t){return 1-Math.pow(1-t,4);};
+  requestAnimationFrame(function step(ts){
+    if(!t0)t0=ts;
+    var p=Math.min((ts-t0)/650,1);
+    scrollTo(0,start+dist*ease(p));
+    if(p<1)requestAnimationFrame(step);
+  });
+}
+document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){
+  var t=document.querySelector(a.getAttribute('href'));
+  if(!t)return; e.preventDefault(); easeScrollTo(t);
+});});
+
+var HOVERS=matchMedia('(hover:hover)').matches;
+if(HOVERS){
+  var dot=document.getElementById('cursorDot');
+  var mx=0,my=0,cx=0,cy=0;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.classList.add('active');});
+  document.addEventListener('mouseleave',function(){dot.classList.remove('active');});
+  var sel='a,button';
+  document.addEventListener('mouseover',function(e){if(e.target.closest(sel))dot.classList.add('grow');});
+  document.addEventListener('mouseout',function(e){if(e.target.closest(sel))dot.classList.remove('grow');});
+  (function loop(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;dot.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(loop);})();
+  document.querySelectorAll('.nav-cta,.btn,.btn-outline').forEach(function(btn){
+    btn.addEventListener('mousemove',function(e){var r=btn.getBoundingClientRect();btn.style.transform='translate('+((e.clientX-r.left-r.width/2)*.15)+'px,'+((e.clientY-r.top-r.height/2)*.15)+'px)';});
+    btn.addEventListener('mouseleave',function(){btn.style.transform='';});
+  });
+}
+</script>
+</body>
+</html>

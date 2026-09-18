@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FAF7F0">
+<title>EU Cosmetics Regulation | The Law, Plainly | ORR</title>
+<meta name="description" content="Regulation (EC) No 1223/2009 on cosmetic products — restated article by article, in plain English. A reading companion for founders, not a substitute for the official text.">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="../../assets/ngb.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ══════════════════════════════════════════════════════════════
+   PALETTE — lighter, warmer, index-matched. Dark reserved for the
+   masthead only; the reading surface stays paper-bright throughout.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --vellum: #FAF7F0;
+  --paper:  #FFFFFF;
+  --paper2: #F5F1E8;
+  --ink:    #211E17;
+  --ink80:  rgba(33,30,23,.90);
+  --ink65:  rgba(33,30,23,.72);
+  --ink48:  rgba(33,30,23,.56);
+  --ink32:  rgba(33,30,23,.38);
+  --ink14:  rgba(33,30,23,.13);
+  --ink08:  rgba(33,30,23,.075);
+  --pine:   #1A4D40;
+  --pine-b: #246B59;
+  --pine-l: #3D8570;
+  --pine08: rgba(26,77,64,.07);
+  --pine14: rgba(26,77,64,.13);
+  --dark:   #0E2A24;
+  --crm:    #FAF7F0;
+  --crm80:  rgba(250,247,240,.90);
+  --crm60:  rgba(250,247,240,.68);
+  --crm40:  rgba(250,247,240,.46);
+  --crm16:  rgba(250,247,240,.16);
+  --mint:   #93CDBB;
+  --bronze: #A9895A;
+  --gold:   #C9A15F;
+  --line:   rgba(33,30,23,.11);
+  --lineL:  rgba(33,30,23,.06);
+  --disp:'Newsreader', Georgia, serif;
+  --body:'Hanken Grotesk', system-ui, sans-serif;
+  --mono:'IBM Plex Mono', monospace;
+  --e1:cubic-bezier(.22,1,.36,1);
+  --e2:cubic-bezier(.16,1,.3,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --pad:clamp(22px,4.6vw,56px);
+  --shell:1560px;
+}
+html{background:var(--vellum);color:var(--ink);-webkit-text-size-adjust:100%;scrollbar-width:none;overflow-x:hidden;overflow-x:clip}
+html::-webkit-scrollbar{display:none}
+body{font-family:var(--body);font-weight:400;line-height:1.75;font-size:16.5px;background:var(--vellum);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;overflow-x:clip;cursor:default;letter-spacing:.005em}
+::selection{background:var(--pine);color:var(--crm)}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.2;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E")}
+@media(hover:hover){
+  .cursor-dot{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--pine);pointer-events:none;z-index:9990;
+    mix-blend-mode:exclusion;transition:width .3s var(--spring),height .3s var(--spring),margin .3s var(--spring),opacity .3s;margin:-4px 0 0 -4px;opacity:0}
+  .cursor-dot.active{opacity:1}
+  .cursor-dot.grow{width:40px;height:40px;margin:-20px 0 0 -20px;background:var(--mint);mix-blend-mode:difference}
+}
+#vrail{position:fixed;left:0;top:0;bottom:0;width:2px;z-index:7000;pointer-events:none;background:var(--ink08)}
+#vrail-fill{position:absolute;top:0;left:0;width:100%;height:0;background:linear-gradient(to bottom,var(--pine),var(--mint));transition:height .15s linear}
+#vrail-r{position:fixed;right:0;top:0;bottom:0;width:2px;z-index:7000;pointer-events:none;background:var(--ink08)}
+#vrail-r-fill{position:absolute;top:0;left:0;width:100%;height:0;background:linear-gradient(to bottom,var(--pine),var(--mint));transition:height .15s linear}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;height:64px;display:flex;align-items:center;padding:0 42px;
+  opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .5s var(--e2),transform .5s var(--e2),background .4s,border-color .4s,backdrop-filter .4s;border-bottom:1px solid transparent}
+#nav.visible{opacity:1;transform:none;pointer-events:auto}
+#nav.solid{background:rgba(250,247,240,.86);backdrop-filter:blur(18px) saturate(1.3);border-color:var(--line)}
+#nav.dark-mode{background:rgba(14,42,36,.88);border-color:var(--crm16)}
+#nav.dark-mode .nav-mid{color:var(--crm40)}
+#nav.dark-mode .nav-r a{color:var(--mint)}
+#nav.dark-mode .nav-cta{border-color:var(--crm);color:var(--crm)!important}
+#nav.dark-mode .nav-cta:hover{background:var(--mint);border-color:var(--mint);color:var(--dark)!important}
+.brand{display:flex;align-items:center;gap:11px;position:relative}
+.nav-logo{width:55px;height:55px;display:block;transition:opacity .5s var(--e2)}
+.nav-logo-dark{opacity:1}
+.nav-logo-light{position:absolute;top:0;left:0;opacity:0}
+#nav.dark-mode .nav-logo-dark{opacity:0}
+#nav.dark-mode .nav-logo-light{opacity:1}
+.nav-mid{font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--ink48);position:absolute;left:50%;transform:translateX(-50%)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:30px}
+.nav-r a{font-family:var(--body);font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--pine-b);transition:color .25s}
+.nav-r a:hover{color:var(--pine)}
+.nav-cta{border:1px solid var(--ink);padding:8px 18px;color:var(--ink)!important;letter-spacing:.12em;transition:background .25s,color .25s,border-color .25s}
+.nav-cta:hover{background:var(--pine);border-color:var(--pine);color:var(--crm)!important}
+.menu-btn{display:none;position:relative;width:44px;height:44px;margin-right:-10px;background:none;border:0;cursor:pointer}
+.menu-btn i{position:absolute;left:11px;right:11px;height:1.5px;background:var(--ink);transition:top .34s var(--e1),transform .34s var(--e1)}
+.menu-btn i:first-child{top:18px}.menu-btn i:last-child{top:26px}
+.menu-btn.x i:first-child{top:22px;transform:rotate(45deg)}.menu-btn.x i:last-child{top:22px;transform:rotate(-45deg)}
+#nav.dark-mode .menu-btn i{background:var(--crm)}
+.mnav{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;z-index:899;background:rgba(250,247,240,.98);backdrop-filter:blur(20px) saturate(1.3);
+  flex-direction:column;padding:22px 22px calc(30px + env(safe-area-inset-bottom));opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .4s var(--e2),transform .4s var(--e2)}
+.mnav.open{opacity:1;transform:none;pointer-events:auto}
+.mnav a{font-family:var(--disp);font-weight:300;font-size:clamp(28px,8.5vw,38px);letter-spacing:-.015em;color:var(--ink);padding:20px 2px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(10px);transition:opacity .5s var(--e2),transform .5s var(--e2)}
+.mnav a::after{content:'→';font-family:var(--body);font-size:17px;color:var(--pine);opacity:.7}
+.mnav.open a{opacity:1;transform:none}
+.mnav.open a:nth-child(1){transition-delay:.05s}
+.mnav.open a:nth-child(2){transition-delay:.1s}
+.mnav.open a:nth-child(3){transition-delay:.15s}
+.mnav-tag{margin-top:auto;font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--ink32);opacity:0;transition:opacity .6s var(--e2) .3s}
+.mnav.open .mnav-tag{opacity:1}
+html.m-lock,html.m-lock body{overflow:hidden}
+@media(max-width:820px){
+  #nav{padding:0 max(18px,env(safe-area-inset-right)) 0 max(18px,env(safe-area-inset-left))}
+  .nav-mid{display:none}.nav-r a:not(.nav-cta){display:none}.nav-cta{padding:10px 16px}.menu-btn{display:block}.mnav{display:flex}
+}
+@media(max-width:1080px){.nav-mid{display:none}}
+#nav{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+
+/* FOOTER */
+footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);border-top:1px solid var(--crm16);padding:68px 42px 44px;display:grid;grid-template-columns:1.3fr 1px 1fr 1px 1.3fr;gap:0 56px}
+.ft-div{background:linear-gradient(to bottom,var(--crm16),transparent);align-self:stretch}
+.ft-brand span{font-family:var(--disp);font-size:14px;color:var(--crm60);line-height:1.55;display:block;margin-top:12px}
+.ft-bw{font-family:var(--disp);font-weight:300;font-size:28px;letter-spacing:.08em;color:var(--crm)}
+.begin-logo{height:160px;width:auto;display:block}
+.ft-nav{display:flex;flex-direction:column;gap:13px}
+.ft-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--crm40);margin-bottom:2px}
+.ft-nav a{font-size:13px;color:var(--crm60);transition:color .25s}
+.ft-nav a:hover{color:var(--mint)}
+.ft-close{display:flex;flex-direction:column;text-align:right}
+.ft-stmt{font-family:var(--disp);font-style:italic;font-weight:300;font-size:16px;line-height:1.45;color:var(--crm60);margin-bottom:22px}
+.ft-legal{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.ft-copy{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--crm40)}
+.ft-ll{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.ft-ll a{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--crm40);transition:color .25s}
+.ft-ll a:hover{color:var(--mint)}
+.ft-disc{font-size:11px;line-height:1.68;color:var(--crm60);text-align:right;max-width:52ch;margin-top:8px}
+footer{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+@media(max-width:1080px){
+  footer{grid-template-columns:1fr 1fr;gap:36px 44px}.ft-div{display:none}.ft-close{grid-column:1/-1;text-align:left}
+  .ft-legal,.ft-ll{align-items:flex-start;justify-content:flex-start}.ft-disc{text-align:left;max-width:60ch}.begin-logo{height:clamp(96px,12vw,140px)}
+}
+@media(max-width:880px){
+  footer{grid-template-columns:1fr;padding:52px 22px calc(38px + env(safe-area-inset-bottom));gap:34px}.ft-div{display:none}
+  .ft-close{grid-column:auto;text-align:left}.ft-legal,.ft-ll{align-items:flex-start;justify-content:flex-start}
+  .begin-logo{height:clamp(72px,20vw,96px)}.ft-stmt{font-size:15px}.ft-disc{font-size:12px;line-height:1.6;color:var(--crm80);max-width:100%}
+}
+@media(max-width:400px){#vrail,#vrail-r{width:1px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ══════════════════════════════════════════════════════════════
+   DOCUMENT HEADER — restrained dark band, generous vertical rhythm
+   ══════════════════════════════════════════════════════════════ */
+#doc-head{position:relative;padding:calc(64px + clamp(52px,7vw,92px)) var(--pad) clamp(46px,5.6vw,68px);
+ background:var(--dark);color:var(--crm);border-bottom:1px solid var(--crm16);overflow:hidden}
+#doc-head::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.45;
+ background-image:linear-gradient(rgba(250,247,240,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(250,247,240,.025) 1px,transparent 1px);background-size:64px 64px}
+#doc-head::after{content:'';position:absolute;top:-30%;right:-6%;width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(circle,rgba(147,205,187,.10),transparent 68%);pointer-events:none}
+.dh-wrap{max-width:var(--shell);margin:0 auto;position:relative;padding-left:clamp(0px,4vw,64px)}
+.dh-crumb{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--crm40);margin-bottom:22px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.dh-crumb a{color:var(--crm60);transition:color .2s}
+.dh-crumb a:hover{color:var(--mint)}
+.dh-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--mint);margin-bottom:24px}
+.dh-title{font-family:var(--disp);font-weight:300;font-size:clamp(42px,6.4vw,84px);line-height:1.0;
+ letter-spacing:-.03em;margin-bottom:24px;max-width:19ch;color:var(--crm)}
+.dh-title em{font-style:italic;color:var(--mint)}
+.dh-stand{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(17px,1.9vw,21px);
+ line-height:1.55;color:var(--crm60);max-width:66ch}
+.dh-note{font-family:var(--body);font-size:14px;line-height:1.72;color:var(--crm80);max-width:64ch;margin-top:16px}
+.dh-companion{font-family:var(--body);font-size:13px;color:var(--crm40);margin-top:18px;max-width:64ch;
+  display:flex;align-items:center;gap:9px}
+.dh-companion::before{content:'';width:14px;height:1px;background:var(--crm40)}
+.dh-meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:32px;padding-top:26px;border-top:1px solid var(--crm16)}
+.dh-meta-item{display:flex;flex-direction:column;gap:5px}
+.dh-meta-k{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--crm40)}
+.dh-meta-v{font-family:var(--body);font-size:13px;color:var(--crm80)}
+
+/* ══════════════════════════════════════════════════════════════
+   BODY — wider shell, much more generous index, wider reading column
+   ══════════════════════════════════════════════════════════════ */
+#doc-body{max-width:var(--shell);margin:0 auto;padding:clamp(52px,6vw,80px) var(--pad) clamp(64px,8vw,110px);
+ display:grid;grid-template-columns:224px 1fr;gap:0 clamp(96px,10vw,160px);align-items:start}
+
+/* ── the index — a real index: leaders, quiet type, no chrome ── */
+.idx{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 128px);overflow-y:auto;scrollbar-width:none;
+  padding-right:4px}
+.idx::-webkit-scrollbar{display:none}
+.idx-label{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink32);
+ padding-bottom:16px;margin-bottom:4px;border-bottom:1.5px solid var(--ink);display:flex;align-items:baseline;justify-content:space-between}
+.idx-label span:first-child{color:var(--ink);font-weight:500}
+.idx-label-count{font-family:var(--mono);font-size:9px;color:var(--ink32);letter-spacing:.06em}
+
+.idx-chgroup{border-bottom:1px solid var(--lineL)}
+.idx-chgroup:last-child{border-bottom:none}
+.idx-chhead{display:block;width:100%;background:none;border:none;
+ text-align:left;cursor:pointer;padding:15px 2px 15px 0;position:relative;transition:opacity .2s}
+.idx-chhead:hover{opacity:.7}
+.idx-chlabel{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink32);display:block;margin-bottom:3px}
+.idx-chname-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.idx-chname{font-family:var(--disp);font-weight:400;font-size:14px;color:var(--ink);line-height:1.35;letter-spacing:-.005em;max-width:100%}
+.idx-chleader{flex:1;border-bottom:1px dotted var(--ink14);margin-bottom:4px;min-width:8px;align-self:flex-end}
+.idx-chchev{font-family:var(--body);font-weight:300;font-size:14px;color:var(--ink32);
+ transition:transform .35s var(--e1);flex-shrink:0}
+.idx-chgroup.open .idx-chchev{transform:rotate(45deg)}
+.idx-chgroup.current .idx-chlabel{color:var(--pine-b)}
+.idx-chgroup.current .idx-chname{color:var(--pine);font-style:italic}
+.idx-chbody{max-height:0;overflow:hidden;transition:max-height .45s var(--e2)}
+.idx-chbody-in{padding:0 0 14px 2px}
+.idx-chbody-in a{display:flex;gap:10px;align-items:baseline;padding:6px 0;font-size:12.5px;line-height:1.5;color:var(--ink48);
+ transition:color .2s}
+.idx-chbody-in a .n{font-family:var(--mono);font-size:9px;color:var(--ink32);flex-shrink:0;min-width:14px;transition:color .2s}
+.idx-chbody-in a:hover{color:var(--ink)}
+.idx-chbody-in a.on{color:var(--pine);font-weight:500}
+.idx-chbody-in a.on .n{color:var(--pine)}
+.idx-foot{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);
+ font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--ink32);line-height:1.85}
+.idx-mobile{display:none}
+
+/* ── the reading column — wider still ── */
+.content{min-width:0;max-width:1020px}
+.lead-note{margin-bottom:clamp(40px,4.6vw,58px);padding:22px 26px;background:transparent;border:1px solid var(--ink14);
+  border-left:3px solid var(--ink32);border-radius:0 10px 10px 0}
+.lead-note p{font-size:12.5px;line-height:1.75;color:var(--ink48);font-family:var(--body)}
+.lead-note p + p{margin-top:10px}
+.lead-note strong{color:var(--ink65);font-weight:600}
+.lead-note .ln-label{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink32);margin-bottom:10px;display:block}
+
+.chap-divider{display:flex;align-items:baseline;gap:16px;margin:clamp(52px,6vw,76px) 0 clamp(26px,3vw,34px);
+ padding-bottom:16px;border-bottom:2px solid var(--pine14)}
+.content .clause:first-of-type ~ .chap-divider:first-of-type,
+.content > .chap-divider:first-child{margin-top:0}
+.chap-divider-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--pine);flex-shrink:0}
+.chap-divider-name{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(21px,2.3vw,29px);color:var(--ink);line-height:1.2}
+
+.clause{padding-top:clamp(28px,3.4vw,38px);margin-top:clamp(28px,3.4vw,38px);border-top:1px solid var(--line);scroll-margin-top:96px}
+.chap-divider + .clause{border-top:none;margin-top:0;padding-top:0}
+.cl-head{display:flex;align-items:baseline;gap:18px;margin-bottom:16px}
+.cl-num{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--pine);padding-top:6px;flex-shrink:0;white-space:nowrap;
+  background:var(--pine08);padding:4px 9px;border-radius:5px;margin-top:2px}
+.cl-title{font-family:var(--disp);font-weight:300;font-size:clamp(22px,2.6vw,31px);line-height:1.16;letter-spacing:-.02em;color:var(--ink)}
+.clause p{font-size:15.5px;line-height:1.85;color:var(--ink65);margin-bottom:14px;max-width:88ch}
+.clause p:last-child{margin-bottom:0}
+.clause strong{font-weight:600;color:var(--ink)}
+.pen-list{list-style:none;counter-reset:pen;margin:6px 0 0;padding:0;max-width:88ch}
+.pen-list li{counter-increment:pen;position:relative;padding:13px 0 13px 38px;font-size:15px;line-height:1.75;
+  color:var(--ink65);border-bottom:1px solid var(--lineL)}
+.pen-list li:first-child{border-top:1px solid var(--lineL)}
+.pen-list li::before{content:counter(pen,decimal-leading-zero);position:absolute;left:0;top:13px;
+  font-family:var(--mono);font-size:11px;color:var(--pine)}
+
+.map-clear{margin-top:clamp(52px,5.8vw,76px);padding:28px 30px;background:var(--pine08);border-left:3px solid var(--pine);
+  max-width:none;border-radius:0 12px 12px 0}
+.map-clear p{font-family:var(--disp);font-style:italic;font-weight:300;font-size:15px;line-height:1.72;color:var(--ink65)}
+
+.sources-block{margin-top:clamp(32px,3.8vw,44px);padding-top:22px;border-top:1px solid var(--line);max-width:none}
+.sources-label{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink32);margin-bottom:9px}
+.sources-block p{font-size:12.5px;line-height:1.7;color:var(--ink48)}
+
+.doc-close{margin-top:clamp(52px,6vw,78px);padding-top:clamp(30px,3.6vw,40px);border-top:1px solid var(--line);
+ display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
+.doc-close p{font-family:var(--disp);font-style:italic;font-weight:300;font-size:14.5px;color:var(--ink48);max-width:44ch;line-height:1.58}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-size:11.5px;font-weight:500;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--ink);border:1px solid var(--ink);padding:14px 24px;background:none;
+  cursor:pointer;transition:background .3s,color .3s,border-color .3s,gap .3s;white-space:nowrap;border-radius:2px}
+.btn-outline:hover{background:var(--pine);border-color:var(--pine);color:var(--crm);gap:15px}
+
+@media(max-width:1360px){
+  #doc-body{grid-template-columns:214px 1fr;gap:0 56px}
+  .content{max-width:none}
+}
+
+@media(max-width:960px){
+ #doc-body{grid-template-columns:1fr;gap:0}
+ .idx{display:none}
+ .idx-mobile{display:block;position:sticky;top:64px;z-index:80;margin:0 calc(-1*var(--pad)) clamp(30px,5vw,42px);
+  background:rgba(250,247,240,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+ .idx-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px var(--pad);
+  background:none;border:none;cursor:pointer;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--pine)}
+ .idx-toggle .chev{transition:transform .35s var(--e1)}
+ .idx-mobile.open .idx-toggle .chev{transform:rotate(45deg)}
+ .idx-panel{max-height:0;overflow:hidden;transition:max-height .45s var(--e2)}
+ .idx-panel-in{padding:4px var(--pad) 20px;max-height:62vh;overflow-y:auto}
+ .idxm-chap{font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--pine);
+   padding:16px 0 8px;opacity:.9}
+ .idx-panel a{display:flex;gap:12px;padding:10px 0;font-size:13.5px;color:var(--ink65);border-bottom:1px solid var(--lineL)}
+ .idx-panel a .n{font-family:var(--mono);font-size:10.5px;color:var(--pine);min-width:38px}
+ .content{max-width:none}
+ .doc-close{flex-direction:column;align-items:stretch;text-align:left}
+ .btn-outline{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div id="vrail" aria-hidden="true"><div id="vrail-fill"></div></div>
+<div id="vrail-r" aria-hidden="true"><div id="vrail-r-fill"></div></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<header id="nav" class="visible solid dark-mode">
+  <a class="brand" href="../../index.html" aria-label="ORR home">
+    <img src="../../assets/drk.svg" alt="ORR" class="nav-logo nav-logo-dark"/>
+    <img src="../../assets/crm.svg" alt="ORR" class="nav-logo nav-logo-light"/>
+  </a>
+  <span class="nav-mid">From Idea to Operating Business</span>
+  <nav class="nav-r">
+    <a href="../../index.html#structure">Structure</a>
+    <a href="../../resources.html">Resources</a>
+    <a href="../../index.html#begin" class="nav-cta">Begin &rarr;</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+  </nav>
+</header>
+
+<nav class="mnav" id="mnav" aria-label="Mobile navigation">
+  <a href="../../index.html#structure">Structure</a>
+  <a href="../../index.html#model">How we work</a>
+  <a href="../../resources.html">Resources</a>
+  <a href="../../index.html#begin">Begin</a>
+  <span class="mnav-tag">From Idea to Operating Business</span>
+</nav>
+
+<header id="doc-head">
+ <div class="dh-wrap">
+  <p class="dh-crumb"><a href="../../resources.html">Resources</a><span aria-hidden="true">/</span><a href="../law-plainly.html">The Law, Plainly</a><span aria-hidden="true">/</span><span>EU Cosmetics Regulation</span></p>
+  <p class="dh-eyebrow">EU · REGULATION (EC) 1223/2009 · REFERENCE SERIES</p>
+  <h1 class="dh-title">The EU Cosmetics <em>Regulation,</em> Plainly.</h1>
+  <p class="dh-stand">Regulation (EC) No 1223/2009 on cosmetic products — article by article, in plain English. No jargon, no legalese, no filler.</p>
+  <p class="dh-companion">A reading companion, not a substitute for the official text.</p>
+  <div class="dh-meta">
+    <div class="dh-meta-item"><span class="dh-meta-k">Articles</span><span class="dh-meta-v">1–40</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-k">Chapters</span><span class="dh-meta-v">X</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-k">Annexes</span><span class="dh-meta-v">I–X</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-k">Applicable</span><span class="dh-meta-v">11 July 2013</span></div>
+  </div>
+ </div>
+</header>
+<main id="doc-body">
+<aside class="idx">
+ <div class="idx-label"><span>Contents</span><span class="idx-label-count">31 articles</span></div>
+<div class="idx-chgroup" data-chgroup="c1">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Chapter I</span><span class="idx-chname-row"><span class="idx-chname">Scope and Definitions</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#c1-s1"><span class="n">01</span><span>Scope and Objective</span></a>
+<a href="#c1-s2"><span class="n">02</span><span>Definitions</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="c2">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Chapter II</span><span class="idx-chname-row"><span class="idx-chname">Safety, Responsibility, Free Movement</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#c2-s1"><span class="n">01</span><span>Safety</span></a>
+<a href="#c2-s2"><span class="n">02</span><span>Responsible Person</span></a>
+<a href="#c2-s3"><span class="n">03</span><span>Obligations of Responsible Persons</span></a>
+<a href="#c2-s4"><span class="n">04</span><span>Obligations of Distributors</span></a>
+<a href="#c2-s5"><span class="n">05</span><span>Identification Within the Supply Chain</span></a>
+<a href="#c2-s6"><span class="n">06</span><span>Good Manufacturing Practice</span></a>
+<a href="#c2-s7"><span class="n">07</span><span>Free Movement</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="c3">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Chapter III</span><span class="idx-chname-row"><span class="idx-chname">Safety Assessment, Product Information File, Notification</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#c3-s1"><span class="n">01</span><span>Safety Assessment</span></a>
+<a href="#c3-s2"><span class="n">02</span><span>Product Information File</span></a>
+<a href="#c3-s3"><span class="n">03</span><span>Sampling and Analysis</span></a>
+<a href="#c3-s4"><span class="n">04</span><span>Notification</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="c4">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Chapter IV</span><span class="idx-chname-row"><span class="idx-chname">Restrictions for Certain Substances</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#c4-s1"><span class="n">01</span><span>Restrictions for Substances Listed in the Annexes</span></a>
+<a href="#c4-s2"><span class="n">02</span><span>CMR Substances</span></a>
+<a href="#c4-s3"><span class="n">03</span><span>Nanomaterials</span></a>
+<a href="#c4-s4"><span class="n">04</span><span>Traces of Prohibited Substances</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="c5">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Chapter V</span><span class="idx-chname-row"><span class="idx-chname">Animal Testing</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#c5-s1"><span class="n">01</span><span>Animal Testing</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="c6">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Chapter VI</span><span class="idx-chname-row"><span class="idx-chname">Consumer Information</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#c6-s1"><span class="n">01</span><span>Labelling</span></a>
+<a href="#c6-s2"><span class="n">02</span><span>Product Claims</span></a>
+<a href="#c6-s3"><span class="n">03</span><span>Access to Information for the Public</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="c7">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Chapter VII</span><span class="idx-chname-row"><span class="idx-chname">Market Surveillance</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#c7-s1"><span class="n">01</span><span>In-Market Control</span></a>
+<a href="#c7-s2"><span class="n">02</span><span>Communication of Serious Undesirable Effects</span></a>
+<a href="#c7-s3"><span class="n">03</span><span>Information on Substances</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="c8">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Chapter VIII</span><span class="idx-chname-row"><span class="idx-chname">Non-Compliance and Safeguard Clause</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#c8-s1"><span class="n">01</span><span>Non-Compliance by the Responsible Person</span></a>
+<a href="#c8-s2"><span class="n">02</span><span>Non-Compliance by Distributors</span></a>
+<a href="#c8-s3"><span class="n">03</span><span>Safeguard Clause</span></a>
+<a href="#c8-s4"><span class="n">04</span><span>Good Administrative Practices</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="c9">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Chapter IX</span><span class="idx-chname-row"><span class="idx-chname">Administrative Cooperation</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#c9-s1"><span class="n">01</span><span>Cooperation Between Competent Authorities</span></a>
+<a href="#c9-s2"><span class="n">02</span><span>Cooperation Regarding PIF Verification</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="c10">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Chapter X</span><span class="idx-chname-row"><span class="idx-chname">Implementing Measures and Final Provisions</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#c10-s1"><span class="n">01</span><span>Amendment of the Annexes</span></a>
+<a href="#c10-s2"><span class="n">02</span><span>Glossary of Common Ingredient Names</span></a>
+<a href="#c10-s3"><span class="n">03</span><span>Competent Authorities and Poison Centres</span></a>
+<a href="#c10-s4"><span class="n">04</span><span>Annual Report on Animal Testing</span></a>
+<a href="#c10-s5"><span class="n">05</span><span>Formal Objection Against Harmonised Standards</span></a>
+<a href="#c10-s6"><span class="n">06</span><span>Penalties</span></a>
+<a href="#c10-s7"><span class="n">07</span><span>Repeal</span></a>
+<a href="#c10-s8"><span class="n">08</span><span>Entry into Force and Application</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="annex">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Reference</span><span class="idx-chname-row"><span class="idx-chname">Annexes I–X</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#annex"><span class="n">—</span><span>Annex summary</span></a></div></div>
+</div>
+ <div class="idx-foot">Read in full.<br>Reading companion, not the official text.</div>
+</aside>
+<div class="idx-mobile"><button class="idx-toggle" type="button">Contents <span class="chev">+</span></button><div class="idx-panel"><div class="idx-panel-in"><div class="idxm-chap">Chapter I — Scope and Definitions</div>
+<a href="#c1-s1"><span class="n">Art. 1</span><span>Scope and Objective</span></a>
+<a href="#c1-s2"><span class="n">Art. 2</span><span>Definitions</span></a>
+<div class="idxm-chap">Chapter II — Safety, Responsibility, Free Movement</div>
+<a href="#c2-s1"><span class="n">Art. 3</span><span>Safety</span></a>
+<a href="#c2-s2"><span class="n">Art. 4</span><span>Responsible Person</span></a>
+<a href="#c2-s3"><span class="n">Art. 5</span><span>Obligations of Responsible Persons</span></a>
+<a href="#c2-s4"><span class="n">Art. 6</span><span>Obligations of Distributors</span></a>
+<a href="#c2-s5"><span class="n">Art. 7</span><span>Identification Within the Supply Chain</span></a>
+<a href="#c2-s6"><span class="n">Art. 8</span><span>Good Manufacturing Practice</span></a>
+<a href="#c2-s7"><span class="n">Art. 9</span><span>Free Movement</span></a>
+<div class="idxm-chap">Chapter III — Safety Assessment, Product Information File, Notification</div>
+<a href="#c3-s1"><span class="n">Art. 10</span><span>Safety Assessment</span></a>
+<a href="#c3-s2"><span class="n">Art. 11</span><span>Product Information File</span></a>
+<a href="#c3-s3"><span class="n">Art. 12</span><span>Sampling and Analysis</span></a>
+<a href="#c3-s4"><span class="n">Art. 13</span><span>Notification</span></a>
+<div class="idxm-chap">Chapter IV — Restrictions for Certain Substances</div>
+<a href="#c4-s1"><span class="n">Art. 14</span><span>Restrictions for Substances Listed in the Annexes</span></a>
+<a href="#c4-s2"><span class="n">Art. 15</span><span>CMR Substances</span></a>
+<a href="#c4-s3"><span class="n">Art. 16</span><span>Nanomaterials</span></a>
+<a href="#c4-s4"><span class="n">Art. 17</span><span>Traces of Prohibited Substances</span></a>
+<div class="idxm-chap">Chapter V — Animal Testing</div>
+<a href="#c5-s1"><span class="n">Art. 18</span><span>Animal Testing</span></a>
+<div class="idxm-chap">Chapter VI — Consumer Information</div>
+<a href="#c6-s1"><span class="n">Art. 19</span><span>Labelling</span></a>
+<a href="#c6-s2"><span class="n">Art. 20</span><span>Product Claims</span></a>
+<a href="#c6-s3"><span class="n">Art. 21</span><span>Access to Information for the Public</span></a>
+<div class="idxm-chap">Chapter VII — Market Surveillance</div>
+<a href="#c7-s1"><span class="n">Art. 22</span><span>In-Market Control</span></a>
+<a href="#c7-s2"><span class="n">Art. 23</span><span>Communication of Serious Undesirable Effects</span></a>
+<a href="#c7-s3"><span class="n">Art. 24</span><span>Information on Substances</span></a>
+<div class="idxm-chap">Chapter VIII — Non-Compliance and Safeguard Clause</div>
+<a href="#c8-s1"><span class="n">Art. 25</span><span>Non-Compliance by the Responsible Person</span></a>
+<a href="#c8-s2"><span class="n">Art. 26</span><span>Non-Compliance by Distributors</span></a>
+<a href="#c8-s3"><span class="n">Art. 27</span><span>Safeguard Clause</span></a>
+<a href="#c8-s4"><span class="n">Art. 28</span><span>Good Administrative Practices</span></a>
+<div class="idxm-chap">Chapter IX — Administrative Cooperation</div>
+<a href="#c9-s1"><span class="n">Art. 29</span><span>Cooperation Between Competent Authorities</span></a>
+<a href="#c9-s2"><span class="n">Art. 30</span><span>Cooperation Regarding PIF Verification</span></a>
+<div class="idxm-chap">Chapter X — Implementing Measures and Final Provisions</div>
+<a href="#c10-s1"><span class="n">Art. 31</span><span>Amendment of the Annexes</span></a>
+<a href="#c10-s2"><span class="n">Art. 33</span><span>Glossary of Common Ingredient Names</span></a>
+<a href="#c10-s3"><span class="n">Art. 34</span><span>Competent Authorities and Poison Centres</span></a>
+<a href="#c10-s4"><span class="n">Art. 35</span><span>Annual Report on Animal Testing</span></a>
+<a href="#c10-s5"><span class="n">Art. 36</span><span>Formal Objection Against Harmonised Standards</span></a>
+<a href="#c10-s6"><span class="n">Art. 37</span><span>Penalties</span></a>
+<a href="#c10-s7"><span class="n">Art. 38</span><span>Repeal</span></a>
+<a href="#c10-s8"><span class="n">Art. 40</span><span>Entry into Force and Application</span></a>
+<div class="idxm-chap">Annexes I–X</div>
+<a href="#annex"><span class="n"></span><span>Annex summary</span></a>
+</div></div></div>
+<div class="content">
+<div class="lead-note">
+  <span class="ln-label">Notice</span>
+  <p>This restatement is provided for <strong>general informational and educational purposes only</strong>. It is a plain-language reading companion prepared by ORR and does not constitute legal advice, and does not create an advisor-client or any other professional relationship between ORR and any reader.</p>
+  <p>Every effort has been made to accurately reflect the source law as enacted, but <strong>this page is not the official text of the law</strong> and may not reflect subsequent amendments, rules, notifications, or judicial interpretation. Where this restatement and the official text differ, the official text governs.</p>
+  <p>ORR, its principals, and its affiliates accept <strong>no responsibility or liability</strong> for any loss, damage, or legal consequence arising from reliance on this page. Nothing here should be treated as a substitute for advice from a qualified legal professional licensed in the relevant jurisdiction. <strong>Consult a lawyer</strong> before making any decision based on this content.</p>
+</div>
+<div class="chap-divider" id="c1"><span class="chap-divider-label">Chapter I</span><span class="chap-divider-name">Scope and Definitions</span></div>
+<section class="clause" id="c1-s1">
+ <div class="cl-head"><span class="cl-num">Art. 1</span><h2 class="cl-title">Scope and Objective</h2></div>
+ <p>This Regulation sets the rules for any cosmetic product made available on the EU market. Its twin objectives are: ensuring the functioning of the internal market and ensuring a high level of protection of human health.</p>
+</section>
+
+<section class="clause" id="c1-s2">
+ <div class="cl-head"><span class="cl-num">Art. 2</span><h2 class="cl-title">Definitions</h2></div>
+ <p>Cosmetic product — any substance or mixture intended to be placed in contact with the external parts of the human body (skin, hair, nails, lips, external genital organs) or with the teeth and the mucous membranes of the oral cavity, with a view exclusively or mainly to cleaning them, perfuming them, changing their appearance, protecting them, keeping them in good condition, or correcting body odours. A substance or mixture intended to be ingested, inhaled, injected, or implanted is not a cosmetic product.</p>
+<p>Substance — a chemical element and its compounds in the natural state or obtained by any manufacturing process, including any additive necessary to preserve its stability and any impurity deriving from the process, but excluding any separable solvent.</p>
+<p>Mixture — a mixture or solution composed of two or more substances.</p>
+<p>Manufacturer — whoever manufactures a cosmetic product (or has it manufactured) and markets it under their own name or trademark.</p>
+<p>Distributor — any natural or legal person in the supply chain, other than the manufacturer or importer, who makes a cosmetic product available on the EU market.</p>
+<p>End user — a consumer or a professional using the cosmetic product.</p>
+<p>Placing on the market — the first time a cosmetic product is made available on the EU market.</p>
+<p>Importer — any natural or legal person established in the EU who places a cosmetic product from a third country on the EU market.</p>
+<p>Nanomaterial — an insoluble or biopersistent and intentionally manufactured material with one or more external dimensions, or an internal structure, on the scale from 1 to 100 nm. The Commission may adjust this definition as science evolves.</p>
+<p>Preservatives — substances exclusively or mainly intended to inhibit microbial growth in the product. Colorants — substances exclusively or mainly intended to colour the product or the body by absorbing or reflecting visible light. UV-filters — substances exclusively or mainly intended to protect the skin against certain UV radiation.</p>
+<p>Undesirable effect — an adverse reaction for human health attributable to the normal or reasonably foreseeable use of a cosmetic product. Serious undesirable effect — an undesirable effect resulting in temporary or permanent functional incapacity, disability, hospitalisation, congenital anomalies, or an immediate vital risk or death.</p>
+<p>Frame formulation — a formulation listing the category or function of ingredients and their maximum concentration in the product, or giving relevant quantitative and qualitative information. Used for poison centre notifications to enable prompt medical treatment.</p>
+</section>
+
+<div class="chap-divider" id="c2"><span class="chap-divider-label">Chapter II</span><span class="chap-divider-name">Safety, Responsibility, Free Movement</span></div>
+<section class="clause" id="c2-s1">
+ <div class="cl-head"><span class="cl-num">Art. 3</span><h2 class="cl-title">Safety</h2></div>
+ <p>Every cosmetic product made available on the market must be safe for human health when used under normal or reasonably foreseeable conditions of use, taking account of: presentation (including conformity with Directive 87/357/EEC on products resembling foodstuffs); labelling; instructions for use and disposal; and any other indication or information provided by the responsible person. Providing warnings does not exempt the responsible person from compliance with the rest of this Regulation.</p>
+</section>
+
+<section class="clause" id="c2-s2">
+ <div class="cl-head"><span class="cl-num">Art. 4</span><h2 class="cl-title">Responsible Person</h2></div>
+ <p>Only cosmetic products for which a legal or natural person is designated within the EU as "responsible person" may be placed on the market. For products manufactured in the EU, the EU-established manufacturer is the responsible person by default. The manufacturer may designate another EU-established person by written mandate. For imported products, each importer is the responsible person for the products they import. A distributor becomes the responsible person if they market the product under their own name or trademark, or modify it in a way that could affect compliance.</p>
+</section>
+
+<section class="clause" id="c2-s3">
+ <div class="cl-head"><span class="cl-num">Art. 5</span><h2 class="cl-title">Obligations of Responsible Persons</h2></div>
+ <p>The responsible person must ensure compliance with Articles 3, 8, 10–18, 19(1)(2)(5), and Articles 20, 21, 23, and 24. If they consider or have reason to believe a product they placed on the market is non-compliant, they must immediately take corrective measures — bringing it into conformity, withdrawing, or recalling as appropriate. If the product presents a risk to human health, they must immediately inform the competent national authorities, specifying the non-compliance and corrective measures taken. They must cooperate with authorities on request.</p>
+</section>
+
+<section class="clause" id="c2-s4">
+ <div class="cl-head"><span class="cl-num">Art. 6</span><h2 class="cl-title">Obligations of Distributors</h2></div>
+ <p>Distributors must act with due care. Before making a product available, they must verify that: the labelling information (responsible person identity, durability, ingredients list) is present; language requirements are met; and the minimum durability date has not passed. If they consider a product is non-compliant, they must not make it available until compliance is established, or must take corrective measures (withdraw, recall). If the product presents a risk, they must inform the responsible person and competent authorities immediately.</p>
+</section>
+
+<section class="clause" id="c2-s5">
+ <div class="cl-head"><span class="cl-num">Art. 7</span><h2 class="cl-title">Identification Within the Supply Chain</h2></div>
+ <p>At the request of a competent authority, responsible persons must identify the distributors they supply, and distributors must identify who supplied them and who they supplied. This traceability obligation lasts for three years after the batch was made available to the distributor.</p>
+</section>
+
+<section class="clause" id="c2-s6">
+ <div class="cl-head"><span class="cl-num">Art. 8</span><h2 class="cl-title">Good Manufacturing Practice</h2></div>
+ <p>Manufacture of cosmetic products must comply with good manufacturing practice (GMP). Compliance with GMP is presumed where manufacture is in accordance with the relevant harmonised standards published in the Official Journal.</p>
+</section>
+
+<section class="clause" id="c2-s7">
+ <div class="cl-head"><span class="cl-num">Art. 9</span><h2 class="cl-title">Free Movement</h2></div>
+ <p>Member states must not refuse, prohibit, or restrict the making available of cosmetic products that comply with this Regulation, for reasons related to the requirements it lays down.</p>
+</section>
+
+<div class="chap-divider" id="c3"><span class="chap-divider-label">Chapter III</span><span class="chap-divider-name">Safety Assessment, Product Information File, Notification</span></div>
+<section class="clause" id="c3-s1">
+ <div class="cl-head"><span class="cl-num">Art. 10</span><h2 class="cl-title">Safety Assessment</h2></div>
+ <p>Before placing a cosmetic product on the market, the responsible person must ensure it has undergone a safety assessment on the basis of the relevant information, and that a cosmetic product safety report has been prepared in accordance with Annex I. The safety assessment must take into account: intended use; anticipated systemic exposure to individual ingredients in the final formulation; an appropriate weight-of-evidence approach reviewing data from all existing sources; and must be kept up to date with additional relevant information generated after placing on the market. The safety assessment must be carried out by a person holding a diploma in pharmacy, toxicology, medicine, or a similar discipline, or a course recognised as equivalent by a member state.</p>
+</section>
+
+<section class="clause" id="c3-s2">
+ <div class="cl-head"><span class="cl-num">Art. 11</span><h2 class="cl-title">Product Information File</h2></div>
+ <p>The responsible person must keep a product information file (PIF) for every cosmetic product placed on the market, for ten years after the last batch was placed on the market. The PIF must contain: a description of the product; the cosmetic product safety report; a description of the manufacturing method and a statement of GMP compliance; proof of the claimed effect (where justified by the product's nature or effect); and data on any animal testing performed by the manufacturer, agents, or suppliers relating to development or safety assessment, including animal testing performed for third-country regulatory requirements.</p>
+<p>The PIF must be readily accessible in electronic or other format at the responsible person's address to the competent authority of the member state where it is kept, in a language easily understood by that authority.</p>
+</section>
+
+<section class="clause" id="c3-s3">
+ <div class="cl-head"><span class="cl-num">Art. 12</span><h2 class="cl-title">Sampling and Analysis</h2></div>
+ <p>Sampling and analysis must be reliable and reproducible. In the absence of applicable EU legislation, reliability and reproducibility are presumed if the method used is in accordance with relevant harmonised standards.</p>
+</section>
+
+<section class="clause" id="c3-s4">
+ <div class="cl-head"><span class="cl-num">Art. 13</span><h2 class="cl-title">Notification</h2></div>
+ <p>Before placing a cosmetic product on the market, the responsible person must submit electronically to the Commission (via the CPNP — Cosmetic Products Notification Portal): the product category and name; the responsible person's name and address; country of origin for imports; the member state where the product will be placed on the market; contact details; the presence of nanomaterials with identification and reasonably foreseeable exposure conditions; the name and CAS/EC number of any CMR substances of category 1A or 1B; and the frame formulation for poison centre use. When the product is placed on the market, the responsible person must also submit the original labelling and a photograph of the packaging.</p>
+<p>A distributor translating labelling for another member state must separately notify the Commission of that translation. Notifications must be updated whenever any information changes. The Commission makes notification information available electronically to all competent authorities and to poison centres.</p>
+</section>
+
+<div class="chap-divider" id="c4"><span class="chap-divider-label">Chapter IV</span><span class="chap-divider-name">Restrictions for Certain Substances</span></div>
+<section class="clause" id="c4-s1">
+ <div class="cl-head"><span class="cl-num">Art. 14</span><h2 class="cl-title">Restrictions for Substances Listed in the Annexes</h2></div>
+ <p>Cosmetic products must not contain: prohibited substances listed in Annex II; restricted substances used outside the conditions in Annex III; colorants other than those listed in Annex IV, or listed colorants not used in accordance with Annex IV conditions (except hair colorants pending a Commission decision to extend Annex IV's scope to them); preservatives other than those listed in Annex V, or listed preservatives not used in accordance with Annex V conditions; and UV-filters other than those listed in Annex VI, or listed UV-filters not used in accordance with Annex VI conditions.</p>
+<p>Substances listed in Annexes III–VI for purposes other than their primary function (e.g. a preservative used as something other than a preservative) must also comply with the conditions of the Annex they appear in.</p>
+</section>
+
+<section class="clause" id="c4-s2">
+ <div class="cl-head"><span class="cl-num">Art. 15</span><h2 class="cl-title">CMR Substances</h2></div>
+ <p>Substances classified as carcinogenic, mutagenic, or toxic to reproduction (CMR) are prohibited in cosmetic products. CMR Category 2 substances are prohibited unless the SCCS (Scientific Committee on Consumer Safety) has evaluated them and found them safe for use in cosmetic products. CMR Category 1A or 1B substances are prohibited with a narrow exception: they may be used if they comply with food safety requirements, there is no suitable alternative, the application is for a particular product category with known exposure, and the SCCS has found them safe — taking particular account of vulnerable population groups and overall exposure from other sources.</p>
+<p>The Commission must review the Regulation with regard to endocrine-disrupting substances when internationally agreed identification criteria become available.</p>
+</section>
+
+<section class="clause" id="c4-s3">
+ <div class="cl-head"><span class="cl-num">Art. 16</span><h2 class="cl-title">Nanomaterials</h2></div>
+ <p>A high level of human health protection must be ensured for every cosmetic product containing nanomaterials. In addition to the standard notification, products containing nanomaterials must be notified to the Commission six months before being placed on the market, with: the nanomaterial's identification, specification (particle size, physical and chemical properties), quantity estimate, toxicological profile, safety data, and reasonably foreseeable exposure conditions.</p>
+<p>If the Commission has safety concerns about a nanomaterial, it must request a SCCS opinion within six months. If the SCCS finds data lacking, the responsible person must provide it within a reasonable time. If there is a potential risk or insufficient data, the Commission may amend Annexes II and III. The Commission must publish a catalogue of all nanomaterials used in cosmetic products and submit annual status reports to the European Parliament and Council.</p>
+</section>
+
+<section class="clause" id="c4-s4">
+ <div class="cl-head"><span class="cl-num">Art. 17</span><h2 class="cl-title">Traces of Prohibited Substances</h2></div>
+ <p>The non-intended presence of a small quantity of a prohibited substance is permitted if it stems from impurities in natural or synthetic ingredients, the manufacturing process, storage, or migration from packaging, is technically unavoidable in good manufacturing practice, and the product still conforms with Article 3 (safety).</p>
+</section>
+
+<div class="chap-divider" id="c5"><span class="chap-divider-label">Chapter V</span><span class="chap-divider-name">Animal Testing</span></div>
+<section class="clause" id="c5-s1">
+ <div class="cl-head"><span class="cl-num">Art. 18</span><h2 class="cl-title">Animal Testing</h2></div>
+ <p>The following are prohibited: placing on the market cosmetic products whose final formulation has been subject to animal testing using a method other than a validated alternative; placing on the market cosmetic products containing ingredients that have been subject to animal testing using a method other than a validated alternative; performing animal testing within the EU on finished cosmetic products to meet this Regulation; and performing animal testing within the EU on ingredients to meet this Regulation, where a validated alternative method exists.</p>
+<p>These prohibitions took effect on 11 March 2009 for most tests. For tests concerning repeated-dose toxicity, reproductive toxicity, and toxicokinetics (for which no alternatives existed), the deadline was extended to 11 March 2013.</p>
+<p>In exceptional circumstances, where serious safety concerns arise about an existing cosmetic ingredient, a member state may request the Commission to grant a derogation — but only if: the ingredient is in wide use with no alternative capable of performing a similar function, and the specific human health problem is substantiated with a detailed research protocol.</p>
+<p>The responsible person may state on packaging that no animal tests have been carried out only if neither the manufacturer nor its suppliers carried out or commissioned any animal tests on the finished product, its prototype, or any ingredients, and did not use ingredients tested on animals by others for developing new cosmetic products.</p>
+</section>
+
+<div class="chap-divider" id="c6"><span class="chap-divider-label">Chapter VI</span><span class="chap-divider-name">Consumer Information</span></div>
+<section class="clause" id="c6-s1">
+ <div class="cl-head"><span class="cl-num">Art. 19</span><h2 class="cl-title">Labelling</h2></div>
+ <p>Cosmetic products may only be made available on the market if the container and packaging bear the following in indelible, easily legible, and visible lettering:</p>
+<ol class="pen-list">
+<li>The responsible person's name (or registered name) and address, with the address where the PIF is kept highlighted. Country of origin for imports.</li>
+<li>Nominal content by weight or volume at the time of packaging — except for packaging under 5g or 5ml, free samples, and single-application packs.</li>
+<li>Date of minimum durability — preceded by the hourglass symbol or "best used before the end of." Not mandatory for products with durability over 30 months — instead, a period-after-opening (PAO) symbol with the safe-use period in months or years must be shown (the open-jar symbol).</li>
+<li>Particular precautions for use, including those listed in Annexes III–VI, and special precautionary information for professional-use products.</li>
+<li>Batch number or manufacturing reference.</li>
+<li>Function of the product, unless clear from its presentation.</li>
+<li>Ingredients list, preceded by the word "ingredients." Listed in descending order of weight at time of addition. Ingredients below 1% may be listed in any order after those above 1%. Nanomaterial ingredients must be followed by "[nano]" in brackets. Perfume and aromatic compositions are listed as "parfum" or "aroma," but individual allergens required by Annex III must still be named. Colorants may be listed in any order after other ingredients, with "may contain" or "+/-" for multi-shade products. INCI nomenclature must be used.</li>
+</ol>
+<p>Where practical limitations prevent full labelling on the container (e.g. for precautions or ingredients), the information may be given on an enclosed or attached leaflet, label, tape, tag, or card — referred to by a specified symbol on the container or packaging. For very small products like soap or bath balls, ingredients may appear on a notice in immediate proximity to the point of sale.</p>
+<p>The language of labelling for content, durability, precautions, and function is determined by the law of the member state where the product is made available to the end user.</p>
+</section>
+
+<section class="clause" id="c6-s2">
+ <div class="cl-head"><span class="cl-num">Art. 20</span><h2 class="cl-title">Product Claims</h2></div>
+ <p>In the labelling, marketing, and advertising of cosmetic products, text, names, trademarks, pictures, and signs must not be used to imply characteristics or functions the product does not have. The Commission must adopt a list of common criteria for claims. The responsible person may state that no animal tests were carried out only under the conditions set out in Article 18.</p>
+</section>
+
+<section class="clause" id="c6-s3">
+ <div class="cl-head"><span class="cl-num">Art. 21</span><h2 class="cl-title">Access to Information for the Public</h2></div>
+ <p>The responsible person must ensure that the qualitative and quantitative composition (limited to hazardous substances for quantitative data), the name and code of perfume/aromatic compositions and their supplier identity, and existing data on undesirable and serious undesirable effects are made easily accessible to the public by any appropriate means — without prejudice to commercial secrecy and intellectual property rights.</p>
+</section>
+
+<div class="chap-divider" id="c7"><span class="chap-divider-label">Chapter VII</span><span class="chap-divider-name">Market Surveillance</span></div>
+<section class="clause" id="c7-s1">
+ <div class="cl-head"><span class="cl-num">Art. 22</span><h2 class="cl-title">In-Market Control</h2></div>
+ <p>Member states must monitor compliance through in-market controls: checking cosmetic products and economic operators on an adequate scale, through the PIF and, where appropriate, physical and laboratory testing. Member states must also monitor compliance with GMP. Market surveillance authorities must be given sufficient powers, resources, and knowledge. Member states must review their surveillance activities at least every four years and share results with other member states and the Commission.</p>
+</section>
+
+<section class="clause" id="c7-s2">
+ <div class="cl-head"><span class="cl-num">Art. 23</span><h2 class="cl-title">Communication of Serious Undesirable Effects</h2></div>
+ <p>The responsible person and distributors must report all serious undesirable effects to the competent authority of the member state where the effect occurred, without delay — including: the details of the serious undesirable effect, the product name, and any corrective measures taken. The competent authority must immediately transmit this information to the competent authorities of all other member states (and, where reported by a distributor, to the responsible person). End users and health professionals may also report directly to competent authorities, which must forward the information. Competent authorities may use this information for market surveillance, market analysis, evaluation, and consumer information.</p>
+</section>
+
+<section class="clause" id="c7-s3">
+ <div class="cl-head"><span class="cl-num">Art. 24</span><h2 class="cl-title">Information on Substances</h2></div>
+ <p>Where there is serious doubt about the safety of a substance contained in cosmetic products, a competent authority may require the responsible person to submit a list of all cosmetic products for which they are responsible that contain that substance, with the concentration of the substance in each product.</p>
+</section>
+
+<div class="chap-divider" id="c8"><span class="chap-divider-label">Chapter VIII</span><span class="chap-divider-name">Non-Compliance and Safeguard Clause</span></div>
+<section class="clause" id="c8-s1">
+ <div class="cl-head"><span class="cl-num">Art. 25</span><h2 class="cl-title">Non-Compliance by the Responsible Person</h2></div>
+ <p>Competent authorities must require the responsible person to take corrective measures — bringing the product into conformity, withdrawing, or recalling — within an expressly stated time limit, where there is non-compliance with: GMP; safety assessment; PIF requirements; sampling and analysis; notification (including nanomaterial notification); substance restrictions; animal testing requirements; labelling; product claims; public access to information; serious undesirable effect reporting; or substance information requests.</p>
+<p>In cases of serious risk to human health: the competent authority may immediately prohibit, restrict, withdraw, or recall the product, and must inform the Commission and other member states. Where non-compliance extends beyond one member state, the competent authority must inform the Commission. The EU's RAPEX information exchange system is used for cross-border serious risk notifications.</p>
+</section>
+
+<section class="clause" id="c8-s2">
+ <div class="cl-head"><span class="cl-num">Art. 26</span><h2 class="cl-title">Non-Compliance by Distributors</h2></div>
+ <p>Competent authorities must require distributors to take corrective measures where distributors fail to meet their obligations under Article 6.</p>
+</section>
+
+<section class="clause" id="c8-s3">
+ <div class="cl-head"><span class="cl-num">Art. 27</span><h2 class="cl-title">Safeguard Clause</h2></div>
+ <p>Where a product complies with this Regulation but a competent authority has reasonable grounds for concern that it presents or could present a serious risk to human health, it may take appropriate provisional measures — withdrawal, recall, or restricting availability. The authority must immediately inform the Commission and other member states. The Commission must determine whether the provisional measures are justified. If justified, the Commission may amend the Annexes. If not justified, the member state must repeal them.</p>
+</section>
+
+<section class="clause" id="c8-s4">
+ <div class="cl-head"><span class="cl-num">Art. 28</span><h2 class="cl-title">Good Administrative Practices</h2></div>
+ <p>All decisions under Articles 25 and 27 must state exact grounds, be notified without delay, and include information on available remedies and time limits. Except where immediate action is needed for serious risk, the responsible person must be heard before any decision is taken. The same applies to distributors under Articles 26 and 27.</p>
+</section>
+
+<div class="chap-divider" id="c9"><span class="chap-divider-label">Chapter IX</span><span class="chap-divider-name">Administrative Cooperation</span></div>
+<section class="clause" id="c9-s1">
+ <div class="cl-head"><span class="cl-num">Art. 29</span><h2 class="cl-title">Cooperation Between Competent Authorities</h2></div>
+ <p>Member state competent authorities must cooperate with each other and with the Commission to ensure proper application and enforcement. The Commission must organise exchanges of experience to coordinate uniform application. Cooperation may extend to international initiatives.</p>
+</section>
+
+<section class="clause" id="c9-s2">
+ <div class="cl-head"><span class="cl-num">Art. 30</span><h2 class="cl-title">Cooperation Regarding PIF Verification</h2></div>
+ <p>Any member state's competent authority may request the competent authority of the member state where the PIF is kept to verify whether it meets the requirements and provides evidence of safety. The request must be motivated. The requested authority must carry out the verification without undue delay and report its findings.</p>
+</section>
+
+<div class="chap-divider" id="c10"><span class="chap-divider-label">Chapter X</span><span class="chap-divider-name">Implementing Measures and Final Provisions</span></div>
+<section class="clause" id="c10-s1">
+ <div class="cl-head"><span class="cl-num">Art. 31</span><h2 class="cl-title">Amendment of the Annexes</h2></div>
+ <p>Where there is a potential risk to human health, the Commission may amend Annexes II–VI after consulting the SCCS. On imperative grounds of urgency, the Commission may use an urgency procedure. The Commission may also amend Annexes III–VI and VIII for technical and scientific adaptation, and Annex I where necessary for product safety.</p>
+</section>
+
+<section class="clause" id="c10-s2">
+ <div class="cl-head"><span class="cl-num">Art. 33</span><h2 class="cl-title">Glossary of Common Ingredient Names</h2></div>
+ <p>The Commission must compile and update a glossary of common ingredient names, taking account of internationally recognised nomenclatures including INCI. The glossary is not a list of authorised substances. Common ingredient names must be used for labelling within twelve months of the glossary's publication.</p>
+</section>
+
+<section class="clause" id="c10-s3">
+ <div class="cl-head"><span class="cl-num">Art. 34</span><h2 class="cl-title">Competent Authorities and Poison Centres</h2></div>
+ <p>Member states must designate national competent authorities and communicate their details (and those of their poison centres) to the Commission. The Commission maintains and publishes a list.</p>
+</section>
+
+<section class="clause" id="c10-s4">
+ <div class="cl-head"><span class="cl-num">Art. 35</span><h2 class="cl-title">Annual Report on Animal Testing</h2></div>
+ <p>The Commission must report annually to the European Parliament and Council on: progress in developing and validating alternative test methods; progress in obtaining OECD acceptance of those methods and third-country recognition; and how the specific needs of SMEs have been addressed.</p>
+</section>
+
+<section class="clause" id="c10-s5">
+ <div class="cl-head"><span class="cl-num">Art. 36</span><h2 class="cl-title">Formal Objection Against Harmonised Standards</h2></div>
+ <p>Where a member state or the Commission considers that a harmonised standard does not satisfy the requirements of this Regulation, the matter is brought before the relevant committee. The Commission may publish, restrict, maintain, or withdraw the reference to the standard.</p>
+</section>
+
+<section class="clause" id="c10-s6">
+ <div class="cl-head"><span class="cl-num">Art. 37</span><h2 class="cl-title">Penalties</h2></div>
+ <p>Member states must lay down penalties for infringement. Penalties must be effective, proportionate, and dissuasive. Member states must notify the Commission of their penalty provisions.</p>
+</section>
+
+<section class="clause" id="c10-s7">
+ <div class="cl-head"><span class="cl-num">Art. 38</span><h2 class="cl-title">Repeal</h2></div>
+ <p>Directive 76/768/EEC (the previous Cosmetics Directive) was repealed with effect from 11 July 2013. References to the old Directive are read as references to this Regulation. Competent authorities must keep available the information received under the old Directive's notification system, and responsible persons must keep the old Directive's information accessible, until 11 July 2020.</p>
+</section>
+
+<section class="clause" id="c10-s8">
+ <div class="cl-head"><span class="cl-num">Art. 40</span><h2 class="cl-title">Entry into Force and Application</h2></div>
+ <p>This Regulation entered into force twenty days after publication. It applies from 11 July 2013, except: Article 15(1) and (2) (CMR substance prohibitions) applied from 1 December 2010; and Article 16(3) second subparagraph (nanomaterial notification for products already on the market) applied from 11 January 2013.</p>
+</section>
+
+<div class="chap-divider" id="annex"><span class="chap-divider-label">Reference</span><span class="chap-divider-name">Annexes I–X</span></div>
+<section class="clause" id="annex-summary" style="border-top:none;padding-top:0;margin-top:0">
+ <div class="cl-head"><span class="cl-num">Summary</span><h2 class="cl-title">What each Annex covers</h2></div>
+ <p><strong>Annex I</strong> — Cosmetic Product Safety Report. Sets out the required format and content, in two parts: Part A covers safety information (composition, physical/chemical characteristics, microbiological quality, impurities and traces, packaging, normal and reasonably foreseeable use, exposure, toxicological profile of each substance, undesirable and serious undesirable effects); Part B covers the safety assessor's conclusions (statement of safety, warning labels and instructions, reasoning, assessor credentials).</p>
+<p><strong>Annex II</strong> — List of Substances Prohibited in Cosmetic Products. Over 1,600 entries. Substances on this list may not be used as ingredients in any cosmetic product, at any concentration.</p>
+<p><strong>Annex III</strong> — List of Substances Which Cosmetic Products Must Not Contain Except Subject to Restrictions. Each entry specifies: the substance, the product type or body part it may be used on, the maximum concentration permitted, and any conditions and warnings that must appear on the label.</p>
+<p><strong>Annex IV</strong> — List of Colorants Allowed in Cosmetic Products. Specifies which colorants may be used, at what concentrations, and for which product types (all products, products rinsed off, products not in contact with mucous membranes, products exclusively for external use).</p>
+<p><strong>Annex V</strong> — List of Preservatives Allowed in Cosmetic Products. Specifies which preservatives may be used, at what maximum concentrations, and any conditions or warnings.</p>
+<p><strong>Annex VI</strong> — List of UV-Filters Allowed in Cosmetic Products. Specifies which UV-filters may be used, at what maximum concentrations, and any conditions or warnings.</p>
+<p><strong>Annex VII</strong> — Symbols used on packaging: the open-book symbol (referring to enclosed information), the open-jar symbol (period after opening), and the hourglass symbol (date of minimum durability).</p>
+<p><strong>Annex VIII</strong> — List of Validated Alternative Methods to Animal Testing. Alternative test methods that have been validated and adopted at EU level, replacing the corresponding animal tests.</p>
+<p><strong>Annex IX</strong> — Correlation Table. Maps the provisions of the old Directive 76/768/EEC to this Regulation and vice versa.</p>
+<p><strong>Annex X</strong> — Repealed Directive and its amendments. Lists Directive 76/768/EEC and all its successive amendments that this Regulation replaces.</p>
+</section>
+
+<div class="map-clear"><p>This reference covers what the Regulation says. The EU Cosmetics Regulation is one of the most detailed product-safety frameworks in the world — it governs everything from formulation to safety assessment to labelling to market surveillance for any product that touches skin, hair, nails, or teeth. Working out whether your specific product falls within the definition, which Annex restrictions apply to your ingredients, what your safety report must contain, and what your label must say in each member state — is a different exercise.</p></div>
+<div class="sources-block"><div class="sources-label">Source</div><p>Regulation (EC) No 1223/2009 of the European Parliament and of the Council of 30 November 2009 on cosmetic products, Official Journal of the European Union, L 342, 22 December 2009. In force since 11 January 2010, applicable from 11 July 2013.</p></div>
+<div class="doc-close">
+ <p>Need to work out how this actually applies to your product, data flows, or role? <em>That's a different exercise.</em></p>
+ <a href="../../index.html#begin" class="btn-outline">Start a conversation <span aria-hidden="true">→</span></a>
+</div>
+</div>
+</main>
+
+<footer>
+  <div class="ft-brand">
+    <div class="ft-bw"><img src="../../assets/crm.svg" alt="ORR Logo" class="begin-logo"/></div>
+    <span>From idea to operating business.</span>
+  </div>
+  <div class="ft-div"></div>
+  <nav class="ft-nav">
+    <span class="ft-l">Navigate</span>
+    <a href="../../resources.html">Resources</a>
+    <a href="../../index.html#assess">Diagnose</a>
+    <a href="../../index.html#structure">Structure</a>
+    <a href="../../founder.html">Founder</a>
+    <a href="../../index.html#begin">Begin</a>
+  </nav>
+  <div class="ft-div"></div>
+  <div class="ft-close">
+    <p class="ft-stmt">The businesses that run without their founders weren't built by accident. They were engineered.</p>
+    <div class="ft-legal">
+      <span class="ft-copy">© <span id="yr"></span> ORR — All rights reserved</span>
+      <div class="ft-ll">
+        <a href="../../legal/privacy.html">Privacy</a>
+        <a href="../../legal/terms.html">Terms</a>
+        <a href="../../legal/disclaimer.html">Disclaimer</a>
+      </div>
+      <p class="ft-disc">ORR is a business-structuring consultancy, not a law firm, accountancy, or financial adviser. Nothing on this site is professional advice.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+(function(){
+  var vrailFill=document.getElementById('vrail-fill');
+  var vrailRFill=document.getElementById('vrail-r-fill');
+  var nav=document.getElementById('nav');
+  var head=document.getElementById('doc-head');
+  var clauses=[].slice.call(document.querySelectorAll('.clause'));
+  var chgroups=[].slice.call(document.querySelectorAll('.idx-chgroup'));
+  var links=[].slice.call(document.querySelectorAll('.idx-chbody-in a,.idx-panel a'));
+  var map={}; links.forEach(function(a){var h=a.getAttribute('href').slice(1);(map[h]=map[h]||[]).push(a);});
+  var ticking=false;
+  function frame(){
+    ticking=false;
+    var y=scrollY, vh=innerHeight, total=document.body.scrollHeight-vh;
+    var pct=(total>0?Math.min(y/total,1)*100:0)+'%';
+    if(vrailFill) vrailFill.style.height=pct;
+    if(vrailRFill) vrailRFill.style.height=pct;
+    if(nav&&head) nav.classList.toggle('dark-mode', head.getBoundingClientRect().bottom>80);
+    var lineY=vh*0.3, cur=null;
+    clauses.forEach(function(c){ if(c.getBoundingClientRect().top<=lineY) cur=c.id; });
+    links.forEach(function(a){a.classList.remove('on');});
+    if(cur&&map[cur]) map[cur].forEach(function(a){a.classList.add('on');});
+    if(cur){
+      var chId = cur.split('-s')[0];
+      chgroups.forEach(function(g){
+        var isCurrent = g.dataset.chgroup === chId;
+        g.classList.toggle('current', isCurrent);
+      });
+    }
+  }
+  function onScroll(){ if(!ticking){ticking=true;requestAnimationFrame(frame);} }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll,{passive:true});
+  frame();
+})();
+
+(function(){
+  var groups = [].slice.call(document.querySelectorAll('.idx-chgroup'));
+  function measure(g){
+    var body = g.querySelector('.idx-chbody');
+    var inner = g.querySelector('.idx-chbody-in');
+    body.style.maxHeight = g.classList.contains('open') ? inner.scrollHeight + 'px' : '0';
+  }
+  groups.forEach(function(g){
+    var head = g.querySelector('.idx-chhead');
+    head.addEventListener('click', function(){
+      var open = g.classList.toggle('open');
+      head.setAttribute('aria-expanded', open);
+      measure(g);
+    });
+  });
+  if(groups[0]){ groups[0].classList.add('open'); measure(groups[0]); }
+  var mo = new MutationObserver(function(){
+    groups.forEach(function(g){
+      if(g.classList.contains('current') && !g.classList.contains('open')){
+        g.classList.add('open'); measure(g);
+      }
+    });
+  });
+  groups.forEach(function(g){ mo.observe(g, {attributes:true, attributeFilter:['class']}); });
+})();
+
+(function(){var m=document.querySelector('.idx-mobile');if(!m)return;
+ var b=m.querySelector('.idx-toggle'),p=m.querySelector('.idx-panel');
+ b.addEventListener('click',function(){var o=m.classList.toggle('open');
+  p.style.maxHeight=o?p.querySelector('.idx-panel-in').scrollHeight+'px':'0';});
+ m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');p.style.maxHeight='0';});});
+})();
+
+(function(){
+  var mBtn=document.getElementById('menuBtn'),mNav=document.getElementById('mnav');
+  if(!mBtn||!mNav)return;
+  mBtn.addEventListener('click',function(){
+    var o=!mNav.classList.contains('open');
+    mNav.classList.toggle('open',o);mBtn.classList.toggle('x',o);
+    mBtn.setAttribute('aria-expanded',o);
+    document.documentElement.classList.toggle('m-lock',o);
+  });
+  mNav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){
+    mNav.classList.remove('open');mBtn.classList.remove('x');
+    mBtn.setAttribute('aria-expanded','false');
+    document.documentElement.classList.remove('m-lock');
+  });});
+})();
+
+var REDUCED = matchMedia('(prefers-reduced-motion:reduce)').matches;
+function easeScrollTo(el){
+  if(!el) return;
+  var start=scrollY, end=el.getBoundingClientRect().top+scrollY, dist=end-start;
+  if(REDUCED){scrollTo(0,end);return;}
+  var t0=null; var ease=function(t){return 1-Math.pow(1-t,4);};
+  requestAnimationFrame(function step(ts){
+    if(!t0)t0=ts;
+    var p=Math.min((ts-t0)/650,1);
+    scrollTo(0,start+dist*ease(p));
+    if(p<1)requestAnimationFrame(step);
+  });
+}
+document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){
+  var t=document.querySelector(a.getAttribute('href'));
+  if(!t)return; e.preventDefault(); easeScrollTo(t);
+});});
+
+var HOVERS=matchMedia('(hover:hover)').matches;
+if(HOVERS){
+  var dot=document.getElementById('cursorDot');
+  var mx=0,my=0,cx=0,cy=0;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.classList.add('active');});
+  document.addEventListener('mouseleave',function(){dot.classList.remove('active');});
+  var sel='a,button';
+  document.addEventListener('mouseover',function(e){if(e.target.closest(sel))dot.classList.add('grow');});
+  document.addEventListener('mouseout',function(e){if(e.target.closest(sel))dot.classList.remove('grow');});
+  (function loop(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;dot.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(loop);})();
+  document.querySelectorAll('.nav-cta,.btn,.btn-outline').forEach(function(btn){
+    btn.addEventListener('mousemove',function(e){var r=btn.getBoundingClientRect();btn.style.transform='translate('+((e.clientX-r.left-r.width/2)*.15)+'px,'+((e.clientY-r.top-r.height/2)*.15)+'px)';});
+    btn.addEventListener('mouseleave',function(){btn.style.transform='';});
+  });
+}
+</script>
+</body>
+</html>

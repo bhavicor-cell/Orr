@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#F1ECE1">
+<title>Resources | ORR</title>
+<meta name="description" content="Frameworks, templates, and plain-language law — built from real operating experience. Most of it is free. Use it whether or not you ever speak to us.">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="assets/ngb.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400&family=Anton&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --vellum: #F1ECE1;
+  --vellum2:#E9E2D3;
+  --vellum3:#E0D8C6;
+  --ink:    #1A1812;
+  --ink72:  rgba(26,24,18,.84);
+  --ink54:  rgba(26,24,18,.68);
+  --ink38:  rgba(26,24,18,.54);
+  --ink18:  rgba(26,24,18,.16);
+  --ink10:  rgba(26,24,18,.10);
+  --pine:   #1A4D40;
+  --pine-b: #246B59;
+  --pine12: rgba(26,77,64,.12);
+  --pine06: rgba(26,77,64,.06);
+  --dark:   #0E2A24;
+  --dark2:  #0B221D;
+  --crm:    #F1ECE1;
+  --crm72:  rgba(241,236,225,.86);
+  --crm54:  rgba(241,236,225,.72);
+  --crm38:  rgba(241,236,225,.56);
+  --crm18:  rgba(241,236,225,.18);
+  --mint:   #8FC9B7;
+  --bronze: #9C7C49;
+  --line:   rgba(26,24,18,.12);
+  --lineL:  rgba(26,24,18,.07);
+  --disp:'Newsreader', Georgia, serif;
+  --body:'Hanken Grotesk', system-ui, sans-serif;
+  --mono:'IBM Plex Mono', monospace;
+  --ghost:'Anton', sans-serif;
+  --e1:cubic-bezier(.22,1,.36,1);
+  --e2:cubic-bezier(.16,1,.3,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --pad:clamp(20px,4.4vw,42px);
+}
+html{background:var(--vellum);color:var(--ink);-webkit-text-size-adjust:100%;
+  scrollbar-width:none;overflow-x:hidden;overflow-x:clip}
+html::-webkit-scrollbar{display:none}
+body{font-family:var(--body);font-weight:400;line-height:1.75;font-size:16.5px;background:var(--vellum);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;overflow-x:clip;
+  cursor:default;letter-spacing:.005em}
+::selection{background:var(--pine);color:var(--crm)}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.28;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E")}
+
+@media(hover:hover){
+  .cursor-dot{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--pine);pointer-events:none;z-index:9990;
+    mix-blend-mode:exclusion;transition:width .3s var(--spring),height .3s var(--spring),margin .3s var(--spring),opacity .3s;
+    margin:-4px 0 0 -4px;opacity:0}
+  .cursor-dot.active{opacity:1}
+  .cursor-dot.grow{width:40px;height:40px;margin:-20px 0 0 -20px;background:var(--mint);mix-blend-mode:difference}
+}
+
+#vrail{position:fixed;left:0;top:0;bottom:0;width:2px;z-index:7000;pointer-events:none;background:var(--ink10)}
+#vrail-fill{position:absolute;top:0;left:0;width:100%;height:0;
+  background:linear-gradient(to bottom,var(--pine),var(--mint));transition:height .15s linear}
+
+.btn,.btn-outline,.nav-cta{
+  transition:background .3s,color .3s,border-color .3s,gap .3s,transform .4s var(--spring),box-shadow .3s}
+.btn{display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:var(--vellum);font-family:var(--body);
+  font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:17px 28px;cursor:pointer;border:none;}
+.btn:hover{background:var(--pine);gap:18px}
+.btn .a{transition:transform .3s}.btn:hover .a{transform:translateX(3px)}
+
+/* ══ NAV — identical to homepage/legal pages ══ */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;height:62px;display:flex;align-items:center;padding:0 42px;
+  opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .5s var(--e2),transform .5s var(--e2),background .4s,border-color .4s,backdrop-filter .4s;border-bottom:1px solid transparent}
+#nav.visible{opacity:1;transform:none;pointer-events:auto}
+#nav.solid{background:rgba(241,236,225,.85);backdrop-filter:blur(18px) saturate(1.3);border-color:var(--line)}
+#nav.dark-mode{background:rgba(14,42,36,.85);border-color:var(--crm18)}
+#nav.dark-mode .nav-mid{color:var(--crm38)}
+#nav.dark-mode .nav-r a{color:var(--mint)}
+#nav.dark-mode .nav-cta{border-color:var(--crm);color:var(--crm)!important}
+#nav.dark-mode .nav-cta:hover{background:var(--mint);border-color:var(--mint);color:var(--dark)!important}
+.brand{display:flex;align-items:center;gap:11px;position:relative}
+.nav-logo{width:55px;height:55px;display:block;transition:opacity .5s var(--e2)}
+.nav-logo-dark{opacity:1}
+.nav-logo-light{position:absolute;top:0;left:0;opacity:0}
+#nav.dark-mode .nav-logo-dark{opacity:0}
+#nav.dark-mode .nav-logo-light{opacity:1}
+.nav-mid{font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--ink54);
+  position:absolute;left:50%;transform:translateX(-50%)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:30px}
+.nav-r a{font-family:var(--body);font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--pine-b);transition:color .25s}
+.nav-r a:hover{color:var(--pine)}
+.nav-cta{border:1px solid var(--ink);padding:8px 18px;color:var(--ink)!important;letter-spacing:.12em;transition:background .25s,color .25s,border-color .25s}
+.nav-cta:hover{background:var(--pine);border-color:var(--pine);color:var(--crm)!important}
+.menu-btn{display:none;position:relative;width:44px;height:44px;margin-right:-10px;background:none;border:0;cursor:pointer}
+.menu-btn i{position:absolute;left:11px;right:11px;height:1.5px;background:var(--ink);transition:top .34s var(--e1),transform .34s var(--e1)}
+.menu-btn i:first-child{top:18px}.menu-btn i:last-child{top:26px}
+.menu-btn.x i:first-child{top:22px;transform:rotate(45deg)}.menu-btn.x i:last-child{top:22px;transform:rotate(-45deg)}
+#nav.dark-mode .menu-btn i{background:var(--crm)}
+.mnav{display:none;position:fixed;top:62px;left:0;right:0;bottom:0;z-index:899;
+  background:rgba(241,236,225,.97);backdrop-filter:blur(20px) saturate(1.3);
+  flex-direction:column;padding:22px 22px calc(30px + env(safe-area-inset-bottom));
+  opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .4s var(--e2),transform .4s var(--e2)}
+.mnav.open{opacity:1;transform:none;pointer-events:auto}
+.mnav a{font-family:var(--disp);font-weight:300;font-size:clamp(28px,8.5vw,38px);letter-spacing:-.015em;color:var(--ink);
+  padding:20px 2px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;
+  opacity:0;transform:translateY(10px);transition:opacity .5s var(--e2),transform .5s var(--e2)}
+.mnav a::after{content:'→';font-family:var(--body);font-size:17px;color:var(--pine);opacity:.7}
+.mnav.open a{opacity:1;transform:none}
+.mnav.open a:nth-child(1){transition-delay:.05s}
+.mnav.open a:nth-child(2){transition-delay:.1s}
+.mnav.open a:nth-child(3){transition-delay:.15s}
+.mnav-tag{margin-top:auto;font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--ink38);
+  opacity:0;transition:opacity .6s var(--e2) .3s}
+.mnav.open .mnav-tag{opacity:1}
+html.m-lock,html.m-lock body{overflow:hidden}
+@media(max-width:820px){
+  #nav{padding:0 max(18px,env(safe-area-inset-right)) 0 max(18px,env(safe-area-inset-left))}
+  .nav-mid{display:none}
+  .nav-r a:not(.nav-cta){display:none}
+  .nav-cta{padding:10px 16px}
+  .menu-btn{display:block}
+  .mnav{display:flex}
+}
+@media(max-width:1080px){.nav-mid{display:none}}
+#nav{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+
+/* ══ FOOTER — identical to legal pages ══ */
+footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);border-top:1px solid var(--crm18);padding:68px 42px 44px;
+  display:grid;grid-template-columns:1.3fr 1px 1fr 1px 1.3fr;gap:0 56px}
+.ft-div{background:linear-gradient(to bottom,var(--crm18),transparent);align-self:stretch}
+.ft-brand span{font-family:var(--disp);font-size:14px;color:var(--crm54);line-height:1.55;display:block;margin-top:12px}
+.ft-bw{font-family:var(--disp);font-weight:300;font-size:28px;letter-spacing:.08em;color:var(--crm)}
+.begin-logo{height:160px;width:auto;display:block}
+.ft-nav{display:flex;flex-direction:column;gap:13px}
+.ft-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--crm38);margin-bottom:2px}
+.ft-nav a{font-size:13px;color:var(--crm54);transition:color .25s}
+.ft-nav a:hover{color:var(--mint)}
+.ft-close{display:flex;flex-direction:column;text-align:right}
+.ft-stmt{font-family:var(--disp);font-style:italic;font-weight:300;font-size:16px;line-height:1.45;color:var(--crm54);margin-bottom:22px}
+.ft-legal{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.ft-copy{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--crm38)}
+.ft-ll{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.ft-ll a{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--crm38);transition:color .25s}
+.ft-ll a:hover{color:var(--mint)}
+.ft-disc{font-size:11px;line-height:1.68;color:var(--crm54);text-align:right;max-width:52ch;margin-top:8px}
+footer{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+@media(max-width:1080px){
+  footer{grid-template-columns:1fr 1fr;gap:36px 44px}
+  .ft-div{display:none}
+  .ft-close{grid-column:1/-1;text-align:left}
+  .ft-legal,.ft-ll{align-items:flex-start;justify-content:flex-start}
+  .ft-disc{text-align:left;max-width:60ch}
+  .begin-logo{height:clamp(96px,12vw,140px)}
+}
+@media(max-width:880px){
+  footer{grid-template-columns:1fr;padding:52px 22px calc(38px + env(safe-area-inset-bottom));gap:34px}
+  .ft-div{display:none}
+  .ft-close{grid-column:auto;text-align:left}
+  .ft-legal,.ft-ll{align-items:flex-start;justify-content:flex-start}
+  .begin-logo{height:clamp(72px,20vw,96px)}
+  .ft-stmt{font-size:15px}
+  .ft-disc{font-size:12px;line-height:1.6;color:var(--crm72);max-width:100%}
+}
+@media(max-width:400px){#vrail{width:1px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ══════════════════════════════════════════════════════════════
+   RESOURCES — page-specific
+   ══════════════════════════════════════════════════════════════ */
+
+/* reveal, shared with homepage's convention */
+.r{opacity:0;transform:translateY(20px);transition:opacity .9s var(--e2),transform .9s var(--e2)}
+.r.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+/* — HEADER: dark band, identical DNA to doc-head — */
+#res-head{position:relative;padding:calc(62px + clamp(48px,7vw,86px)) var(--pad) clamp(56px,7vw,92px);
+  background:var(--dark);color:var(--crm);border-bottom:1px solid var(--crm18);overflow:hidden}
+#res-head::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(241,236,225,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(241,236,225,.03) 1px,transparent 1px);background-size:60px 60px}
+.rh-wrap{max-width:1180px;margin:0 auto;position:relative}
+.rh-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--mint);margin-bottom:22px}
+.rh-title{font-family:var(--disp);font-weight:300;font-size:clamp(44px,7vw,88px);line-height:.98;
+  letter-spacing:-.03em;margin-bottom:22px;color:var(--crm);max-width:14ch}
+.rh-title em{font-style:italic;color:var(--mint)}
+.rh-sub{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(17px,1.8vw,21px);
+  line-height:1.55;color:var(--crm72);max-width:52ch;margin-bottom:8px}
+.rh-note{font-family:var(--body);font-size:13.5px;color:var(--crm38);max-width:52ch;margin-top:16px}
+.rh-note strong{color:var(--crm54);font-weight:500}
+
+/* — BODY — */
+#res-body{max-width:1180px;margin:0 auto;padding:clamp(60px,7vw,92px) var(--pad) clamp(70px,8vw,110px)}
+.res-intro{max-width:62ch;margin-bottom:clamp(44px,5.4vw,66px)}
+.res-intro p{font-size:15px;line-height:1.85;color:var(--ink72)}
+
+/* category blocks — expandable accordions. Collapsed: name, description,
+   meta, and a big +. Expanded: the same header stays in place (nothing
+   reflows above it) and the full item list unfolds directly beneath —
+   one page, no page-loads, no dead middle stop. */
+.cat-list{display:flex;flex-direction:column}
+.cat-block{border-top:1px solid var(--line)}
+.cat-list .cat-block:last-child{border-bottom:1px solid var(--line)}
+
+.cat-head{display:grid;grid-template-columns:56px 1fr auto;gap:0 clamp(20px,3vw,40px);
+  align-items:start;width:100%;background:none;border:none;text-align:left;cursor:pointer;
+  padding:clamp(32px,4.2vw,48px) 0;transition:padding-left .35s var(--e1)}
+@media(hover:hover){
+  .cat-head:hover{padding-left:12px}
+  .cat-head:hover .cat-name{color:var(--pine)}
+}
+.cat-ix{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--pine);padding-top:8px}
+.cat-main{min-width:0}
+.cat-name{font-family:var(--disp);font-weight:300;font-size:clamp(26px,3.2vw,40px);line-height:1.08;
+  letter-spacing:-.02em;color:var(--ink);margin-bottom:10px;transition:color .3s}
+.cat-desc{font-size:14.5px;line-height:1.75;color:var(--ink72);max-width:58ch;margin-bottom:14px}
+.cat-meta{display:flex;flex-wrap:wrap;gap:8px 18px}
+.cat-meta span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink38)}
+.cat-meta span b{color:var(--pine);font-weight:400}
+.cat-toggle{display:flex;align-items:flex-start;justify-content:flex-end;padding-top:4px}
+.cat-toggle-ring{width:38px;height:38px;border:1px solid var(--ink18);border-radius:50%;
+  display:grid;place-items:center;flex-shrink:0;transition:border-color .35s,background .35s,transform .45s var(--spring)}
+.cat-toggle-ring svg{width:13px;height:13px;transition:transform .4s var(--e1)}
+.cat-block.open .cat-toggle-ring{border-color:var(--pine);background:var(--pine06)}
+.cat-block.open .cat-toggle-ring svg{transform:rotate(45deg)}
+@media(hover:hover){.cat-head:hover .cat-toggle-ring{border-color:var(--pine)}}
+
+/* the unfold */
+.cat-panel{max-height:0;overflow:hidden;transition:max-height .55s var(--e2)}
+.cat-panel-in{padding:0 0 clamp(30px,3.8vw,44px)}
+
+.item-list{display:flex;flex-direction:column;border-top:1px solid var(--lineL)}
+.item-row{display:grid;grid-template-columns:1fr auto;gap:14px 20px;align-items:start;
+  padding:20px clamp(0px,1vw,8px) 20px clamp(56px,7vw,76px);border-bottom:1px solid var(--lineL);
+  position:relative;transition:padding-left .3s var(--e1),background .25s}
+@media(hover:hover){
+  .item-row:hover{background:var(--pine06);padding-left:calc(clamp(56px,7vw,76px) + 6px)}
+  .item-row:hover .item-name{color:var(--pine)}
+  .item-row:hover .item-go{color:var(--pine);gap:13px}
+}
+.item-row::before{content:'✦';position:absolute;left:clamp(20px,2.6vw,28px);top:24px;font-size:7px;color:var(--pine);opacity:.55}
+.item-main{min-width:0}
+.item-tophead{display:flex;align-items:center;gap:8px;margin-bottom:7px;flex-wrap:wrap}
+.item-tag{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--pine);
+  border:1px solid var(--pine12);background:var(--pine06);padding:2px 7px}
+.item-tag.paid{color:var(--bronze);border-color:rgba(156,124,73,.22);background:rgba(156,124,73,.06)}
+.item-name{font-family:var(--disp);font-weight:400;font-size:clamp(16px,1.6vw,18.5px);line-height:1.3;color:var(--ink);transition:color .25s;margin-bottom:4px}
+.item-desc{font-size:13px;line-height:1.62;color:var(--ink72);max-width:58ch}
+.item-go{display:flex;align-items:center;gap:9px;font-family:var(--body);font-size:10.5px;font-weight:500;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--ink38);white-space:nowrap;padding-top:3px;transition:color .25s,gap .25s}
+
+/* case-study row gets a visibly different treatment — wider reading commitment */
+.item-row.case-study{background:var(--dark);border-bottom-color:transparent;margin:6px clamp(0px,1vw,8px) 6px clamp(56px,7vw,76px);
+  padding:22px 22px;border-radius:2px}
+.item-row.case-study::before{display:none}
+.item-row.case-study .item-tag{color:var(--mint);border-color:rgba(143,201,183,.25);background:rgba(143,201,183,.08)}
+.item-row.case-study .item-name{color:var(--crm)}
+.item-row.case-study .item-desc{color:var(--crm72)}
+.item-row.case-study .item-go{color:var(--mint)}
+@media(hover:hover){
+  .item-row.case-study:hover{background:var(--dark);padding-left:calc(22px + 6px)}
+  .item-row.case-study:hover .item-name{color:var(--mint)}
+  .item-row.case-study:hover .item-go{color:var(--crm)}
+}
+
+.cat-viewall{display:flex;justify-content:flex-start;padding:18px clamp(0px,1vw,8px) 0 clamp(56px,7vw,76px)}
+.cat-viewall a{display:inline-flex;align-items:center;gap:9px;font-family:var(--body);font-size:10.5px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink54);border-bottom:1px solid var(--line);padding-bottom:3px;
+  transition:color .25s,border-color .25s,gap .25s}
+.cat-viewall a:hover{color:var(--pine);border-color:var(--pine);gap:14px}
+
+@media(max-width:760px){
+  .cat-head{grid-template-columns:1fr auto;gap:12px}
+  .cat-ix{display:none}
+  .item-row,.cat-viewall{padding-left:24px}
+  .item-row::before{left:6px}
+  .item-row.case-study{margin-left:24px;margin-right:0}
+  @media(hover:hover){
+    .cat-head:hover{padding-left:0}
+    .item-row:hover{padding-left:30px}
+    .item-row.case-study:hover{padding-left:28px}
+  }
+}
+
+/* — CLOSING STRIP — reuses homepage's later-closing-top pattern for continuity */
+.res-close{margin-top:clamp(56px,6.6vw,84px);padding-top:clamp(30px,3.6vw,42px);
+  border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;
+  gap:24px;flex-wrap:wrap}
+.res-close p{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(15px,1.5vw,18px);
+  color:var(--ink54);max-width:46ch;line-height:1.55}
+.res-close p em{font-style:italic;color:var(--pine)}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-size:12px;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink);border:1px solid var(--ink);padding:15px 26px;background:none;
+  cursor:pointer;transition:background .3s,color .3s,border-color .3s,gap .3s;white-space:nowrap}
+.btn-outline:hover{background:var(--pine);border-color:var(--pine);color:var(--crm);gap:16px}
+@media(max-width:600px){
+  .res-close{flex-direction:column;align-items:stretch;text-align:left}
+  .btn-outline{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div id="vrail" aria-hidden="true"><div id="vrail-fill"></div></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<header id="nav">
+  <a class="brand" href="index.html" aria-label="ORR home">
+    <img src="assets/drk.svg" alt="ORR" class="nav-logo nav-logo-dark"/>
+    <img src="assets/crm.svg" alt="ORR" class="nav-logo nav-logo-light"/>
+  </a>
+  <span class="nav-mid">From Idea to Operating Business</span>
+  <nav class="nav-r">
+    <a href="index.html#structure">Structure</a>
+    <a href="resources.html">Resources</a>
+    <a href="index.html#begin" class="nav-cta">Begin →</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+  </nav>
+</header>
+
+<nav class="mnav" id="mnav" aria-label="Mobile navigation">
+  <a href="index.html#structure">Structure</a>
+  <a href="index.html#model">How we work</a>
+  <a href="resources.html">Resources</a>
+  <a href="index.html#begin">Begin</a>
+  <span class="mnav-tag">From Idea to Operating Business</span>
+</nav>
+
+<header id="res-head">
+  <div class="rh-wrap">
+    <p class="rh-eyebrow r">Free to use · No sign-up</p>
+    <h1 class="rh-title r d1">Resources.</h1>
+    <p class="rh-sub r d2">Use what we publish. Or bring us in to put it in place.</p>
+    <p class="rh-note r d2">Most of what's here is <strong>free</strong> — templates, plain-language law, governance frameworks, and a full worked example of a compliance program built end to end. Use it whether or not you ever speak to us.</p>
+  </div>
+</header>
+
+<main id="res-body">
+  <div class="res-intro r">
+    <p>Pick the one that matches what you're trying to solve right now. Each category opens to its own list — you don't need to dig through everything to find the one thing you need.</p>
+  </div>
+
+  <div class="cat-list" id="catList">
+
+    <!-- 01 — RUN THE BUSINESS -->
+    <div class="cat-block r" data-cat="run">
+      <button class="cat-head" type="button" aria-expanded="false" aria-controls="panel-run">
+        <span class="cat-ix">01</span>
+        <div class="cat-main">
+          <h2 class="cat-name">Run the Business</h2>
+          <p class="cat-desc">Frameworks and templates for the operational work that keeps a business moving — offer design, pricing, delivery, roles, and the day-to-day systems most founders build too late.</p>
+          <div class="cat-meta"><span><b>12</b> resources</span><span>Templates · Frameworks · Articles</span></div>
+        </div>
+        <span class="cat-toggle"><span class="cat-toggle-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+      </button>
+      <div class="cat-panel" id="panel-run">
+        <div class="cat-panel-in">
+          <div class="item-list">
+
+            <a class="item-row" href="resources/run-the-business.html">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">Insight</span></div>
+                <h3 class="item-name">The Outsider Test</h3>
+                <p class="item-desc">Why the questions an outsider asks about your business are usually the ones you've stopped asking yourself.</p>
+              </div>
+              <span class="item-go">Read <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="resources/run-the-business.html">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">Insight</span></div>
+                <h3 class="item-name">Structure Is Like Health</h3>
+                <p class="item-desc">You don't notice it until it's missing — and by then it's already expensive to fix.</p>
+              </div>
+              <span class="item-go">Read <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="resources/run-the-business.html">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">Insight</span></div>
+                <h3 class="item-name">The Freedom Trap</h3>
+                <p class="item-desc">Why the independence that got you started is often the exact thing keeping the business small.</p>
+              </div>
+              <span class="item-go">Read <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="resources/run-the-business.html">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">Insight</span></div>
+                <h3 class="item-name">The Idea-Testing Trap</h3>
+                <p class="item-desc">No idea is wrong — but assuming it will sell once it exists is the single most common early mistake.</p>
+              </div>
+              <span class="item-go">Read <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="#">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">Framework</span></div>
+                <h3 class="item-name">Business Model Stress-Test Framework</h3>
+                <p class="item-desc">Pressure-test your offer, pricing, and delivery model before you scale any part of it.</p>
+              </div>
+              <span class="item-go">Get it <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="#">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">Template</span></div>
+                <h3 class="item-name">Operating Structure Template</h3>
+                <p class="item-desc">A working skeleton for how a business actually runs day to day — not a diagram, a document you fill in.</p>
+              </div>
+              <span class="item-go">Get it <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="#">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">Excel</span></div>
+                <h3 class="item-name">Role &amp; Responsibility Matrix</h3>
+                <p class="item-desc">Who owns what, and who decides when nobody's sure — before that ambiguity becomes a real problem.</p>
+              </div>
+              <span class="item-go">Get it <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="#">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag paid">Paid kit</span></div>
+                <h3 class="item-name">Offer &amp; Pricing Infrastructure</h3>
+                <p class="item-desc">The full system for defining what you sell and what it's worth — four to six integrated deliverables, not one document.</p>
+              </div>
+              <span class="item-go">View kit <span aria-hidden="true">→</span></span>
+            </a>
+
+          </div>
+          <div class="cat-viewall"><a href="resources/run-the-business.html">View all 12 <span aria-hidden="true">→</span></a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 — THE LAW, PLAINLY -->
+    <div class="cat-block r d1" data-cat="law">
+      <button class="cat-head" type="button" aria-expanded="false" aria-controls="panel-law">
+        <span class="cat-ix">02</span>
+        <div class="cat-main">
+          <h2 class="cat-name">The Law, Plainly</h2>
+          <p class="cat-desc">Entire pieces of legislation restated section by section, in language a founder can actually use — DPDP, GDPR, CCPA/CPRA, and more, with no legal background required to follow them.</p>
+          <div class="cat-meta"><span><b>7</b> laws interpreted</span><span>Plain-language interpretations</span></div>
+        </div>
+        <span class="cat-toggle"><span class="cat-toggle-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+      </button>
+      <div class="cat-panel" id="panel-law">
+        <div class="cat-panel-in">
+          <div class="item-list">
+
+            <a class="item-row" href="#">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">India</span></div>
+                <h3 class="item-name">DPDP Act, 2023</h3>
+                <p class="item-desc">India's Digital Personal Data Protection Act, restated section by section for founders building or selling into India.</p>
+              </div>
+              <span class="item-go">Read <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="#">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">EU</span></div>
+                <h3 class="item-name">GDPR</h3>
+                <p class="item-desc">The regulation that shaped modern data protection law worldwide, restated without the legal density that usually surrounds it.</p>
+              </div>
+              <span class="item-go">Read <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="#">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">US</span></div>
+                <h3 class="item-name">CCPA / CPRA</h3>
+                <p class="item-desc">California's consumer privacy law, and what it actually asks of a business that touches California residents' data.</p>
+              </div>
+              <span class="item-go">Read <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="#">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">UAE</span></div>
+                <h3 class="item-name">DIFC Data Protection Law</h3>
+                <p class="item-desc">The data protection regime governing the Dubai International Financial Centre, for founders operating in or through the DIFC.</p>
+              </div>
+              <span class="item-go">Read <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="#">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">EU</span></div>
+                <h3 class="item-name">EU AI Act</h3>
+                <p class="item-desc">The world's first comprehensive AI regulation, restated for founders building AI-driven products regardless of where they're based.</p>
+              </div>
+              <span class="item-go">Read <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="#">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">EU</span></div>
+                <h3 class="item-name">EU Cyber Resilience Act</h3>
+                <p class="item-desc">New cybersecurity obligations for products with digital elements sold into the EU — what counts, and what's required.</p>
+              </div>
+              <span class="item-go">Read <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="#">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">US</span></div>
+                <h3 class="item-name">US IoT Cybersecurity Improvement Act</h3>
+                <p class="item-desc">Federal security requirements for connected devices — relevant well beyond companies selling directly to the US government.</p>
+              </div>
+              <span class="item-go">Read <span aria-hidden="true">→</span></span>
+            </a>
+
+          </div>
+          <div class="cat-viewall"><a href="resources/law-plainly.html">View all 7, with filters <span aria-hidden="true">→</span></a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 — GOVERNANCE & COMPLIANCE -->
+    <div class="cat-block r d2" data-cat="gov">
+      <button class="cat-head" type="button" aria-expanded="false" aria-controls="panel-gov">
+        <span class="cat-ix">03</span>
+        <div class="cat-main">
+          <h2 class="cat-name">Governance &amp; Compliance</h2>
+          <p class="cat-desc">Decision structures and accountability frameworks built for founders, not boards — plus a full case study of a multi-regime privacy program built end to end, deliverable by deliverable.</p>
+          <div class="cat-meta"><span><b>6</b> resources</span><span>Frameworks · 1 Case Study</span></div>
+        </div>
+        <span class="cat-toggle"><span class="cat-toggle-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></span>
+      </button>
+      <div class="cat-panel" id="panel-gov">
+        <div class="cat-panel-in">
+          <div class="item-list">
+
+            <a class="item-row case-study" href="resources/governance/helvane.html">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Case Study</span></div>
+                <h3 class="item-name">Helvane B.V. — A Multi-Regime Privacy Program, Built End to End</h3>
+                <p class="item-desc">GDPR, CCPA/CPRA, and DPDP compliance built for a fictional SaaS company — 24 deliverables, from policy to breach response, worked through in full rather than templated.</p>
+              </div>
+              <span class="item-go">Read the case study <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="#">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">Framework</span></div>
+                <h3 class="item-name">Governance Framework for Early-Stage Companies</h3>
+                <p class="item-desc">Decision rights and accountability structure sized for a founder-run business, not a board.</p>
+              </div>
+              <span class="item-go">Get it <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="#">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">Template</span></div>
+                <h3 class="item-name">Decision Rights &amp; Accountability Matrix</h3>
+                <p class="item-desc">Who decides, who's consulted, and who just needs to know — mapped once so it stops being re-litigated.</p>
+              </div>
+              <span class="item-go">Get it <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="#">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">Framework</span></div>
+                <h3 class="item-name">Policy Control Framework</h3>
+                <p class="item-desc">A starting set of internal policies and the controls that keep them followed, not just written.</p>
+              </div>
+              <span class="item-go">Get it <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="#">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">Framework</span></div>
+                <h3 class="item-name">Compliance Framework for AI-SaaS</h3>
+                <p class="item-desc">Compliance groundwork specifically for AI-driven SaaS products, mapped to the obligations that actually apply.</p>
+              </div>
+              <span class="item-go">Get it <span aria-hidden="true">→</span></span>
+            </a>
+
+            <a class="item-row" href="#">
+              <div class="item-main">
+                <div class="item-tophead"><span class="item-tag">Free</span><span class="item-tag">Commentary</span></div>
+                <h3 class="item-name">DPDP Rules, 2025 — Commentary</h3>
+                <p class="item-desc">What the 2025 Rules actually change, read alongside the Act itself.</p>
+              </div>
+              <span class="item-go">Read <span aria-hidden="true">→</span></span>
+            </a>
+
+          </div>
+          <div class="cat-viewall"><a href="resources/governance.html">View all 6 <span aria-hidden="true">→</span></a></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="res-close r">
+    <p>Already know what you need built, not just published? <em>That's a different conversation.</em></p>
+    <a href="index.html#begin" class="btn-outline">Start a conversation <span aria-hidden="true">→</span></a>
+  </div>
+</main>
+
+<footer>
+  <div class="ft-brand">
+    <div class="ft-bw"><img src="assets/crm.svg" alt="ORR Logo" class="begin-logo"/></div>
+    <span>From idea to operating business.</span>
+  </div>
+  <div class="ft-div"></div>
+  <nav class="ft-nav">
+    <span class="ft-l">Navigate</span>
+    <a href="resources.html">Resources</a>
+    <a href="index.html#assess">Diagnose</a>
+    <a href="index.html#structure">Structure</a>
+    <a href="founder.html">Founder</a>
+    <a href="index.html#begin">Begin</a>
+  </nav>
+  <div class="ft-div"></div>
+  <div class="ft-close">
+    <p class="ft-stmt">The businesses that run without their founders weren't built by accident. They were engineered.</p>
+    <div class="ft-legal">
+      <span class="ft-copy">© <span id="yr"></span> ORR — All rights reserved</span>
+      <div class="ft-ll">
+        <a href="legal/privacy.html">Privacy</a>
+        <a href="legal/terms.html">Terms</a>
+        <a href="legal/disclaimer.html">Disclaimer</a>
+      </div>
+      <p class="ft-disc">ORR is a business-structuring consultancy, not a law firm, accountancy, or financial adviser. Nothing on this site is professional advice.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+var REDUCED = matchMedia('(prefers-reduced-motion:reduce)').matches;
+var nav = document.getElementById('nav');
+var vrailFill = document.getElementById('vrail-fill');
+
+var ticking = false;
+function frame(){
+  ticking = false;
+  var y = scrollY, total = document.body.scrollHeight - innerHeight;
+  nav.classList.toggle('visible', true);
+  nav.classList.toggle('solid', y > 40);
+  if(vrailFill) vrailFill.style.height = (total > 0 ? Math.min(y/total,1)*100 : 0) + '%';
+}
+addEventListener('scroll', function(){ if(!ticking){ticking=true;requestAnimationFrame(frame);} }, {passive:true});
+addEventListener('resize', frame, {passive:true});
+frame();
+
+var ro = new IntersectionObserver(function(es){ es.forEach(function(e){
+  if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }
+}); }, {threshold:.1, rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.r').forEach(function(el){ ro.observe(el); });
+
+/* ══ CATEGORY ACCORDIONS ══
+   Independent — opening one doesn't close the others, since a founder may
+   want two categories open side by side while deciding. Each panel's
+   max-height is measured from its actual content, so it works regardless
+   of how many items a category ends up holding. */
+(function(){
+  var blocks = [].slice.call(document.querySelectorAll('.cat-block'));
+  function measure(block){
+    var panel = block.querySelector('.cat-panel');
+    var inner = block.querySelector('.cat-panel-in');
+    panel.style.maxHeight = block.classList.contains('open') ? inner.scrollHeight + 'px' : '0';
+  }
+  blocks.forEach(function(block){
+    var head = block.querySelector('.cat-head');
+    head.addEventListener('click', function(){
+      var open = block.classList.toggle('open');
+      head.setAttribute('aria-expanded', open);
+      measure(block);
+    });
+  });
+  /* open the first category by default so the pattern is obvious on load */
+  if(blocks[0]){
+    blocks[0].classList.add('open');
+    blocks[0].querySelector('.cat-head').setAttribute('aria-expanded','true');
+    measure(blocks[0]);
+  }
+  /* re-measure open panels on resize/font-load so nothing clips */
+  addEventListener('resize', function(){ blocks.forEach(function(b){ if(b.classList.contains('open')) measure(b); }); }, {passive:true});
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ blocks.forEach(function(b){ if(b.classList.contains('open')) measure(b); }); });
+})();
+
+(function(){
+  var mBtn = document.getElementById('menuBtn'), mNav = document.getElementById('mnav');
+  if(!mBtn || !mNav) return;
+  mBtn.addEventListener('click', function(){
+    var o = !mNav.classList.contains('open');
+    mNav.classList.toggle('open', o); mBtn.classList.toggle('x', o);
+    mBtn.setAttribute('aria-expanded', o);
+    document.documentElement.classList.toggle('m-lock', o);
+  });
+  mNav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){
+    mNav.classList.remove('open'); mBtn.classList.remove('x');
+    mBtn.setAttribute('aria-expanded','false');
+    document.documentElement.classList.remove('m-lock');
+  }); });
+})();
+
+var HOVERS = matchMedia('(hover:hover)').matches;
+if(HOVERS){
+  var dot = document.getElementById('cursorDot');
+  var mx=0,my=0,cx=0,cy=0;
+  document.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; dot.classList.add('active'); });
+  document.addEventListener('mouseleave', function(){ dot.classList.remove('active'); });
+  var sel = 'a,button,.item-row,.cat-head';
+  document.addEventListener('mouseover', function(e){ if(e.target.closest(sel)) dot.classList.add('grow'); });
+  document.addEventListener('mouseout', function(e){ if(e.target.closest(sel)) dot.classList.remove('grow'); });
+  (function loop(){ cx+=(mx-cx)*.12; cy+=(my-cy)*.12; dot.style.transform='translate('+cx+'px,'+cy+'px)'; requestAnimationFrame(loop); })();
+  document.querySelectorAll('.nav-cta,.btn,.btn-outline').forEach(function(btn){
+    btn.addEventListener('mousemove', function(e){
+      var r = btn.getBoundingClientRect();
+      btn.style.transform = 'translate('+((e.clientX-r.left-r.width/2)*.15)+'px,'+((e.clientY-r.top-r.height/2)*.15)+'px)';
+    });
+    btn.addEventListener('mouseleave', function(){ btn.style.transform = ''; });
+  });
+}
+</script>
+</body>
+</html>

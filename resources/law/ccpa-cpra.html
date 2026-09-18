@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FAF7F0">
+<title>CCPA/CPRA | The Law, Plainly | ORR</title>
+<meta name="description" content="The California Consumer Privacy Act of 2018, as amended by the California Privacy Rights Act — restated section by section, in plain English. A reading companion for founders, not a substitute for the official text.">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="../../assets/ngb.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ══════════════════════════════════════════════════════════════
+   PALETTE — lighter, warmer, index-matched. Dark reserved for the
+   masthead only; the reading surface stays paper-bright throughout.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --vellum: #FAF7F0;
+  --paper:  #FFFFFF;
+  --paper2: #F5F1E8;
+  --ink:    #211E17;
+  --ink80:  rgba(33,30,23,.90);
+  --ink65:  rgba(33,30,23,.72);
+  --ink48:  rgba(33,30,23,.56);
+  --ink32:  rgba(33,30,23,.38);
+  --ink14:  rgba(33,30,23,.13);
+  --ink08:  rgba(33,30,23,.075);
+  --pine:   #1A4D40;
+  --pine-b: #246B59;
+  --pine-l: #3D8570;
+  --pine08: rgba(26,77,64,.07);
+  --pine14: rgba(26,77,64,.13);
+  --dark:   #0E2A24;
+  --crm:    #FAF7F0;
+  --crm80:  rgba(250,247,240,.90);
+  --crm60:  rgba(250,247,240,.68);
+  --crm40:  rgba(250,247,240,.46);
+  --crm16:  rgba(250,247,240,.16);
+  --mint:   #93CDBB;
+  --bronze: #A9895A;
+  --gold:   #C9A15F;
+  --line:   rgba(33,30,23,.11);
+  --lineL:  rgba(33,30,23,.06);
+  --disp:'Newsreader', Georgia, serif;
+  --body:'Hanken Grotesk', system-ui, sans-serif;
+  --mono:'IBM Plex Mono', monospace;
+  --e1:cubic-bezier(.22,1,.36,1);
+  --e2:cubic-bezier(.16,1,.3,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --pad:clamp(22px,4.6vw,56px);
+  --shell:1560px;
+}
+html{background:var(--vellum);color:var(--ink);-webkit-text-size-adjust:100%;scrollbar-width:none;overflow-x:hidden;overflow-x:clip}
+html::-webkit-scrollbar{display:none}
+body{font-family:var(--body);font-weight:400;line-height:1.75;font-size:16.5px;background:var(--vellum);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;overflow-x:clip;cursor:default;letter-spacing:.005em}
+::selection{background:var(--pine);color:var(--crm)}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.2;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E")}
+@media(hover:hover){
+  .cursor-dot{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--pine);pointer-events:none;z-index:9990;
+    mix-blend-mode:exclusion;transition:width .3s var(--spring),height .3s var(--spring),margin .3s var(--spring),opacity .3s;margin:-4px 0 0 -4px;opacity:0}
+  .cursor-dot.active{opacity:1}
+  .cursor-dot.grow{width:40px;height:40px;margin:-20px 0 0 -20px;background:var(--mint);mix-blend-mode:difference}
+}
+#vrail{position:fixed;left:0;top:0;bottom:0;width:2px;z-index:7000;pointer-events:none;background:var(--ink08)}
+#vrail-fill{position:absolute;top:0;left:0;width:100%;height:0;background:linear-gradient(to bottom,var(--pine),var(--mint));transition:height .15s linear}
+#vrail-r{position:fixed;right:0;top:0;bottom:0;width:2px;z-index:7000;pointer-events:none;background:var(--ink08)}
+#vrail-r-fill{position:absolute;top:0;left:0;width:100%;height:0;background:linear-gradient(to bottom,var(--pine),var(--mint));transition:height .15s linear}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;height:64px;display:flex;align-items:center;padding:0 42px;
+  opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .5s var(--e2),transform .5s var(--e2),background .4s,border-color .4s,backdrop-filter .4s;border-bottom:1px solid transparent}
+#nav.visible{opacity:1;transform:none;pointer-events:auto}
+#nav.solid{background:rgba(250,247,240,.86);backdrop-filter:blur(18px) saturate(1.3);border-color:var(--line)}
+#nav.dark-mode{background:rgba(14,42,36,.88);border-color:var(--crm16)}
+#nav.dark-mode .nav-mid{color:var(--crm40)}
+#nav.dark-mode .nav-r a{color:var(--mint)}
+#nav.dark-mode .nav-cta{border-color:var(--crm);color:var(--crm)!important}
+#nav.dark-mode .nav-cta:hover{background:var(--mint);border-color:var(--mint);color:var(--dark)!important}
+.brand{display:flex;align-items:center;gap:11px;position:relative}
+.nav-logo{width:55px;height:55px;display:block;transition:opacity .5s var(--e2)}
+.nav-logo-dark{opacity:1}
+.nav-logo-light{position:absolute;top:0;left:0;opacity:0}
+#nav.dark-mode .nav-logo-dark{opacity:0}
+#nav.dark-mode .nav-logo-light{opacity:1}
+.nav-mid{font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--ink48);position:absolute;left:50%;transform:translateX(-50%)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:30px}
+.nav-r a{font-family:var(--body);font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--pine-b);transition:color .25s}
+.nav-r a:hover{color:var(--pine)}
+.nav-cta{border:1px solid var(--ink);padding:8px 18px;color:var(--ink)!important;letter-spacing:.12em;transition:background .25s,color .25s,border-color .25s}
+.nav-cta:hover{background:var(--pine);border-color:var(--pine);color:var(--crm)!important}
+.menu-btn{display:none;position:relative;width:44px;height:44px;margin-right:-10px;background:none;border:0;cursor:pointer}
+.menu-btn i{position:absolute;left:11px;right:11px;height:1.5px;background:var(--ink);transition:top .34s var(--e1),transform .34s var(--e1)}
+.menu-btn i:first-child{top:18px}.menu-btn i:last-child{top:26px}
+.menu-btn.x i:first-child{top:22px;transform:rotate(45deg)}.menu-btn.x i:last-child{top:22px;transform:rotate(-45deg)}
+#nav.dark-mode .menu-btn i{background:var(--crm)}
+.mnav{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;z-index:899;background:rgba(250,247,240,.98);backdrop-filter:blur(20px) saturate(1.3);
+  flex-direction:column;padding:22px 22px calc(30px + env(safe-area-inset-bottom));opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .4s var(--e2),transform .4s var(--e2)}
+.mnav.open{opacity:1;transform:none;pointer-events:auto}
+.mnav a{font-family:var(--disp);font-weight:300;font-size:clamp(28px,8.5vw,38px);letter-spacing:-.015em;color:var(--ink);padding:20px 2px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(10px);transition:opacity .5s var(--e2),transform .5s var(--e2)}
+.mnav a::after{content:'→';font-family:var(--body);font-size:17px;color:var(--pine);opacity:.7}
+.mnav.open a{opacity:1;transform:none}
+.mnav.open a:nth-child(1){transition-delay:.05s}
+.mnav.open a:nth-child(2){transition-delay:.1s}
+.mnav.open a:nth-child(3){transition-delay:.15s}
+.mnav-tag{margin-top:auto;font-family:var(--body);font-size:10.5px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--ink32);opacity:0;transition:opacity .6s var(--e2) .3s}
+.mnav.open .mnav-tag{opacity:1}
+html.m-lock,html.m-lock body{overflow:hidden}
+@media(max-width:820px){
+  #nav{padding:0 max(18px,env(safe-area-inset-right)) 0 max(18px,env(safe-area-inset-left))}
+  .nav-mid{display:none}.nav-r a:not(.nav-cta){display:none}.nav-cta{padding:10px 16px}.menu-btn{display:block}.mnav{display:flex}
+}
+@media(max-width:1080px){.nav-mid{display:none}}
+#nav{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+
+/* FOOTER */
+footer{position:relative;z-index:1;background:var(--dark);color:var(--crm);border-top:1px solid var(--crm16);padding:68px 42px 44px;display:grid;grid-template-columns:1.3fr 1px 1fr 1px 1.3fr;gap:0 56px}
+.ft-div{background:linear-gradient(to bottom,var(--crm16),transparent);align-self:stretch}
+.ft-brand span{font-family:var(--disp);font-size:14px;color:var(--crm60);line-height:1.55;display:block;margin-top:12px}
+.ft-bw{font-family:var(--disp);font-weight:300;font-size:28px;letter-spacing:.08em;color:var(--crm)}
+.begin-logo{height:160px;width:auto;display:block}
+.ft-nav{display:flex;flex-direction:column;gap:13px}
+.ft-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--crm40);margin-bottom:2px}
+.ft-nav a{font-size:13px;color:var(--crm60);transition:color .25s}
+.ft-nav a:hover{color:var(--mint)}
+.ft-close{display:flex;flex-direction:column;text-align:right}
+.ft-stmt{font-family:var(--disp);font-style:italic;font-weight:300;font-size:16px;line-height:1.45;color:var(--crm60);margin-bottom:22px}
+.ft-legal{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.ft-copy{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--crm40)}
+.ft-ll{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.ft-ll a{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--crm40);transition:color .25s}
+.ft-ll a:hover{color:var(--mint)}
+.ft-disc{font-size:11px;line-height:1.68;color:var(--crm60);text-align:right;max-width:52ch;margin-top:8px}
+footer{padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+@media(max-width:1080px){
+  footer{grid-template-columns:1fr 1fr;gap:36px 44px}.ft-div{display:none}.ft-close{grid-column:1/-1;text-align:left}
+  .ft-legal,.ft-ll{align-items:flex-start;justify-content:flex-start}.ft-disc{text-align:left;max-width:60ch}.begin-logo{height:clamp(96px,12vw,140px)}
+}
+@media(max-width:880px){
+  footer{grid-template-columns:1fr;padding:52px 22px calc(38px + env(safe-area-inset-bottom));gap:34px}.ft-div{display:none}
+  .ft-close{grid-column:auto;text-align:left}.ft-legal,.ft-ll{align-items:flex-start;justify-content:flex-start}
+  .begin-logo{height:clamp(72px,20vw,96px)}.ft-stmt{font-size:15px}.ft-disc{font-size:12px;line-height:1.6;color:var(--crm80);max-width:100%}
+}
+@media(max-width:400px){#vrail,#vrail-r{width:1px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ══════════════════════════════════════════════════════════════
+   DOCUMENT HEADER — restrained dark band, generous vertical rhythm
+   ══════════════════════════════════════════════════════════════ */
+#doc-head{position:relative;padding:calc(64px + clamp(52px,7vw,92px)) var(--pad) clamp(46px,5.6vw,68px);
+ background:var(--dark);color:var(--crm);border-bottom:1px solid var(--crm16);overflow:hidden}
+#doc-head::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.45;
+ background-image:linear-gradient(rgba(250,247,240,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(250,247,240,.025) 1px,transparent 1px);background-size:64px 64px}
+#doc-head::after{content:'';position:absolute;top:-30%;right:-6%;width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(circle,rgba(147,205,187,.10),transparent 68%);pointer-events:none}
+.dh-wrap{max-width:var(--shell);margin:0 auto;position:relative;padding-left:clamp(0px,4vw,64px)}
+.dh-crumb{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--crm40);margin-bottom:22px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.dh-crumb a{color:var(--crm60);transition:color .2s}
+.dh-crumb a:hover{color:var(--mint)}
+.dh-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--mint);margin-bottom:24px}
+.dh-title{font-family:var(--disp);font-weight:300;font-size:clamp(42px,6.4vw,84px);line-height:1.0;
+ letter-spacing:-.03em;margin-bottom:24px;max-width:19ch;color:var(--crm)}
+.dh-title em{font-style:italic;color:var(--mint)}
+.dh-stand{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(17px,1.9vw,21px);
+ line-height:1.55;color:var(--crm60);max-width:66ch}
+.dh-note{font-family:var(--body);font-size:14px;line-height:1.72;color:var(--crm80);max-width:64ch;margin-top:16px}
+.dh-companion{font-family:var(--body);font-size:13px;color:var(--crm40);margin-top:18px;max-width:64ch;
+  display:flex;align-items:center;gap:9px}
+.dh-companion::before{content:'';width:14px;height:1px;background:var(--crm40)}
+.dh-meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:32px;padding-top:26px;border-top:1px solid var(--crm16)}
+.dh-meta-item{display:flex;flex-direction:column;gap:5px}
+.dh-meta-k{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--crm40)}
+.dh-meta-v{font-family:var(--body);font-size:13px;color:var(--crm80)}
+
+/* ══════════════════════════════════════════════════════════════
+   BODY — wider shell, much more generous index, wider reading column
+   ══════════════════════════════════════════════════════════════ */
+#doc-body{max-width:var(--shell);margin:0 auto;padding:clamp(52px,6vw,80px) var(--pad) clamp(64px,8vw,110px);
+ display:grid;grid-template-columns:224px 1fr;gap:0 clamp(96px,10vw,160px);align-items:start}
+
+/* ── the index — a real index: leaders, quiet type, no chrome ── */
+.idx{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 128px);overflow-y:auto;scrollbar-width:none;
+  padding-right:4px}
+.idx::-webkit-scrollbar{display:none}
+.idx-label{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink32);
+ padding-bottom:16px;margin-bottom:4px;border-bottom:1.5px solid var(--ink);display:flex;align-items:baseline;justify-content:space-between}
+.idx-label span:first-child{color:var(--ink);font-weight:500}
+.idx-label-count{font-family:var(--mono);font-size:9px;color:var(--ink32);letter-spacing:.06em}
+
+.idx-chgroup{border-bottom:1px solid var(--lineL)}
+.idx-chgroup:last-child{border-bottom:none}
+.idx-chhead{display:block;width:100%;background:none;border:none;
+ text-align:left;cursor:pointer;padding:15px 2px 15px 0;position:relative;transition:opacity .2s}
+.idx-chhead:hover{opacity:.7}
+.idx-chlabel{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink32);display:block;margin-bottom:3px}
+.idx-chname-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.idx-chname{font-family:var(--disp);font-weight:400;font-size:14px;color:var(--ink);line-height:1.35;letter-spacing:-.005em;max-width:100%}
+.idx-chleader{flex:1;border-bottom:1px dotted var(--ink14);margin-bottom:4px;min-width:8px;align-self:flex-end}
+.idx-chchev{font-family:var(--body);font-weight:300;font-size:14px;color:var(--ink32);
+ transition:transform .35s var(--e1);flex-shrink:0}
+.idx-chgroup.open .idx-chchev{transform:rotate(45deg)}
+.idx-chgroup.current .idx-chlabel{color:var(--pine-b)}
+.idx-chgroup.current .idx-chname{color:var(--pine);font-style:italic}
+.idx-chbody{max-height:0;overflow:hidden;transition:max-height .45s var(--e2)}
+.idx-chbody-in{padding:0 0 14px 2px}
+.idx-chbody-in a{display:flex;gap:10px;align-items:baseline;padding:6px 0;font-size:12.5px;line-height:1.5;color:var(--ink48);
+ transition:color .2s}
+.idx-chbody-in a .n{font-family:var(--mono);font-size:9px;color:var(--ink32);flex-shrink:0;min-width:14px;transition:color .2s}
+.idx-chbody-in a:hover{color:var(--ink)}
+.idx-chbody-in a.on{color:var(--pine);font-weight:500}
+.idx-chbody-in a.on .n{color:var(--pine)}
+.idx-foot{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);
+ font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--ink32);line-height:1.85}
+.idx-mobile{display:none}
+
+/* ── the reading column — wider still ── */
+.content{min-width:0;max-width:1020px}
+.lead-note{margin-bottom:clamp(40px,4.6vw,58px);padding:22px 26px;background:transparent;border:1px solid var(--ink14);
+  border-left:3px solid var(--ink32);border-radius:0 10px 10px 0}
+.lead-note p{font-size:12.5px;line-height:1.75;color:var(--ink48);font-family:var(--body)}
+.lead-note p + p{margin-top:10px}
+.lead-note strong{color:var(--ink65);font-weight:600}
+.lead-note .ln-label{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink32);margin-bottom:10px;display:block}
+
+.chap-divider{display:flex;align-items:baseline;gap:16px;margin:clamp(52px,6vw,76px) 0 clamp(26px,3vw,34px);
+ padding-bottom:16px;border-bottom:2px solid var(--pine14)}
+.content .clause:first-of-type ~ .chap-divider:first-of-type,
+.content > .chap-divider:first-child{margin-top:0}
+.chap-divider-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--pine);flex-shrink:0}
+.chap-divider-name{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(21px,2.3vw,29px);color:var(--ink);line-height:1.2}
+
+.clause{padding-top:clamp(28px,3.4vw,38px);margin-top:clamp(28px,3.4vw,38px);border-top:1px solid var(--line);scroll-margin-top:96px}
+.chap-divider + .clause{border-top:none;margin-top:0;padding-top:0}
+.cl-head{display:flex;align-items:baseline;gap:18px;margin-bottom:16px}
+.cl-num{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--pine);padding-top:6px;flex-shrink:0;white-space:nowrap;
+  background:var(--pine08);padding:4px 9px;border-radius:5px;margin-top:2px}
+.cl-title{font-family:var(--disp);font-weight:300;font-size:clamp(22px,2.6vw,31px);line-height:1.16;letter-spacing:-.02em;color:var(--ink)}
+.cl-subhead{font-family:var(--disp);font-style:italic;font-weight:400;font-size:clamp(17px,1.8vw,20px);
+  letter-spacing:-.005em;color:var(--pine);margin:28px 0 12px;padding-top:20px;border-top:1px solid var(--lineL)}
+.clause .cl-subhead:first-of-type{margin-top:22px}
+.clause p{font-size:15.5px;line-height:1.85;color:var(--ink65);margin-bottom:14px;max-width:88ch}
+.clause p:last-child{margin-bottom:0}
+.clause strong{font-weight:600;color:var(--ink)}
+.pen-list{list-style:none;counter-reset:pen;margin:6px 0 0;padding:0;max-width:88ch}
+.pen-list li{counter-increment:pen;position:relative;padding:13px 0 13px 38px;font-size:15px;line-height:1.75;
+  color:var(--ink65);border-bottom:1px solid var(--lineL)}
+.pen-list li:first-child{border-top:1px solid var(--lineL)}
+.pen-list li::before{content:counter(pen,decimal-leading-zero);position:absolute;left:0;top:13px;
+  font-family:var(--mono);font-size:11px;color:var(--pine)}
+
+.map-clear{margin-top:clamp(52px,5.8vw,76px);padding:28px 30px;background:var(--pine08);border-left:3px solid var(--pine);
+  max-width:none;border-radius:0 12px 12px 0}
+.map-clear p{font-family:var(--disp);font-style:italic;font-weight:300;font-size:15px;line-height:1.72;color:var(--ink65)}
+
+.sources-block{margin-top:clamp(32px,3.8vw,44px);padding-top:22px;border-top:1px solid var(--line);max-width:none}
+.sources-label{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink32);margin-bottom:9px}
+.sources-block p{font-size:12.5px;line-height:1.7;color:var(--ink48)}
+
+.doc-close{margin-top:clamp(52px,6vw,78px);padding-top:clamp(30px,3.6vw,40px);border-top:1px solid var(--line);
+ display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
+.doc-close p{font-family:var(--disp);font-style:italic;font-weight:300;font-size:14.5px;color:var(--ink48);max-width:44ch;line-height:1.58}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-size:11.5px;font-weight:500;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--ink);border:1px solid var(--ink);padding:14px 24px;background:none;
+  cursor:pointer;transition:background .3s,color .3s,border-color .3s,gap .3s;white-space:nowrap;border-radius:2px}
+.btn-outline:hover{background:var(--pine);border-color:var(--pine);color:var(--crm);gap:15px}
+
+@media(max-width:1360px){
+  #doc-body{grid-template-columns:214px 1fr;gap:0 56px}
+  .content{max-width:none}
+}
+
+@media(max-width:960px){
+ #doc-body{grid-template-columns:1fr;gap:0}
+ .idx{display:none}
+ .idx-mobile{display:block;position:sticky;top:64px;z-index:80;margin:0 calc(-1*var(--pad)) clamp(30px,5vw,42px);
+  background:rgba(250,247,240,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+ .idx-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px var(--pad);
+  background:none;border:none;cursor:pointer;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--pine)}
+ .idx-toggle .chev{transition:transform .35s var(--e1)}
+ .idx-mobile.open .idx-toggle .chev{transform:rotate(45deg)}
+ .idx-panel{max-height:0;overflow:hidden;transition:max-height .45s var(--e2)}
+ .idx-panel-in{padding:4px var(--pad) 20px;max-height:62vh;overflow-y:auto}
+ .idxm-chap{font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--pine);
+   padding:16px 0 8px;opacity:.9}
+ .idx-panel a{display:flex;gap:12px;padding:10px 0;font-size:13.5px;color:var(--ink65);border-bottom:1px solid var(--lineL)}
+ .idx-panel a .n{font-family:var(--mono);font-size:10.5px;color:var(--pine);min-width:38px}
+ .content{max-width:none}
+ .doc-close{flex-direction:column;align-items:stretch;text-align:left}
+ .btn-outline{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div id="vrail" aria-hidden="true"><div id="vrail-fill"></div></div>
+<div id="vrail-r" aria-hidden="true"><div id="vrail-r-fill"></div></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<header id="nav" class="visible solid dark-mode">
+  <a class="brand" href="../../index.html" aria-label="ORR home">
+    <img src="../../assets/drk.svg" alt="ORR" class="nav-logo nav-logo-dark"/>
+    <img src="../../assets/crm.svg" alt="ORR" class="nav-logo nav-logo-light"/>
+  </a>
+  <span class="nav-mid">From Idea to Operating Business</span>
+  <nav class="nav-r">
+    <a href="../../index.html#structure">Structure</a>
+    <a href="../../resources.html">Resources</a>
+    <a href="../../index.html#begin" class="nav-cta">Begin &rarr;</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+  </nav>
+</header>
+
+<nav class="mnav" id="mnav" aria-label="Mobile navigation">
+  <a href="../../index.html#structure">Structure</a>
+  <a href="../../index.html#model">How we work</a>
+  <a href="../../resources.html">Resources</a>
+  <a href="../../index.html#begin">Begin</a>
+  <span class="mnav-tag">From Idea to Operating Business</span>
+</nav>
+
+<header id="doc-head">
+ <div class="dh-wrap">
+  <p class="dh-crumb"><a href="../../resources.html">Resources</a><span aria-hidden="true">/</span><a href="../law-plainly.html">The Law, Plainly</a><span aria-hidden="true">/</span><span>CCPA/CPRA</span></p>
+  <p class="dh-eyebrow">CALIFORNIA · CIV. CODE §1798.100–199.100 · REFERENCE SERIES</p>
+  <h1 class="dh-title">The CCPA/CPRA, <em>Plainly.</em></h1>
+  <p class="dh-stand">The California Consumer Privacy Act of 2018, as amended by the California Privacy Rights Act of 2020 — section by section, in plain English. No jargon, no legalese, no filler.</p>
+  <p class="dh-companion">A reading companion, not a substitute for the official text.</p>
+  <div class="dh-meta">
+    <div class="dh-meta-item"><span class="dh-meta-k">Sections</span><span class="dh-meta-v">1798.100–199.100</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-k">Groups</span><span class="dh-meta-v">8</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-k">CCPA enacted</span><span class="dh-meta-v">2018</span></div>
+    <div class="dh-meta-item"><span class="dh-meta-k">CPRA operative</span><span class="dh-meta-v">1 January 2023</span></div>
+  </div>
+ </div>
+</header>
+<main id="doc-body">
+<aside class="idx">
+ <div class="idx-label"><span>Contents</span><span class="idx-label-count">24 sections</span></div>
+<div class="idx-chgroup" data-chgroup="g1">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Section</span><span class="idx-chname-row"><span class="idx-chname">Business Obligations</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#g1-s1"><span class="n">01</span><span>General Duties When Collecting Personal Information</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="g2">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Section</span><span class="idx-chname-row"><span class="idx-chname">Consumer Rights</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#g2-s1"><span class="n">01</span><span>Right to Delete</span></a>
+<a href="#g2-s2"><span class="n">02</span><span>Right to Correct</span></a>
+<a href="#g2-s3"><span class="n">03</span><span>Right to Know (Collection)</span></a>
+<a href="#g2-s4"><span class="n">04</span><span>Right to Know (Sale and Sharing)</span></a>
+<a href="#g2-s5"><span class="n">05</span><span>Right to Opt Out of Sale or Sharing</span></a>
+<a href="#g2-s6"><span class="n">06</span><span>Right to Limit Use of Sensitive Personal Information</span></a>
+<a href="#g2-s7"><span class="n">07</span><span>Right of No Retaliation</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="g3">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Section</span><span class="idx-chname-row"><span class="idx-chname">Operational Requirements</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#g3-s1"><span class="n">01</span><span>Notice, Disclosure, Correction, and Deletion Requirements</span></a>
+<a href="#g3-s2"><span class="n">02</span><span>Opt-Out and Sensitive-Information Mechanisms</span></a>
+<a href="#g3-s3"><span class="n">03</span><span>Browser Opt-Out Signals</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="g4">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Section</span><span class="idx-chname-row"><span class="idx-chname">Definitions</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#g4-s1"><span class="n">01</span><span>Selected Key Terms</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="g5">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Section</span><span class="idx-chname-row"><span class="idx-chname">Exemptions</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#g5-s1"><span class="n">01</span><span>Exemptions</span></a>
+<a href="#g5-s2"><span class="n">02</span><span>Reidentification Restrictions</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="g6">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Section</span><span class="idx-chname-row"><span class="idx-chname">Enforcement and Penalties</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#g6-s1"><span class="n">01</span><span>Private Right of Action (Security Breaches)</span></a>
+<a href="#g6-s2"><span class="n">02</span><span>Administrative Enforcement</span></a>
+<a href="#g6-s3"><span class="n">03</span><span>Consumer Privacy Fund</span></a>
+<a href="#g6-s4"><span class="n">04</span><span>Attorney General Enforcement</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="g7">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Section</span><span class="idx-chname-row"><span class="idx-chname">General Provisions</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#g7-s1"><span class="n">01</span><span>Conflicts with Other Laws</span></a>
+<a href="#g7-s2"><span class="n">02</span><span>Preemption of Local Law</span></a>
+<a href="#g7-s3"><span class="n">03</span><span>Regulations</span></a>
+<a href="#g7-s4"><span class="n">04</span><span>Anti-Avoidance</span></a>
+<a href="#g7-s5"><span class="n">05</span><span>Waiver</span></a>
+<a href="#g7-s6"><span class="n">06</span><span>Liberal Construction and Federal Relationship</span></a>
+</div></div>
+</div>
+<div class="idx-chgroup" data-chgroup="g8">
+ <button class="idx-chhead" type="button" aria-expanded="false"><span class="idx-chlabel">Section</span><span class="idx-chname-row"><span class="idx-chname">California Privacy Protection Agency</span><span class="idx-chleader" aria-hidden="true"></span><span class="idx-chchev">+</span></span></button>
+ <div class="idx-chbody"><div class="idx-chbody-in"><a href="#g8-s1"><span class="n">01</span><span>The Agency</span></a>
+</div></div>
+</div>
+ <div class="idx-foot">Read in full.<br>Reading companion, not the official text.</div>
+</aside>
+<div class="idx-mobile"><button class="idx-toggle" type="button">Contents <span class="chev">+</span></button><div class="idx-panel"><div class="idx-panel-in"><div class="idxm-chap">Business Obligations</div>
+<a href="#g1-s1"><span class="n">§ 1798.100</span><span>General Duties When Collecting Personal Information</span></a>
+<div class="idxm-chap">Consumer Rights</div>
+<a href="#g2-s1"><span class="n">§ 1798.105</span><span>Right to Delete</span></a>
+<a href="#g2-s2"><span class="n">§ 1798.106</span><span>Right to Correct</span></a>
+<a href="#g2-s3"><span class="n">§ 1798.110</span><span>Right to Know (Collection)</span></a>
+<a href="#g2-s4"><span class="n">§ 1798.115</span><span>Right to Know (Sale and Sharing)</span></a>
+<a href="#g2-s5"><span class="n">§ 1798.120</span><span>Right to Opt Out of Sale or Sharing</span></a>
+<a href="#g2-s6"><span class="n">§ 1798.121</span><span>Right to Limit Use of Sensitive Personal Information</span></a>
+<a href="#g2-s7"><span class="n">§ 1798.125</span><span>Right of No Retaliation</span></a>
+<div class="idxm-chap">Operational Requirements</div>
+<a href="#g3-s1"><span class="n">§ 1798.130</span><span>Notice, Disclosure, Correction, and Deletion Requirements</span></a>
+<a href="#g3-s2"><span class="n">§ 1798.135</span><span>Opt-Out and Sensitive-Information Mechanisms</span></a>
+<a href="#g3-s3"><span class="n">§ 1798.136</span><span>Browser Opt-Out Signals</span></a>
+<div class="idxm-chap">Definitions</div>
+<a href="#g4-s1"><span class="n">§ 1798.140</span><span>Selected Key Terms</span></a>
+<div class="idxm-chap">Exemptions</div>
+<a href="#g5-s1"><span class="n">§ 1798.145–146</span><span>Exemptions</span></a>
+<a href="#g5-s2"><span class="n">§ 1798.148</span><span>Reidentification Restrictions</span></a>
+<div class="idxm-chap">Enforcement and Penalties</div>
+<a href="#g6-s1"><span class="n">§ 1798.150</span><span>Private Right of Action (Security Breaches)</span></a>
+<a href="#g6-s2"><span class="n">§ 1798.155</span><span>Administrative Enforcement</span></a>
+<a href="#g6-s3"><span class="n">§ 1798.160</span><span>Consumer Privacy Fund</span></a>
+<a href="#g6-s4"><span class="n">§ 1798.199.90</span><span>Attorney General Enforcement</span></a>
+<div class="idxm-chap">General Provisions</div>
+<a href="#g7-s1"><span class="n">§ 1798.175</span><span>Conflicts with Other Laws</span></a>
+<a href="#g7-s2"><span class="n">§ 1798.180</span><span>Preemption of Local Law</span></a>
+<a href="#g7-s3"><span class="n">§ 1798.185</span><span>Regulations</span></a>
+<a href="#g7-s4"><span class="n">§ 1798.190</span><span>Anti-Avoidance</span></a>
+<a href="#g7-s5"><span class="n">§ 1798.192</span><span>Waiver</span></a>
+<a href="#g7-s6"><span class="n">§ 1798.194–196</span><span>Liberal Construction and Federal Relationship</span></a>
+<div class="idxm-chap">California Privacy Protection Agency</div>
+<a href="#g8-s1"><span class="n">§ 1798.199.10–199.100</span><span>The Agency</span></a>
+</div></div></div>
+<div class="content">
+<div class="lead-note">
+  <span class="ln-label">Notice</span>
+  <p>This restatement is provided for <strong>general informational and educational purposes only</strong>. It is a plain-language reading companion prepared by ORR and does not constitute legal advice, and does not create an advisor-client or any other professional relationship between ORR and any reader.</p>
+  <p>Every effort has been made to accurately reflect the source law as enacted, but <strong>this page is not the official text of the law</strong> and may not reflect subsequent amendments, rules, notifications, or judicial interpretation. Where this restatement and the official text differ, the official text governs.</p>
+  <p>ORR, its principals, and its affiliates accept <strong>no responsibility or liability</strong> for any loss, damage, or legal consequence arising from reliance on this page. Nothing here should be treated as a substitute for advice from a qualified legal professional licensed in the relevant jurisdiction. <strong>Consult a lawyer</strong> before making any decision based on this content.</p>
+</div>
+<div class="chap-divider" id="g1"><span class="chap-divider-label">Business Obligations</span></div>
+<section class="clause" id="g1-s1">
+ <div class="cl-head"><span class="cl-num">§ 1798.100</span><h2 class="cl-title">General Duties When Collecting Personal Information</h2></div>
+ <p>At or before the point of collection, a business must tell consumers: what categories of personal information it is collecting and why; whether that information is sold or shared; if sensitive personal information is collected, the categories and purposes; and how long it intends to retain each category — or the criteria used to determine that period. A business cannot retain personal information longer than is reasonably necessary for the disclosed purpose.</p>
+<p>Collection, use, retention, and sharing must be reasonably necessary and proportionate to the purposes for which the data was collected, and not processed in a way that is incompatible with those purposes.</p>
+<p>If a business sells, shares, or discloses personal information to a third party, service provider, or contractor, it must enter a written agreement that: specifies the limited purposes; obligates the recipient to comply with this law and provide the same level of privacy protection; gives the business the right to take steps to ensure compliance; requires the recipient to notify the business if it can no longer meet its obligations; and gives the business the right to stop and remediate unauthorised use.</p>
+<p>Every business must implement reasonable security procedures appropriate to the nature of the information.</p>
+</section>
+
+<div class="chap-divider" id="g2"><span class="chap-divider-label">Consumer Rights</span></div>
+<section class="clause" id="g2-s1">
+ <div class="cl-head"><span class="cl-num">§ 1798.105</span><h2 class="cl-title">Right to Delete</h2></div>
+ <p>A consumer can ask a business to delete any personal information the business collected from her. On receiving a verifiable request, the business must delete, direct its service providers and contractors to delete, and notify all third parties it sold or shared the data with to delete — unless doing so is impossible or involves disproportionate effort.</p>
+<p>Deletion is not required where the data is reasonably necessary to: complete a transaction or perform a contract; ensure security and integrity; debug errors; exercise free speech; comply with the California Electronic Communications Privacy Act; conduct peer-reviewed research (with informed consent); enable internal uses reasonably aligned with consumer expectations; or comply with a legal obligation.</p>
+</section>
+
+<section class="clause" id="g2-s2">
+ <div class="cl-head"><span class="cl-num">§ 1798.106</span><h2 class="cl-title">Right to Correct</h2></div>
+ <p>A consumer can ask a business to correct inaccurate personal information. The business must use commercially reasonable efforts to make the correction.</p>
+</section>
+
+<section class="clause" id="g2-s3">
+ <div class="cl-head"><span class="cl-num">§ 1798.110</span><h2 class="cl-title">Right to Know (Collection)</h2></div>
+ <p>A consumer can ask a business to disclose: the categories of personal information collected about her; the categories of sources; the business or commercial purpose for collecting, selling, or sharing; the categories of third parties to whom information is disclosed; and the specific pieces of personal information collected about her.</p>
+</section>
+
+<section class="clause" id="g2-s4">
+ <div class="cl-head"><span class="cl-num">§ 1798.115</span><h2 class="cl-title">Right to Know (Sale and Sharing)</h2></div>
+ <p>A consumer can ask a business that sells or shares her data to disclose: the categories of personal information collected, sold, or shared, and the categories of third parties involved; and the categories of personal information disclosed for a business purpose, and to whom. A third party that receives personal information sold or shared to it must not resell or reshare it unless the consumer has received explicit notice and an opportunity to opt out.</p>
+</section>
+
+<section class="clause" id="g2-s5">
+ <div class="cl-head"><span class="cl-num">§ 1798.120</span><h2 class="cl-title">Right to Opt Out of Sale or Sharing</h2></div>
+ <p>A consumer can direct a business not to sell or share her personal information to third parties, at any time. A business must not sell or share the personal information of a consumer it knows is under 16 — unless the consumer (if 13–15) or parent/guardian (if under 13) has affirmatively authorised it. Willfully disregarding a consumer's age counts as actual knowledge.</p>
+<p>Once a consumer opts out, the business must wait at least 12 months before asking again for authorisation to sell or share.</p>
+</section>
+
+<section class="clause" id="g2-s6">
+ <div class="cl-head"><span class="cl-num">§ 1798.121</span><h2 class="cl-title">Right to Limit Use of Sensitive Personal Information</h2></div>
+ <p>A consumer can direct a business to limit its use of sensitive personal information to what is necessary to perform the services or provide the goods the consumer reasonably expects, and to certain enumerated purposes (security, integrity, short-term transient use, and quality verification). Once the consumer gives that direction, the business must comply and wait at least 12 months before asking again. Sensitive personal information collected without the purpose of inferring characteristics about a consumer is treated as regular personal information.</p>
+</section>
+
+<section class="clause" id="g2-s7">
+ <div class="cl-head"><span class="cl-num">§ 1798.125</span><h2 class="cl-title">Right of No Retaliation</h2></div>
+ <p>A business must not discriminate against a consumer for exercising any right under this law — including by denying services, charging different prices, providing different quality, or retaliating against an employee or contractor who exercises their rights. A business may offer financial incentives for collecting, selling, sharing, or retaining personal information, and may charge a different price if it is reasonably related to the value the consumer's data provides to the business — but incentive programs must have prior opt-in consent and must not be unjust, unreasonable, coercive, or usurious.</p>
+</section>
+
+<div class="chap-divider" id="g3"><span class="chap-divider-label">Operational Requirements</span></div>
+<section class="clause" id="g3-s1">
+ <div class="cl-head"><span class="cl-num">§ 1798.130</span><h2 class="cl-title">Notice, Disclosure, Correction, and Deletion Requirements</h2></div>
+ <p>A business must make available at least two methods for submitting requests (including a toll-free number, or just email if the business is online-only). Requests must be fulfilled free of charge within 45 days (extendable once by 45 days with notice). Disclosures cover the preceding 12 months and must be delivered in a readily usable, machine-readable format. The business may authenticate the consumer but cannot require account creation.</p>
+<p>A business must disclose in its online privacy policy (updated at least annually): a description of consumer rights; categories of personal information collected, the sources, the purposes, the third-party recipients; categories of personal information sold or shared, and disclosed for a business purpose (in separate lists); and the designated methods for submitting requests. Staff handling privacy inquiries must be trained.</p>
+</section>
+
+<section class="clause" id="g3-s2">
+ <div class="cl-head"><span class="cl-num">§ 1798.135</span><h2 class="cl-title">Opt-Out and Sensitive-Information Mechanisms</h2></div>
+ <p>A business that sells or shares personal information, or uses sensitive personal information beyond the permitted purposes, must provide clear, conspicuous links on its homepage: "Do Not Sell or Share My Personal Information" and "Limit the Use of My Sensitive Personal Information" — or a single link combining both. Alternatively, the business can honour opt-out preference signals sent by the consumer's platform or browser.</p>
+<p>The business must not require account creation to opt out. After opt-out, it must wait at least 12 months before asking the consumer to re-authorise. For consumers under 16 who did not consent, the same 12-month waiting period applies.</p>
+</section>
+
+<section class="clause" id="g3-s3">
+ <div class="cl-head"><span class="cl-num">§ 1798.136</span><h2 class="cl-title">Browser Opt-Out Signals</h2></div>
+ <p>A business that develops or maintains a browser must include configurable functionality allowing the consumer to send an opt-out preference signal to businesses. The functionality must be easy to find and configure. This section becomes operative on 1 January 2027.</p>
+</section>
+
+<div class="chap-divider" id="g4"><span class="chap-divider-label">Definitions</span></div>
+<section class="clause" id="g4-s1">
+ <div class="cl-head"><span class="cl-num">§ 1798.140</span><h2 class="cl-title">Selected Key Terms</h2></div>
+ <p>Business — a for-profit entity that does business in California, collects consumers' personal information (or has it collected on its behalf), determines the purposes and means of processing, and meets at least one threshold: over $25 million in gross revenue; buys, sells, or shares the personal information of 100,000+ consumers or households annually; or derives 50%+ of annual revenue from selling or sharing personal information. Also includes entities that control or are controlled by such a business and share common branding.</p>
+<p>Consumer — a natural person who is a California resident.</p>
+<p>Personal information — information that identifies, relates to, describes, is reasonably capable of being associated with, or could reasonably be linked to a particular consumer or household. Includes: identifiers (name, email, SSN, IP address); financial and commercial information; biometric information; internet activity; geolocation; audio, visual, and similar data; employment and education information; and inferences drawn to create a profile. Does not include publicly available information, deidentified information, or aggregate consumer information.</p>
+<p>Sensitive personal information — SSN, driver's licence, passport, or state ID numbers; financial account details with access credentials; precise geolocation; racial or ethnic origin, citizenship or immigration status, religious or philosophical beliefs, or union membership; mail, email, and text message contents (unless the business is the intended recipient); genetic data; neural data; biometric information processed for unique identification; and health, sex life, or sexual orientation data.</p>
+<p>Sell — selling, renting, releasing, disclosing, disseminating, making available, transferring, or otherwise communicating a consumer's personal information to a third party for monetary or other valuable consideration.</p>
+<p>Share — the same set of actions, but for the purpose of cross-context behavioural advertising, whether or not money changes hands.</p>
+<p>Service provider — a person that processes personal information on behalf of a business under a written contract that prohibits selling, sharing, retaining, using, or disclosing the data beyond the specified business purposes, or outside the direct business relationship.</p>
+<p>Contractor — a person to whom a business makes personal information available for a business purpose under a written contract with similar restrictions as a service provider contract, plus a certification of understanding and compliance, and a right for the business to audit at least annually.</p>
+<p>Consent — freely given, specific, informed, and unambiguous, by statement or clear affirmative action. General terms of use do not count. Hovering, muting, pausing, or closing content does not count. Agreement obtained through dark patterns does not count.</p>
+<p>Dark pattern — a user interface designed or manipulated with the substantial effect of subverting or impairing user autonomy, decision-making, or choice.</p>
+<p>Cross-context behavioural advertising — targeting advertising to a consumer based on personal information obtained from the consumer's activity across businesses, websites, apps, or services other than the one the consumer intentionally interacts with.</p>
+<p>Profiling — automated processing of personal information to evaluate personal aspects of a person, particularly to analyse or predict performance at work, economic situation, health, preferences, interests, reliability, behaviour, location, or movements.</p>
+<p>Deidentified — information that cannot reasonably be used to identify a consumer, provided the business takes reasonable measures, publicly commits to not reidentifying, and contractually binds recipients to the same.</p>
+</section>
+
+<div class="chap-divider" id="g5"><span class="chap-divider-label">Exemptions</span></div>
+<section class="clause" id="g5-s1">
+ <div class="cl-head"><span class="cl-num">§ 1798.145–146</span><h2 class="cl-title">Exemptions</h2></div>
+ <p>A business is not restricted from: complying with federal, state, or local laws, court orders, or subpoenas; cooperating with law enforcement; exercising or defending legal claims; using deidentified or aggregate consumer information; or collecting personal information entirely outside California.</p>
+<p>The entire law does not apply to: medical information governed by HIPAA or the California Confidentiality of Medical Information Act (CMIA); personal information governed by the Fair Credit Reporting Act; personal information subject to the Gramm-Leach-Bliley Act; or personal information collected under the federal Driver's Privacy Protection Act. These carve-outs do not exempt data from the private right of action for security breaches (§1798.150).</p>
+<p>Additional exemptions exist for: vehicle and vessel warranty and recall data; educational test data held for a school district; and business-to-business contact data in the context of due diligence or providing services between companies (though the B2B exemption sunset on 1 January 2023).</p>
+<p>Health-related data that is deidentified in accordance with HIPAA standards and derived from information originally collected by a HIPAA-covered entity is exempt. Reidentification of such data is prohibited except for treatment, public health, research, deidentification testing, or where required by law.</p>
+</section>
+
+<section class="clause" id="g5-s2">
+ <div class="cl-head"><span class="cl-num">§ 1798.148</span><h2 class="cl-title">Reidentification Restrictions</h2></div>
+ <p>No business or person may reidentify or attempt to reidentify information that has been deidentified under the HIPAA standard, except for treatment, payment, or healthcare operations; public health purposes; research conducted under the Common Rule; testing deidentification processes under contract; or where required by law. Any contract for sale or licence of such deidentified data must state that the data includes deidentified patient information, prohibit reidentification, and require the same restrictions in any further disclosure.</p>
+</section>
+
+<div class="chap-divider" id="g6"><span class="chap-divider-label">Enforcement and Penalties</span></div>
+<section class="clause" id="g6-s1">
+ <div class="cl-head"><span class="cl-num">§ 1798.150</span><h2 class="cl-title">Private Right of Action (Security Breaches)</h2></div>
+ <p>Any consumer whose unencrypted and unredacted personal information is subject to unauthorised access and exfiltration, theft, or disclosure as a result of a business's failure to implement reasonable security procedures can bring a civil action for: statutory damages of $100–$750 per consumer per incident, or actual damages (whichever is greater); injunctive or declaratory relief; or any other relief the court deems proper. The consumer must give the business 30 days' written notice before filing for statutory damages. If the business cures the violation and provides a written statement that it will not recur, no statutory-damages action may proceed — but fixing security after a breach does not count as curing that breach. This private right of action applies only to security-breach violations, not to any other section of this law.</p>
+</section>
+
+<section class="clause" id="g6-s2">
+ <div class="cl-head"><span class="cl-num">§ 1798.155</span><h2 class="cl-title">Administrative Enforcement</h2></div>
+ <p>Any business, service provider, contractor, or person that violates this law is liable for an administrative fine of up to $2,500 per violation, or $7,500 per intentional violation or per violation involving a consumer known to be under 16 (amounts adjusted for CPI). Fines are brought by the California Privacy Protection Agency.</p>
+</section>
+
+<section class="clause" id="g6-s3">
+ <div class="cl-head"><span class="cl-num">§ 1798.160</span><h2 class="cl-title">Consumer Privacy Fund</h2></div>
+ <p>A special fund called the Consumer Privacy Fund exists within the General Fund. 95% of administrative fines go to a Consumer Privacy Subfund used exclusively by the CPPA for its duties. 95% of civil penalties recovered by the Attorney General go to an AG Consumer Privacy Enforcement Subfund. 5% of all fines and penalties go to a Consumer Privacy Grant Subfund for grants to nonprofits (consumer privacy), public agencies (children's online privacy education), and law enforcement (combating data-breach fraud).</p>
+</section>
+
+<section class="clause" id="g6-s4">
+ <div class="cl-head"><span class="cl-num">§ 1798.199.90</span><h2 class="cl-title">Attorney General Enforcement</h2></div>
+ <p>The Attorney General can bring civil actions for violations, with penalties of up to $2,500 per violation or $7,500 per intentional violation or violation involving minors' data. The AG may not bring a civil action for a violation after the CPPA has already issued a decision or order for the same violation. A business cannot be required to pay both an administrative fine and a civil penalty for the same violation.</p>
+</section>
+
+<div class="chap-divider" id="g7"><span class="chap-divider-label">General Provisions</span></div>
+<section class="clause" id="g7-s1">
+ <div class="cl-head"><span class="cl-num">§ 1798.175</span><h2 class="cl-title">Conflicts with Other Laws</h2></div>
+ <p>This law supplements existing California privacy laws. Where it conflicts with another law, whichever affords greater privacy protection to consumers controls.</p>
+</section>
+
+<section class="clause" id="g7-s2">
+ <div class="cl-head"><span class="cl-num">§ 1798.180</span><h2 class="cl-title">Preemption of Local Law</h2></div>
+ <p>This is a statewide law. It supersedes and preempts all local rules, regulations, codes, and ordinances regarding the collection and sale of consumers' personal information.</p>
+</section>
+
+<section class="clause" id="g7-s3">
+ <div class="cl-head"><span class="cl-num">§ 1798.185</span><h2 class="cl-title">Regulations</h2></div>
+ <p>The California Privacy Protection Agency (inheriting authority from the Attorney General) has broad rulemaking power covering: updating personal information and sensitive personal information categories; opt-out procedures and preference signals; consent and notice requirements; deletion, correction, and access procedures; financial incentive rules; automated decision-making and profiling regulations; cybersecurity audit requirements; risk assessment submissions; and insurance industry privacy harmonisation. Enforcement of provisions added by the CPRA could not commence until 1 July 2023.</p>
+</section>
+
+<section class="clause" id="g7-s4">
+ <div class="cl-head"><span class="cl-num">§ 1798.190</span><h2 class="cl-title">Anti-Avoidance</h2></div>
+ <p>Courts and the CPPA will disregard steps or transactions that are designed to circumvent this law — including structuring data disclosures to avoid the definitions of "sell" or "share," or eliminating monetary consideration to avoid those definitions while still obtaining something of value.</p>
+</section>
+
+<section class="clause" id="g7-s5">
+ <div class="cl-head"><span class="cl-num">§ 1798.192</span><h2 class="cl-title">Waiver</h2></div>
+ <p>Any contract provision that waives or limits rights under this law is void and unenforceable. This includes representative-action waivers. A consumer may still decline to request information, decline to opt out, or re-authorise sale or sharing after previously opting out.</p>
+</section>
+
+<section class="clause" id="g7-s6">
+ <div class="cl-head"><span class="cl-num">§ 1798.194–196</span><h2 class="cl-title">Liberal Construction and Federal Relationship</h2></div>
+ <p>This law is to be liberally construed to effectuate its purposes. It supplements federal and state law but does not apply where preempted by or in conflict with federal law or the US or California Constitution.</p>
+</section>
+
+<div class="chap-divider" id="g8"><span class="chap-divider-label">California Privacy Protection Agency</span></div>
+<section class="clause" id="g8-s1">
+ <div class="cl-head"><span class="cl-num">§ 1798.199.10–199.100</span><h2 class="cl-title">The Agency</h2></div>
+ <p>The California Privacy Protection Agency (CPPA) is established in state government with full power to implement and enforce the CCPA. It is governed by a five-member board: the Governor appoints the chair and one member; the Attorney General, Senate Rules Committee, and Speaker of the Assembly each appoint one member. Appointments should prioritise expertise in privacy, technology, and consumer rights.</p>
+<p>Board members must: have relevant qualifications; maintain confidentiality; remain free from external influence; refrain from incompatible occupations; and not accept employment with a business subject to enforcement during their tenure or the preceding five years (one-year cooling-off), nor act as agent or attorney for anyone in a matter pending before the agency (two-year cooling-off). Members serve at the pleasure of their appointing authority, for a maximum of eight consecutive years, and are compensated at $100 per day of official duties (adjusted for CPI).</p>
+<p>The agency's functions include: administering, implementing, and enforcing this law through administrative actions; adopting regulations; protecting fundamental privacy rights; promoting public awareness; providing guidance to consumers and businesses; appointing a Chief Privacy Auditor; monitoring developments in data protection; cooperating with other privacy authorities; and establishing a voluntary certification mechanism for businesses below the statutory thresholds.</p>
+<p>The CPPA can investigate on complaint or its own initiative. Before any finding of probable cause, the alleged violator must receive 30 days' notice, a summary of evidence, and the right to be present and represented by counsel. Hearings follow the Administrative Procedure Act. On finding a violation, the agency can order cease-and-desist and impose fines. Administrative actions must be commenced within five years. The CPPA can collect unpaid fines through civil action or court judgment. All agency decisions are subject to judicial review under an abuse-of-discretion standard.</p>
+</section>
+
+<div class="map-clear"><p>This reference covers what the law says. Working out how it applies to your specific product, data flows, and role — is a different exercise.</p></div>
+<div class="sources-block"><div class="sources-label">Source</div><p>California Civil Code, Title 1.81.5 — California Consumer Privacy Act of 2018, §§1798.100–1798.199.100, as amended through Stats. 2025 (AB 1170, AB 137, AB 566). Originally enacted by Stats. 2018, Ch. 55 (AB 375); substantially amended by Proposition 24 (CPRA), effective 16 December 2020, operative 1 January 2023.</p></div>
+<div class="doc-close">
+ <p>Need to work out how this actually applies to your product, data flows, or role? <em>That's a different exercise.</em></p>
+ <a href="../../index.html#begin" class="btn-outline">Start a conversation <span aria-hidden="true">→</span></a>
+</div>
+</div>
+</main>
+
+<footer>
+  <div class="ft-brand">
+    <div class="ft-bw"><img src="../../assets/crm.svg" alt="ORR Logo" class="begin-logo"/></div>
+    <span>From idea to operating business.</span>
+  </div>
+  <div class="ft-div"></div>
+  <nav class="ft-nav">
+    <span class="ft-l">Navigate</span>
+    <a href="../../resources.html">Resources</a>
+    <a href="../../index.html#assess">Diagnose</a>
+    <a href="../../index.html#structure">Structure</a>
+    <a href="../../founder.html">Founder</a>
+    <a href="../../index.html#begin">Begin</a>
+  </nav>
+  <div class="ft-div"></div>
+  <div class="ft-close">
+    <p class="ft-stmt">The businesses that run without their founders weren't built by accident. They were engineered.</p>
+    <div class="ft-legal">
+      <span class="ft-copy">© <span id="yr"></span> ORR — All rights reserved</span>
+      <div class="ft-ll">
+        <a href="../../legal/privacy.html">Privacy</a>
+        <a href="../../legal/terms.html">Terms</a>
+        <a href="../../legal/disclaimer.html">Disclaimer</a>
+      </div>
+      <p class="ft-disc">ORR is a business-structuring consultancy, not a law firm, accountancy, or financial adviser. Nothing on this site is professional advice.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+(function(){
+  var vrailFill=document.getElementById('vrail-fill');
+  var vrailRFill=document.getElementById('vrail-r-fill');
+  var nav=document.getElementById('nav');
+  var head=document.getElementById('doc-head');
+  var clauses=[].slice.call(document.querySelectorAll('.clause'));
+  var chgroups=[].slice.call(document.querySelectorAll('.idx-chgroup'));
+  var links=[].slice.call(document.querySelectorAll('.idx-chbody-in a,.idx-panel a'));
+  var map={}; links.forEach(function(a){var h=a.getAttribute('href').slice(1);(map[h]=map[h]||[]).push(a);});
+  var ticking=false;
+  function frame(){
+    ticking=false;
+    var y=scrollY, vh=innerHeight, total=document.body.scrollHeight-vh;
+    var pct=(total>0?Math.min(y/total,1)*100:0)+'%';
+    if(vrailFill) vrailFill.style.height=pct;
+    if(vrailRFill) vrailRFill.style.height=pct;
+    if(nav&&head) nav.classList.toggle('dark-mode', head.getBoundingClientRect().bottom>80);
+    var lineY=vh*0.3, cur=null;
+    clauses.forEach(function(c){ if(c.getBoundingClientRect().top<=lineY) cur=c.id; });
+    links.forEach(function(a){a.classList.remove('on');});
+    if(cur&&map[cur]) map[cur].forEach(function(a){a.classList.add('on');});
+    if(cur){
+      var chId = cur.split('-s')[0];
+      chgroups.forEach(function(g){
+        var isCurrent = g.dataset.chgroup === chId;
+        g.classList.toggle('current', isCurrent);
+      });
+    }
+  }
+  function onScroll(){ if(!ticking){ticking=true;requestAnimationFrame(frame);} }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll,{passive:true});
+  frame();
+})();
+
+(function(){
+  var groups = [].slice.call(document.querySelectorAll('.idx-chgroup'));
+  function measure(g){
+    var body = g.querySelector('.idx-chbody');
+    var inner = g.querySelector('.idx-chbody-in');
+    body.style.maxHeight = g.classList.contains('open') ? inner.scrollHeight + 'px' : '0';
+  }
+  groups.forEach(function(g){
+    var head = g.querySelector('.idx-chhead');
+    head.addEventListener('click', function(){
+      var open = g.classList.toggle('open');
+      head.setAttribute('aria-expanded', open);
+      measure(g);
+    });
+  });
+  if(groups[0]){ groups[0].classList.add('open'); measure(groups[0]); }
+  var mo = new MutationObserver(function(){
+    groups.forEach(function(g){
+      if(g.classList.contains('current') && !g.classList.contains('open')){
+        g.classList.add('open'); measure(g);
+      }
+    });
+  });
+  groups.forEach(function(g){ mo.observe(g, {attributes:true, attributeFilter:['class']}); });
+})();
+
+(function(){var m=document.querySelector('.idx-mobile');if(!m)return;
+ var b=m.querySelector('.idx-toggle'),p=m.querySelector('.idx-panel');
+ b.addEventListener('click',function(){var o=m.classList.toggle('open');
+  p.style.maxHeight=o?p.querySelector('.idx-panel-in').scrollHeight+'px':'0';});
+ m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');p.style.maxHeight='0';});});
+})();
+
+(function(){
+  var mBtn=document.getElementById('menuBtn'),mNav=document.getElementById('mnav');
+  if(!mBtn||!mNav)return;
+  mBtn.addEventListener('click',function(){
+    var o=!mNav.classList.contains('open');
+    mNav.classList.toggle('open',o);mBtn.classList.toggle('x',o);
+    mBtn.setAttribute('aria-expanded',o);
+    document.documentElement.classList.toggle('m-lock',o);
+  });
+  mNav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){
+    mNav.classList.remove('open');mBtn.classList.remove('x');
+    mBtn.setAttribute('aria-expanded','false');
+    document.documentElement.classList.remove('m-lock');
+  });});
+})();
+
+var REDUCED = matchMedia('(prefers-reduced-motion:reduce)').matches;
+function easeScrollTo(el){
+  if(!el) return;
+  var start=scrollY, end=el.getBoundingClientRect().top+scrollY, dist=end-start;
+  if(REDUCED){scrollTo(0,end);return;}
+  var t0=null; var ease=function(t){return 1-Math.pow(1-t,4);};
+  requestAnimationFrame(function step(ts){
+    if(!t0)t0=ts;
+    var p=Math.min((ts-t0)/650,1);
+    scrollTo(0,start+dist*ease(p));
+    if(p<1)requestAnimationFrame(step);
+  });
+}
+document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){
+  var t=document.querySelector(a.getAttribute('href'));
+  if(!t)return; e.preventDefault(); easeScrollTo(t);
+});});
+
+var HOVERS=matchMedia('(hover:hover)').matches;
+if(HOVERS){
+  var dot=document.getElementById('cursorDot');
+  var mx=0,my=0,cx=0,cy=0;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.classList.add('active');});
+  document.addEventListener('mouseleave',function(){dot.classList.remove('active');});
+  var sel='a,button';
+  document.addEventListener('mouseover',function(e){if(e.target.closest(sel))dot.classList.add('grow');});
+  document.addEventListener('mouseout',function(e){if(e.target.closest(sel))dot.classList.remove('grow');});
+  (function loop(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;dot.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(loop);})();
+  document.querySelectorAll('.nav-cta,.btn,.btn-outline').forEach(function(btn){
+    btn.addEventListener('mousemove',function(e){var r=btn.getBoundingClientRect();btn.style.transform='translate('+((e.clientX-r.left-r.width/2)*.15)+'px,'+((e.clientY-r.top-r.height/2)*.15)+'px)';});
+    btn.addEventListener('mouseleave',function(){btn.style.transform='';});
+  });
+}
+</script>
+</body>
+</html>

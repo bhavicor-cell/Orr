@@ -1,0 +1,2010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1ECE1">
+<title>Helvane B.V. — Multi-Regime Privacy Infrastructure | Governance &amp; Compliance | ORR</title>
+<meta name="description" content="A full multi-regime privacy compliance programme — GDPR, CCPA/CPRA, and DPDP — built end to end for a fictional B2B SaaS company. 24 deliverables, every one cross-referencing the ones it depends on.">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="../../assets/ngb.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F1ECE1; --paper-2:#E9E2D3; --paper-3:#E0D8C6;
+  --ink:#1A1812; --ink-soft:rgba(26,24,18,.72); --ink-faint:rgba(26,24,18,.54);
+  --rule:rgba(26,24,18,.12); --rule-strong:rgba(26,24,18,.22);
+  --gdpr:#1A4D40; --ccpa:#3D5A80; --dpdp:#9C7C49;
+  --accent:#1A4D40; --flag:#9C4A32;
+  --card:#FFFFFF; --shadow:rgba(26,24,18,.08);
+  --code-bg:#E9E2D3;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E2A24; --paper-2:#123028; --paper-3:#17392F;
+    --ink:#F1ECE1; --ink-soft:rgba(241,236,225,.78); --ink-faint:rgba(241,236,225,.56);
+    --rule:rgba(241,236,225,.16); --rule-strong:rgba(241,236,225,.24);
+    --gdpr:#8FC9B7; --ccpa:#8FB3D9; --dpdp:#C9A876;
+    --accent:#8FC9B7; --flag:#D99B84;
+    --card:#123028; --shadow:rgba(0,0,0,.35);
+    --code-bg:#0B221D;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E2A24; --paper-2:#123028; --paper-3:#17392F;
+  --ink:#F1ECE1; --ink-soft:rgba(241,236,225,.78); --ink-faint:rgba(241,236,225,.56);
+  --rule:rgba(241,236,225,.16); --rule-strong:rgba(241,236,225,.24);
+  --gdpr:#8FC9B7; --ccpa:#8FB3D9; --dpdp:#C9A876;
+  --accent:#8FC9B7; --flag:#D99B84;
+  --card:#123028; --shadow:rgba(0,0,0,.35);
+  --code-bg:#0B221D;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Newsreader",Georgia,serif;font-size:17px;line-height:1.62;font-weight:400;
+}
+img{max-width:100%}
+h1,h2,h3,h4,.sans{font-family:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif}
+code,.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+a{color:inherit}
+
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.5rem}
+.wide{max-width:60rem;margin:0 auto;padding:0 1.5rem}
+
+/* ================= MASTHEAD ================= */
+.masthead{border-bottom:1px solid var(--rule);padding:1.1rem 0;position:sticky;top:0;background:var(--paper);z-index:40}
+@media (max-width:560px){
+  .mark-sub{display:none}
+  .mark-version{display:none}
+}
+.masthead-inner{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;max-width:60rem;margin:0 auto;padding:0 1.5rem}
+.mark{font-family:"Hanken Grotesk",sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:.14em;color:var(--ink);text-decoration:none}
+.mark-sub{font-family:"Hanken Grotesk",sans-serif;font-size:.72rem;font-weight:400;color:var(--ink-faint);letter-spacing:.04em}
+.mark-version{font-family:"Hanken Grotesk",sans-serif;font-size:.68rem;font-weight:500;color:var(--ink-faint);letter-spacing:.03em}
+
+/* ================= HERO / NARRATIVE (unchanged shell) ================= */
+.hero{padding:4rem 0 2.5rem}
+.matter{font-family:"Hanken Grotesk",sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.1em;color:var(--ink-faint);margin:0 0 1.75rem}
+h1{font-size:clamp(2.1rem,6vw,3.4rem);line-height:1.08;font-weight:600;letter-spacing:-.02em;margin:0 0 1.5rem}
+.standfirst{font-size:1.22rem;line-height:1.58;color:var(--ink-soft);font-weight:300;margin:0 0 2.75rem;max-width:36rem}
+
+.register{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.reg-item{padding:1.4rem 1.2rem 1.5rem 0;border-right:1px solid var(--rule)}
+.reg-item:last-child{border-right:none;padding-right:0}
+.reg-item:not(:first-child){padding-left:1.2rem}
+.reg-code{font-family:"Hanken Grotesk",sans-serif;font-weight:700;font-size:1.35rem;line-height:1;margin:0 0 .45rem}
+.reg-item:nth-child(1) .reg-code{color:var(--gdpr)}
+.reg-item:nth-child(2) .reg-code{color:var(--ccpa)}
+.reg-item:nth-child(3) .reg-code{color:var(--dpdp)}
+.reg-stat{font-family:"Hanken Grotesk",sans-serif;font-size:.74rem;color:var(--ink-faint);line-height:1.4;display:block}
+
+.reading-paths{margin-top:1.8rem}
+.rp-label{font-family:"Hanken Grotesk",sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.08em;color:var(--ink-faint);display:block;margin-bottom:.7rem}
+.rp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.rp-item{
+  display:block;text-decoration:none;color:var(--ink-soft);
+  font-family:"Hanken Grotesk",sans-serif;font-size:.82rem;line-height:1.5;
+  background:var(--card);border:1px solid var(--rule);border-radius:4px;
+  padding:.9rem 1rem;transition:border-color .15s ease, box-shadow .15s ease;
+}
+.rp-item:hover{border-color:var(--accent);box-shadow:0 1px 4px var(--shadow)}
+.rp-item b{color:var(--ink);font-weight:700;display:block;margin-bottom:.2rem;font-size:.88rem}
+@media (max-width:640px){.rp-grid{grid-template-columns:1fr}}
+@media (max-width:640px){
+  .register{grid-template-columns:1fr}
+  .reg-item{border-right:none;border-bottom:1px solid var(--rule);padding:1.1rem 0}
+  .reg-item:not(:first-child){padding-left:0}
+  .reg-item:last-child{border-bottom:none}
+}
+
+section{padding:3.5rem 0}
+.sec-label{font-family:"Hanken Grotesk",sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.1em;color:var(--ink-faint);margin:0 0 .7rem}
+h2{font-size:clamp(1.5rem,3.6vw,2.05rem);line-height:1.2;font-weight:600;letter-spacing:-.015em;margin:0 0 1.4rem}
+h3{font-size:1.16rem;font-weight:600;line-height:1.35;margin:0 0 .6rem}
+p{margin:0 0 1.15rem}
+.lede{font-size:1.1rem;color:var(--ink-soft);font-weight:300}
+hr.rule{border:none;border-top:1px solid var(--rule);margin:0}
+
+.profile{background:var(--paper-2);border-left:3px solid var(--accent);padding:1.6rem 1.7rem;margin:2rem 0}
+.profile dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.55rem 1.4rem}
+.profile dt{font-family:"Hanken Grotesk",sans-serif;font-size:.78rem;font-weight:600;color:var(--ink-faint);white-space:nowrap;padding-top:.18rem}
+.profile dd{margin:0;font-size:.98rem;line-height:1.5}
+@media (max-width:560px){.profile dl{grid-template-columns:1fr;gap:.2rem .5rem}.profile dd{margin-bottom:.7rem}}
+
+.phase{border-top:1px solid var(--rule);padding:2.4rem 0 2.2rem}
+.phase-head{display:flex;align-items:baseline;gap:.9rem;flex-wrap:wrap;margin-bottom:1.1rem}
+.phase-tag{font-family:"Hanken Grotesk",sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.09em;padding:.3rem .6rem;border-radius:2px;color:#fff;white-space:nowrap}
+.p-gdpr .phase-tag{background:var(--gdpr)} .p-ccpa .phase-tag{background:var(--ccpa)} .p-dpdp .phase-tag{background:var(--dpdp)}
+:root[data-theme="dark"] .phase-tag{color:#101820}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .phase-tag{color:#101820}}
+.phase h3{margin:0;font-size:1.3rem}
+.phase-meta{font-family:"Hanken Grotesk",sans-serif;font-size:.76rem;color:var(--ink-faint);margin:0 0 1.2rem}
+
+.finding{border-left:3px solid var(--flag);background:var(--card);padding:1.1rem 1.3rem;margin:1.5rem 0;box-shadow:0 1px 3px var(--shadow)}
+.finding-label{font-family:"Hanken Grotesk",sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.08em;color:var(--flag);display:block;margin-bottom:.4rem}
+.finding p{margin:0;font-size:1rem;line-height:1.55}
+
+/* "open in reader" link used inside narrative to jump into full-text docs */
+.read-link{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:"Hanken Grotesk",sans-serif;font-size:.82rem;font-weight:600;
+  color:var(--accent);text-decoration:none;margin-top:.3rem;cursor:pointer;
+  border-bottom:1px solid transparent;
+}
+.read-link:hover{border-bottom-color:var(--accent)}
+.read-link::after{content:"\2192";transition:transform .12s ease}
+.read-link:hover::after{transform:translateX(2px)}
+
+details{border-top:1px solid var(--rule);margin-top:1.3rem}
+details summary{font-family:"Hanken Grotesk",sans-serif;font-size:.82rem;font-weight:600;color:var(--ink-soft);padding:.85rem 0;cursor:pointer;list-style:none;display:flex;align-items:center;gap:.5rem;transition:color .15s ease}
+details summary::-webkit-details-marker{display:none}
+details summary:hover{color:var(--ink)}
+details summary::before{content:"+";font-weight:700;font-size:1rem;width:.9rem;display:inline-block;color:var(--ink-faint)}
+details[open] summary::before{content:"\2212"}
+.deliv{margin:0 0 1.2rem;padding:0;list-style:none;columns:2;column-gap:2rem}
+.deliv li{font-size:.92rem;line-height:1.5;padding:.3rem 0;break-inside:avoid;color:var(--ink-soft)}
+.deliv li button{
+  background:none;border:none;padding:0;margin:0;font:inherit;color:var(--ink-soft);
+  text-align:left;cursor:pointer;text-decoration:none;
+}
+.deliv li button:hover{color:var(--accent)}
+@media (max-width:600px){.deliv{columns:1}}
+
+/* dependency graph (unchanged) */
+.graph-shell{margin-top:2rem;background:var(--card);border-radius:4px;box-shadow:0 1px 3px var(--shadow);overflow:hidden}
+.graph-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:1rem 1.3rem;border-bottom:1px solid var(--rule)}
+.graph-hint{font-family:"Hanken Grotesk",sans-serif;font-size:.78rem;color:var(--ink-faint)}
+.graph-legend{display:flex;gap:1rem;flex-wrap:wrap}
+.leg{display:flex;align-items:center;gap:.4rem;font-family:"Hanken Grotesk",sans-serif;font-size:.72rem;color:var(--ink-soft)}
+.leg-dot{width:.55rem;height:.55rem;border-radius:50%;display:inline-block}
+.leg-dot.gdpr{background:var(--gdpr)} .leg-dot.ccpa{background:var(--ccpa)} .leg-dot.dpdp{background:var(--dpdp)} .leg-dot.all{background:var(--accent)}
+.graph-body{position:relative}
+#depgraph{display:block;width:100%;height:auto;cursor:default}
+.gnode{cursor:pointer}
+.gnode circle{transition:r .15s ease, stroke-width .15s ease}
+.gnode:focus{outline:none}
+.gnode:focus circle{stroke:var(--accent);stroke-width:3}
+.gnode text{font-family:"Hanken Grotesk",sans-serif;font-size:9.5px;fill:var(--ink-soft);pointer-events:none}
+.gnode.dim{opacity:.22}
+.gnode.active circle{stroke:var(--ink);stroke-width:2.5}
+.gedge{stroke:var(--rule);stroke-width:1.1;fill:none;transition:stroke .15s ease, stroke-width .15s ease, opacity .15s ease}
+.gedge.dim{opacity:.08}
+.gedge.active{stroke:var(--flag);stroke-width:1.8}
+.graph-detail{border-top:1px solid var(--rule);padding:1.1rem 1.3rem 1.3rem;min-height:3.4rem}
+.graph-detail-empty{font-family:"Hanken Grotesk",sans-serif;font-size:.8rem;color:var(--ink-faint)}
+.gd-title{font-family:"Hanken Grotesk",sans-serif;font-size:.85rem;font-weight:700;margin:0 0 .6rem}
+.gd-rel{font-size:.92rem;line-height:1.5;margin:0 0 .4rem;padding-left:1.1rem;position:relative;color:var(--ink-soft)}
+.gd-rel::before{content:"\2192";position:absolute;left:0;top:0;color:var(--accent);font-weight:700}
+.gd-rel b{color:var(--ink);font-weight:600}
+.gd-rel.in::before{content:"\2190"}
+.gd-open{display:inline-block;margin-top:.5rem}
+
+.calls{margin:2rem 0 0}
+.call{border-top:1px solid var(--rule);padding:1.7rem 0;display:grid;grid-template-columns:1fr 1.45fr;gap:1.8rem}
+.call:last-child{border-bottom:1px solid var(--rule)}
+.call-q h3{margin:0;font-size:1.05rem;line-height:1.35}
+.call-q .verdict{font-family:"Hanken Grotesk",sans-serif;font-size:.74rem;font-weight:600;color:var(--accent);margin-top:.5rem;display:block}
+.call-a{font-size:.98rem;line-height:1.56;color:var(--ink-soft)}
+.call-a p{margin:0}
+@media (max-width:640px){.call{grid-template-columns:1fr;gap:.8rem}}
+
+.ops{display:grid;gap:1.1rem;margin-top:2rem}
+.op{background:var(--card);padding:1.5rem 1.6rem;box-shadow:0 1px 3px var(--shadow);border-radius:3px}
+.op h3{margin:0 0 .5rem;font-size:1.05rem}
+.op p{margin:0;font-size:.96rem;line-height:1.55;color:var(--ink-soft)}
+.op .op-detail{font-family:"Hanken Grotesk",sans-serif;font-size:.76rem;color:var(--ink-faint);margin-top:.75rem;display:block;line-height:1.5}
+
+.method{counter-reset:step;margin-top:2rem}
+.method-step{display:grid;grid-template-columns:2.6rem 1fr;gap:1.1rem;padding:1.1rem 0;border-top:1px solid var(--rule);align-items:start}
+.method-step:last-child{border-bottom:1px solid var(--rule)}
+.step-n{font-family:"Hanken Grotesk",sans-serif;font-weight:700;font-size:1.5rem;line-height:1;color:var(--rule-strong)}
+.method-step h3{margin:0 0 .25rem;font-size:1.02rem}
+.method-step p{margin:0;font-size:.95rem;color:var(--ink-soft);line-height:1.5}
+
+.doc-index{margin-top:2rem;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+thead th{font-family:"Hanken Grotesk",sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.07em;text-align:left;padding:.6rem .8rem .6rem 0;border-bottom:1.5px solid var(--ink);color:var(--ink);white-space:nowrap}
+tbody td{padding:.65rem .8rem .65rem 0;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.45}
+tbody tr td:first-child{font-weight:500;padding-right:1.2rem}
+td.reg-j{font-family:"Hanken Grotesk",sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.06em;white-space:nowrap}
+.j-gdpr{color:var(--gdpr)} .j-ccpa{color:var(--ccpa)} .j-dpdp{color:var(--dpdp)} .j-all{color:var(--accent)}
+td.reg-d{color:var(--ink-soft);font-size:.88rem}
+tbody tr.doc-row{cursor:pointer}
+tbody tr.doc-row:hover{background:var(--paper-2)}
+tbody tr.doc-row td:first-child{color:var(--ink)}
+
+.caveat{background:var(--paper-2);padding:1.5rem 1.7rem;margin-top:2.5rem;border-radius:3px}
+.caveat p{font-size:.95rem;line-height:1.58;color:var(--ink-soft);margin:0 0 .8rem}
+.caveat p:last-child{margin:0}
+.caveat strong{color:var(--ink);font-weight:500}
+
+.cta-card{
+  margin-top:2.5rem;padding:1.8rem 2rem;border-radius:5px;
+  background:var(--ink);color:var(--paper);
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;
+}
+.cta-card h3{color:var(--paper);font-size:1.15rem}
+.cta-card p{color:var(--ink-faint) !important}
+.cta-btn{
+  font-family:"Hanken Grotesk",sans-serif;font-size:.86rem;font-weight:600;white-space:nowrap;
+  background:var(--accent);color:#fff;text-decoration:none;
+  padding:.7rem 1.3rem;border-radius:3px;flex:none;
+  transition:opacity .15s ease;
+}
+.cta-btn:hover{opacity:.85}
+@media (max-width:560px){.cta-card{padding:1.4rem 1.5rem}}
+
+/* tracker table */
+.tt-shell{margin-top:1.75rem;background:var(--card);border-radius:4px;box-shadow:0 1px 3px var(--shadow);overflow:hidden}
+.tt-toolbar{display:flex;gap:.5rem;flex-wrap:wrap;padding:1rem 1.3rem;border-bottom:1px solid var(--rule);align-items:center}
+.tt-search{font-family:"Hanken Grotesk",sans-serif;font-size:.85rem;border:1px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:3px;padding:.5rem .7rem;flex:1;min-width:10rem;outline:none}
+.tt-search:focus{border-color:var(--accent)}
+.tt-chip{font-family:"Hanken Grotesk",sans-serif;font-size:.72rem;font-weight:600;padding:.4rem .75rem;border-radius:20px;border:1px solid var(--rule);background:transparent;color:var(--ink-soft);cursor:pointer;white-space:nowrap;transition:all .12s ease}
+.tt-chip:hover{border-color:var(--ink-faint)}
+.tt-chip.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tt-count{font-family:"Hanken Grotesk",sans-serif;font-size:.72rem;color:var(--ink-faint);margin-left:auto;white-space:nowrap}
+.tt-table-wrap{overflow-x:auto}
+table.tt{border-collapse:collapse;width:100%;font-size:.86rem;min-width:640px}
+table.tt thead th{font-family:"Hanken Grotesk",sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-align:left;padding:.7rem .9rem;background:var(--paper-2);color:var(--ink-soft);white-space:nowrap;position:sticky;top:0}
+table.tt tbody td{padding:.7rem .9rem;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.4}
+table.tt tbody tr:last-child td{border-bottom:none}
+table.tt tbody tr:hover{background:var(--paper-2)}
+.tt-regime{font-family:"Hanken Grotesk",sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.04em;padding:.2rem .5rem;border-radius:2px;color:#fff;white-space:nowrap;display:inline-block}
+.tt-regime.gdpr{background:var(--gdpr)} .tt-regime.ccpa{background:var(--ccpa)} .tt-regime.dpdp{background:var(--dpdp)}
+.tt-outcome{font-family:"Hanken Grotesk",sans-serif;font-size:.72rem;font-weight:600;white-space:nowrap}
+.tt-outcome.fulfilled{color:var(--accent)} .tt-outcome.forwarded{color:var(--ccpa)} .tt-outcome.partial{color:var(--flag)}
+.tt-notes{color:var(--ink-soft);font-size:.83rem;max-width:22rem}
+.tt-empty-row td{text-align:center;padding:2rem;color:var(--ink-faint);font-family:"Hanken Grotesk",sans-serif;font-size:.82rem}
+
+@keyframes pulseHighlight{
+  0%{box-shadow:0 0 0 0 rgba(43,106,87,.45)}
+  70%{box-shadow:0 0 0 14px rgba(43,106,87,0)}
+  100%{box-shadow:0 0 0 0 rgba(43,106,87,0)}
+}
+.pulse-highlight{animation:pulseHighlight 1.5s ease-out 1}
+
+footer{border-top:1px solid var(--rule);padding:3rem 0 4rem;margin-top:2rem}
+.foot-mark{font-family:"Hanken Grotesk",sans-serif;font-weight:700;font-size:1.4rem;letter-spacing:.12em;margin:0 0 .5rem}
+.foot-line{font-size:.98rem;color:var(--ink-soft);margin:0 0 1.5rem}
+.foot-contact a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
+.foot-contact a:hover{border-bottom-color:var(--accent)}
+.foot-contact{font-family:"Hanken Grotesk",sans-serif;font-size:.88rem}
+
+/* ================= READER OVERLAY (the new part) ================= */
+#readerOverlay{
+  position:fixed;inset:0;z-index:100;
+  background:var(--paper);
+  display:none;
+  overflow:hidden;
+}
+#readerOverlay.open{display:flex}
+
+.reader-shell{display:flex;width:100%;height:100%}
+
+/* left rail: document index grouped by regime */
+.reader-nav{
+  width:19rem;flex:none;
+  border-right:1px solid var(--rule);
+  background:var(--paper-2);
+  overflow-y:auto;
+  height:100%;
+}
+.reader-nav-head{
+  padding:1.1rem 1.3rem;border-bottom:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+  position:sticky;top:0;background:var(--paper-2);z-index:2;
+}
+.reader-close{
+  font-family:"Hanken Grotesk",sans-serif;font-size:.78rem;font-weight:600;
+  color:var(--ink-soft);background:var(--card);border:1px solid var(--rule);
+  border-radius:3px;padding:.4rem .7rem;cursor:pointer;white-space:nowrap;
+}
+.reader-close:hover{color:var(--ink);border-color:var(--ink-faint)}
+.reader-brand{font-family:"Hanken Grotesk",sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.08em}
+
+.reader-group{padding:.9rem 1.3rem .3rem}
+.reader-group-label{
+  font-family:"Hanken Grotesk",sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.09em;
+  padding:.15rem .5rem;border-radius:2px;color:#fff;display:inline-block;margin-bottom:.6rem;
+}
+.rg-gdpr{background:var(--gdpr)} .rg-ccpa{background:var(--ccpa)} .rg-dpdp{background:var(--dpdp)} .rg-all{background:var(--accent)}
+:root[data-theme="dark"] .reader-group-label{color:#101820}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .reader-group-label{color:#101820}}
+
+.reader-doclist{list-style:none;margin:0 0 .5rem;padding:0}
+.reader-doclist li{margin:0}
+.reader-doclist button{
+  width:100%;text-align:left;background:none;border:none;
+  font-family:"Hanken Grotesk",sans-serif;font-size:.85rem;color:var(--ink-soft);
+  padding:.5rem .6rem;border-radius:3px;cursor:pointer;line-height:1.35;
+  display:flex;align-items:center;gap:.5rem;
+}
+.reader-doclist button:hover{background:var(--paper-3);color:var(--ink)}
+.reader-doclist button.active{background:var(--card);color:var(--ink);font-weight:600;box-shadow:0 1px 2px var(--shadow)}
+.rd-depth{
+  font-family:"Hanken Grotesk",sans-serif;font-size:.6rem;font-weight:700;
+  color:var(--ink-faint);border:1px solid var(--rule);border-radius:2px;
+  padding:.05rem .3rem;white-space:nowrap;flex:none;
+}
+
+/* right pane: the actual reading surface */
+.reader-main{flex:1;overflow-y:auto;height:100%;position:relative}
+.reader-topbar{
+  position:sticky;top:0;z-index:3;
+  background:var(--paper);border-bottom:1px solid var(--rule);
+  padding:.9rem 1.6rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+}
+.reader-crumb{font-family:"Hanken Grotesk",sans-serif;font-size:.76rem;color:var(--ink-faint)}
+.reader-crumb b{color:var(--ink-soft);font-weight:600}
+.reader-nav-btns{display:flex;gap:.4rem}
+.reader-nav-btn{
+  font-family:"Hanken Grotesk",sans-serif;font-size:.74rem;font-weight:600;
+  background:var(--card);border:1px solid var(--rule);border-radius:3px;
+  padding:.35rem .65rem;cursor:pointer;color:var(--ink-soft);
+}
+.reader-nav-btn:hover{color:var(--ink);border-color:var(--ink-faint)}
+.reader-nav-btn:disabled{opacity:.35;cursor:default}
+.reader-nav-btn:disabled:hover{color:var(--ink-soft);border-color:var(--rule)}
+
+.doc-content{max-width:42rem;margin:0 auto;padding:2.5rem 1.8rem 6rem}
+.doc-eyebrow{font-family:"Hanken Grotesk",sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.08em;margin-bottom:.6rem;display:inline-block;padding:.22rem .55rem;border-radius:2px;color:#fff}
+.doc-eyebrow.gdpr{background:var(--gdpr)} .doc-eyebrow.ccpa{background:var(--ccpa)} .doc-eyebrow.dpdp{background:var(--dpdp)} .doc-eyebrow.all{background:var(--accent)}
+:root[data-theme="dark"] .doc-eyebrow{color:#101820}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .doc-eyebrow{color:#101820}}
+.doc-title{font-size:1.9rem;font-weight:600;letter-spacing:-.015em;margin:0 0 .4rem;line-height:1.15}
+.doc-sub{font-family:"Hanken Grotesk",sans-serif;font-size:.85rem;color:var(--ink-faint);margin:0 0 2.2rem}
+
+.doc-content h4{font-size:1.02rem;font-weight:600;margin:2rem 0 .7rem;font-family:"Hanken Grotesk",sans-serif;color:var(--ink)}
+.doc-content h5{
+  font-family:"Hanken Grotesk",sans-serif;font-size:.76rem;font-weight:700;letter-spacing:.06em;
+  color:var(--ink-faint);margin:1.6rem 0 .5rem;text-transform:none;
+}
+.doc-content p{font-size:.98rem;margin:0 0 1.05rem}
+.doc-content ul,.doc-content ol{margin:0 0 1.1rem;padding-left:1.3rem}
+.doc-content li{font-size:.96rem;margin-bottom:.4rem;line-height:1.55}
+.dc-callout{
+  background:var(--paper-2);border-left:3px solid var(--accent);
+  padding:1rem 1.2rem;margin:1.4rem 0;font-size:.94rem;line-height:1.55;color:var(--ink-soft);
+}
+.dc-callout.warn{border-left-color:var(--flag)}
+.dc-callout b{color:var(--ink);font-weight:600}
+
+.dtable-wrap{overflow-x:auto;margin:1.2rem 0 1.6rem;border-radius:3px;box-shadow:0 1px 3px var(--shadow)}
+table.dtable{border-collapse:collapse;width:100%;font-size:.86rem;background:var(--card)}
+table.dtable th{font-family:"Hanken Grotesk",sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.05em;text-align:left;padding:.6rem .8rem;background:var(--paper-3);color:var(--ink-soft);white-space:nowrap}
+table.dtable td{padding:.6rem .8rem;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.45;font-size:.88rem}
+table.dtable tr:last-child td{border-bottom:none}
+td.risk-high,td.risk-critical{background:rgba(140,47,29,.08)}
+td.risk-medium{background:rgba(168,80,10,.08)}
+td.risk-low{background:rgba(43,106,87,.08)}
+.tag{font-family:"Hanken Grotesk",sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.04em;padding:.15rem .45rem;border-radius:2px;white-space:nowrap;display:inline-block}
+.tag-critical{background:var(--flag);color:#fff}
+.tag-high{background:#C0704A;color:#fff}
+.tag-medium{background:#B98A2E;color:#101820}
+.tag-low{background:var(--accent);color:#fff}
+
+.clause{margin:0 0 1.05rem;padding-left:2.1rem;position:relative;font-size:.96rem;line-height:1.58}
+.clause .cn{position:absolute;left:0;top:0;font-family:"Hanken Grotesk",sans-serif;font-weight:700;font-size:.85rem;color:var(--ink-faint)}
+.doc-end{
+  margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--rule);
+  font-family:"Hanken Grotesk",sans-serif;font-size:.78rem;color:var(--ink-faint);
+}
+
+/* ---------- mobile: reader overlay becomes a stacked, drawer-nav layout ---------- */
+.reader-menu-btn{
+  display:none;
+  font-family:"Hanken Grotesk",sans-serif;font-size:.78rem;font-weight:600;
+  color:var(--ink-soft);background:var(--card);border:1px solid var(--rule);
+  border-radius:3px;padding:.4rem .65rem;cursor:pointer;white-space:nowrap;
+  align-items:center;gap:.35rem;flex:none;
+}
+.reader-menu-btn:hover{color:var(--ink);border-color:var(--ink-faint)}
+.reader-nav-scrim{
+  display:none;
+  position:fixed;inset:0;background:rgba(15,20,25,.42);z-index:9;
+}
+.reader-nav-scrim.show{display:block}
+
+@media (max-width:760px){
+  .reader-shell{position:relative}
+  .reader-menu-btn{display:inline-flex}
+  .reader-nav{
+    position:fixed;top:0;left:0;bottom:0;
+    width:min(85vw,20rem);
+    transform:translateX(-100%);
+    transition:transform .22s ease;
+    z-index:10;
+    box-shadow:2px 0 16px var(--shadow);
+  }
+  .reader-nav.open{transform:translateX(0)}
+  .reader-main{width:100%}
+  .reader-topbar{padding:.75rem 1rem;gap:.6rem}
+  .reader-crumb{font-size:.7rem;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .reader-nav-btns{flex:none}
+  .doc-content{padding:1.6rem 1.1rem 4rem}
+  .doc-title{font-size:1.5rem}
+  .doc-sub{font-size:.78rem;margin-bottom:1.6rem}
+  table.dtable{min-width:520px}
+  .clause{padding-left:1.7rem}
+}
+@media (max-width:420px){
+  .doc-title{font-size:1.32rem}
+  .reader-nav-head{padding:.9rem 1rem}
+  .reader-group{padding:.75rem 1rem .2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ ORR SITE NAV ============ -->
+<header id="nav" style="position:sticky;top:0;left:0;right:0;z-index:900;height:62px;display:flex;align-items:center;padding:0 clamp(20px,4.4vw,42px);background:rgba(241,236,225,.92);backdrop-filter:blur(18px) saturate(1.3);border-bottom:1px solid var(--rule);font-family:'Hanken Grotesk',sans-serif">
+  <a href="../../index.html" aria-label="ORR home" style="display:flex;align-items:center;gap:11px;text-decoration:none">
+    <img src="../../assets/drk.svg" alt="ORR" style="width:44px;height:44px;display:block"/>
+  </a>
+  <nav style="margin-left:auto;display:flex;align-items:center;gap:26px">
+    <a href="../../index.html#structure" style="font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:#246B59;text-decoration:none">Structure</a>
+    <a href="../../resources.html" style="font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:#246B59;text-decoration:none">Resources</a>
+    <a href="../../index.html#begin" style="border:1px solid var(--ink);padding:8px 18px;color:var(--ink);text-decoration:none;font-size:11px;letter-spacing:.12em;text-transform:uppercase">Begin &rarr;</a>
+  </nav>
+</header>
+
+<!-- ============ BREADCRUMB ============ -->
+<div class="wide" style="padding-top:1.4rem">
+  <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0">
+    <a href="../../resources.html" style="color:var(--ink-faint);text-decoration:none">Resources</a>
+    <span aria-hidden="true">/</span>
+    <a href="../governance.html" style="color:var(--ink-faint);text-decoration:none">Governance &amp; Compliance</a>
+    <span aria-hidden="true">/</span>
+    <span style="color:var(--accent)">Helvane B.V. Case Study</span>
+  </p>
+</div>
+
+<!-- ============ CASE STUDY MASTHEAD (kept — reads as a document sub-brand within the section) ============ -->
+<div class="masthead" style="position:static;margin-top:1.2rem">
+  <div class="masthead-inner">
+    <span class="mark">HELVANE B.V.</span>
+    <span class="mark-sub">Multi-Regime Privacy Infrastructure · An ORR Case Study</span>
+    <span class="mark-version">Case study v1.1 · 13 Sep 2026</span>
+  </div>
+</div>
+
+<!-- ============ NARRATIVE PAGE CONTENT — placeholder marker, filled by build script ============ -->
+<div class="wide">
+<div class="hero">
+    <p class="matter">Case Study · Engagement HLV-GDPR-01 · Multi-Regime Privacy Infrastructure</p>
+    <h1>Building a privacy programme for a company that had none.</h1>
+    <p class="standfirst">A twenty-person SaaS startup with no policies, no register, and a live AI feature quietly sending customer support tickets to a third-party model. Three jurisdictions later, it has a working compliance programme — and this is the record of how it was built, including the parts where the law gave no clean answer.</p>
+
+    <div class="register">
+      <div class="reg-item">
+        <p class="reg-code">GDPR</p>
+        <span class="reg-stat">Regulation (EU) 2016/679<br>10 deliverables · fully enforceable</span>
+      </div>
+      <div class="reg-item">
+        <p class="reg-code">CCPA / CPRA</p>
+        <span class="reg-stat">Cal. Civ. Code § 1798.100 et seq.<br>4 deliverables · fully enforceable</span>
+      </div>
+      <div class="reg-item">
+        <p class="reg-code">DPDP</p>
+        <span class="reg-stat">Digital Personal Data Protection Act, 2023<br>4 deliverables · phased to May 2027</span>
+      </div>
+    </div>
+
+    <div class="reading-paths">
+      <span class="rp-label">Three ways to read this</span>
+      <div class="rp-grid">
+        <a href="#brief" class="rp-item"><b>5 minutes</b> — read the brief and the four judgment calls, skip the rest</a>
+        <a href="#engagement" class="rp-item"><b>15 minutes</b> — read the three phase walkthroughs and try the dependency graph</a>
+        <a href="#register" class="rp-item"><b>Go deep</b> — open the full document register and read any of the 21 source documents in full</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ THE BRIEF ============ -->
+<div class="wrap">
+  <section id="brief">
+    <p class="sec-label">The brief</p>
+    <h2>A helpdesk platform is a harder privacy problem than it looks</h2>
+    <p>Helvane B.V. sells customer-support software to small businesses. That means every ticket its customers receive — every complaint, every refund request, every rambling message someone typed at midnight — passes through Helvane's systems. Helvane doesn't own that data. Its customers do. Helvane just holds it.</p>
+    <p>That distinction is the spine of the entire engagement. It determines which obligations land on Helvane and which land on its customers, and getting it wrong in either direction is the most common failure mode for a company in this position. Handle a deletion request you had no authority to handle, and you've overstepped. Ignore one you were obliged to forward, and you've failed your contract.</p>
+
+    <div class="profile">
+      <dl>
+        <dt>Company</dt><dd>Helvane B.V. — B2B helpdesk and live-chat platform</dd>
+        <dt>Registered</dt><dd>Amsterdam, Netherlands</dd>
+        <dt>At engagement start</dt><dd>~20 people, seed stage, no privacy programme of any kind</dd>
+        <dt>At engagement close</dt><dd>~65 people across EU, US and India operations</dd>
+        <dt>Dual role</dt><dd>Controller for its own employee, sales and marketing data; Processor for every ticket its customers' end-users submit</dd>
+        <dt>Starting position</dt><dd>Policies lived in a Notion page. No register, no DPA, no breach process, no rights-request process.</dd>
+      </dl>
+    </div>
+
+    <p class="lede">Helvane is fictional. The regulatory analysis, the methodology, and the judgment calls are not — they are the same ones a real engagement of this shape would produce.</p>
+  </section>
+</div>
+
+<hr class="rule">
+
+<!-- ============ THE ENGAGEMENT ============ -->
+<div class="wrap">
+  <section id="engagement">
+    <p class="sec-label">The engagement</p>
+    <h2>Three regimes, built in sequence</h2>
+    <p>Each regime was assessed on its own terms before anything was written. That sounds obvious. In practice, the commonest shortcut in multi-jurisdiction privacy work is to build once for GDPR and relabel it twice — and the second and third regimes are precisely where that shortcut breaks.</p>
+
+    <p>Twenty-two documents is a claim of coherence that's easy to make and hard to check from the outside. So rather than assert it, here is the actual reference chain — every arrow below is a specific clause or finding in one document that another document names directly. Click any node.</p>
+
+    <div class="graph-shell">
+      <div class="graph-toolbar">
+        <span class="graph-hint">Click a document to trace what it feeds and what feeds it</span>
+        <div class="graph-legend">
+          <span class="leg"><span class="leg-dot gdpr"></span>GDPR</span>
+          <span class="leg"><span class="leg-dot ccpa"></span>CCPA</span>
+          <span class="leg"><span class="leg-dot dpdp"></span>DPDP</span>
+          <span class="leg"><span class="leg-dot all"></span>Cross-regime</span>
+        </div>
+      </div>
+      <div class="graph-body">
+        <svg id="depgraph" viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Document dependency graph — 22 nodes, click any to see connections"></svg>
+      </div>
+      <div class="graph-detail" id="graphDetail">
+        <p class="graph-detail-empty">Select a document above to see its dependencies.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+
+  <!-- GDPR -->
+  <div class="phase p-gdpr">
+    <div class="phase-head">
+      <span class="phase-tag">PHASE 01</span>
+      <h3>GDPR — the foundation</h3>
+    </div>
+    <p class="phase-meta">Data mapping → risk assessment → contracts → operating procedures</p>
+
+    <p>The work began with a Record of Processing Activities, because everything downstream depends on knowing what data actually exists. Mapping surfaced fourteen gaps. Three were critical, and one of them had been running in production for months.</p>
+
+    <div class="finding">
+      <span class="finding-label">CRITICAL FINDING</span>
+      <p>Helvane's AI reply-suggestion feature was sending the full text of customer support tickets — which can contain anything an end-user chose to disclose, including health information — to a third-party AI provider. No data processing agreement. No confirmed processing region. No written assurance that the vendor wasn't training on those inputs. The feature was enabled by default.</p>
+    <button type="button" class="read-link" data-open-doc="dpia" style="background:none;border:none;padding:0;margin-top:.6rem">Read the full document</button></div>
+
+    <p>That finding drove the sequencing of everything after it. A DPIA was conducted under Article 35, concluding the feature met four of the WP248 screening criteria and required full assessment. Its mitigations were then written directly into the customer-facing DPA as binding contractual terms — a no-training clause, an opt-in default, a thirty-day advance notice requirement for sub-processor changes — rather than left as recommendations in a document nobody would enforce.</p>
+
+    <p>The remaining deliverables built outward from there: a breach response plan that makes the Article 33 clock somebody's explicit job, a rights-handling procedure built around the controller/processor fork, and the external-facing policies that had to match what the register actually said.</p>
+
+    <details>
+      <summary>Deliverables — 10 documents</summary>
+      <ul class="deliv">
+        <li><button type="button" data-open-doc="ropa">Record of Processing Activities (Art. 30) — controller and processor registers, sub-processor register, gap tracker</button></li>
+        <li><button type="button" data-open-doc="dpia">Data Protection Impact Assessment (Art. 35) — AI reply suggestions</button></li>
+        <li><button type="button" data-open-doc="dpa">Data Processing Agreement (Art. 28) — customer-facing</button></li>
+        <li><button type="button" data-open-doc="breach">Breach Response Plan + Breach Register</button></li>
+        <li><button type="button" data-open-doc="dsr">Data Subject Rights Handling Procedure</button></li>
+        <li><button type="button" data-open-doc="privpol">External Privacy Policy</button></li>
+        <li><button type="button" data-open-doc="cookiepol">Cookie Policy</button></li>
+        <li><button type="button" data-open-doc="dpoassess">DPO Necessity Assessment (Art. 37)</button></li>
+        <li><button type="button" data-open-doc="intpol">Internal Data Protection Policy</button></li>
+        <li><button type="button" data-open-doc="remediation">Remediation Memo — LIAs, consent logging, retention, access controls</button></li>
+      </ul>
+    </details>
+  </div>
+
+  <!-- CCPA -->
+  <div class="phase p-ccpa">
+    <div class="phase-head">
+      <span class="phase-tag">PHASE 02</span>
+      <h3>CCPA / CPRA — the American divergence</h3>
+    </div>
+    <p class="phase-meta">Applicability → disclosure → opt-out machinery → rights handling</p>
+
+    <p>By the time Helvane crossed into California, it had outgrown the revenue threshold and was serving US customers. Applicability was unambiguous. What was not unambiguous was whether Helvane was <em>sharing</em> personal information — a CPRA concept with no GDPR equivalent, which catches companies that have never sold a record in their lives.</p>
+
+    <div class="finding">
+      <span class="finding-label">FINDING</span>
+      <p>The US web analytics vendor Helvane had used since launch — flagged but unresolved since the original GDPR register — almost certainly constitutes "sharing" for cross-context behavioral advertising under the CPRA. Not because Helvane sells anything, but because that is the default behaviour of most analytics tags unless deliberately configured otherwise. This is how an otherwise-clean B2B company acquires a Do Not Sell/Share obligation without noticing.</p>
+    <button type="button" class="read-link" data-open-doc="ccpa-app" style="background:none;border:none;padding:0;margin-top:.6rem">Read the full document</button></div>
+
+    <p>The assessment opened by mapping, honestly, what carried over from the GDPR work and what did not. The breach workflow transferred nearly intact. The DPIA methodology had no CCPA analogue. The DPA did not transfer at all — California expects its own contractual language for service providers, not an Article 28 agreement with the nouns swapped.</p>
+
+    <p>What followed was a California-specific privacy notice built to the statutory disclosure format, an opt-out mechanism designed to honour the Global Privacy Control signal, and a rights procedure with CCPA's own graduated verification standard and forty-five-day clock.</p>
+
+    <details>
+      <summary>Deliverables — 4 documents</summary>
+      <ul class="deliv">
+        <li><button type="button" data-open-doc="ccpa-app">CCPA/CPRA Applicability &amp; Gap Assessment — including the GDPR-transfer mapping</button></li>
+        <li><button type="button" data-open-doc="ca-notice">California Privacy Notice</button></li>
+        <li><button type="button" data-open-doc="dns">Do Not Sell or Share &amp; Opt-Out Procedure — including GPC handling</button></li>
+        <li><button type="button" data-open-doc="ccpa-rights">CCPA Consumer Rights Request Procedure</button></li>
+      </ul>
+    </details>
+  </div>
+
+  <!-- DPDP -->
+  <div class="phase p-dpdp">
+    <div class="phase-head">
+      <span class="phase-tag">PHASE 03</span>
+      <h3>DPDP — building ahead of the deadline</h3>
+    </div>
+    <p class="phase-meta">Applicability → consent basis mapping → notice framework → rights &amp; grievance</p>
+
+    <p>India was different in kind, not just in detail. Helvane opened a Bengaluru delivery hub and signed its first Indian customers, triggering the Digital Personal Data Protection Act on multiple independent grounds at once. But the Act's substantive obligations commence in phases, with the operative compliance requirements landing in May 2027.</p>
+
+    <p>That changed the brief. This was not remediation of a live violation. It was a build-and-test window — and saying so plainly, rather than manufacturing urgency, was part of the work.</p>
+
+    <div class="finding">
+      <span class="finding-label">STRUCTURAL FINDING</span>
+      <p>The DPDP Act treats consent as the <em>primary</em> basis for processing, with a narrow, closed list of statutory alternatives. There is no general legitimate-interest ground. Helvane's entire Indian marketing and website operation had no lawful basis available other than consent — and its existing consent flow, built for the EU cookie model, did not meet the Act's itemisation and language-accessibility requirements.</p>
+    <button type="button" class="read-link" data-open-doc="dpdp-map" style="background:none;border:none;padding:0;margin-top:.6rem">Read the full document</button></div>
+
+    <p>One further structural point mattered more than it first appeared. Significant Data Fiduciary status under the Act is conferred by government notification, not self-assessment. Unlike the GDPR DPO test, Helvane cannot reason its way to that designation — so the correct posture was a documented monitoring trigger, not a self-declared conclusion.</p>
+
+    <p>The Act also grants a right with no GDPR or CCPA counterpart: a Data Principal may nominate another person to exercise their rights in the event of death or incapacity. That needed a process designed from first principles, and one that would work correctly the first time it was ever invoked.</p>
+
+    <details>
+      <summary>Deliverables — 4 documents</summary>
+      <ul class="deliv">
+        <li><button type="button" data-open-doc="dpdp-app">DPDP Applicability &amp; Gap Assessment — phased-commencement posture</button></li>
+        <li><button type="button" data-open-doc="dpdp-map">Data Mapping &amp; Legal Basis Addendum — Section 6 / Section 7 testing per activity</button></li>
+        <li><button type="button" data-open-doc="dpdp-notice">Notice &amp; Consent Framework — itemised consent, multi-language notice</button></li>
+        <li><button type="button" data-open-doc="dpdp-rights">Data Principal Rights &amp; Grievance Redressal Procedure — including the nomination right and DPDP breach annex</button></li>
+      </ul>
+    </details>
+  </div>
+
+</div>
+
+<hr class="rule">
+
+<!-- ============ JUDGMENT ============ -->
+<div class="wrap">
+  <section>
+    <p class="sec-label">Judgment</p>
+    <h2>Four decisions that could have gone the other way</h2>
+    <p class="lede">Compliance work is mostly not about knowing what a statute says. It is about taking a defensible position where the statute does not clearly say anything. These are the four places this engagement had to choose.</p>
+
+    <div class="calls">
+
+      <div class="call">
+        <div class="call-q">
+          <h3>The AI vendor</h3>
+          <span class="verdict">Conditional approval, not rejection</span><button type="button" class="read-link" data-open-doc="vendor" style="background:none;border:none;padding:0;margin-top:.5rem;font-size:.72rem">Source document</button>
+        </div>
+        <div class="call-a">
+          <p>The security posture was genuinely strong — SOC 2, ISO 27001, encryption, restricted access. The problems were a training opt-out that hadn't been enabled and a processing region that hadn't been pinned. Both fixable in thirty days. A hard rejection would have been defensible on paper and wrong in practice: it would have killed a working product feature over problems with known remedies. The assessment issued conditional approval with a deployment-blocker deadline instead.</p>
+        </div>
+      </div>
+
+      <div class="call">
+        <div class="call-q">
+          <h3>Whether a DPO was mandatory</h3>
+          <span class="verdict">Not required — but genuinely close</span><button type="button" class="read-link" data-open-doc="dpoassess" style="background:none;border:none;padding:0;margin-top:.5rem;font-size:.72rem">Source document</button>
+        </div>
+        <div class="call-a">
+          <p>Helvane processes support tickets at scale, and special-category data appears in them regularly. That looks like it should trigger Article 37. But the EDPB's "regular and systematic monitoring" threshold targets behavioural tracking and profiling, not passive storage and retrieval of messages people chose to send. The conclusion was no — with two named triggers that would flip it, and a recommendation to formalise the interim privacy role now rather than wait.</p>
+        </div>
+      </div>
+
+      <div class="call">
+        <div class="call-q">
+          <h3>Indian recruitment data</h3>
+          <span class="verdict">Obtain consent despite the exemption</span><button type="button" class="read-link" data-open-doc="dpdp-map" style="background:none;border:none;padding:0;margin-top:.5rem;font-size:.72rem">Source document</button>
+        </div>
+        <div class="call-a">
+          <p>Section 7(i) of the DPDP Act covers processing for employment purposes without consent. Whether it reaches the recruitment stage — before any employment relationship exists — is genuinely contestable, and the Board has not yet said. The engagement took the conservative reading: consent for applicants, statutory legitimate use only once employed. If the Board later reads Section 7(i) broadly, Helvane has collected a consent it did not strictly need. The reverse error is considerably more expensive.</p>
+        </div>
+      </div>
+
+      <div class="call">
+        <div class="call-q">
+          <h3>The analytics vendor under CPRA</h3>
+          <span class="verdict">Treat as "sharing" pending confirmation</span><button type="button" class="read-link" data-open-doc="ccpa-app" style="background:none;border:none;padding:0;margin-top:.5rem;font-size:.72rem">Source document</button>
+        </div>
+        <div class="call-a">
+          <p>There was an available argument that the vendor is a pure service provider and no sharing occurs. Taking it would have avoided building an entire Do Not Sell/Share mechanism. But that argument rests on a vendor configuration nobody had actually verified, and assuming favourably about an unverified vendor is the precise error the AI-feature DPIA had already caught once. The register says "sharing" until someone checks.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<hr class="rule">
+
+<!-- ============ OPERATIONS ============ -->
+<div class="wrap">
+  <section>
+    <p class="sec-label">Operations</p>
+    <h2>A programme that exists is not the same as one that runs</h2>
+    <p>Documents describe what should happen. They are not evidence that it does. Three operational artifacts were produced to test whether the programme actually functions under load — and each one surfaced something the documents alone had not.</p>
+
+    <div class="ops">
+
+      <div class="op" id="opTracker">
+        <h3>Rights request tracker — 15 simulated requests</h3>
+        <p>Every request routed across all three regimes, with deliberate edge cases: a request arriving through the wrong channel, an authorised agent acting for a former applicant, an opt-out submitted by telephone rather than the website link, a CCPA extension invoked with documented reasoning, and the first invocation of the DPDP nomination right by the nominee of a deceased data principal.</p>
+        <span class="op-detail">Surfaced: a hiring manager's interview notes held outside the applicant tracking system, invisible to the retention policy — found only because someone actually searched.</span>
+
+        <div class="tt-shell">
+          <div class="tt-toolbar">
+            <button class="tt-chip active" data-filter="all">All</button>
+            <button class="tt-chip" data-filter="GDPR">GDPR</button>
+            <button class="tt-chip" data-filter="CCPA">CCPA</button>
+            <button class="tt-chip" data-filter="DPDP">DPDP</button>
+            <input class="tt-search" id="ttSearch" type="text" placeholder="Search requester, right, or note…">
+            <span class="tt-count" id="ttCount"></span>
+          </div>
+          <div class="tt-table-wrap">
+            <table class="tt">
+              <thead>
+                <tr><th>ID</th><th>Regime</th><th>Right(s)</th><th>Requester</th><th>Outcome</th><th>Note</th></tr>
+              </thead>
+              <tbody id="ttBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="op">
+        <h3>Vendor risk assessment — AI API provider</h3>
+        <p>A full questionnaire across data location, retention, training use, security posture, sub-processing, and contractual terms, with the vendor's responses recorded and analysed line by line rather than filed unread.</p>
+        <span class="op-detail">Surfaced: the vendor's answer on model training sounded reassuring — customers can opt out — but Helvane had never actually opted out. A low-risk answer concealing a critical exposure.</span><button type="button" class="read-link" data-open-doc="vendor" style="background:none;border:none;padding:0;margin-top:.7rem">Open full document</button>
+      </div>
+
+      <div class="op">
+        <h3>Breach tabletop — cross-tenant data exposure</h3>
+        <p>A deployment regression breaks tenant isolation for four hours, exposing tickets between an EU customer and an Indian customer simultaneously. Walked through in timestamped real time against the breach plan, with a completed register entry and a multi-regime notification fork.</p>
+        <span class="op-detail">Surfaced: the incident was caught by a nightly batch test. Had it happened during business hours, nothing would have detected it for up to twenty-four hours.</span><button type="button" class="read-link" data-open-doc="tabletop" style="background:none;border:none;padding:0;margin-top:.7rem">Open full document</button>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<hr class="rule">
+
+<!-- ============ METHOD ============ -->
+<div class="wrap">
+  <section>
+    <p class="sec-label">Method</p>
+    <h2>How the work is sequenced</h2>
+    <p>The order is not arbitrary. Each stage produces the facts the next one depends on, which is why programmes assembled from templates tend to contradict themselves — the policy claims one retention period, the register records another, and nobody notices until a regulator does.</p>
+
+    <div class="method">
+      <div class="method-step">
+        <span class="step-n">1</span>
+        <div>
+          <h3>Map</h3>
+          <p>Inventory every processing activity and test it against the specific regime's own categories and basis framework — not a generic one carried over from elsewhere.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <span class="step-n">2</span>
+        <div>
+          <h3>Assess</h3>
+          <p>Applicability thresholds, gap analysis, and formal risk assessment where the regime mandates it. Unresolved questions stay visibly unresolved rather than being assumed favourably.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <span class="step-n">3</span>
+        <div>
+          <h3>Build</h3>
+          <p>Policies, contracts and procedures written against the facts established above, each one cross-referencing the register rather than restating it from memory.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <span class="step-n">4</span>
+        <div>
+          <h3>Operate</h3>
+          <p>Rights handling, breach response, vendor due diligence and consent management — the parts that have to work on an ordinary Tuesday, not just on paper.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <span class="step-n">5</span>
+        <div>
+          <h3>Monitor</h3>
+          <p>Review cadence, regulatory change tracking, and standing re-assessment triggers, so the programme degrades gracefully instead of silently going stale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<hr class="rule">
+
+<!-- ============ THE REGISTER ============ -->
+<div class="wide">
+  <section id="register">
+    <p class="sec-label">The register</p>
+    <h2>Full document index</h2>
+    <p style="max-width:46rem">Twenty-four artifacts. Every document cross-references the ones it depends on — the DPA's sub-processor annex mirrors the register's open gaps, the breach annex extends the existing plan rather than duplicating it, and the privacy notices match what the register actually records.</p>
+
+    <div class="doc-index">
+      <table>
+        <thead>
+          <tr><th>Document</th><th>Regime</th><th>What it does</th></tr>
+        </thead>
+        <tbody>
+          <tr class="doc-row" data-open-doc="ropa"><td>Record of Processing Activities</td><td class="reg-j j-gdpr">GDPR</td><td class="reg-d">Art. 30 register — controller and processor activities, sub-processors, running gap tracker</td></tr>
+          <tr class="doc-row" data-open-doc="dpia"><td>Data Protection Impact Assessment</td><td class="reg-j j-gdpr">GDPR</td><td class="reg-d">Art. 35 assessment of the AI reply-suggestion feature; five risks scored, mitigations split into prerequisites and recommendations</td></tr>
+          <tr class="doc-row" data-open-doc="dpa"><td>Data Processing Agreement</td><td class="reg-j j-gdpr">GDPR</td><td class="reg-d">Art. 28 customer-facing contract; encodes the DPIA prerequisites as binding terms</td></tr>
+          <tr class="doc-row" data-open-doc="breach"><td>Breach Response Plan</td><td class="reg-j j-gdpr">GDPR</td><td class="reg-d">Detection to notification workflow, severity triage, awareness-clock discipline, breach register</td></tr>
+          <tr class="doc-row" data-open-doc="dsr"><td>DSR Handling Procedure</td><td class="reg-j j-gdpr">GDPR</td><td class="reg-d">Rights intake, the controller/processor fork, verification, fulfilment and refusal handling</td></tr>
+          <tr class="doc-row" data-open-doc="privpol"><td>External Privacy Policy</td><td class="reg-j j-gdpr">GDPR</td><td class="reg-d">Public-facing Art. 13/14 disclosure, traced line by line to the register</td></tr>
+          <tr class="doc-row" data-open-doc="cookiepol"><td>Cookie Policy</td><td class="reg-j j-gdpr">GDPR</td><td class="reg-d">Cookie inventory, consent categories, control mechanics</td></tr>
+          <tr class="doc-row" data-open-doc="dpoassess"><td>DPO Necessity Assessment</td><td class="reg-j j-gdpr">GDPR</td><td class="reg-d">Art. 37 analysis with a reasoned negative conclusion and named re-assessment triggers</td></tr>
+          <tr class="doc-row" data-open-doc="intpol"><td>Internal Data Protection Policy</td><td class="reg-j j-gdpr">GDPR</td><td class="reg-d">Employee-facing, plain language, built around the two-hats distinction</td></tr>
+          <tr class="doc-row" data-open-doc="remediation"><td>Remediation Memo</td><td class="reg-j j-gdpr">GDPR</td><td class="reg-d">Completed legitimate-interest assessments plus four configuration-level fixes with named owners</td></tr>
+          <tr class="doc-row" data-open-doc="ccpa-app"><td>CCPA Applicability &amp; Gap Assessment</td><td class="reg-j j-ccpa">CCPA</td><td class="reg-d">Threshold test, sale/share analysis, and an honest GDPR-transfer mapping</td></tr>
+          <tr class="doc-row" data-open-doc="ca-notice"><td>California Privacy Notice</td><td class="reg-j j-ccpa">CCPA</td><td class="reg-d">Statutory disclosure format, including the per-vendor sale/share determination</td></tr>
+          <tr class="doc-row" data-open-doc="dns"><td>Do Not Sell or Share Procedure</td><td class="reg-j j-ccpa">CCPA</td><td class="reg-d">Opt-out mechanism design, GPC handling, and the preference-collision problem</td></tr>
+          <tr class="doc-row" data-open-doc="ccpa-rights"><td>CCPA Consumer Rights Procedure</td><td class="reg-j j-ccpa">CCPA</td><td class="reg-d">Know, delete, correct and appeal, with CCPA's graduated verification standard</td></tr>
+          <tr class="doc-row" data-open-doc="dpdp-app"><td>DPDP Applicability &amp; Gap Assessment</td><td class="reg-j j-dpdp">DPDP</td><td class="reg-d">Multi-ground applicability, phased-commencement posture, SDF monitoring position</td></tr>
+          <tr class="doc-row" data-open-doc="dpdp-map"><td>DPDP Data Mapping Addendum</td><td class="reg-j j-dpdp">DPDP</td><td class="reg-d">Each India-relevant activity tested against Section 6 consent or Section 7 legitimate use</td></tr>
+          <tr class="doc-row" data-open-doc="dpdp-notice"><td>DPDP Notice &amp; Consent Framework</td><td class="reg-j j-dpdp">DPDP</td><td class="reg-d">Itemised consent design, multi-language notice, Consent Manager forward-compatibility</td></tr>
+          <tr class="doc-row" data-open-doc="dpdp-rights"><td>DPDP Rights &amp; Grievance Procedure</td><td class="reg-j j-dpdp">DPDP</td><td class="reg-d">Data Principal rights, grievance redressal, the nomination right, and the DPDP breach annex</td></tr>
+          <tr class="doc-row" data-scroll-to="opTracker"><td>Rights Request Tracker</td><td class="reg-j j-all">ALL</td><td class="reg-d">15 simulated requests with edge cases, verification records and resolution reasoning — live, filterable table in the Operations section</td></tr>
+          <tr class="doc-row" data-open-doc="vendor"><td>Vendor Risk Assessment</td><td class="reg-j j-all">ALL</td><td class="reg-d">Completed questionnaire and analysis for the AI API provider; conditional approval issued</td></tr>
+          <tr class="doc-row" data-open-doc="tabletop"><td>Breach Tabletop Exercise</td><td class="reg-j j-all">ALL</td><td class="reg-d">Timestamped incident walkthrough, completed register entry, lessons learned</td></tr>
+          <tr class="doc-row" data-open-doc="memos"><td>Advisory Memos</td><td class="reg-j j-all">ALL</td><td class="reg-d">Two business-facing analyses: training AI on customer data, and scraping for lead generation</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="caveat" style="max-width:46rem">
+      <p><strong>On what this is, and what it is not.</strong> Helvane B.V. is a constructed company. Its employees, customers, vendors and incidents are invented, and every document says so on its face.</p>
+      <p>What is not invented is the regulatory analysis, the sequencing, or the reasoning behind each position taken. The documents carry the caveats a real engagement would carry — draft status, items awaiting vendor confirmation, provisions pending counsel review — because removing them would misrepresent what the work is.</p>
+      <p>Nothing here has been reviewed by Dutch, Californian or Indian counsel, and it is not legal advice.</p>
+    </div>
+
+    <div class="cta-card">
+      <div>
+        <h3 style="margin:0 0 .3rem">Want a programme like this built for your company?</h3>
+        <p style="margin:0;color:var(--ink-soft);font-size:.96rem">ORR builds real, jurisdiction-specific privacy infrastructure — mapped, assessed, and operationalised the same way this one was.</p>
+      </div>
+      <a href="../../index.html#begin" class="cta-btn">Start a conversation →</a>
+    </div>
+  </section>
+</div>
+
+<footer style="background:#0E2A24;color:#F1ECE1;border-top:1px solid rgba(241,236,225,.18);padding:56px clamp(20px,4.4vw,42px) 40px;font-family:'Hanken Grotesk',sans-serif">
+  <div style="max-width:60rem;margin:0 auto;display:flex;flex-direction:column;gap:28px">
+    <p style="font-family:'Newsreader',serif;font-style:italic;font-weight:300;font-size:16px;line-height:1.5;color:rgba(241,236,225,.72);margin:0;max-width:52ch">Want a programme like this built for your company? ORR builds real, jurisdiction-specific privacy infrastructure — mapped, assessed, and operationalised the same way this one was.</p>
+    <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:center">
+      <a href="../../index.html#begin" style="display:inline-flex;align-items:center;gap:10px;background:#F1ECE1;color:#0E2A24;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:13px 24px;text-decoration:none">Start a conversation &rarr;</a>
+      <a href="../governance.html" style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(241,236,225,.72);text-decoration:none;border-bottom:1px solid rgba(241,236,225,.3);padding-bottom:3px">Back to Governance &amp; Compliance</a>
+    </div>
+    <div style="padding-top:20px;border-top:1px solid rgba(241,236,225,.18);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(241,236,225,.56)">© <span id="yr"></span> ORR — All rights reserved</span>
+      <div style="display:flex;gap:14px">
+        <a href="../../legal/privacy.html" style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(241,236,225,.56);text-decoration:none">Privacy</a>
+        <a href="../../legal/terms.html" style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(241,236,225,.56);text-decoration:none">Terms</a>
+        <a href="../../legal/disclaimer.html" style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(241,236,225,.56);text-decoration:none">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+<!-- ============ READER OVERLAY ============ -->
+<div id="readerOverlay">
+  <div class="reader-shell">
+    <div class="reader-nav-scrim" id="readerNavScrim"></div>
+    <nav class="reader-nav" id="readerNav">
+      <div class="reader-nav-head">
+        <a href="../../index.html" aria-label="ORR home" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:inherit">
+          <img src="../../assets/drk.svg" alt="ORR" style="width:22px;height:22px;display:block;flex-shrink:0"/>
+          <span class="reader-brand">ORR · DOCUMENT REGISTER</span>
+        </a>
+        <button class="reader-close" id="readerCloseBtn">Close ✕</button>
+      </div>
+      <div id="readerNavGroups"></div>
+    </nav>
+    <main class="reader-main" id="readerMain">
+      <div class="reader-topbar">
+        <button class="reader-menu-btn" id="readerMenuBtn">☰ Documents</button>
+        <span class="reader-crumb" id="readerCrumb"></span>
+        <div class="reader-nav-btns">
+          <a href="../../resources.html" class="reader-nav-btn" style="text-decoration:none;display:inline-flex;align-items:center">ORR Resources</a>
+          <button class="reader-nav-btn" id="readerPrev">← Previous</button>
+          <button class="reader-nav-btn" id="readerNext">Next →</button>
+        </div>
+      </div>
+      <article class="doc-content" id="readerContent"></article>
+    </main>
+  </div>
+</div>
+
+
+<script>
+// ============================================================
+// DOCUMENT CONTENT — rendered literally inside the reader overlay.
+// Each doc: {id, regime, depth: 'full'|'register'|'text', title, sub, body: HTML string}
+// depth is used only for the nav badge (Full / Register / Text) — all render completely either way.
+// ============================================================
+
+const DOCS = {};
+
+// ---------------- GDPR: RoPA (register depth — full tables, condensed narrative) ----------------
+DOCS["ropa"] = {
+  regime: "gdpr", depth: "Register",
+  title: "Record of Processing Activities",
+  sub: "Article 30 GDPR · Helvane B.V. · v1.0 · maintained by the interim Privacy Lead",
+  body: `
+    <p>Two operative registers, reflecting Helvane's dual role: <b>Controller Activities</b> (Art. 30(1)) — processing where Helvane decides the purpose and means — and <b>Processor Activities</b> (Art. 30(2)) — processing Helvane carries out on behalf of its SMB customers. A Sub-processor Register and a running Gap Tracker sit alongside both.</p>
+
+    <h4>Controller Activities</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Ref</th><th>Activity</th><th>Legal basis</th><th>Risk</th></tr>
+      <tr><td>C-01</td><td>Recruitment &amp; onboarding</td><td>Art. 6(1)(b) pre-contractual; 6(1)(c) legal obligation</td><td class="risk-low"><span class="tag tag-low">Low</span></td></tr>
+      <tr><td>C-02</td><td>HR administration &amp; payroll</td><td>Art. 6(1)(b) contract; 6(1)(c) legal obligation</td><td class="risk-medium"><span class="tag tag-medium">Medium</span></td></tr>
+      <tr><td>C-03</td><td>Sales pipeline &amp; lead management</td><td>Art. 6(1)(f) legitimate interest</td><td class="risk-medium"><span class="tag tag-medium">Medium</span></td></tr>
+      <tr><td>C-04</td><td>Marketing communications</td><td>Art. 6(1)(a) consent; 6(1)(f) soft opt-in</td><td class="risk-low"><span class="tag tag-low">Low</span></td></tr>
+      <tr><td>C-05</td><td>Website analytics &amp; cookies</td><td>Art. 6(1)(a) consent; 6(1)(f) strictly necessary</td><td class="risk-medium"><span class="tag tag-medium">Medium</span></td></tr>
+      <tr><td>C-06</td><td>Billing &amp; subscription management</td><td>Art. 6(1)(b) contract</td><td class="risk-low"><span class="tag tag-low">Low</span></td></tr>
+      <tr><td>C-07</td><td>Corporate IT, security &amp; access management</td><td>Art. 6(1)(f) legitimate interest; 6(1)(c) legal obligation</td><td class="risk-low"><span class="tag tag-low">Low</span></td></tr>
+    </table></div>
+
+    <h4>Processor Activities</h4>
+    <p>Processing carried out on behalf of Helvane's SMB customers — Helvane is Processor; the Customer is Controller for its own end-users' data.</p>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Ref</th><th>Activity</th><th>Special category risk</th><th>Risk</th></tr>
+      <tr><td>P-01</td><td>Support ticket intake &amp; storage</td><td>Possible — incidental in free text/attachments</td><td class="risk-high"><span class="tag tag-high">High</span></td></tr>
+      <tr><td>P-02</td><td>Live chat widget</td><td>Possible, same basis as P-01</td><td class="risk-medium"><span class="tag tag-medium">Medium</span></td></tr>
+      <tr><td>P-03</td><td>AI-assisted reply suggestions</td><td>Inherits P-01; content leaves primary hosting environment</td><td class="risk-high"><span class="tag tag-high">High</span></td></tr>
+      <tr><td>P-04</td><td>Knowledge base hosting</td><td>No — minimal personal data footprint</td><td class="risk-low"><span class="tag tag-low">Low</span></td></tr>
+      <tr><td>P-05</td><td>Customer data export &amp; offboarding</td><td>Inherits from source activities</td><td class="risk-medium"><span class="tag tag-medium">Medium</span></td></tr>
+    </table></div>
+
+    <div class="dc-callout warn"><b>P-03 is the register's top finding.</b> Ticket content is sent to a third-party AI API with, at the time of mapping, no confirmed processing region, no executed DPA, and no written confirmation the vendor doesn't train on inputs. This single row drives the DPIA, several DPA clauses, and the Vendor Risk Assessment.</div>
+
+    <h4>Sub-processor Register (excerpt)</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Vendor</th><th>Location</th><th>Transfer mechanism</th><th>Status</th></tr>
+      <tr><td>AWS (hosting)</td><td>Frankfurt, Germany</td><td>N/A — intra-EEA</td><td class="risk-low"><span class="tag tag-low">OK</span></td></tr>
+      <tr><td>AI API provider</td><td>Unconfirmed — likely US</td><td>Unconfirmed</td><td class="risk-high"><span class="tag tag-high">GAP</span></td></tr>
+      <tr><td>Email delivery vendor</td><td>EU region selectable, unconfirmed active</td><td>TBC</td><td class="risk-medium"><span class="tag tag-medium">CHECK</span></td></tr>
+      <tr><td>CRM vendor</td><td>US primary, EU residency add-on available</td><td>SCCs (vendor standard terms)</td><td class="risk-medium"><span class="tag tag-medium">CHECK</span></td></tr>
+      <tr><td>Payment processor</td><td>Global (US entity, PCI-DSS L1)</td><td>SCCs + vendor TIA on file</td><td class="risk-low"><span class="tag tag-low">OK</span></td></tr>
+    </table></div>
+
+    <h4>Gap Tracker — final status</h4>
+    <p>Fourteen findings from the original mapping. By the close of the GDPR workstream: five <b>Addressed</b> through a standalone deliverable, three <b>Handed off</b> as owned configuration tasks (consent logging, applicant retention, BSN access controls), and six further items closed across the DPIA, DPA, and Remediation Memo. Nothing was marked closed without a document or a named owner attached.</p>
+  `
+};
+
+// ---------------- GDPR: DPIA (full depth) ----------------
+DOCS["dpia"] = {
+  regime: "gdpr", depth: "Full",
+  title: "Data Protection Impact Assessment",
+  sub: "Article 35 GDPR · AI-Assisted Reply Suggestions (RoPA ref. P-03) · Status: draft, outcome pending vendor confirmation",
+  body: `
+    <h4>1. Screening — is a DPIA required?</h4>
+    <p>Applying the WP248 criteria (endorsed by the EDPB) plus the Dutch DPA's supplementary list:</p>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Criterion</th><th>Applies?</th><th>Why</th></tr>
+      <tr><td>Evaluation or scoring</td><td class="risk-medium">Partial</td><td>The model implicitly ranks likely response content — not a formal profiling score, but functionally close.</td></tr>
+      <tr><td>Automated decision-making, legal/similarly significant effect</td><td class="risk-low">No</td><td>A human agent reviews and sends the reply; the AI output is a draft suggestion, not an autonomous decision.</td></tr>
+      <tr><td>Sensitive or highly personal data</td><td class="risk-high">Yes</td><td>Ticket free text can incidentally contain special category data.</td></tr>
+      <tr><td>Large scale</td><td class="risk-high">Yes</td><td>Applies across the full end-user base of every customer who enables the feature.</td></tr>
+      <tr><td>Innovative use / new technology</td><td class="risk-high">Yes</td><td>Third-party generative AI applied to personal data is squarely the target of this criterion.</td></tr>
+    </table></div>
+    <p><b>Outcome:</b> four criteria met or partially met, clearing the WP248 threshold of two or more. A full DPIA is required, and — given the feature already appears enabled for some accounts — retroactive completion is strongly advised rather than optional.</p>
+
+    <h4>2. Necessity &amp; proportionality — alternatives considered</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Option</th><th>Achieves purpose?</th><th>Privacy impact</th></tr>
+      <tr><td>Current approach — full ticket text to external API</td><td>Yes</td><td class="risk-high"><span class="tag tag-high">High</span></td></tr>
+      <tr><td>Redact obvious PII before sending</td><td>Largely</td><td class="risk-medium"><span class="tag tag-medium">Medium</span></td></tr>
+      <tr><td>EU-region-only model, contractual no-training guarantee</td><td>Yes</td><td class="risk-low"><span class="tag tag-low">Low–Medium</span></td></tr>
+      <tr><td>Opt-in, default-off per Customer account</td><td>Yes, for opted-in accounts</td><td class="risk-low"><span class="tag tag-low">Low (programme-wide)</span></td></tr>
+      <tr><td>Discontinue the feature</td><td>No</td><td>None</td></tr>
+    </table></div>
+    <p><b>Conclusion:</b> the purpose is legitimate; the current implementation is not the least intrusive means available. Recommended combination — region-pinned/no-training vendor configuration + default opt-out + pre-transmission redaction.</p>
+
+    <h4>3. Risk assessment</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Risk</th><th>Likelihood</th><th>Severity</th><th>Overall</th></tr>
+      <tr><td>Special category data transmitted to an unvetted third party</td><td>Medium</td><td>High</td><td class="risk-critical"><span class="tag tag-critical">High</span></td></tr>
+      <tr><td>Ticket content used to train the vendor's models without a legal basis</td><td>Unknown (unconfirmed)</td><td>High</td><td class="risk-critical"><span class="tag tag-critical">High</span></td></tr>
+      <tr><td>Cross-border transfer without a valid Chapter V mechanism</td><td>Medium–High</td><td>Medium</td><td class="risk-critical"><span class="tag tag-critical">High</span></td></tr>
+      <tr><td>End-user has no visibility of the second AI sub-processor</td><td>High</td><td>Low–Medium</td><td class="risk-medium"><span class="tag tag-medium">Medium</span></td></tr>
+      <tr><td>AI suggestion inaccuracy sent without adequate review</td><td>Low–Medium</td><td>Low</td><td class="risk-low"><span class="tag tag-low">Low</span></td></tr>
+    </table></div>
+
+    <h4>4. Mitigations</h4>
+    <p><b>Prerequisites</b> — must be complete before the feature can remain live:</p>
+    <ul>
+      <li>Confirm the vendor's processing region; obtain a written, contractual no-training-on-inputs commitment.</li>
+      <li>Execute a DPA including SCCs (or confirm EU-only processing removes that need) and complete a Transfer Impact Assessment.</li>
+      <li>Add the vendor to the customer-facing sub-processor list with a contractual advance-notice-of-change period.</li>
+      <li>Set the feature to opt-in / default-off at the account level.</li>
+    </ul>
+    <p><b>Recommended</b> — further risk reduction:</p>
+    <ul>
+      <li>Automated pre-transmission redaction of common identifiers before text reaches the API.</li>
+      <li>Exclude attachments from the feature entirely; text body only.</li>
+      <li>Disclose the feature in Helvane's own Privacy Policy and DPA so Customers can cascade disclosure to end-users.</li>
+    </ul>
+
+    <div class="dc-callout warn"><b>Open items blocking final sign-off:</b> which vendor/endpoint and processing region; whether training-on-inputs can be contractually disabled; whether the feature is currently default-on or opt-in; whether attachments are included in the API payload; the vendor's own log-retention period. Risk ratings above assume the less favourable answer to each until confirmed.</div>
+  `
+};
+
+// ---------------- GDPR: DPA (full depth) ----------------
+DOCS["dpa"] = {
+  regime: "gdpr", depth: "Full",
+  title: "Data Processing Agreement",
+  sub: "Article 28 GDPR · Incorporated into the Helvane Terms of Service",
+  body: `
+    <p>Between the Customer (Controller) and Helvane B.V. (Processor), governing Helvane's processing of Customer Data — principally support ticket and chat content submitted by the Customer's own end-users.</p>
+
+    <h4>Selected operative clauses</h4>
+    <div class="clause"><span class="cn">4.1</span>Helvane shall process Customer Data only on documented instructions from Customer, including with regard to international transfers, unless required otherwise by Union or Member State law — in which case Helvane shall inform Customer of that legal requirement before processing, unless prohibited on important grounds of public interest.</div>
+    <div class="clause"><span class="cn">4.3</span>Helvane shall implement the technical and organisational measures set out in Annex 3, and shall not materially reduce the overall level of security during the term without Customer's prior written consent.</div>
+    <div class="clause"><span class="cn">5.1</span>Customer provides Helvane a general written authorisation to engage Sub-processors, provided Helvane maintains an up-to-date list at Annex 2 and notifies Customer of intended additions or replacements, giving Customer the opportunity to object.</div>
+    <div class="clause"><span class="cn">5.2</span>Helvane shall provide at least <b>30 days'</b> advance notice of any new Sub-processor. Customer may object on reasonable data-protection grounds within 14 days; if unresolved, Customer may terminate the affected Service without penalty.</div>
+    <div class="clause"><span class="cn">5.4</span><b>AI-specific commitment:</b> Helvane shall not enable any Sub-processor to use Customer Data submitted via the AI-assisted reply suggestion feature to train, fine-tune, or otherwise improve that Sub-processor's models, and shall obtain a written contractual commitment to that effect before the feature is made available to Customer.</div>
+    <div class="clause"><span class="cn">5.5</span>The AI-assisted reply suggestion feature is <b>disabled by default</b> for Customer's account. Customer may opt in via account settings and opt out at any time with immediate effect.</div>
+    <div class="clause"><span class="cn">8.1</span>Helvane shall notify Customer without undue delay, and in any event within <b>48 hours</b> of becoming aware, of a Personal Data Breach affecting Customer Data.</div>
+    <div class="clause"><span class="cn">9.2</span>Following the 30-day export window, Helvane shall delete all remaining Customer Data — including from backups — within <b>90 days</b> of termination, unless a longer retention period is required by law, in which case processing is restricted to that legal purpose only.</div>
+    <div class="clause"><span class="cn">10.1</span>Helvane shall make available, on request no more than once per 12-month period (or at any time following a Personal Data Breach), information reasonably necessary to demonstrate compliance — a current third-party audit report may substitute for an on-site audit where available.</div>
+
+    <h4>Annex 2 — Sub-processors (excerpt)</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Sub-processor</th><th>Purpose</th><th>Transfer mechanism</th></tr>
+      <tr><td>AWS</td><td>Cloud hosting, Frankfurt (EU)</td><td>N/A — intra-EEA</td></tr>
+      <tr><td>AI API Provider</td><td>AI-assisted reply suggestions (opt-in only)</td><td>SCCs + TIA pending execution — feature remains gated per Clause 5.4–5.5 until confirmed</td></tr>
+    </table></div>
+
+    <p class="doc-end">Clauses 5.4–5.5 exist because of the DPIA's Prerequisites — a mitigation only becomes real once it's a binding term, not a recommendation sitting in a separate document.</p>
+  `
+};
+
+// ---------------- GDPR: Breach Response Plan (register depth) ----------------
+DOCS["breach"] = {
+  regime: "gdpr", depth: "Register",
+  title: "Breach Response Plan",
+  sub: "Internal procedure · Supports Art. 33–34 GDPR and DPA Clause 8",
+  body: `
+    <p>A Personal Data Breach means a breach of security leading to accidental or unlawful destruction, loss, alteration, unauthorised disclosure of, or access to personal data — broader than "a hack." It includes a misdirected email, a lost unencrypted device, or a misconfigured access control.</p>
+
+    <h4>Roles</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Role</th><th>Responsibility</th><th>Who</th></tr>
+      <tr><td>Incident Lead</td><td>Owns the incident end-to-end; makes the notify/don't-notify call; signs off the final record</td><td>CTO (primary); Head of People &amp; Ops (backup)</td></tr>
+      <tr><td>Privacy Lead</td><td>Assesses GDPR risk classification; determines notification obligations</td><td>Interim Privacy Lead, with ORR on call for Critical/High incidents</td></tr>
+      <tr><td>Customer Communications</td><td>Notifies affected Customers per DPA Clause 8</td><td>Head of Support</td></tr>
+    </table></div>
+
+    <h4>The awareness clock</h4>
+    <p>The 72-hour notification clock starts when Helvane becomes <b>aware</b> of a breach — a reasonable degree of certainty a security incident occurred and compromised personal data, not the moment of first suspicion. The Incident Lead's first action is logging this timestamp, since every downstream deadline runs from it.</p>
+
+    <h4>Severity classification</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Severity</th><th>Indicative criteria</th></tr>
+      <tr><td class="risk-critical"><span class="tag tag-critical">Critical</span></td><td>Special category data or large-scale exposure confirmed or likely; active unauthorised access; ransomware</td></tr>
+      <tr><td class="risk-high"><span class="tag tag-high">High</span></td><td>Confirmed unauthorised access affecting one or a small number of Customers' end-user data</td></tr>
+      <tr><td class="risk-medium"><span class="tag tag-medium">Medium</span></td><td>Contained incident, limited scope, low likelihood of resulting risk</td></tr>
+      <tr><td class="risk-low"><span class="tag tag-low">Low</span></td><td>Near-miss, no plausible risk to individuals</td></tr>
+    </table></div>
+
+    <h4>Notification tracks</h4>
+    <p>Three run independently: <b>Art. 33</b> to the supervisory authority (documented decision either way, even when the answer is "not notified"); <b>Art. 34</b> to affected individuals (higher bar — likely high risk); and the <b>contractual 48-hour Customer notice</b> under DPA Clause 8.1, which is tighter than and separate from the statutory clock.</p>
+
+    <div class="dc-callout">This plan was stress-tested in the Breach Tabletop Exercise — see the Operational register — which found the awareness-clock discipline worked correctly, but also surfaced a real gap: detection currently relies on a nightly batch test, with no real-time monitoring for an incident during business hours.</div>
+  `
+};
+
+// ---------------- GDPR: DSR Procedure (register depth) ----------------
+DOCS["dsr"] = {
+  regime: "gdpr", depth: "Register",
+  title: "Data Subject Rights Handling Procedure",
+  sub: "Supports Chapter III GDPR (Arts. 12–23) and DPA Clause 7",
+  body: `
+    <p>Covers two structurally different situations. Getting the fork right at intake is the most important step in the whole procedure.</p>
+
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Who is asking</th><th>About what</th><th>Action</th></tr>
+      <tr><td>Helvane employee, current or former</td><td>Their own HR data</td><td>Handle directly — Helvane is Controller</td></tr>
+      <tr><td>Newsletter subscriber, lead, visitor</td><td>Marketing/analytics data</td><td>Handle directly — Helvane is Controller</td></tr>
+      <tr><td class="risk-high">End-user of a Helvane Customer</td><td>Their ticket / chat history</td><td class="risk-high"><b>Do not action.</b> Acknowledge, forward to the Customer within 3 business days per DPA Clause 7.1</td></tr>
+      <tr><td>The Customer itself</td><td>Export/deletion of their account's data</td><td>Handle via Customer offboarding tooling — this is a Controller instructing its Processor, not a Data Subject request</td></tr>
+    </table></div>
+
+    <h4>Rights in scope</h4>
+    <p>Access (Art. 15), Rectification (16), Erasure (17, not absolute — subject to Art. 17(3) exceptions like legal retention), Restriction (18), Portability (20, only where automated + consent/contract basis), Objection (21 — absolute for direct marketing, balancing test otherwise), and No Automated Decision-Making (22, not currently engaged given the AI feature is human-reviewed).</p>
+
+    <h4>Verification</h4>
+    <p>Proportionate to the sensitivity of the data and the risk of getting it wrong. Employee/HR: verify via known corporate identity. Marketing/website: email match on file is usually sufficient. Genuine doubt: one additional confirming detail, not a government ID by default.</p>
+
+    <h4>Special case — the AI feature</h4>
+    <p>A request specifically about the AI reply-suggestion feature is escalated to the Privacy Lead <b>regardless of which Customer it concerns</b>, given the elevated risk profile the DPIA already established — a standing exception to the normal forward-to-Customer default.</p>
+
+    <div class="dc-callout">This procedure is exercised in full in the Rights Request Tracker — 6 of the 15 simulated requests are GDPR scenarios, including the forwarding fork, an authorised-agent request, and an Article 21 absolute objection.</div>
+  `
+};
+
+// ---------------- GDPR: Privacy Policy (full text — it's meant to be read whole) ----------------
+DOCS["privpol"] = {
+  regime: "gdpr", depth: "Full",
+  title: "Privacy Policy",
+  sub: "External · helvane.[tld] · Effective [date]",
+  body: `
+    <p>Helvane B.V. ("Helvane," "we," "us") is a company registered in Amsterdam, the Netherlands, providing a customer support and helpdesk platform to business Customers. This Policy explains how we collect, use, and protect personal data when you visit our website, engage with our marketing, apply for a job, or otherwise interact with Helvane directly.</p>
+
+    <div class="dc-callout warn"><b>If you are a customer of one of our business Customers</b> — for example, you submitted a support ticket or used a chat widget on one of our Customers' websites — this Policy does not apply to that data. Helvane processes that information on behalf of our Customer, as a data processor. Refer to the privacy policy of the business you contacted.</div>
+
+    <h4>What we collect and why</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Who</th><th>What</th><th>Legal basis</th></tr>
+      <tr><td>Website visitors</td><td>IP, device/browser data, pages visited, cookie identifiers</td><td>Consent (non-essential) / legitimate interest (necessary)</td></tr>
+      <tr><td>Newsletter subscribers</td><td>Name, email, company, engagement history</td><td>Consent — withdrawable any time</td></tr>
+      <tr><td>Sales leads</td><td>Name, work email, job title, company, meeting notes</td><td>Legitimate interest</td></tr>
+      <tr><td>Billing contacts</td><td>Name, email, billing address (card data tokenised, not stored by us)</td><td>Performance of a contract</td></tr>
+      <tr><td>Job applicants</td><td>CV, work history, interview notes, right-to-work documents</td><td>Pre-contractual steps; legal obligation</td></tr>
+    </table></div>
+
+    <h4>Retention</h4>
+    <p>Marketing data until unsubscribe, or 2 years of inactivity. Sales pipeline: relationship duration + 2 years. Billing: contract term + 7 years (Dutch fiscal law). Unsuccessful applications: 6 months. Website analytics: 14 months.</p>
+
+    <h4>Your rights</h4>
+    <p>Access, correction, erasure, restriction, objection (including to direct marketing), and portability where technically feasible. Contact privacy@helvane.[tld]. We respond within one month. You may also lodge a complaint with the Autoriteit Persoonsgegevens or your own member state's supervisory authority.</p>
+
+    <h4>International transfers</h4>
+    <p>Where a service provider processes outside the EEA, we rely on an adequacy decision, Standard Contractual Clauses, or another valid Chapter V mechanism, completing a Transfer Impact Assessment where required.</p>
+  `
+};
+
+// ---------------- GDPR: Cookie Policy (full text) ----------------
+DOCS["cookiepol"] = {
+  regime: "gdpr", depth: "Full",
+  title: "Cookie Policy",
+  sub: "Supplements the Privacy Policy",
+  body: `
+    <h4>Categories</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Category</th><th>Purpose</th><th>Consent required?</th></tr>
+      <tr><td>Strictly necessary</td><td>Site function — consent preferences, session security, load balancing</td><td class="risk-low"><span class="tag tag-low">No</span></td></tr>
+      <tr><td>Analytics</td><td>Understand traffic and improve the site</td><td class="risk-medium"><span class="tag tag-medium">Yes</span></td></tr>
+      <tr><td>Marketing</td><td>Measure campaign effectiveness</td><td class="risk-medium"><span class="tag tag-medium">Yes</span></td></tr>
+    </table></div>
+
+    <h4>Cookie inventory (excerpt)</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Cookie / provider</th><th>Category</th><th>Third party?</th></tr>
+      <tr><td>Consent preference</td><td>Strictly necessary</td><td>No (first party)</td></tr>
+      <tr><td>Web analytics vendor</td><td>Analytics</td><td>Yes — US-based, IP truncation status unconfirmed at time of writing</td></tr>
+      <tr><td>Marketing automation platform</td><td>Marketing</td><td>Yes — EU-hosted</td></tr>
+    </table></div>
+
+    <div class="dc-callout">This inventory should ultimately come from an automated scan of the live site, not be hand-maintained — a manually written table goes silently wrong the day an engineer adds a new script tag. Noted as a maintenance risk, not a one-time task.</div>
+
+    <p>Change preferences at any time via the "Cookie Preferences" link in the site footer, or through browser settings. Withdrawing consent does not affect the lawfulness of processing carried out before withdrawal.</p>
+  `
+};
+
+// ---------------- GDPR: DPO Assessment (full depth) ----------------
+DOCS["dpoassess"] = {
+  regime: "gdpr", depth: "Full",
+  title: "DPO Necessity Assessment",
+  sub: "Article 37 GDPR",
+  body: `
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Trigger</th><th>Applies?</th><th>Reasoning</th></tr>
+      <tr><td>Public authority or body</td><td class="risk-low">No</td><td>Helvane is a private B.V. — not engaged.</td></tr>
+      <tr><td>Regular and systematic monitoring, large scale</td><td class="risk-medium">Close call</td><td>Core activity is service delivery — receiving, storing, and displaying support tickets — which is better characterised as service delivery than "monitoring" in the WP243 sense (behavioural advertising, location tracking, credit scoring). But this is genuinely sensitive to how the AI feature evolves.</td></tr>
+      <tr><td>Large-scale special category processing</td><td class="risk-medium">Close call</td><td>Special category data appears incidentally and unsystematically in ticket text — not the deliberate, inherent processing the criterion targets. Sensitive to whether the product ever adds functionality that specifically categorises tickets by health/biometric content.</td></tr>
+    </table></div>
+
+    <p><b>Conclusion:</b> a mandatory DPO appointment is not clearly triggered on current facts. This is a genuinely close call, not a clean negative — both open questions above could flip if the AI feature moves toward behavioural scoring, or if special-category tagging is ever added as a product feature.</p>
+
+    <h4>Recommendation — staged, not binary</h4>
+    <ul>
+      <li><b>Now:</b> formalise the interim Privacy Lead role with clear scope and an escalation path to external counsel, rather than waiting for a formal trigger.</li>
+      <li><b>Re-assessment triggers:</b> every 6 months alongside the RoPA review; immediately if the AI feature's functionality changes; immediately if the customer base or ticket volume grows materially.</li>
+      <li><b>Medium term:</b> if either trigger fires, appoint a formal DPO — in-house (provided no conflict of interest, ruling out combining the role with the CTO) or an outsourced DPO service.</li>
+    </ul>
+    <p>A voluntarily appointed DPO is held to the same Art. 38–39 independence and reporting-line requirements as a mandatory one — this is not treated as a lesser commitment if and when Helvane makes it.</p>
+  `
+};
+
+// ---------------- GDPR: Internal Policy (full text) ----------------
+DOCS["intpol"] = {
+  regime: "gdpr", depth: "Full",
+  title: "Internal Data Protection Policy",
+  sub: "For all Helvane employees and contractors",
+  body: `
+    <h4>Your two hats: Controller data vs. Customer Data</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th></th><th>Helvane's own data (Controller)</th><th>Customer Data (Processor)</th></tr>
+      <tr><td>What it is</td><td>Employee, sales, marketing, billing, website analytics</td><td>Support tickets and chat from our Customers' own end-users</td></tr>
+      <tr><td>Who decides how it's used</td><td>Helvane</td><td>Our Customer — we only act on their instructions</td></tr>
+      <tr><td>If someone asks to delete/access it</td><td>We handle it directly</td><td class="risk-high"><b>We do NOT action it ourselves</b> — forward to the Customer</td></tr>
+    </table></div>
+    <p>If you're ever unsure which category something falls into, ask the Privacy Lead before acting — don't guess, especially with Customer Data.</p>
+
+    <h4>Day-to-day</h4>
+    <ul>
+      <li>Only access ticket/chat data you need for your actual task — don't browse.</li>
+      <li>Never export Customer Data to a personal device or an unapproved tool.</li>
+      <li>Before adopting a new vendor that will touch personal data — including free trials — check with the Privacy Lead first. It may need a DPA and must be added to the Sub-processor Register before use, not after.</li>
+      <li>Report anything that might be a breach immediately, however small or uncertain. You will not be penalised for reporting a genuine mistake promptly; you may be if a mistake is concealed.</li>
+    </ul>
+  `
+};
+
+// ---------------- GDPR: Remediation Memo (full text) ----------------
+DOCS["remediation"] = {
+  regime: "gdpr", depth: "Full",
+  title: "Remediation Memo",
+  sub: "Legitimate Interest Assessments · Consent Logging · Applicant Retention · BSN Access Controls",
+  body: `
+    <h4>LIA — Sales Pipeline (C-03)</h4>
+    <p><b>Purpose test:</b> yes — managing B2B sales relationships is a standard, expected commercial activity. <b>Necessity test:</b> yes — no materially less intrusive way to run a sales pipeline. <b>Balancing test:</b> favours Helvane — subjects are business contacts acting professionally, data is exactly what one expects when engaging a vendor, and an accessible objection mechanism tips the balance further. <b>Conclusion:</b> supportable, provided the objection mechanism remains genuinely honoured.</p>
+
+    <h4>LIA — Existing-Customer Product Updates (C-04, "soft opt-in")</h4>
+    <p>Supportable for genuine service/product update content, explicitly contemplated by Recital 47. Does <b>not</b> extend to unrelated marketing content mixed into the same communication — an internal rule was recommended to prevent content drift.</p>
+
+    <h4>Consent logging — minimum fields</h4>
+    <p>Who (email), what (specific purpose — never bundled), when (timestamp), how (mechanism), what they saw (wording/version reference), and withdrawal (timestamp + method). Most marketing platforms — including Helvane's — log this natively; this was a configuration check, not a build task.</p>
+
+    <h4>Applicant retention fix</h4>
+    <p>Default: delete unsuccessful applicant data at 6 months, no exceptions, unless the candidate affirmatively opts in to a time-boxed talent pool. Converts an undocumented default extension into a properly consented choice.</p>
+
+    <h4>BSN access controls</h4>
+    <p>Restrict the Dutch national ID number to the payroll processor and a named, minimal set of payroll-admin personnel — not the full HR team by default. Log and periodically review access, consistent with the existing IT access-logging control.</p>
+  `
+};
+// ---------------- CCPA: Applicability Assessment (full depth) ----------------
+DOCS["ccpa-app"] = {
+  regime: "ccpa", depth: "Full",
+  title: "CCPA / CPRA Applicability & Gap Assessment",
+  sub: "Cal. Civ. Code § 1798.100 et seq. · entry point for the second workstream",
+  body: `
+    <h4>Threshold test</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Threshold</th><th>Test</th><th>Met?</th></tr>
+      <tr><td>(A) Revenue</td><td>&gt; $25M annual gross revenue</td><td class="risk-high"><span class="tag tag-critical">YES</span></td></tr>
+      <tr><td>(B) Data volume</td><td>100,000+ CA consumers/households annually</td><td class="risk-medium"><span class="tag tag-medium">LIKELY</span></td></tr>
+      <tr><td>(C) Revenue from selling/sharing</td><td>&ge; 50% of revenue from selling/sharing PI</td><td class="risk-low"><span class="tag tag-low">NO</span></td></tr>
+    </table></div>
+    <p><b>Conclusion:</b> Threshold (A) alone is sufficient. Clean and unambiguous — unlike the GDPR DPO test, no close call here.</p>
+
+    <h4>Does Helvane "sell" or "share" personal information?</h4>
+    <p>"Sell" doesn't require money to change hands — only disclosure for valuable consideration. "Share" (added by the CPRA) covers disclosure to a third party for cross-context behavioral advertising, with or without consideration.</p>
+    <div class="dc-callout warn"><b>Finding:</b> Helvane's US-based web analytics vendor — flagged but unresolved since the original GDPR register — very likely constitutes "sharing" under the CPRA. Not because Helvane sells anything, but because that is the default behaviour of most analytics/ad-adjacent platforms unless deliberately configured otherwise. This had never been assessed, because it was out of scope for GDPR purposes (there, the control point was cookie consent, not a sale/share characterisation).</div>
+    <p>Recommendation: treat Helvane as "sharing" for CPRA purposes unless and until the vendor's configuration is confirmed otherwise — the same "confirm, don't assume favourably" posture the GDPR DPIA took with the AI vendor.</p>
+
+    <h4>What transfers from the GDPR programme, and what doesn't</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>GDPR asset</th><th>Transfers?</th><th>Why / what changes</th></tr>
+      <tr><td>RoPA</td><td class="risk-medium">Substantially, with additions</td><td>CCPA's statutory PI categories don't map 1:1 onto GDPR's — needs a dedicated inventory addendum, not a relabelled copy.</td></tr>
+      <tr><td>DPIA methodology</td><td class="risk-high">No direct equivalent</td><td>CPRA's own risk-assessment rulemaking is still developing at the CPPA — flag for tracking, don't build against a moving target.</td></tr>
+      <tr><td>DPA (Art. 28 contract)</td><td class="risk-high">No — needs its own instrument</td><td>CCPA's service-provider/contractor contract terms are similar in spirit to Art. 28 but not textually interchangeable.</td></tr>
+      <tr><td>Breach Response Plan</td><td class="risk-low">Mostly transfers</td><td>Internal workflow reusable — California's separate breach statute (§1798.82) has its own trigger and required content.</td></tr>
+      <tr><td>DSR Procedure</td><td class="risk-medium">Structurally similar, needs a parallel track</td><td>CCPA rights aren't identical (opt-out of sale/share, limit sensitive-PI use have no GDPR equivalent); 45-day deadline vs. 1 month.</td></tr>
+      <tr><td>Privacy Policy</td><td class="risk-high">No — needs its own notice</td><td>CCPA mandates specific disclosures the GDPR-oriented policy doesn't contain.</td></tr>
+    </table></div>
+
+    <h4>Gap list — this workstream</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Gap</th><th>Priority</th></tr>
+      <tr><td>No CA-specific privacy notice</td><td class="risk-critical"><span class="tag tag-critical">Critical</span></td></tr>
+      <tr><td>No Do Not Sell/Share mechanism despite likely "sharing"</td><td class="risk-critical"><span class="tag tag-critical">Critical</span></td></tr>
+      <tr><td>No CCPA-specific rights request procedure</td><td class="risk-high"><span class="tag tag-high">High</span></td></tr>
+      <tr><td>No CCPA-compliant service-provider contract terms</td><td class="risk-medium"><span class="tag tag-medium">Medium — deferred</span></td></tr>
+    </table></div>
+  `
+};
+
+// ---------------- CCPA: CA Privacy Notice (full text) ----------------
+DOCS["ca-notice"] = {
+  regime: "ccpa", depth: "Full",
+  title: "California Privacy Notice",
+  sub: "Supplements the general Privacy Policy · For California residents",
+  body: `
+    <div class="dc-callout warn">If you are contacting us as a customer of one of our business Customers, Helvane processes your information as a service provider on that business's behalf. That business is responsible for its own CCPA disclosures to you.</div>
+
+    <h4>Disclosure, selling, and sharing (preceding 12 months)</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Category of PI</th><th>Third party</th><th>Sold?</th><th>Shared?</th></tr>
+      <tr><td>Identifiers, internet activity</td><td>Cloud hosting provider</td><td class="risk-low">No</td><td class="risk-low">No</td></tr>
+      <tr><td>Identifiers, commercial info</td><td>CRM provider</td><td class="risk-low">No</td><td class="risk-low">No</td></tr>
+      <tr><td>Identifiers, internet activity, geolocation, inferences</td><td class="risk-high"><b>Web analytics vendor</b></td><td class="risk-low">No</td><td class="risk-critical"><span class="tag tag-critical">YES — treated as such pending vendor confirmation</span></td></tr>
+      <tr><td>Identifiers, commercial info</td><td>Payment processor</td><td class="risk-low">No</td><td class="risk-low">No</td></tr>
+    </table></div>
+    <p>We do not sell personal information for monetary consideration. As reflected above, we treat our use of the web analytics vendor as "sharing" for cross-context behavioral advertising, pending confirmation of its exact configuration.</p>
+
+    <h4>Your California rights</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Right</th><th>What it means</th></tr>
+      <tr><td>Right to Know</td><td>Specific pieces and categories collected, used, disclosed, sold/shared in the preceding 12 months</td></tr>
+      <tr><td>Right to Delete</td><td>Subject to certain exceptions (completing a transaction, legal compliance, security)</td></tr>
+      <tr><td>Right to Opt Out</td><td>Direct us not to sell or share — see the opt-out mechanism</td></tr>
+      <tr><td>Right to Appeal</td><td>If we decline a request, you may appeal the decision</td></tr>
+    </table></div>
+    <p>We will not require account creation to submit a request, and will verify identity proportionate to the sensitivity of the information requested.</p>
+  `
+};
+
+// ---------------- CCPA: Do Not Sell/Share (register depth) ----------------
+DOCS["dns"] = {
+  regime: "ccpa", depth: "Register",
+  title: "Do Not Sell or Share My Personal Information",
+  sub: "Opt-Out Mechanism — Design and Operating Procedure · Cal. Civ. Code § 1798.120, § 1798.135",
+  body: `
+    <h4>Design requirements</h4>
+    <ul>
+      <li>Link titled exactly "Do Not Sell or Share My Personal Information," or "Your Privacy Choices" with the CCPA opt-out icon — reachable from every page, not buried in policy text.</li>
+      <li>No account creation required; minimal identity verification, since the consequence of an invalid opt-out is low-risk.</li>
+      <li>Propagates to the relevant vendor within <b>15 business days</b>, honoured for at least 12 months before re-asking.</li>
+    </ul>
+
+    <h4>Global Privacy Control (GPC)</h4>
+    <p>A browser-level signal treated by California regulators as equivalent to a direct opt-out click. Helvane's site must detect it automatically and apply the same effect without further action from the consumer.</p>
+    <div class="dc-callout"><b>A real bug this procedure catches:</b> if a consumer has both set GPC and has existing opted-in marketing preferences, GPC governs for sale/share purposes specifically — it does <b>not</b> automatically unsubscribe them from consented marketing email. The two controls are legally distinct and must not collide in the underlying data model, a mistake many real implementations make by wiring both into one "unsubscribe" toggle.</div>
+
+    <h4>Operating procedure</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Step</th><th>Action</th><th>Owner</th></tr>
+      <tr><td>1</td><td>Request received (link or GPC signal)</td><td>Automated</td></tr>
+      <tr><td>2</td><td>Logged with timestamp, method, identifying token (cookie ID — not name/email, since none is required)</td><td>Automated</td></tr>
+      <tr><td>3</td><td>Vendor's cross-context feature disabled for that identifier, or tag suppressed entirely</td><td>CTO / Engineering</td></tr>
+      <tr><td>5</td><td>Quarterly audit — sample opted-out identifiers and confirm the vendor isn't receiving advertising data for them</td><td>Privacy Lead</td></tr>
+    </table></div>
+
+    <p>Requests arriving outside the website mechanism — a phone call, an email to support — must be honoured just as validly; the CCPA does not permit making opting out harder than opting in.</p>
+  `
+};
+
+// ---------------- CCPA: Consumer Rights Procedure (register depth) ----------------
+DOCS["ccpa-rights"] = {
+  regime: "ccpa", depth: "Register",
+  title: "CCPA Consumer Rights Request Procedure",
+  sub: "Right to Know, Delete, Correct, and Appeal · Cal. Civ. Code § 1798.100–.130",
+  body: `
+    <h4>How this differs from the GDPR procedure</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th></th><th>GDPR</th><th>CCPA</th></tr>
+      <tr><td>Response deadline</td><td>1 month (+2)</td><td>45 days (+45)</td></tr>
+      <tr><td>Identity verification</td><td>Proportionate, not prescribed in detail</td><td>Graduated standard tied to request type</td></tr>
+      <tr><td>Lookback period</td><td>No fixed lookback</td><td>Generally 12 months</td></tr>
+      <tr><td>Appeal mechanism</td><td>None — escalation is via the supervisory authority</td><td>Internal appeal required before external escalation</td></tr>
+    </table></div>
+
+    <h4>Verification standard by request type</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Request</th><th>Standard</th><th>Practical approach</th></tr>
+      <tr><td>Right to Know (categories)</td><td>Reasonable degree of certainty</td><td>Match 2 data points</td></tr>
+      <tr><td>Right to Know (specific pieces)</td><td>Reasonably high degree of certainty</td><td>Match 3 data points, or a signed declaration under penalty of perjury</td></tr>
+      <tr><td>Right to Delete</td><td>Matches the equivalent Know standard</td><td>Generally 2 data points; two-step confirmation given irreversibility</td></tr>
+    </table></div>
+    <p>If verification cannot be completed to the applicable standard, the request is still answered — typically as a categories-only Right to Know, the lower bar — rather than refused outright.</p>
+
+    <h4>Appeal handling</h4>
+    <p>Reviewed by someone <b>not involved</b> in the original decision — at Helvane's size, this may require the CEO or an external reviewer to look again at a call the Privacy Lead made. Response within 90 days (extendable by 45, with notice). A denied appeal must inform the consumer of the right to complain to the CPPA.</p>
+  `
+};
+
+// ---------------- DPDP: Applicability Assessment (full depth) ----------------
+DOCS["dpdp-app"] = {
+  regime: "dpdp", depth: "Full",
+  title: "DPDP Act Applicability & Gap Assessment",
+  sub: "Digital Personal Data Protection Act, 2023 & Rules, 2025",
+  body: `
+    <h4>Regulatory status at time of assessment</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Phase</th><th>Effective date</th><th>What it brings into force</th></tr>
+      <tr><td>Phase 1</td><td>13 Nov 2025 (notification)</td><td>Procedural/administrative — Board constitution</td></tr>
+      <tr><td class="risk-medium">Phase 2</td><td class="risk-medium">13 Nov 2026 — UPCOMING</td><td>Consent Manager framework (Rule 4)</td></tr>
+      <tr><td>Phase 3</td><td>13 May 2027</td><td>Substantive day-to-day obligations — notice, consent, rights, breach notification, most penalties</td></tr>
+    </table></div>
+    <div class="dc-callout"><b>As of this assessment, Helvane sits between Phase 1 and Phase 2</b> — substantive obligations remain roughly eight months away. This is deliberately a build-and-test brief, not remediation of a live violation, and the assessment says so plainly rather than manufacturing urgency.</div>
+
+    <h4>Threshold test</h4>
+    <p>Unlike GDPR or CCPA, the Act's baseline applicability is deliberately broad — no small-business carve-out. Helvane triggers it on <b>three independent grounds</b>: processing within India via the Bengaluru hub's employee data, processing within India via Indian Customers' end-users, and extraterritorially via Section 3(b) — offering goods/services to Data Principals in India, which would apply even without the hub.</p>
+
+    <h4>Significant Data Fiduciary — a genuinely different mechanism</h4>
+    <p>SDF status is <b>not self-assessable</b>. Unlike the GDPR DPO test, Section 10 vests the designation in the Central Government. Until an actual notification arrives, Helvane is not an SDF, regardless of how its data volume might informally compare to the statutory factors. The correct posture is a monitoring trigger, not a self-declared conclusion — and if SDF status is ever conferred, the Act requires an <b>India-resident</b> DPO, materially stricter than GDPR's flexible rules.</p>
+
+    <h4>Consent under DPDP — a structurally different model</h4>
+    <p>GDPR treats consent as one of six legal bases. CCPA doesn't require consent as a general basis at all. DPDP treats free, specific, informed, unconditional consent (Section 6) as the <b>primary</b> basis, with only a narrow, closed list of Section 7 legitimate uses as alternatives — no general legitimate-interest ground exists. Helvane's existing legal-basis analysis does not transfer by default; each activity needs independent testing.</p>
+  `
+};
+
+// ---------------- DPDP: Data Mapping Addendum (full depth) ----------------
+DOCS["dpdp-map"] = {
+  regime: "dpdp", depth: "Full",
+  title: "DPDP Data Mapping & Legal Basis Addendum",
+  sub: "Testing each India-relevant activity against Section 6 (Consent) or Section 7 (Legitimate Uses)",
+  body: `
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Activity</th><th>DPDP basis</th><th>Assessment</th></tr>
+      <tr><td>Recruitment &amp; onboarding (pre-employment)</td><td class="risk-medium">Ambiguous — recommend consent</td><td>Section 7(i) covers employment purposes, but its reach into the pre-employment stage is genuinely contestable pending Board guidance. The conservative reading — consent for applicants, legitimate use once employed — was taken as more defensible.</td></tr>
+      <tr><td>HR administration &amp; payroll</td><td class="risk-low">Section 7(i), sound</td><td>Clearly within employment-purposes legitimate use — payroll and statutory HR administration are core examples the provision is understood to cover.</td></tr>
+      <tr><td class="risk-high">India website visitors &amp; marketing leads</td><td class="risk-high">Section 6 consent required</td><td><b>No legitimate use in Section 7 covers general marketing.</b> The clearest, most consequential finding in this addendum — the existing GDPR-oriented consent flow was not built to meet DPDP's specific standard.</td></tr>
+      <tr><td>Customer Data (Helvane as Processor)</td><td class="risk-low">The Customer's responsibility</td><td>Consistent with the Processor role established across all three regimes — Helvane processes on instruction; the Customer obtains the basis from its own end-users.</td></tr>
+      <tr><td>Corporate IT / security</td><td class="risk-low">Section 7(i)</td><td>Squarely within the "safeguarding the employer" language — no consent required for proportionate access logging.</td></tr>
+    </table></div>
+
+    <h4>Children and persons with disabilities</h4>
+    <p>Materially stricter than GDPR or CCPA: verifiable parental/guardian consent is required (Section 9(1)), and tracking or targeted advertising directed at children is <b>prohibited outright</b> — not merely consent-gated. Not currently a live processing activity given Helvane's B2B-only positioning, but flagged as a standing checkpoint for any future market expansion.</p>
+
+    <h4>Summary</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Cluster</th><th>Readiness</th></tr>
+      <tr><td>Employment (Bengaluru hub)</td><td class="risk-low"><span class="tag tag-low">Largely sound</span></td></tr>
+      <tr><td>Recruitment (pre-employment)</td><td class="risk-medium"><span class="tag tag-medium">Ambiguous — consent added</span></td></tr>
+      <tr><td>Marketing/website (India)</td><td class="risk-critical"><span class="tag tag-critical">Gap — Notice &amp; Consent Framework built to fix</span></td></tr>
+    </table></div>
+  `
+};
+
+// ---------------- DPDP: Notice & Consent Framework (full text) ----------------
+DOCS["dpdp-notice"] = {
+  regime: "dpdp", depth: "Full",
+  title: "DPDP Notice & Consent Framework",
+  sub: "Implements Section 5 (Notice) and Section 6 (Consent)",
+  body: `
+    <h4>Why this is not a reskinned cookie banner</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Requirement</th><th>GDPR consent (existing)</th><th>DPDP consent (Section 6)</th></tr>
+      <tr><td>Itemisation</td><td>Purpose-specific in practice</td><td>Notice must itemise the specific data and specific purpose — a single bundled "I agree" does not meet the standard</td></tr>
+      <tr><td>Language</td><td>Not specifically mandated</td><td>English or any Eighth Schedule language, at the Data Principal's choice</td></tr>
+      <tr><td>Withdrawal symmetry</td><td>Conceptually similar (Art. 7(3))</td><td>Explicitly codified (6(4)) — must be at least as easy as giving consent</td></tr>
+      <tr><td>Consent Manager routing</td><td>No equivalent</td><td>Once Phase 2 activates, Data Principals may route consent through a registered intermediary</td></tr>
+    </table></div>
+
+    <h4>Consumer-facing notice text (template excerpt)</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Purpose</th><th>Data collected</th><th>Your choice</th></tr>
+      <tr><td>Send our product newsletter</td><td>Name, email</td><td>☐ I consent to receive marketing emails</td></tr>
+      <tr><td>Sales follow-up on your enquiry</td><td>Name, email, company, job title, phone</td><td>☐ I consent to sales contact about my enquiry</td></tr>
+      <tr><td>Understand how visitors use our site</td><td>IP, browsing behaviour, device info</td><td>☐ I consent to analytics cookies</td></tr>
+    </table></div>
+    <p>"You may withdraw any of the above consents at any time, as easily as you gave them... You have the right to nominate another individual to exercise these rights on your behalf if you become unable to do so."</p>
+
+    <h4>Forward compatibility — Consent Managers</h4>
+    <p>Phase 2 tooling won't exist yet when it activates, so the recommendation was not to build an integration now, but to structure the underlying consent data model — per-purpose records, timestamped, independently withdrawable — so it can accept a Consent Manager interface later without a rework.</p>
+  `
+};
+
+// ---------------- DPDP: Rights & Grievance Procedure (full depth) ----------------
+DOCS["dpdp-rights"] = {
+  regime: "dpdp", depth: "Full",
+  title: "Data Principal Rights & Grievance Redressal Procedure",
+  sub: "Sections 11–14, DPDP Act · includes the DPDP Breach Notification Annex",
+  body: `
+    <h4>Rights in scope</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Right</th><th>Section</th><th>Covers</th></tr>
+      <tr><td>Access to Information</td><td>11</td><td>Summary of processing, categories of data, identities of processors data has been shared with</td></tr>
+      <tr><td>Correction &amp; Erasure</td><td>12</td><td>Correction of inaccurate data; erasure once no longer necessary</td></tr>
+      <tr><td>Grievance Redressal</td><td>13</td><td>A readily available means of registering a grievance</td></tr>
+      <tr><td class="risk-high">Right to Nominate</td><td>14</td><td><b>No GDPR or CCPA equivalent</b> — exercise of rights by another person in the event of death or incapacity</td></tr>
+    </table></div>
+
+    <h4>The nomination right — process design</h4>
+    <p>Designed from first principles, since no prior procedure could be adapted:</p>
+    <ol>
+      <li>A nominee may be registered at any point — optional, no proactive verification at registration, a standing instruction only exercised if invoked.</li>
+      <li>On invocation: verify the nominee's own identity <em>and</em> the fact of death or incapacity (death certificate, medical/legal document, guardianship order where applicable).</li>
+      <li>Once verified, the nominee exercises the original Data Principal's Sections 11–13 rights exactly as they could have — this creates no new rights, only a substitute exerciser.</li>
+    </ol>
+    <div class="dc-callout"><b>An untested process for something this sensitive is worse than no process</b> — staff need to handle a bereaved or incapacitated person's nominee with care under real emotional circumstances, not improvise the mechanics for the first time in the moment. This exact concern was validated in the Rights Request Tracker, where the nomination right's first simulated invocation ran cleanly against this design.</div>
+
+    <h4>Breach Notification Annex — extends, doesn't duplicate</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Aspect</th><th>GDPR (existing plan)</th><th>DPDP (this annex)</th></tr>
+      <tr><td>Who is notified</td><td>Supervisory authority (if Art. 33 met) + individuals (if Art. 34 high-risk met)</td><td>Data Protection Board of India + Data Principals — current Rules drafting carries no "likely high risk" qualifier for individual notification, so the threshold may be lower/broader</td></tr>
+      <tr><td>Deadline</td><td>72 hours where feasible</td><td>No fixed analogue currently specified with the same precision — the same 72-hour internal target was applied as the more conservative choice pending Board guidance</td></tr>
+    </table></div>
+    <p>Operational integration: a single new "Indian Data Principals affected? (Y/N)" field was added to the <b>existing</b> Breach Register, rather than standing up a parallel India-only log.</p>
+  `
+};
+// ---------------- Operational: Vendor Risk Assessment (full depth) ----------------
+DOCS["vendor"] = {
+  regime: "all", depth: "Full",
+  title: "Vendor Privacy Risk Assessment",
+  sub: "Completed assessment — AI API Provider · RoPA ref. P-03",
+  body: `
+    <p>Overall risk rating (pre-mitigation): <span class="tag tag-critical">HIGH</span> — unconfirmed processing region, no DPA, unresolved training-on-inputs question.</p>
+
+    <h4>Section A — Data processing and location</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Question</th><th>Vendor response</th><th>Risk</th></tr>
+      <tr><td>Can processing be pinned to a specific region?</td><td>"Standard tier customers cannot guarantee region pinning — requests are routed by latency."</td><td class="risk-high"><span class="tag tag-high">High</span></td></tr>
+      <tr><td>Are inputs retained after the response is returned?</td><td>"Retained 30 days for abuse monitoring, then automatically deleted."</td><td class="risk-medium"><span class="tag tag-medium">Medium</span></td></tr>
+      <tr><td>Are inputs used to train or improve models?</td><td>"By default, Standard-tier inputs may be used for model improvement. Customers can opt out via API settings."</td><td class="risk-critical"><span class="tag tag-critical">Critical</span></td></tr>
+    </table></div>
+    <div class="dc-callout warn"><b>The single most consequential finding in the assessment:</b> the vendor's answer sounds reassuring — you can opt out — but Helvane had never actually enabled that opt-out. A low-risk-sounding answer was concealing a critical, live exposure. Immediate action: confirm and enable the setting today; this is a deployment blocker until resolved.</div>
+
+    <h4>Section B — Security</h4>
+    <p>SOC 2 Type II and ISO 27001 certified. TLS 1.3 in transit, AES-256 at rest, logical per-key isolation. Access to raw inputs restricted to a dedicated Trust &amp; Safety team, logged, quarterly-reviewed. <span class="tag tag-low">Strong posture overall.</span></p>
+
+    <h4>Section C — Contractual</h4>
+    <p>Standard GDPR DPA available, incorporating 2021 SCCs (Module 3). No bespoke amendments on Standard tier — a potential problem if the training opt-out needs to be a binding contract term rather than just an API toggle a vendor could silently change.</p>
+    <p>Individual per-prompt deletion is <b>not supported</b> — only the 30-day auto-purge and account-level deletion. Common limitation among LLM API providers; must be disclosed transparently to Customers rather than promised away.</p>
+
+    <h4>Decision</h4>
+    <div class="dc-callout"><b>Conditional approval</b> — not rejection, not a clean pass. Four conditions within 30 days, or the feature is suspended: (1) confirm and enable the training opt-out; (2) execute the DPA with the no-training clause contractually binding; (3) upgrade to region-pinning or execute SCCs + a TIA; (4) update the Customer-facing DPA annex and CA Notice to reflect the retention and deletion limitations.</div>
+  `
+};
+
+// ---------------- Operational: Breach Tabletop (full depth) ----------------
+DOCS["tabletop"] = {
+  regime: "all", depth: "Full",
+  title: "Breach Tabletop Exercise",
+  sub: "Scenario: misconfigured API key exposes customer ticket data across tenants",
+  body: `
+    <p>A deployment regression breaks tenant isolation for ~4 hours. Two Customers affected simultaneously: BrightDesk GmbH (EU — GDPR) and SupportBee India Pvt Ltd (India — DPDP) — deliberately multi-regime, to test both notification forks under one clock.</p>
+
+    <h4>Timeline</h4>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Time (UTC)</th><th>Event</th><th>Action</th></tr>
+      <tr><td>02:00</td><td>Regression introduced. Not yet detected.</td><td>—</td></tr>
+      <tr><td>06:15</td><td>Nightly automated test flags inconsistent ticket-owner IDs.</td><td>Alert fires to on-call engineer</td></tr>
+      <tr><td class="risk-high">06:45</td><td class="risk-high">Engineer confirms the alert is genuine.</td><td class="risk-high"><b>AWARENESS TIMESTAMP LOGGED</b> — the Art. 33 / DPA Clause 8.1 clocks start here, not at 06:15</td></tr>
+      <tr><td>07:15</td><td>Rollback complete.</td><td>Immediate containment achieved</td></tr>
+      <tr><td>08:30</td><td>Classified HIGH — confirmed cross-tenant disclosure, two Customers.</td><td>CEO informed; ORR engaged</td></tr>
+      <tr><td>10:00</td><td>Notification obligations assessed.</td><td>Four separate decisions made — see below</td></tr>
+      <tr><td>14:00</td><td>Customer notifications sent.</td><td>~7h after awareness — within the 48h DPA commitment</td></tr>
+      <tr><td>16:00</td><td>Regulator notifications submitted.</td><td>~9h after awareness — within 72h target, both AP and DPDP Board</td></tr>
+      <tr><td>+3 days</td><td>Root-cause fix deployed — hardened isolation + new test gate.</td><td>Distinct from the rollback (containment vs. prevention)</td></tr>
+    </table></div>
+
+    <h4>The four notification decisions made at 10:00</h4>
+    <ol>
+      <li>DPA Clause 8.1 requires notifying both Customers within 48h of awareness.</li>
+      <li>Art. 33 to the AP: <b>yes</b> — risk to rights and freedoms cannot be excluded given personal data was disclosed to an unauthorised third party.</li>
+      <li>DPDP breach annex: SupportBee India's end-users are affected — Board notification and Data Principal notification both required, given the current Rules carry no risk-based qualifier.</li>
+      <li>Art. 34 / individual notification: Helvane notifies the Customers; the Customers, as Controllers, decide whether to notify their own end-users.</li>
+    </ol>
+
+    <h4>Lessons learned</h4>
+    <ul>
+      <li>The awareness-timestamp discipline worked correctly — logged at confirmation (06:45), not the earlier alert (06:15) or the later classification (08:30).</li>
+      <li>The multi-regime fork executed cleanly because roles were pre-assigned and the DPDP breach annex's new register field was already in place.</li>
+      <li class="risk-high"><b>Gap identified:</b> detection relied on a nightly batch test. Had this happened during business hours, there would have been no real-time monitoring to catch it sooner — flagged for engineering to address, not papered over in the write-up.</li>
+    </ul>
+  `
+};
+
+// ---------------- Advisory Memos (full text) ----------------
+DOCS["memos"] = {
+  regime: "all", depth: "Full",
+  title: "Advisory Memos",
+  sub: "Two business-facing analyses",
+  body: `
+    <h4>Memo 1 — Can Helvane train its own AI on Customer ticket data?</h4>
+    <p><b>To:</b> CTO · <b>Re:</b> reducing dependency on the third-party AI vendor by training an in-house model</p>
+    <p><b>Short answer:</b> no, not under the current framework, and not without substantial groundwork.</p>
+    <p>Helvane processes ticket data as a <b>Processor</b> — on the Customer's instructions, for the Customer's purposes. Training a proprietary model is unambiguously Helvane's own purpose. The moment that happens, Helvane steps outside its Processor role and becomes an independent Controller for that specific activity — requiring a DPA amendment, each Customer's affirmative consent (not a quiet ToS update), a fresh Legitimate Interest Assessment, and likely a new DPIA. Under CCPA, it may also cost Helvane its "service provider" classification for that data.</p>
+    <p><b>Recommended paths:</b> short term, anonymise/aggregate ticket data below the personal-data threshold before training; medium term, build a genuine consent-and-disclosure path via the DPA and accept that some Customers will decline. Do not begin training on any Customer Data, even experimentally, before one of these is complete — the reputational risk of a Customer discovering their end-users' tickets in a training set without their knowledge is existential for a trust-dependent B2B product.</p>
+
+    <h4>Memo 2 — Can we scrape LinkedIn for sales prospecting?</h4>
+    <p><b>To:</b> Head of Marketing · <b>Re:</b> a data-enrichment tool for EU and Indian outbound leads</p>
+    <div class="dtable-wrap"><table class="dtable">
+      <tr><th>Regime</th><th>Verdict</th><th>Why</th></tr>
+      <tr><td>GDPR</td><td class="risk-medium">Very limited</td><td>Automated scraping almost certainly fails the legitimate-interest balancing test — the source itself (violating LinkedIn's own terms) is not a lawful one. Manual outreach based on public professional information is more defensible, provided an immediate opt-out is offered.</td></tr>
+      <tr><td>CCPA</td><td class="risk-low">Less restrictive, not unrestricted</td><td>No general consent requirement, but the "publicly available" carve-out is narrow and contested, and the source would still need disclosure in the CA Notice.</td></tr>
+      <tr><td>DPDP</td><td class="risk-critical">Effectively no</td><td>Section 7's closed list has no general B2B prospecting carve-out, and consent is the primary basis. Even manual cold outreach is a stretch under Section 7(a) for data the person published, not provided to Helvane.</td></tr>
+    </table></div>
+    <p><b>Recommendation:</b> no automated scraping for any region. Manual, targeted LinkedIn outreach (within LinkedIn's own terms) is defensible for EU contacts with a genuine opt-out. Wait for clearer DPDP Board guidance before assuming any unsolicited Indian outreach is safe. Consider whether the reputational cost of disclosing "we scraped LinkedIn" in a public notice outweighs the marginal lead value.</p>
+  `
+};
+
+
+/* =========================================================
+   READER APP — navigation, rendering, open/close, prev/next
+   ========================================================= */
+(function(){
+  const NAV_STRUCTURE = [
+    {group:"GDPR", cls:"gdpr", docs:["ropa","dpia","dpa","breach","dsr","privpol","cookiepol","dpoassess","intpol","remediation"]},
+    {group:"CCPA / CPRA", cls:"ccpa", docs:["ccpa-app","ca-notice","dns","ccpa-rights"]},
+    {group:"DPDP", cls:"dpdp", docs:["dpdp-app","dpdp-map","dpdp-notice","dpdp-rights"]},
+    {group:"Operational & Advisory", cls:"all", docs:["tracker","vendor","tabletop","memos"]},
+  ];
+  const FLAT_ORDER = NAV_STRUCTURE.flatMap(g => g.docs);
+
+  const overlay = document.getElementById("readerOverlay");
+  const navGroups = document.getElementById("readerNavGroups");
+  const content = document.getElementById("readerContent");
+  const crumb = document.getElementById("readerCrumb");
+  const prevBtn = document.getElementById("readerPrev");
+  const nextBtn = document.getElementById("readerNext");
+  const closeBtn = document.getElementById("readerCloseBtn");
+  const mainPane = document.getElementById("readerMain");
+  const navPane = document.getElementById("readerNav");
+  const menuBtn = document.getElementById("readerMenuBtn");
+  const navScrim = document.getElementById("readerNavScrim");
+
+  let currentId = null;
+
+  function buildNav(){
+    navGroups.innerHTML = "";
+    NAV_STRUCTURE.forEach(g => {
+      const wrap = document.createElement("div");
+      wrap.className = "reader-group";
+      const label = document.createElement("span");
+      label.className = "reader-group-label rg-" + g.cls;
+      label.textContent = g.group;
+      wrap.appendChild(label);
+      const ul = document.createElement("ul");
+      ul.className = "reader-doclist";
+      g.docs.forEach(id => {
+        const doc = DOCS[id];
+        if(!doc) return;
+        const li = document.createElement("li");
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.dataset.id = id;
+        btn.innerHTML = `<span>${doc.title}</span><span class="rd-depth">${doc.depth}</span>`;
+        btn.addEventListener("click", () => openDoc(id));
+        li.appendChild(btn);
+        ul.appendChild(li);
+      });
+      wrap.appendChild(ul);
+      navGroups.appendChild(wrap);
+    });
+  }
+
+  function openDoc(id){
+    const doc = DOCS[id];
+    if(!doc) return;
+    currentId = id;
+    const groupInfo = NAV_STRUCTURE.find(g => g.docs.includes(id));
+    const eyebrowLabel = groupInfo ? groupInfo.group : "";
+    const eyebrowCls = groupInfo ? groupInfo.cls : "all";
+
+    content.innerHTML = `
+      <span class="doc-eyebrow ${eyebrowCls}">${eyebrowLabel}</span>
+      <h1 class="doc-title">${doc.title}</h1>
+      <p class="doc-sub">${doc.sub}</p>
+      ${doc.body}
+      <p class="doc-end">This is a fictional document prepared for a training/simulation engagement, built as part of the Helvane B.V. case study by ORR. One document of 21 — see the full case study at the source link for context. Ref: helvane-case-study / ${id}.</p>
+    `;
+    crumb.innerHTML = `<b>${eyebrowLabel}</b> \u00b7 ${doc.title}`;
+
+    document.querySelectorAll(".reader-doclist button").forEach(b => {
+      b.classList.toggle("active", b.dataset.id === id);
+    });
+
+    const idx = FLAT_ORDER.indexOf(id);
+    prevBtn.disabled = idx <= 0;
+    nextBtn.disabled = idx >= FLAT_ORDER.length - 1;
+
+    mainPane.scrollTop = 0;
+    overlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+
+    // on mobile, opening a document should close the drawer nav so the reading pane is visible
+    closeMobileNav();
+
+    const activeBtn = document.querySelector(`.reader-doclist button[data-id="${id}"]`);
+    if(activeBtn && typeof activeBtn.scrollIntoView === "function") activeBtn.scrollIntoView({block:"nearest"});
+  }
+
+  function closeReader(){
+    overlay.classList.remove("open");
+    document.body.style.overflow = "";
+    closeMobileNav();
+  }
+
+  function openMobileNav(){
+    navPane.classList.add("open");
+    navScrim.classList.add("show");
+  }
+  function closeMobileNav(){
+    navPane.classList.remove("open");
+    navScrim.classList.remove("show");
+  }
+
+  menuBtn.addEventListener("click", openMobileNav);
+  navScrim.addEventListener("click", closeMobileNav);
+
+  function step(delta){
+    if(!currentId) return;
+    const idx = FLAT_ORDER.indexOf(currentId);
+    const next = idx + delta;
+    if(next >= 0 && next < FLAT_ORDER.length) openDoc(FLAT_ORDER[next]);
+  }
+
+  closeBtn.addEventListener("click", closeReader);
+  prevBtn.addEventListener("click", () => step(-1));
+  nextBtn.addEventListener("click", () => step(1));
+  document.addEventListener("keydown", e => {
+    if(!overlay.classList.contains("open")) return;
+    if(e.key === "Escape") closeReader();
+    if(e.key === "ArrowLeft" && !prevBtn.disabled) step(-1);
+    if(e.key === "ArrowRight" && !nextBtn.disabled) step(1);
+  });
+
+  document.addEventListener("click", e => {
+    const trigger = e.target.closest("[data-open-doc]");
+    if(trigger){
+      e.preventDefault();
+      openDoc(trigger.dataset.openDoc);
+      return;
+    }
+    const scrollTrigger = e.target.closest("[data-scroll-to]");
+    if(scrollTrigger){
+      e.preventDefault();
+      const target = document.getElementById(scrollTrigger.dataset.scrollTo);
+      if(target){
+        if(typeof target.scrollIntoView === "function") target.scrollIntoView({behavior:"smooth", block:"center"});
+        target.classList.add("pulse-highlight");
+        setTimeout(() => target.classList.remove("pulse-highlight"), 1600);
+      }
+    }
+  });
+
+  buildNav();
+  window.__openDoc = openDoc;
+})();
+
+/* =========================================================
+   DEPENDENCY GRAPH
+   ========================================================= */
+(function(){
+  const NODES = [
+    {id:"ropa", label:"RoPA", regime:"gdpr"},
+    {id:"dpia", label:"DPIA", regime:"gdpr"},
+    {id:"dpa", label:"DPA", regime:"gdpr"},
+    {id:"breach", label:"Breach Plan", regime:"gdpr"},
+    {id:"dsr", label:"DSR Procedure", regime:"gdpr"},
+    {id:"privpol", label:"Privacy Policy", regime:"gdpr"},
+    {id:"cookiepol", label:"Cookie Policy", regime:"gdpr"},
+    {id:"dpoassess", label:"DPO Assessment", regime:"gdpr"},
+    {id:"intpol", label:"Internal Policy", regime:"gdpr"},
+    {id:"remediation", label:"Remediation Memo", regime:"gdpr"},
+    {id:"ccpa-app", label:"CCPA Applicability", regime:"ccpa"},
+    {id:"ca-notice", label:"CA Privacy Notice", regime:"ccpa"},
+    {id:"dns", label:"Do Not Sell/Share", regime:"ccpa"},
+    {id:"ccpa-rights", label:"CCPA Rights Proc.", regime:"ccpa"},
+    {id:"dpdp-app", label:"DPDP Applicability", regime:"dpdp"},
+    {id:"dpdp-map", label:"DPDP Mapping", regime:"dpdp"},
+    {id:"dpdp-notice", label:"DPDP Notice", regime:"dpdp"},
+    {id:"dpdp-rights", label:"DPDP Rights Proc.", regime:"dpdp"},
+    {id:"tracker", label:"Rights Tracker", regime:"all"},
+    {id:"vendor", label:"Vendor Assessment", regime:"all"},
+    {id:"tabletop", label:"Breach Tabletop", regime:"all"},
+    {id:"memos", label:"Advisory Memos", regime:"all"},
+  ];
+
+  const EDGES = [
+    {from:"ropa", to:"dpia", label:"flags the AI feature as the top risk finding"},
+    {from:"ropa", to:"dpa", label:"sub-processor register becomes DPA Annex 2"},
+    {from:"ropa", to:"breach", label:"processing activities define what a breach can expose"},
+    {from:"ropa", to:"privpol", label:"controller activities become the Policy's disclosure table"},
+    {from:"ropa", to:"cookiepol", label:"C-05 (analytics/cookies) becomes the cookie inventory"},
+    {from:"ropa", to:"dpoassess", label:"processing scale and nature feed the Art. 37 test"},
+    {from:"ropa", to:"remediation", label:"gap tracker items become the memo's action items"},
+    {from:"ropa", to:"vendor", label:"the P-03 sub-processor entry becomes the assessed vendor"},
+    {from:"ropa", to:"intpol", label:"the controller/processor split is this policy's central organising idea"},
+    {from:"dpia", to:"dpa", label:"\u00a75 prerequisites become DPA Clause 5.4\u20135.5, as binding terms"},
+    {from:"dpia", to:"vendor", label:"the DPIA's open questions become the vendor questionnaire"},
+    {from:"dpa", to:"breach", label:"Clause 8 (48h notice) is what the plan makes operational"},
+    {from:"dpa", to:"dsr", label:"Clause 7 (forwarding duty) is what the procedure operationalises"},
+    {from:"breach", to:"tabletop", label:"the plan is the script the tabletop stress-tests"},
+    {from:"breach", to:"dpdp-rights", label:"extended by the DPDP breach annex \u2014 one new field, shared register"},
+    {from:"dsr", to:"tracker", label:"GDPR rows in the tracker follow this procedure exactly"},
+    {from:"privpol", to:"cookiepol", label:"Policy references the Cookie Policy for full cookie detail"},
+    {from:"ccpa-app", to:"ca-notice", label:"the 'sharing' finding becomes the Notice's disclosure table"},
+    {from:"ccpa-app", to:"dns", label:"the analytics-vendor finding is what this mechanism exists to fix"},
+    {from:"ca-notice", to:"dns", label:"the Notice promises the opt-out link this procedure builds"},
+    {from:"dns", to:"ccpa-rights", label:"shares the same open question on vendor contract terms"},
+    {from:"ccpa-rights", to:"tracker", label:"CCPA rows in the tracker follow this procedure exactly"},
+    {from:"ropa", to:"ccpa-app", label:"the applicability assessment maps what transfers from the RoPA"},
+    {from:"dpia", to:"ccpa-app", label:"cited as a template if CPRA risk-assessment rules mature"},
+    {from:"dpdp-app", to:"dpdp-map", label:"the Section 6/7 framework is what the addendum applies per activity"},
+    {from:"dpdp-map", to:"dpdp-notice", label:"the marketing-consent gap found here is what the Framework fixes"},
+    {from:"dpdp-notice", to:"dpdp-rights", label:"the consent-withdrawal mechanism feeds the Rights Procedure intake"},
+    {from:"dpdp-rights", to:"tracker", label:"DPDP rows, incl. the nomination-right case, follow this procedure"},
+    {from:"breach", to:"dpdp-app", label:"the applicability assessment maps what transfers from this plan"},
+    {from:"dpa", to:"dpdp-app", label:"the assessment explains why this contract does NOT transfer as-is"},
+    {from:"remediation", to:"dpdp-map", label:"LIA methodology contrasted with DPDP's consent-only model"},
+    {from:"tracker", to:"dsr", label:"tests the procedure end-to-end across 6 GDPR scenarios"},
+    {from:"vendor", to:"dpa", label:"the assessment's conditions become required DPA amendment terms"},
+    {from:"tabletop", to:"breach", label:"stress-tests the plan's awareness-clock and role assignments"},
+    {from:"memos", to:"dpa", label:"the AI-training memo cites the DPA's processor-role definition"},
+    {from:"memos", to:"ccpa-app", label:"the LinkedIn memo cites the CCPA public-data carve-out analysis"},
+    {from:"memos", to:"dpdp-map", label:"the LinkedIn memo cites the Section 7 closed-list finding"},
+  ];
+
+  const svg = document.getElementById("depgraph");
+  if(!svg) return;
+
+  const W = 900, H = 620;
+  const regimeColor = {gdpr:"var(--gdpr)", ccpa:"var(--ccpa)", dpdp:"var(--dpdp)", all:"var(--accent)"};
+
+  const groups = {gdpr:[], ccpa:[], dpdp:[], all:[]};
+  NODES.forEach(n => groups[n.regime].push(n));
+
+  const positions = {};
+  function layoutColumn(list, cx, yStart, yEnd){
+    const n = list.length;
+    list.forEach((node, i) => {
+      const y = n === 1 ? (yStart+yEnd)/2 : yStart + (yEnd-yStart) * (i/(n-1));
+      positions[node.id] = {x: cx, y: y};
+    });
+  }
+  layoutColumn(groups.gdpr, 150, 50, 570);
+  layoutColumn(groups.ccpa, 430, 130, 420);
+  layoutColumn(groups.dpdp, 650, 130, 420);
+  layoutColumn(groups.all, 820, 90, 480);
+
+  const NS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs){
+    const e = document.createElementNS(NS, tag);
+    for(const k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  const edgeEls = {};
+  const nodeEls = {};
+
+  EDGES.forEach((edge, i) => {
+    const a = positions[edge.from], b = positions[edge.to];
+    if(!a || !b) return;
+    const mx = (a.x+b.x)/2, my = (a.y+b.y)/2;
+    const dx = b.x-a.x, dy = b.y-a.y;
+    const len = Math.sqrt(dx*dx+dy*dy) || 1;
+    const nx = -dy/len, ny = dx/len;
+    const bend = Math.min(28, len*0.12);
+    const cx = mx + nx*bend, cy = my + ny*bend;
+    const path = el("path", {
+      d: `M ${a.x} ${a.y} Q ${cx} ${cy} ${b.x} ${b.y}`,
+      class: "gedge",
+      "data-from": edge.from, "data-to": edge.to
+    });
+    svg.appendChild(path);
+    edgeEls[i] = {path, edge};
+  });
+
+  NODES.forEach(node => {
+    const p = positions[node.id];
+    const g = el("g", {class:"gnode", "data-id":node.id, transform:`translate(${p.x},${p.y})`, tabindex:"0", role:"button", "aria-label":`${node.label} — view its dependencies`});
+    const circle = el("circle", {r:7, fill:regimeColor[node.regime], stroke:"var(--card)", "stroke-width":1.5});
+    g.appendChild(circle);
+    const labelRight = p.x > 700;
+    const text = el("text", {x: labelRight ? -11 : 11, y:4, "text-anchor": labelRight ? "end" : "start"});
+    text.textContent = node.label;
+    g.appendChild(text);
+    svg.appendChild(g);
+    nodeEls[node.id] = g;
+    g.addEventListener("click", () => selectNode(node.id));
+    g.addEventListener("keydown", e => {
+      if(e.key === "Enter" || e.key === " "){ e.preventDefault(); selectNode(node.id); }
+    });
+  });
+
+  const detailBox = document.getElementById("graphDetail");
+  const NODE_MAP = Object.fromEntries(NODES.map(n => [n.id, n]));
+
+  function selectNode(id){
+    const outgoing = EDGES.filter(e => e.from === id);
+    const incoming = EDGES.filter(e => e.to === id);
+    const connected = new Set([id, ...outgoing.map(e=>e.to), ...incoming.map(e=>e.from)]);
+
+    Object.entries(nodeEls).forEach(([nid, g]) => {
+      g.classList.toggle("dim", !connected.has(nid));
+      g.classList.toggle("active", nid === id);
+    });
+    Object.values(edgeEls).forEach(({path, edge}) => {
+      const involved = edge.from === id || edge.to === id;
+      path.classList.toggle("active", involved);
+      path.classList.toggle("dim", !involved);
+    });
+
+    let html = `<p class="gd-title">${NODE_MAP[id].label}</p>`;
+    if(outgoing.length === 0 && incoming.length === 0){
+      html += `<p class="gd-rel">No direct cross-references recorded for this document in the graph.</p>`;
+    }
+    outgoing.forEach(e => {
+      html += `<p class="gd-rel">feeds <b>${NODE_MAP[e.to].label}</b> \u2014 ${e.label}</p>`;
+    });
+    incoming.forEach(e => {
+      html += `<p class="gd-rel in">draws from <b>${NODE_MAP[e.from].label}</b> \u2014 ${e.label}</p>`;
+    });
+    html += `<button type="button" class="read-link gd-open" data-open-doc="${id}" style="background:none;border:none;padding:0">Open this document</button>`;
+    detailBox.innerHTML = html;
+  }
+
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+})();
+
+/* =========================================================
+   RIGHTS REQUEST TRACKER — live filter/search table
+   ========================================================= */
+(function(){
+  const body = document.getElementById("ttBody");
+  if(!body) return;
+
+  const DATA = [
+    {id:"DSR-2026-001", regime:"GDPR", right:"Erasure (Art. 17)", who:"Newsletter subscriber", outcome:"Fulfilled", note:"Unsubscribed + all marketing data deleted; consent log withdrawn."},
+    {id:"DSR-2026-002", regime:"GDPR", right:"Access + Erasure", who:"End-user of Customer (BrightDesk GmbH)", outcome:"Forwarded", note:"Helvane is Processor \u2014 forwarded to Customer within 2 business days, not actioned directly."},
+    {id:"DSR-2026-003", regime:"GDPR", right:"Access (Art. 15)", who:"Former employee (NL)", outcome:"Fulfilled", note:"BSN excluded from export, sent via separate secure channel given UAVG sensitivity."},
+    {id:"DSR-2026-004", regime:"GDPR", right:"Objection (Art. 21)", who:"Sales lead (DE)", outcome:"Fulfilled", note:"Absolute right \u2014 no balancing test. Removed from marketing sequences immediately."},
+    {id:"DSR-2026-005", regime:"GDPR", right:"Erasure (Art. 17)", who:"Lawyer for former applicant", outcome:"Partial", note:"Data already auto-deleted, but one scorecard found outside the ATS \u2014 flagged as a process gap."},
+    {id:"DSR-2026-006", regime:"GDPR", right:"Access (Art. 15)", who:"Website visitor (FR)", outcome:"Fulfilled", note:"Correctly distinguished website analytics data from the AI ticket-suggestion feature's scope."},
+    {id:"CCPA-2026-001", regime:"CCPA", right:"Right to Know (categories)", who:"California resident (visitor)", outcome:"Fulfilled", note:"Lower verification bar applied correctly \u2014 categories only, not specific pieces."},
+    {id:"CCPA-2026-002", regime:"CCPA", right:"Right to Delete", who:"California resident (lead)", outcome:"Fulfilled", note:"Deletion propagated to CRM vendor; billing records retained under a named legal exception."},
+    {id:"CCPA-2026-003", regime:"CCPA", right:"Right to Delete", who:"End-user of US Customer (HelpCo Inc)", outcome:"Forwarded", note:"Helvane is Service Provider \u2014 forwarded, not actioned unilaterally."},
+    {id:"CCPA-2026-004", regime:"CCPA", right:"Opt-out of sale/share", who:"California resident (prospect)", outcome:"Fulfilled", note:"Request via phone, not the website link \u2014 logged manually per procedure; kept separate from email consent."},
+    {id:"CCPA-2026-005", regime:"CCPA", right:"Right to Know (specific pieces)", who:"California resident", outcome:"Fulfilled", note:"Higher verification bar + 45-day extension invoked with documented reasoning."},
+    {id:"DPDP-2026-001", regime:"DPDP", right:"Access to Information (S.11)", who:"Bengaluru employee", outcome:"Fulfilled", note:"Fulfilled voluntarily \u2014 request pre-dates Phase 3 enforcement, as part of readiness posture."},
+    {id:"DPDP-2026-002", regime:"DPDP", right:"Withdrawal + Erasure", who:"Indian website visitor", outcome:"Fulfilled", note:"Combined withdraw-and-erase request \u2014 more common under DPDP given no legitimate-interest fallback."},
+    {id:"DPDP-2026-003", regime:"DPDP", right:"Correction (S.12)", who:"End-user of Indian Customer (SupportBee India)", outcome:"Forwarded", note:"Helvane is Data Processor \u2014 forwarded within 3 business days."},
+    {id:"DPDP-2026-004", regime:"DPDP", right:"Nomination invocation (S.14)", who:"Nominee of a deceased former applicant", outcome:"Fulfilled", note:"First invocation of the nomination right. Death certificate + nomination record verified; handled personally by the Privacy Lead."},
+  ];
+
+  const outcomeClass = { "Fulfilled":"fulfilled", "Forwarded":"forwarded", "Partial":"partial" };
+  const regimeChips = document.querySelectorAll(".tt-chip");
+  const searchInput = document.getElementById("ttSearch");
+  const countEl = document.getElementById("ttCount");
+  let activeRegime = "all";
+
+  function render(){
+    const q = searchInput.value.trim().toLowerCase();
+    const rows = DATA.filter(r => {
+      const regimeOk = activeRegime === "all" || r.regime === activeRegime;
+      if(!regimeOk) return false;
+      if(!q) return true;
+      return (r.who + " " + r.right + " " + r.note + " " + r.id).toLowerCase().includes(q);
+    });
+
+    body.innerHTML = "";
+    if(rows.length === 0){
+      const tr = document.createElement("tr");
+      tr.className = "tt-empty-row";
+      tr.innerHTML = `<td colspan="6">No requests match that filter.</td>`;
+      body.appendChild(tr);
+    } else {
+      rows.forEach(r => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td style="font-family:'Hanken Grotesk',sans-serif;font-size:.76rem;color:var(--ink-faint);white-space:nowrap">${r.id}</td>
+          <td><span class="tt-regime ${r.regime.toLowerCase()}">${r.regime}</span></td>
+          <td style="font-size:.85rem">${r.right}</td>
+          <td style="font-size:.85rem;color:var(--ink-soft)">${r.who}</td>
+          <td><span class="tt-outcome ${outcomeClass[r.outcome]||''}">${r.outcome}</span></td>
+          <td class="tt-notes">${r.note}</td>
+        `;
+        body.appendChild(tr);
+      });
+    }
+    countEl.textContent = `${rows.length} of ${DATA.length} requests`;
+  }
+
+  regimeChips.forEach(chip => {
+    chip.addEventListener("click", () => {
+      regimeChips.forEach(c => c.classList.remove("active"));
+      chip.classList.add("active");
+      activeRegime = chip.dataset.filter;
+      render();
+    });
+  });
+  searchInput.addEventListener("input", render);
+
+  render();
+})();
+
+var __yrEl = document.getElementById('yr');
+if(__yrEl) __yrEl.textContent = new Date().getFullYear();
+
+</script>
+</body>
+</html>
