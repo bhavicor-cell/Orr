@@ -259,26 +259,39 @@ details[open] summary::before{content:"\2212"}
 @media (max-width:600px){.deliv{columns:1}}
 
 /* dependency graph */
-.graph-shell{margin-top:2.2rem;background:var(--card);border-radius:1px;box-shadow:0 4px 18px -10px var(--shadow);overflow:hidden;border:1px solid var(--rule-strong)}
+.graph-shell{margin-top:2.2rem;background:var(--card);border-radius:1px;box-shadow:0 4px 18px -10px var(--shadow);overflow:hidden;border:1px solid var(--rule-strong);
+  width:100%;max-width:none}
+@media (min-width:900px){
+  .graph-shell{
+    width:min(88vw,64rem);
+    margin-left:calc(50% - min(88vw,64rem) / 2);
+    margin-right:calc(50% - min(88vw,64rem) / 2);
+  }
+}
 .graph-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:1.1rem 1.4rem;border-bottom:1px solid var(--rule)}
 .graph-hint{font-family:"Source Serif 4",serif;font-style:italic;font-size:.8rem;color:var(--ink-faint)}
 .graph-legend{display:flex;gap:1rem;flex-wrap:wrap}
 .leg{display:flex;align-items:center;gap:.4rem;font-family:"JetBrains Mono",monospace;font-size:.68rem;color:var(--ink-soft)}
 .leg-dot{width:.5rem;height:.5rem;border-radius:50%;display:inline-block}
 .leg-dot.gdpr{background:var(--gdpr)} .leg-dot.ccpa{background:var(--ccpa)} .leg-dot.dpdp{background:var(--dpdp)} .leg-dot.all{background:var(--seal)}
-.graph-body{position:relative}
+.graph-body{position:relative;padding:.5rem 0}
 #depgraph{display:block;width:100%;height:auto;cursor:default}
 .gnode{cursor:pointer}
+.gnode .gnode-hit{fill:transparent}
 .gnode circle{transition:r .18s ease, stroke-width .18s ease}
 .gnode:focus{outline:none}
 .gnode:focus circle{stroke:var(--seal);stroke-width:3}
-.gnode text{font-family:"Source Serif 4",serif;font-size:9.5px;fill:var(--ink-soft);pointer-events:none}
+.gnode:focus text{fill:var(--seal)}
+.gnode text{font-family:"Source Serif 4",serif;font-size:13.5px;fill:var(--ink-soft);transition:fill .15s ease}
+.gnode:hover circle{r:9}
+.gnode:hover text{fill:var(--ink)}
 .gnode.dim{opacity:.2}
 .gnode.active circle{stroke:var(--ink);stroke-width:2.5}
+.gnode.active text{fill:var(--ink);font-weight:600}
 .gedge{stroke:var(--rule);stroke-width:1.1;fill:none;transition:stroke .18s ease, stroke-width .18s ease, opacity .18s ease}
 .gedge.dim{opacity:.07}
 .gedge.active{stroke:var(--seal);stroke-width:1.9}
-.graph-detail{border-top:1px solid var(--rule);padding:1.2rem 1.4rem 1.4rem;min-height:3.4rem}
+.graph-detail{border-top:1px solid var(--rule);padding:1.3rem 1.6rem 1.5rem;min-height:3.4rem}
 .graph-detail-empty{font-family:"Source Serif 4",serif;font-style:italic;font-size:.82rem;color:var(--ink-faint)}
 .gd-title{font-family:"Fraunces",serif;font-weight:560;font-size:.92rem;margin:0 0 .65rem}
 .gd-rel{font-size:.93rem;line-height:1.5;margin:0 0 .4rem;padding-left:1.1rem;position:relative;color:var(--ink-soft)}
@@ -721,7 +734,7 @@ td.risk-low{background:rgba(22,56,50,.09)}
         </div>
       </div>
       <div class="graph-body">
-        <svg id="depgraph" viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Document dependency graph — 22 nodes, click any to see connections"></svg>
+        <svg id="depgraph" viewBox="0 0 1080 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Document dependency graph — 22 nodes, click any to see connections"></svg>
       </div>
       <div class="graph-detail" id="graphDetail">
         <p class="graph-detail-empty">Select a document above to see its dependencies.</p>
@@ -2536,7 +2549,7 @@ DOCS["nis2"] = {
   const svg = document.getElementById("depgraph");
   if(!svg) return;
 
-  const W = 900, H = 620;
+  const W = 1080, H = 640;
   const regimeColor = {gdpr:"var(--gdpr)", ccpa:"var(--ccpa)", dpdp:"var(--dpdp)", all:"var(--accent)"};
 
   const groups = {gdpr:[], ccpa:[], dpdp:[], all:[]};
@@ -2550,10 +2563,10 @@ DOCS["nis2"] = {
       positions[node.id] = {x: cx, y: y};
     });
   }
-  layoutColumn(groups.gdpr, 150, 50, 570);
-  layoutColumn(groups.ccpa, 430, 130, 420);
-  layoutColumn(groups.dpdp, 650, 130, 420);
-  layoutColumn(groups.all, 820, 90, 480);
+  layoutColumn(groups.gdpr, 175, 55, 585);
+  layoutColumn(groups.ccpa, 495, 140, 440);
+  layoutColumn(groups.dpdp, 760, 140, 440);
+  layoutColumn(groups.all, 960, 95, 495);
 
   const NS = "http://www.w3.org/2000/svg";
   function el(tag, attrs){
@@ -2585,11 +2598,19 @@ DOCS["nis2"] = {
 
   NODES.forEach(node => {
     const p = positions[node.id];
+    const labelRight = p.x > 850;
     const g = el("g", {class:"gnode", "data-id":node.id, transform:`translate(${p.x},${p.y})`, tabindex:"0", role:"button", "aria-label":`${node.label} — view its dependencies`});
-    const circle = el("circle", {r:7, fill:regimeColor[node.regime], stroke:"var(--card)", "stroke-width":1.5});
+    // Invisible generous hit-area covering both the dot and the full label,
+    // so the whole row — not just the small circle — is one clickable target.
+    const hitW = Math.max(140, node.label.length * 7.6 + 26);
+    const hit = el("rect", {
+      class:"gnode-hit",
+      x: labelRight ? -(hitW - 8) : -8, y:-13, width:hitW, height:26
+    });
+    g.appendChild(hit);
+    const circle = el("circle", {r:7.5, fill:regimeColor[node.regime], stroke:"var(--card)", "stroke-width":1.5});
     g.appendChild(circle);
-    const labelRight = p.x > 700;
-    const text = el("text", {x: labelRight ? -11 : 11, y:4, "text-anchor": labelRight ? "end" : "start"});
+    const text = el("text", {x: labelRight ? -13 : 13, y:4.5, "text-anchor": labelRight ? "end" : "start"});
     text.textContent = node.label;
     g.appendChild(text);
     svg.appendChild(g);
